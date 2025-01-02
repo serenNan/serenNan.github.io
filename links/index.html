@@ -601,12 +601,17 @@
 </script>
 
 
-<script src="background/particles.min.js"></script>
+
+<div id="particles-js"></div>
+
+<div id="particles-js"></div>
+<script src="/background/particles.min.js"></script>
 <script>
-  particlesJS.load('particles-js', '/background\/particlesjs-config.json', function() {
-    console.log('particles.js loaded - callback');
-  });
+particlesJS.load('particles-js', '/background/particlesjs-config.json', function() {
+  console.log('particles.js loaded - callback');
+});
 </script>
+
 
 <style>
   #particles-js {
@@ -618,6 +623,8 @@
     z-index: -1;
   }
 </style>
+
+
 
 
     </body>
