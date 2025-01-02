@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+    <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一些音视频的知识点">
 <title>音视频基础</title>
 
-<link rel='canonical' href='http://localhost:1313/post/video_base/'>
+<link rel='canonical' href='https://example.com/post/video_base/'>
 
 <link rel="stylesheet" href="/scss/style.min.7a7f13fe497ce57d83c15c826b2c9f75fb20e81d58ca134005e26a54fee0e526.css"><meta property='og:title' content="音视频基础">
 <meta property='og:description' content="一些音视频的知识点">
-<meta property='og:url' content='http://localhost:1313/post/video_base/'>
+<meta property='og:url' content='https://example.com/post/video_base/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-02T16:24:14&#43;08:00'/><meta property='og:image' content='http://localhost:1313/post/video_base/player1.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-12-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-02T16:26:41&#43;08:00'/><meta property='og:image' content='https://example.com/post/video_base/player1.jpg' />
 <meta name="twitter:title" content="音视频基础">
 <meta name="twitter:description" content="一些音视频的知识点"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/post/video_base/player1.jpg' />
+    <meta name="twitter:image" content='https://example.com/post/video_base/player1.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -59,7 +59,7 @@
                     
                     
                         
-                        <img src="/img/avatar_huab4713990820d60515064f530d9fd474_38307_300x0_resize_box_3.png" width="300"
+                        <img src="/img/avatar_hu8228776919860687048.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -512,7 +512,7 @@
             <div class="article-time--lastmod">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
                 <time>
-                    2025-01-02 16:24
+                    2025-01-02 16:26
                 </time>
             </div></footer>
     
@@ -714,42 +714,42 @@
 </div>
 </div><h3 id="流程">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>操作步骤</th>
-<th>函数名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>打开媒体文件</td>
-<td><code>avformat_open_input</code></td>
-</tr>
-<tr>
-<td>获取码流信息</td>
-<td><code>avformat_find_stream_info</code></td>
-</tr>
-<tr>
-<td>获取音频流</td>
-<td><code>av_find_best_stream</code></td>
-</tr>
-<tr>
-<td>初始化 packet</td>
-<td><code>av_packet_alloc</code></td>
-</tr>
-<tr>
-<td>读取 packet 数据</td>
-<td><code>av_read_frame</code></td>
-</tr>
-<tr>
-<td>释放 packet 数据</td>
-<td><code>av_packet_unref</code></td>
-</tr>
-<tr>
-<td>关闭媒体文件</td>
-<td><code>avformat_close_input</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>操作步骤</th>
+          <th>函数名</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>打开媒体文件</td>
+          <td><code>avformat_open_input</code></td>
+      </tr>
+      <tr>
+          <td>获取码流信息</td>
+          <td><code>avformat_find_stream_info</code></td>
+      </tr>
+      <tr>
+          <td>获取音频流</td>
+          <td><code>av_find_best_stream</code></td>
+      </tr>
+      <tr>
+          <td>初始化 packet</td>
+          <td><code>av_packet_alloc</code></td>
+      </tr>
+      <tr>
+          <td>读取 packet 数据</td>
+          <td><code>av_read_frame</code></td>
+      </tr>
+      <tr>
+          <td>释放 packet 数据</td>
+          <td><code>av_packet_unref</code></td>
+      </tr>
+      <tr>
+          <td>关闭媒体文件</td>
+          <td><code>avformat_close_input</code></td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-1">代码
 </h3><p><a class="link" href="src/demuxing_audio.c" >demuxing_audio.c</a></p>
@@ -1063,42 +1063,42 @@
 </h2><h3 id="流程-1">流程
 </h3><p>流程和提取aac文件一样</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>操作步骤</th>
-<th>函数名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>打开媒体文件</td>
-<td><code>avformat_open_input</code></td>
-</tr>
-<tr>
-<td>获取码流信息</td>
-<td><code>avformat_find_stream_info</code></td>
-</tr>
-<tr>
-<td>获取音频流</td>
-<td><code>av_find_best_stream</code></td>
-</tr>
-<tr>
-<td>初始化 packet</td>
-<td><code>av_packet_alloc</code></td>
-</tr>
-<tr>
-<td>读取 packet 数据</td>
-<td><code>av_read_frame</code></td>
-</tr>
-<tr>
-<td>释放 packet 数据</td>
-<td><code>av_packet_unref</code></td>
-</tr>
-<tr>
-<td>关闭媒体文件</td>
-<td><code>avformat_close_input</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>操作步骤</th>
+          <th>函数名</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>打开媒体文件</td>
+          <td><code>avformat_open_input</code></td>
+      </tr>
+      <tr>
+          <td>获取码流信息</td>
+          <td><code>avformat_find_stream_info</code></td>
+      </tr>
+      <tr>
+          <td>获取音频流</td>
+          <td><code>av_find_best_stream</code></td>
+      </tr>
+      <tr>
+          <td>初始化 packet</td>
+          <td><code>av_packet_alloc</code></td>
+      </tr>
+      <tr>
+          <td>读取 packet 数据</td>
+          <td><code>av_read_frame</code></td>
+      </tr>
+      <tr>
+          <td>释放 packet 数据</td>
+          <td><code>av_packet_unref</code></td>
+      </tr>
+      <tr>
+          <td>关闭媒体文件</td>
+          <td><code>avformat_close_input</code></td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-2">代码
 </h3><p><a class="link" href="src/demuxing_video.c" >demuxing_video.c</a></p>
@@ -1281,42 +1281,42 @@
 <h2 id="mp4h264">mp4→h264
 </h2><h3 id="流程-2">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>av_bsf_get_by_name</code></td>
-<td>根据名称获取比特流过滤器</td>
-</tr>
-<tr>
-<td><code>av_bsf_alloc</code></td>
-<td>分配比特流过滤器上下文</td>
-</tr>
-<tr>
-<td><code>avcodec_parameters_copy</code></td>
-<td>复制编解码器参数</td>
-</tr>
-<tr>
-<td><code>av_bsf_init</code></td>
-<td>初始化比特流过滤器</td>
-</tr>
-<tr>
-<td><code>av_bsf_send_packet</code></td>
-<td>发送数据包到比特流过滤器</td>
-</tr>
-<tr>
-<td><code>av_bsf_receive_packet</code></td>
-<td>从比特流过滤器接收处理后的数据包</td>
-</tr>
-<tr>
-<td><code>av_bsf_free</code></td>
-<td>释放比特流过滤器上下文及相关资源</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>av_bsf_get_by_name</code></td>
+          <td>根据名称获取比特流过滤器</td>
+      </tr>
+      <tr>
+          <td><code>av_bsf_alloc</code></td>
+          <td>分配比特流过滤器上下文</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_parameters_copy</code></td>
+          <td>复制编解码器参数</td>
+      </tr>
+      <tr>
+          <td><code>av_bsf_init</code></td>
+          <td>初始化比特流过滤器</td>
+      </tr>
+      <tr>
+          <td><code>av_bsf_send_packet</code></td>
+          <td>发送数据包到比特流过滤器</td>
+      </tr>
+      <tr>
+          <td><code>av_bsf_receive_packet</code></td>
+          <td>从比特流过滤器接收处理后的数据包</td>
+      </tr>
+      <tr>
+          <td><code>av_bsf_free</code></td>
+          <td>释放比特流过滤器上下文及相关资源</td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-3">代码
 </h3><p><a class="link" href="src/mp4toh264.c" >mp4toh264.c</a></p>
@@ -1549,54 +1549,54 @@
 <p>DTS-解码时间戳</p>
 <h3 id="流程-3">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>步骤</th>
-<th>对应函数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>打开输入媒体文件</td>
-<td><code>avformat_open_input</code></td>
-</tr>
-<tr>
-<td>获取输入流信息</td>
-<td><code>avformat_find_stream_info</code></td>
-</tr>
-<tr>
-<td>创建输出流上下文</td>
-<td><code>avformat_alloc_output_context2</code></td>
-</tr>
-<tr>
-<td>创建输出码流的AVStream</td>
-<td><code>avformat_new_stream</code></td>
-</tr>
-<tr>
-<td>拷贝编码参数</td>
-<td><code>avcodec_parameters_copy</code></td>
-</tr>
-<tr>
-<td>写入视频文件头</td>
-<td><code>avformat_write_header</code></td>
-</tr>
-<tr>
-<td>读取输入视频流</td>
-<td><code>av_read_frame</code></td>
-</tr>
-<tr>
-<td>计算pts/dts/duration</td>
-<td><code>av_rescale_q_rnd</code>/<code>av_rescale_q</code></td>
-</tr>
-<tr>
-<td>写入视频流数据</td>
-<td><code>av_interleaved_write_frame</code></td>
-</tr>
-<tr>
-<td>写入视频文件末尾</td>
-<td><code>av_write_trailer</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>步骤</th>
+          <th>对应函数</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>打开输入媒体文件</td>
+          <td><code>avformat_open_input</code></td>
+      </tr>
+      <tr>
+          <td>获取输入流信息</td>
+          <td><code>avformat_find_stream_info</code></td>
+      </tr>
+      <tr>
+          <td>创建输出流上下文</td>
+          <td><code>avformat_alloc_output_context2</code></td>
+      </tr>
+      <tr>
+          <td>创建输出码流的AVStream</td>
+          <td><code>avformat_new_stream</code></td>
+      </tr>
+      <tr>
+          <td>拷贝编码参数</td>
+          <td><code>avcodec_parameters_copy</code></td>
+      </tr>
+      <tr>
+          <td>写入视频文件头</td>
+          <td><code>avformat_write_header</code></td>
+      </tr>
+      <tr>
+          <td>读取输入视频流</td>
+          <td><code>av_read_frame</code></td>
+      </tr>
+      <tr>
+          <td>计算pts/dts/duration</td>
+          <td><code>av_rescale_q_rnd</code>/<code>av_rescale_q</code></td>
+      </tr>
+      <tr>
+          <td>写入视频流数据</td>
+          <td><code>av_interleaved_write_frame</code></td>
+      </tr>
+      <tr>
+          <td>写入视频文件末尾</td>
+          <td><code>av_write_trailer</code></td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-4">代码
 </h3><p><a class="link" href="src/mp4toflv.c" >mp4toflv.c</a></p>
@@ -1928,58 +1928,58 @@
 <h3 id="流程-4">流程
 </h3><p>截取封装文件处理流程和转封装流程几乎一样，只是多了一个跳转指定时间戳的步骤。以下是详细流程：</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>步骤</th>
-<th>对应函数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1. 打开输入媒体文件</td>
-<td><code>avformat_open_input</code></td>
-</tr>
-<tr>
-<td>2. 获取输入流信息</td>
-<td><code>avformat_find_stream_info</code></td>
-</tr>
-<tr>
-<td>3. 创建输出流上下文</td>
-<td><code>avformat_alloc_output_context2</code></td>
-</tr>
-<tr>
-<td>4. 创建输出码流的AVStream</td>
-<td><code>avformat_new_stream</code></td>
-</tr>
-<tr>
-<td>5. 拷贝编码参数</td>
-<td><code>avcodec_parameters_copy</code></td>
-</tr>
-<tr>
-<td>6. 写入视频文件头</td>
-<td><code>avformat_write_header</code></td>
-</tr>
-<tr>
-<td>7. 读取输入视频流</td>
-<td><code>av_read_frame</code></td>
-</tr>
-<tr>
-<td>8. 跳转指定时间戳</td>
-<td><code>av_seek_frame</code></td>
-</tr>
-<tr>
-<td>9. 计算pts/dts/duration</td>
-<td><code>av_rescale_q_rnd</code>/<code>av_rescale_q</code></td>
-</tr>
-<tr>
-<td>10. 写入视频流数据</td>
-<td><code>av_interleaved_write_frame</code></td>
-</tr>
-<tr>
-<td>11. 写入视频文件末尾</td>
-<td><code>av_write_trailer</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>步骤</th>
+          <th>对应函数</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1. 打开输入媒体文件</td>
+          <td><code>avformat_open_input</code></td>
+      </tr>
+      <tr>
+          <td>2. 获取输入流信息</td>
+          <td><code>avformat_find_stream_info</code></td>
+      </tr>
+      <tr>
+          <td>3. 创建输出流上下文</td>
+          <td><code>avformat_alloc_output_context2</code></td>
+      </tr>
+      <tr>
+          <td>4. 创建输出码流的AVStream</td>
+          <td><code>avformat_new_stream</code></td>
+      </tr>
+      <tr>
+          <td>5. 拷贝编码参数</td>
+          <td><code>avcodec_parameters_copy</code></td>
+      </tr>
+      <tr>
+          <td>6. 写入视频文件头</td>
+          <td><code>avformat_write_header</code></td>
+      </tr>
+      <tr>
+          <td>7. 读取输入视频流</td>
+          <td><code>av_read_frame</code></td>
+      </tr>
+      <tr>
+          <td>8. 跳转指定时间戳</td>
+          <td><code>av_seek_frame</code></td>
+      </tr>
+      <tr>
+          <td>9. 计算pts/dts/duration</td>
+          <td><code>av_rescale_q_rnd</code>/<code>av_rescale_q</code></td>
+      </tr>
+      <tr>
+          <td>10. 写入视频流数据</td>
+          <td><code>av_interleaved_write_frame</code></td>
+      </tr>
+      <tr>
+          <td>11. 写入视频文件末尾</td>
+          <td><code>av_write_trailer</code></td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-5">代码
 </h3><p><a class="link" href="src/demuxing_dir.c" >demuxing_dir.c</a></p>
@@ -2162,46 +2162,46 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 </h3><p>YUV 是一种颜色编码系统，常用于视频和图像处理中。<code>Y</code> 代表亮度（Luminance），<code>U</code> 和 <code>V</code> 代表色度（Chrominance）。YUV 格式有多种变体，如 YUV420、YUV422、YUV444 等。</p>
 <h3 id="流程-5">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>av_find_best_stream</code></td>
-<td>在媒体文件中查找最佳流</td>
-</tr>
-<tr>
-<td><code>avcodec_alloc_context3</code></td>
-<td>分配一个编解码器上下文</td>
-</tr>
-<tr>
-<td><code>avcodec_parameters_to_context</code></td>
-<td>复制编解码器参数</td>
-</tr>
-<tr>
-<td><code>avcodec_find_decoder</code></td>
-<td>查找并获取视频解码器</td>
-</tr>
-<tr>
-<td><code>avcodec_open2</code></td>
-<td>打开解码器上下文，并与指定的解码器关联</td>
-</tr>
-<tr>
-<td><code>av_read_frame</code></td>
-<td>读取帧</td>
-</tr>
-<tr>
-<td><code>avcodec_send_packet</code></td>
-<td>发送数据包到解码器</td>
-</tr>
-<tr>
-<td><code>avcodec_receive_frame</code></td>
-<td>从解码器接收帧</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>av_find_best_stream</code></td>
+          <td>在媒体文件中查找最佳流</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_alloc_context3</code></td>
+          <td>分配一个编解码器上下文</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_parameters_to_context</code></td>
+          <td>复制编解码器参数</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_find_decoder</code></td>
+          <td>查找并获取视频解码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_open2</code></td>
+          <td>打开解码器上下文，并与指定的解码器关联</td>
+      </tr>
+      <tr>
+          <td><code>av_read_frame</code></td>
+          <td>读取帧</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_send_packet</code></td>
+          <td>发送数据包到解码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_receive_frame</code></td>
+          <td>从解码器接收帧</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>输入指令</p>
 <div class="highlight"><div class="chroma">
@@ -2571,42 +2571,42 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 </div><h2 id="更改视频格式">更改视频格式
 </h2><h3 id="流程-6">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>av_parse_video_size</code></td>
-<td>解析视频尺寸字符串（如 &ldquo;1920x1080&rdquo;）并返回宽度和高度。</td>
-</tr>
-<tr>
-<td><code>sws_getContext</code></td>
-<td>创建一个 <code>SwsContext</code>，用于图像缩放和格式转换。</td>
-</tr>
-<tr>
-<td><code>av_frame_alloc</code></td>
-<td>分配一个 <code>AVFrame</code> 结构体，用于存储解码后的视频帧。</td>
-</tr>
-<tr>
-<td><code>av_image_get_buffer_size</code></td>
-<td>计算给定图像格式和尺寸所需的缓冲区大小。</td>
-</tr>
-<tr>
-<td><code>av_malloc</code></td>
-<td>分配内存，用于存储图像数据。</td>
-</tr>
-<tr>
-<td><code>av_image_fill_arrays</code></td>
-<td>将图像数据填充到 <code>AVFrame</code> 的缓冲区中，并设置相关的行大小和数据指针。</td>
-</tr>
-<tr>
-<td><code>sws_scale</code></td>
-<td>使用 <code>SwsContext</code> 对图像进行缩放或格式转换。</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>av_parse_video_size</code></td>
+          <td>解析视频尺寸字符串（如 &ldquo;1920x1080&rdquo;）并返回宽度和高度。</td>
+      </tr>
+      <tr>
+          <td><code>sws_getContext</code></td>
+          <td>创建一个 <code>SwsContext</code>，用于图像缩放和格式转换。</td>
+      </tr>
+      <tr>
+          <td><code>av_frame_alloc</code></td>
+          <td>分配一个 <code>AVFrame</code> 结构体，用于存储解码后的视频帧。</td>
+      </tr>
+      <tr>
+          <td><code>av_image_get_buffer_size</code></td>
+          <td>计算给定图像格式和尺寸所需的缓冲区大小。</td>
+      </tr>
+      <tr>
+          <td><code>av_malloc</code></td>
+          <td>分配内存，用于存储图像数据。</td>
+      </tr>
+      <tr>
+          <td><code>av_image_fill_arrays</code></td>
+          <td>将图像数据填充到 <code>AVFrame</code> 的缓冲区中，并设置相关的行大小和数据指针。</td>
+      </tr>
+      <tr>
+          <td><code>sws_scale</code></td>
+          <td>使用 <code>SwsContext</code> 对图像进行缩放或格式转换。</td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-7">代码
 </h3><p><a class="link" href="src/decodeVideoChange.c" >decodeVideoChange.c</a></p>
@@ -3140,46 +3140,46 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 </div><h2 id="视频编码yuv到h264">视频编码（yuv到h264）
 </h2><h3 id="流程-7">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>avcodec_find_encoder</code></td>
-<td>查找编码器</td>
-</tr>
-<tr>
-<td><code>avcodec_alloc_context3</code></td>
-<td>创建编码器上下文</td>
-</tr>
-<tr>
-<td><code>avcodec_open2</code></td>
-<td>打开编码器</td>
-</tr>
-<tr>
-<td><code>av_frame_alloc</code></td>
-<td>分配帧内存</td>
-</tr>
-<tr>
-<td><code>av_image_get_buffer_size</code></td>
-<td>获取图像缓冲区大小</td>
-</tr>
-<tr>
-<td><code>av_image_fill_arrays</code></td>
-<td>填充图像数据数组</td>
-</tr>
-<tr>
-<td><code>avcodec_send_frame</code></td>
-<td>发送帧到编码器</td>
-</tr>
-<tr>
-<td><code>avcodec_receive_packet</code></td>
-<td>从编码器接收数据包</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>avcodec_find_encoder</code></td>
+          <td>查找编码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_alloc_context3</code></td>
+          <td>创建编码器上下文</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_open2</code></td>
+          <td>打开编码器</td>
+      </tr>
+      <tr>
+          <td><code>av_frame_alloc</code></td>
+          <td>分配帧内存</td>
+      </tr>
+      <tr>
+          <td><code>av_image_get_buffer_size</code></td>
+          <td>获取图像缓冲区大小</td>
+      </tr>
+      <tr>
+          <td><code>av_image_fill_arrays</code></td>
+          <td>填充图像数据数组</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_send_frame</code></td>
+          <td>发送帧到编码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_receive_packet</code></td>
+          <td>从编码器接收数据包</td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-8">代码
 </h3><p><a class="link" href="src/encodeVideoDemo.c" >encodeVideoDemo.c</a></p>
@@ -3547,66 +3547,66 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 </div>
 </div><h3 id="流程-8">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>avformat_open_input()</code></td>
-<td>打开输入文件或流并读取头部信息。</td>
-</tr>
-<tr>
-<td><code>avformat_find_stream_info()</code></td>
-<td>读取一些数据包以获取流信息。</td>
-</tr>
-<tr>
-<td><code>av_find_best_stream()</code></td>
-<td>查找最佳流（音频、视频或字幕）。</td>
-</tr>
-<tr>
-<td><code>avcodec_alloc_context3()</code></td>
-<td>分配解码器上下文。</td>
-</tr>
-<tr>
-<td><code>avcodec_parameters_to_context()</code></td>
-<td>将流参数复制到解码器上下文中。</td>
-</tr>
-<tr>
-<td><code>avcodec_find_decoder()</code></td>
-<td>查找合适的解码器。</td>
-</tr>
-<tr>
-<td><code>avcodec_open2()</code></td>
-<td>打开解码器。</td>
-</tr>
-<tr>
-<td><code>av_frame_alloc()</code></td>
-<td>分配AVFrame结构体。</td>
-</tr>
-<tr>
-<td><code>av_samples_get_buffer_size()</code></td>
-<td>计算音频缓冲区的大小。</td>
-</tr>
-<tr>
-<td><code>avcodec_fill_audio_frame()</code></td>
-<td>填充音频帧的缓冲区。</td>
-</tr>
-<tr>
-<td><code>av_read_frame()</code></td>
-<td>从输入文件或流中读取数据包。</td>
-</tr>
-<tr>
-<td><code>avcodec_send_packet()</code></td>
-<td>将数据包发送到解码器进行解码。</td>
-</tr>
-<tr>
-<td><code>avcodec_receive_frame()</code></td>
-<td>从解码器接收解码后的帧。</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>avformat_open_input()</code></td>
+          <td>打开输入文件或流并读取头部信息。</td>
+      </tr>
+      <tr>
+          <td><code>avformat_find_stream_info()</code></td>
+          <td>读取一些数据包以获取流信息。</td>
+      </tr>
+      <tr>
+          <td><code>av_find_best_stream()</code></td>
+          <td>查找最佳流（音频、视频或字幕）。</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_alloc_context3()</code></td>
+          <td>分配解码器上下文。</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_parameters_to_context()</code></td>
+          <td>将流参数复制到解码器上下文中。</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_find_decoder()</code></td>
+          <td>查找合适的解码器。</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_open2()</code></td>
+          <td>打开解码器。</td>
+      </tr>
+      <tr>
+          <td><code>av_frame_alloc()</code></td>
+          <td>分配AVFrame结构体。</td>
+      </tr>
+      <tr>
+          <td><code>av_samples_get_buffer_size()</code></td>
+          <td>计算音频缓冲区的大小。</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_fill_audio_frame()</code></td>
+          <td>填充音频帧的缓冲区。</td>
+      </tr>
+      <tr>
+          <td><code>av_read_frame()</code></td>
+          <td>从输入文件或流中读取数据包。</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_send_packet()</code></td>
+          <td>将数据包发送到解码器进行解码。</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_receive_frame()</code></td>
+          <td>从解码器接收解码后的帧。</td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-9">代码
 </h3><p><a class="link" href="src/decodeAudio.c" >decodeAudio.c</a></p>
@@ -3954,42 +3954,42 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 </div><h2 id="音频编码">音频编码
 </h2><h3 id="流程-9">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>av_frame_alloc</code></td>
-<td>分配一个AVFrame结构体</td>
-</tr>
-<tr>
-<td><code>av_frame_get_buffer</code></td>
-<td>为AVFrame分配缓冲区</td>
-</tr>
-<tr>
-<td><code>avcodec_find_encoder_by_name</code></td>
-<td>根据名称查找编码器</td>
-</tr>
-<tr>
-<td><code>avcodec_alloc_context3</code></td>
-<td>分配编码器上下文</td>
-</tr>
-<tr>
-<td><code>avcodec_open2</code></td>
-<td>打开编码器</td>
-</tr>
-<tr>
-<td><code>avcodec_send_frame</code></td>
-<td>发送帧到编码器</td>
-</tr>
-<tr>
-<td><code>avcodec_receive_packet</code></td>
-<td>从编码器接收编码后的数据包</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>av_frame_alloc</code></td>
+          <td>分配一个AVFrame结构体</td>
+      </tr>
+      <tr>
+          <td><code>av_frame_get_buffer</code></td>
+          <td>为AVFrame分配缓冲区</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_find_encoder_by_name</code></td>
+          <td>根据名称查找编码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_alloc_context3</code></td>
+          <td>分配编码器上下文</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_open2</code></td>
+          <td>打开编码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_send_frame</code></td>
+          <td>发送帧到编码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_receive_packet</code></td>
+          <td>从编码器接收编码后的数据包</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>运行指令</p>
 <div class="highlight"><div class="chroma">
@@ -4385,105 +4385,105 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 </div>
 </div><h3 id="流程-10">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>avdevice_register_all</code></td>
-<td>注册所有可用的设备</td>
-</tr>
-<tr>
-<td><code>avformat_alloc_context</code></td>
-<td>分配格式上下文</td>
-</tr>
-<tr>
-<td><code>av_dict_set</code></td>
-<td>设置字典选项</td>
-</tr>
-<tr>
-<td><code>av_find_input_format</code></td>
-<td>查找输入格式</td>
-</tr>
-<tr>
-<td><code>avformat_open_input</code></td>
-<td>打开输入文件</td>
-</tr>
-<tr>
-<td><code>avformat_find_stream_info</code></td>
-<td>查找流信息</td>
-</tr>
-<tr>
-<td><code>av_find_best_stream</code></td>
-<td>查找最佳流</td>
-</tr>
-<tr>
-<td><code>avcodec_alloc_context3</code></td>
-<td>分配编解码器上下文</td>
-</tr>
-<tr>
-<td><code>avcode_parameters_to_context</code></td>
-<td>将参数复制到上下文</td>
-</tr>
-<tr>
-<td><code>avcodec_find_decoder</code></td>
-<td>查找解码器</td>
-</tr>
-<tr>
-<td><code>avcodec_open2</code></td>
-<td>打开编解码器</td>
-</tr>
-<tr>
-<td><code>av_read_frame</code></td>
-<td>读取帧</td>
-</tr>
-<tr>
-<td><code>avcode_send_packet</code></td>
-<td>发送数据包</td>
-</tr>
-<tr>
-<td><code>avcodec_receive_frame</code></td>
-<td>接收帧</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>avdevice_register_all</code></td>
+          <td>注册所有可用的设备</td>
+      </tr>
+      <tr>
+          <td><code>avformat_alloc_context</code></td>
+          <td>分配格式上下文</td>
+      </tr>
+      <tr>
+          <td><code>av_dict_set</code></td>
+          <td>设置字典选项</td>
+      </tr>
+      <tr>
+          <td><code>av_find_input_format</code></td>
+          <td>查找输入格式</td>
+      </tr>
+      <tr>
+          <td><code>avformat_open_input</code></td>
+          <td>打开输入文件</td>
+      </tr>
+      <tr>
+          <td><code>avformat_find_stream_info</code></td>
+          <td>查找流信息</td>
+      </tr>
+      <tr>
+          <td><code>av_find_best_stream</code></td>
+          <td>查找最佳流</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_alloc_context3</code></td>
+          <td>分配编解码器上下文</td>
+      </tr>
+      <tr>
+          <td><code>avcode_parameters_to_context</code></td>
+          <td>将参数复制到上下文</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_find_decoder</code></td>
+          <td>查找解码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_open2</code></td>
+          <td>打开编解码器</td>
+      </tr>
+      <tr>
+          <td><code>av_read_frame</code></td>
+          <td>读取帧</td>
+      </tr>
+      <tr>
+          <td><code>avcode_send_packet</code></td>
+          <td>发送数据包</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_receive_frame</code></td>
+          <td>接收帧</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>颜色空间格式转换：</p>
 <div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>sws_getContext</code></td>
-<td>获取缩放上下文</td>
-</tr>
-<tr>
-<td><code>av_frame_alloc</code></td>
-<td>分配帧</td>
-</tr>
-<tr>
-<td><code>av_image_get_buffer_size</code></td>
-<td>获取图像缓冲区大小</td>
-</tr>
-<tr>
-<td><code>av_malloc</code></td>
-<td>分配内存</td>
-</tr>
-<tr>
-<td><code>av_image_fill_arrays</code></td>
-<td>填充图像数组</td>
-</tr>
-<tr>
-<td><code>sws_scale</code></td>
-<td>缩放图像</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sws_getContext</code></td>
+          <td>获取缩放上下文</td>
+      </tr>
+      <tr>
+          <td><code>av_frame_alloc</code></td>
+          <td>分配帧</td>
+      </tr>
+      <tr>
+          <td><code>av_image_get_buffer_size</code></td>
+          <td>获取图像缓冲区大小</td>
+      </tr>
+      <tr>
+          <td><code>av_malloc</code></td>
+          <td>分配内存</td>
+      </tr>
+      <tr>
+          <td><code>av_image_fill_arrays</code></td>
+          <td>填充图像数组</td>
+      </tr>
+      <tr>
+          <td><code>sws_scale</code></td>
+          <td>缩放图像</td>
+      </tr>
+  </tbody>
 </table></div>
 <p>先用ffmpeg指令试一下视频采集格式，后续代码写的时候要用对应采集的格式。</p>
 <h3 id="代码-11">代码
@@ -4895,70 +4895,70 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 </div>
 </div><h3 id="流程-11">流程
 </h3><div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>函数名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>avdevice_register_all</code></td>
-<td>注册所有可用的设备</td>
-</tr>
-<tr>
-<td><code>avformat_alloc_context</code></td>
-<td>分配格式上下文</td>
-</tr>
-<tr>
-<td><code>av_dict_set</code></td>
-<td>设置字典选项</td>
-</tr>
-<tr>
-<td><code>av_find_input_format</code></td>
-<td>查找输入格式</td>
-</tr>
-<tr>
-<td><code>avformat_open_input</code></td>
-<td>打开输入文件</td>
-</tr>
-<tr>
-<td><code>avformat_find_stream_info</code></td>
-<td>查找流信息</td>
-</tr>
-<tr>
-<td><code>av_find_best_stream</code></td>
-<td>查找最佳流</td>
-</tr>
-<tr>
-<td><code>avcodec_alloc_context3</code></td>
-<td>分配编解码器上下文</td>
-</tr>
-<tr>
-<td><code>avcode_parameters_to_context</code></td>
-<td>将参数复制到上下文</td>
-</tr>
-<tr>
-<td><code>avcodec_find_decoder</code></td>
-<td>查找解码器</td>
-</tr>
-<tr>
-<td><code>avcodec_open2</code></td>
-<td>打开编解码器</td>
-</tr>
-<tr>
-<td><code>av_read_frame</code></td>
-<td>读取帧</td>
-</tr>
-<tr>
-<td><code>avcode_send_packet</code></td>
-<td>发送数据包</td>
-</tr>
-<tr>
-<td><code>avcodec_receive_frame</code></td>
-<td>接收帧</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>avdevice_register_all</code></td>
+          <td>注册所有可用的设备</td>
+      </tr>
+      <tr>
+          <td><code>avformat_alloc_context</code></td>
+          <td>分配格式上下文</td>
+      </tr>
+      <tr>
+          <td><code>av_dict_set</code></td>
+          <td>设置字典选项</td>
+      </tr>
+      <tr>
+          <td><code>av_find_input_format</code></td>
+          <td>查找输入格式</td>
+      </tr>
+      <tr>
+          <td><code>avformat_open_input</code></td>
+          <td>打开输入文件</td>
+      </tr>
+      <tr>
+          <td><code>avformat_find_stream_info</code></td>
+          <td>查找流信息</td>
+      </tr>
+      <tr>
+          <td><code>av_find_best_stream</code></td>
+          <td>查找最佳流</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_alloc_context3</code></td>
+          <td>分配编解码器上下文</td>
+      </tr>
+      <tr>
+          <td><code>avcode_parameters_to_context</code></td>
+          <td>将参数复制到上下文</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_find_decoder</code></td>
+          <td>查找解码器</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_open2</code></td>
+          <td>打开编解码器</td>
+      </tr>
+      <tr>
+          <td><code>av_read_frame</code></td>
+          <td>读取帧</td>
+      </tr>
+      <tr>
+          <td><code>avcode_send_packet</code></td>
+          <td>发送数据包</td>
+      </tr>
+      <tr>
+          <td><code>avcodec_receive_frame</code></td>
+          <td>接收帧</td>
+      </tr>
+  </tbody>
 </table></div>
 <h3 id="代码-12">代码
 </h3><div class="highlight"><div class="chroma">
@@ -5523,7 +5523,7 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="/ts/main.a2db157a6b32049c22db56fb6d98bbeabafd452b307f6890b0b3bc4843f782e3.js" defer></script>
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
@@ -5538,7 +5538,7 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 <style>
   @font-face {
     font-family: 'MapleMono2';
-    src: url('http://localhost:1313/font/MapleMono2.ttf') format('truetype');
+    src: url('https://example.com/font/MapleMono2.ttf') format('truetype');
   }
 
   :root {

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>C&#43;&#43; on serenNan</title>
-        <link>http://localhost:1313/categories/c&#43;&#43;/</link>
+        <link>https://example.com/categories/c&#43;&#43;/</link>
         <description>Recent content in C&#43;&#43; on serenNan</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>serenNan</copyright><atom:link href="http://localhost:1313/categories/c++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>serenNan</copyright><atom:link href="https://example.com/categories/c++/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>C&#43;&#43;语法</title>
-        <link>http://localhost:1313/post/cpp_study/</link>
+        <link>https://example.com/post/cpp_study/</link>
         <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/post/cpp_study/</guid>
-        <description>&lt;img src="http://localhost:1313/post/cpp_study/cpp.jpg" alt="Featured image of post C&#43;&#43;语法" /&gt;&lt;h2 id=&#34;拷贝构造函数&#34;&gt;拷贝构造函数
+        <guid>https://example.com/post/cpp_study/</guid>
+        <description>&lt;img src="https://example.com/post/cpp_study/cpp.jpg" alt="Featured image of post C&#43;&#43;语法" /&gt;&lt;h2 id=&#34;拷贝构造函数&#34;&gt;拷贝构造函数
 &lt;/h2&gt;&lt;h3 id=&#34;参考文章&#34;&gt;参考文章
 &lt;/h3&gt;&lt;p&gt;csdn：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/weixin_59179454/article/details/124853916?ops_request_misc=%257B%2522request%255Fid%2522%253A%252224aaa153760a2e35be9b14554b6f1a33%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;amp;request_id=24aaa153760a2e35be9b14554b6f1a33&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-124853916-null-null.142%5ev100%5epc_search_result_base6&amp;amp;utm_term=c%2B%2B%20%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0&amp;amp;spm=1018.2226.3001.4187&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C++拷贝构造函数&lt;/a&gt;&lt;/p&gt;

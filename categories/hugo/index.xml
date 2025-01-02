@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Hugo on serenNan</title>
-        <link>http://localhost:1313/categories/hugo/</link>
+        <link>https://example.com/categories/hugo/</link>
         <description>Recent content in Hugo on serenNan</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>serenNan</copyright><atom:link href="http://localhost:1313/categories/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>serenNan</copyright><atom:link href="https://example.com/categories/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hugo美化&amp;优化(stack主题)</title>
-        <link>http://localhost:1313/post/hugo-beautify/</link>
+        <link>https://example.com/post/hugo-beautify/</link>
         <pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/post/hugo-beautify/</guid>
-        <description>&lt;img src="http://localhost:1313/post/hugo-beautify/blog2.jpg" alt="Featured image of post Hugo美化&amp;优化(stack主题)" /&gt;&lt;h2 id=&#34;字体&#34;&gt;字体
+        <guid>https://example.com/post/hugo-beautify/</guid>
+        <description>&lt;img src="https://example.com/post/hugo-beautify/blog2.jpg" alt="Featured image of post Hugo美化&amp;优化(stack主题)" /&gt;&lt;h2 id=&#34;字体&#34;&gt;字体
 &lt;/h2&gt;&lt;p&gt;字体文件放在&lt;code&gt;assets/fonts&lt;/code&gt;下，然后在&lt;code&gt;layouts/partials/footer/costom.html&lt;/code&gt;(没有就创建)中引入,格式如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -54,7 +54,7 @@
 &lt;ol&gt;
 &lt;li&gt;先在github page上打开discussion功能&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/hugo-beautify/discussion.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-beautify/discussion.png&#34;
 	width=&#34;1791&#34;
 	height=&#34;964&#34;
 	
@@ -67,7 +67,7 @@
 	
 &gt;
 点击setting，向下滑找到discussion，勾选discussion
-&lt;img src=&#34;http://localhost:1313/post/hugo-beautify/discussion2.png&#34;
+&lt;img src=&#34;https://example.com/post/hugo-beautify/discussion2.png&#34;
 	width=&#34;1715&#34;
 	height=&#34;849&#34;
 	
@@ -83,7 +83,7 @@
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/apps/giscus&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;giscus app&lt;/a&gt;&lt;br&gt;
 选择仓库地址
-&lt;img src=&#34;http://localhost:1313/post/hugo-beautify/install.png&#34;
+&lt;img src=&#34;https://example.com/post/hugo-beautify/install.png&#34;
 	width=&#34;1024&#34;
 	height=&#34;376&#34;
 	
@@ -101,7 +101,7 @@
 &lt;p&gt;进入giscus官网 &lt;a class=&#34;link&#34; href=&#34;https://giscus.app/zh-CN&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;giscus&lt;/a&gt;&lt;br&gt;
 按照步骤配置，最后复制代码
-&lt;img src=&#34;http://localhost:1313/post/hugo-beautify/config1.png&#34;
+&lt;img src=&#34;https://example.com/post/hugo-beautify/config1.png&#34;
 	width=&#34;587&#34;
 	height=&#34;156&#34;
 	
@@ -115,7 +115,7 @@
 		data-flex-basis=&#34;903px&#34;
 	
 &gt;
-&lt;img src=&#34;http://localhost:1313/post/hugo-beautify/config2.png&#34;
+&lt;img src=&#34;https://example.com/post/hugo-beautify/config2.png&#34;
 	width=&#34;949&#34;
 	height=&#34;254&#34;
 	
@@ -137,7 +137,7 @@
 &lt;li&gt;data-category-id&lt;/li&gt;
 &lt;li&gt;data-mapping&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/hugo-beautify/config3.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-beautify/config3.png&#34;
 	width=&#34;625&#34;
 	height=&#34;366&#34;
 	
@@ -193,11 +193,11 @@
         </item>
         <item>
         <title>Hugo配置(stack主题)</title>
-        <link>http://localhost:1313/post/hugo-config/</link>
+        <link>https://example.com/post/hugo-config/</link>
         <pubDate>Sun, 29 Dec 2024 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/post/hugo-config/</guid>
-        <description>&lt;img src="http://localhost:1313/post/hugo-config/blog1.jpg" alt="Featured image of post Hugo配置(stack主题)" /&gt;&lt;h2 id=&#34;yaml参数&#34;&gt;yaml参数
+        <guid>https://example.com/post/hugo-config/</guid>
+        <description>&lt;img src="https://example.com/post/hugo-config/blog1.jpg" alt="Featured image of post Hugo配置(stack主题)" /&gt;&lt;h2 id=&#34;yaml参数&#34;&gt;yaml参数
 &lt;/h2&gt;&lt;h3 id=&#34;主框架&#34;&gt;主框架
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -586,7 +586,7 @@ toc: 目录&lt;/p&gt;
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;!!!注意缩进要对&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/hugo-config/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-config/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2.png&#34;
 	width=&#34;1034&#34;
 	height=&#34;743&#34;
 	
