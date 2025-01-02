@@ -528,8 +528,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;construct!
 copy construct!
 copy construct!
@@ -643,8 +641,6 @@ class destruct!
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;construct!
 move construct!
 class destruct!
@@ -863,8 +859,6 @@ memoryLeak2函数中，new了一个字符串指针，虽然在函数末尾有些
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;Test的构造函数...
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;要释放内存，就得手动&lt;code&gt;delete&lt;/code&gt;，或者使用智能指针&lt;/p&gt;
@@ -898,8 +892,6 @@ memoryLeak2函数中，new了一个字符串指针，虽然在函数末尾有些
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;输出：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;/blockquote&gt;
 &lt;pre&gt;&lt;code&gt;Test的构造函数...
 test-&amp;gt;debug：20
 (*test).debug：20
