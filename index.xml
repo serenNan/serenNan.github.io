@@ -42,9 +42,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;注意: 字体文件路径&lt;code&gt;src&lt;/code&gt;要有后缀&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div class=&#34;notice notice-info&#34; &gt;
+    &lt;div class=&#34;notice-title&#34;&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; class=&#34;icon notice-icon&#34; viewBox=&#34;0 0 512 512&#34; fill=&#34;#705943&#34;&gt;&lt;path d=&#34;M256 8a248 248 0 100 496 248 248 0 000-496zm0 110a42 42 0 110 84 42 42 0 010-84zm56 254c0 7-5 12-12 12h-88c-7 0-12-5-12-12v-24c0-7 5-12 12-12h12v-64h-12c-7 0-12-5-12-12v-24c0-7 5-12 12-12h64c7 0 12 5 12 12v100h12c7 0 12 5 12 12v24z&#34;/&gt;&lt;/svg&gt;&lt;/div&gt;&lt;p&gt;注意: 字体文件路径&lt;code&gt;src&lt;/code&gt;要有后缀&lt;/p&gt;&lt;/div&gt;
+
 &lt;h2 id=&#34;自定义分类页面样式&#34;&gt;自定义分类页面样式
 &lt;/h2&gt;&lt;p&gt;我不喜欢原本默认的归档页面，想把归档和分类分成两个页面，具体操作写在了我的&lt;code&gt;Hugo&lt;/code&gt;配置博客&lt;a class=&#34;link&#34; href=&#34;https://serennan.github.io/post/hugo-config/#%E5%88%86%E7%B1%BB&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Hugo配置(stack主题)&lt;/a&gt;&lt;/p&gt;
@@ -204,7 +205,7 @@
 &lt;img src=&#34;particles3.png&#34; alt=&#34;Particles Image&#34; width=&#34;500&#34; &gt;
 &lt;p&gt;将&lt;code&gt;particles.min.js&lt;/code&gt; 和 &lt;code&gt;particlesjs-config.json&lt;/code&gt;放在&lt;code&gt;assets/background&lt;/code&gt;文件夹下&lt;/p&gt;
 &lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;在&lt;code&gt;layouts/partials/footer/custom.htmll&lt;/code&gt;中添加以下代码：&lt;/li&gt;
+&lt;li&gt;在&lt;code&gt;layouts/partials/footer/custom.html&lt;/code&gt;中添加以下代码：&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
