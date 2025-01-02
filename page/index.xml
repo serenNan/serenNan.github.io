@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pages on serenNan</title>
+        <link>http://localhost:1313/page/</link>
+        <description>Recent content in Pages on serenNan</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>serenNan</copyright>
+        <lastBuildDate>Thu, 02 Jan 2025 16:41:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>分类</title>
+        <link>http://localhost:1313/category/</link>
+        <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/category/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>关于</title>
+        <link>http://localhost:1313/about/</link>
+        <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/about/</guid>
+        <description>&lt;h1 id=&#34;关于本站&#34;&gt;关于本站
+&lt;/h1&gt;&lt;p&gt;用于存放一些笔记，以及一些个人博客&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>归档</title>
+        <link>http://localhost:1313/archives/</link>
+        <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>链接</title>
+        <link>http://localhost:1313/links/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/links/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
