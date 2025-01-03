@@ -385,7 +385,7 @@
       secondHand.style.transform = `rotate(${secondDeg}deg)`;
 
       const digitalClock = document.querySelector('.digital-clock');
-      const timeString = `${hour}:${minute}`;
+      const timeString = `${hour}:${minute.toString().padStart(2, '0')}`;
       digitalClock.textContent = timeString;
 
       setTimeout(updateClock, 1000);
