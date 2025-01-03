@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://example.com/categories/c&#43;&#43;/'>
 
-<link rel="stylesheet" href="/scss/style.min.ebb9fb624d3a82d342fc8375d9d9e8718161e6d27eb1e468c03aec21383b02c0.css"><meta property='og:title' content="Category: C++ - serenNan">
+<link rel="stylesheet" href="/scss/style.min.fb78b5e7a184c4d346ca3beaac0a0b4e441b4859654400e2f40a258e5431f77a.css"><meta property='og:title' content="Category: C++ - serenNan">
 <meta property='og:description' content="C++相关知识点">
 <meta property='og:url' content='https://example.com/categories/c&#43;&#43;/'>
 <meta property='og:site_name' content='serenNan'>
@@ -305,50 +305,75 @@
     <aside class="sidebar right-sidebar sticky">
         
             
-                <section class="widget clock">
+                <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时钟表盘</title>
+  <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+  <section class="widget clock">
     <div class="widget--clock">
-        <div class="clock-face">
-            
-            <div class="mark mark-12"></div>
-            <div class="mark mark-3"></div>
-            <div class="mark mark-6"></div>
-            <div class="mark mark-9"></div>
-            
-            <div class="hand hour-hand"></div>
-            <div class="hand minute-hand"></div>
-            <div class="hand second-hand"></div>
-            
-            <div class="center-dot"></div>
-        </div>
+      <div class="clock-face">
+        
+        
+        <div class="hand hour-hand"></div>
+        <div class="hand minute-hand"></div>
+        <div class="hand second-hand"></div>
+        
+        <div class="center-dot"></div>
+      </div>
     </div>
-</section>
+  </section>
 
-<script>
+  <script>
+    
+    const clockFace = document.querySelector('.clock-face');
+    const radius = 100; 
+    const center = radius; 
+
+    for (let i = 0; i < 12; i++) {
+      const angle = i * 30; 
+      const radians = (angle * Math.PI) / 180; 
+      const x = center + radius * Math.sin(radians); 
+      const y = center - radius * Math.cos(radians); 
+
+      const mark = document.createElement('div');
+      mark.className = 'mark';
+      mark.style.left = `${x}px`;
+      mark.style.top = `${y}px`;
+      mark.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      clockFace.appendChild(mark);
+    }
+
+    
     function updateClock() {
-    const now = new Date();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const second = now.getSeconds();
+      const now = new Date();
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+      const second = now.getSeconds();
 
-    const hourHand = document.querySelector('.hour-hand');
-    const minuteHand = document.querySelector('.minute-hand');
-    const secondHand = document.querySelector('.second-hand');
+      const hourHand = document.querySelector('.hour-hand');
+      const minuteHand = document.querySelector('.minute-hand');
+      const secondHand = document.querySelector('.second-hand');
 
-    
-    const hourDeg = (hour % 12) * 30 + (minute / 60) * 30; 
-    const minuteDeg = minute * 6 + (second / 60) * 6; 
-    const secondDeg = second * 6; 
+      const hourDeg = (hour % 12) * 30 + (minute / 60) * 30; 
+      const minuteDeg = minute * 6 + (second / 60) * 6; 
+      const secondDeg = second * 6; 
 
-    
-    hourHand.style.transform = `rotate(${hourDeg}deg)`;
-    minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
-    secondHand.style.transform = `rotate(${secondDeg}deg)`;
-}
+      hourHand.style.transform = `rotate(${hourDeg}deg)`;
+      minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+      secondHand.style.transform = `rotate(${secondDeg}deg)`;
 
+      setTimeout(updateClock, 1000); 
+    }
 
-setInterval(updateClock, 1000);
-updateClock(); 
-</script>
+    updateClock(); 
+  </script>
+</body>
+</html>
 
             
         
