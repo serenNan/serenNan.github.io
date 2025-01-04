@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://example.com/post/hugo-config/'>
 
-<link rel="stylesheet" href="/scss/style.min.0f9404633f2984a99cf355bdaca6c542cf54f6c559c082541c554833c51301cb.css"><meta property='og:title' content="Hugo配置(stack主题)">
+<link rel="stylesheet" href="/scss/style.min.28ab10dee82c210c10aa350c2ca23e8a10edeb486db7097b2f3f5e4a51569505.css"><meta property='og:title' content="Hugo配置(stack主题)">
 <meta property='og:description' content="Hugo配置教程，使用的stack主题，用GitHub Pages部署">
 <meta property='og:url' content='https://example.com/post/hugo-config/'>
 <meta property='og:site_name' content='serenNan'>
@@ -325,7 +325,7 @@
         <h2 class="widget-title section-title">目录</h2>
         
         <div class="widget--toc">
-            <nav id="TableOfContents">
+        <nav id="TableOfContents">
   <ol>
     <li><a href="#yaml参数">yaml参数</a>
       <ol>
@@ -356,6 +356,42 @@
         </div>
     </section>
 
+
+<script>
+    function initTocHide() {
+        
+        let toc = document.querySelector(".widget--toc");
+        if (!toc) {
+            return;
+        }
+        
+        window.addEventListener('scroll', function() {
+            
+            let currentLi = document.querySelector(".active-class");
+            if (!currentLi) {
+                return
+            }
+            
+            let elementsByClassName = document.querySelectorAll(".open");
+            if (elementsByClassName.length > 0) {
+                elementsByClassName.forEach((ul) => {
+                    ul.classList.remove("open")
+                })
+            }
+            
+            if (currentLi.children.length > 1) {
+                currentLi.children[1].classList.add("open")
+            }
+            
+            let ul = currentLi.parentElement;
+            do {
+                ul.classList.add("open");
+                ul = ul.parentElement.parentElement
+            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
+        });
+    }
+    initTocHide()
+</script>
             
         
     </aside>
