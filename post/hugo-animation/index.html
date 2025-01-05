@@ -10,7 +10,7 @@
 <meta property='og:description' content="Hugo添加一些按键动画的教程">
 <meta property='og:url' content='https://example.com/post/hugo-animation/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-05T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-05T20:53:28&#43;08:00'/><meta property='og:image' content='https://example.com/post/hugo-animation/word.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-05T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-05T21:40:32&#43;08:00'/><meta property='og:image' content='https://example.com/post/hugo-animation/word.jpg' />
 <meta name="twitter:title" content="Hugo动画">
 <meta name="twitter:description" content="Hugo添加一些按键动画的教程"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://example.com/post/hugo-animation/word.jpg' />
@@ -375,7 +375,7 @@
             <div class="article-time--lastmod">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
                 <time>
-                    2025-01-05 20:53
+                    2025-01-05 21:40
                 </time>
             </div></footer>
     
@@ -567,8 +567,38 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>TODO：参数简单介绍</p>
-
+</div><p>参数简单介绍:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-scss" data-lang="scss"><span class="line"><span class="cl"><span class="c1">// 动画时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">transition</span><span class="o">:</span> <span class="mi">0</span><span class="mf">.6</span><span class="kt">s</span> <span class="ni">ease</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 放大
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">transform</span><span class="o">:</span> <span class="nf">scale</span><span class="p">(</span><span class="mi">1</span><span class="mf">.1</span><span class="o">,</span> <span class="mi">1</span><span class="mf">.1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 允许超出边框
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">overflow</span><span class="o">:</span> <span class="ni">visible</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 这个是为了放大别出现字体抖动（但好像没什么效果）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="na">will-change</span><span class="o">:</span> <span class="ni">transform</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">-webkit-font-smoothing</span><span class="o">:</span> <span class="n">antialiased</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
