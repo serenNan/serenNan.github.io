@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Sun, 05 Jan 2025 21:40:32 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 05 Jan 2025 21:51:07 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hugo动画</title>
         <link>https://example.com/post/hugo-animation/</link>
         <pubDate>Sun, 05 Jan 2025 00:00:00 +0000</pubDate>
@@ -224,6 +224,14 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>Hugo时钟</title>
+        <link>https://example.com/post/hugo-clock/</link>
+        <pubDate>Sun, 05 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/post/hugo-clock/</guid>
+        <description></description>
         </item>
         <item>
         <title>Hugo美化&amp;优化(stack主题)</title>

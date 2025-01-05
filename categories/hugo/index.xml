@@ -225,6 +225,14 @@
 &lt;/div&gt;</description>
         </item>
         <item>
+        <title>Hugo时钟</title>
+        <link>https://example.com/post/hugo-clock/</link>
+        <pubDate>Sun, 05 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/post/hugo-clock/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Hugo美化&amp;优化(stack主题)</title>
         <link>https://example.com/post/hugo-beautify/</link>
         <pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate>
