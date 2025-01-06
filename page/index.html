@@ -364,34 +364,41 @@
       clockFace.appendChild(mark);
     }
 
-    function updateClock() {
-      const now = new Date();
-      const hour = now.getHours();
-      const minute = now.getMinutes();
-      const second = now.getSeconds();
+    let previousSecondDeg = 0; 
 
-      const hourHand = document.querySelector('.hour-hand');
-      const minuteHand = document.querySelector('.minute-hand');
-      const secondHand = document.querySelector('.second-hand');
+function updateClock() {
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+  const millisecond = now.getMilliseconds();
 
-      const hourDeg = (hour % 12) * 30 + (minute / 60) * 30;
-      const minuteDeg = minute * 6 + (second / 60) * 6;
-      const secondDeg = second * 6;
+  const hourHand = document.querySelector('.hour-hand');
+  const minuteHand = document.querySelector('.minute-hand');
+  const secondHand = document.querySelector('.second-hand');
 
-      hourHand.style.transform = `rotate(${hourDeg}deg)`;
-      minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+  const hourDeg = (hour % 12) * 30 + (minute / 60) * 30;
+  const minuteDeg = minute * 6 + (second / 60) * 6;
+  let secondDeg = second * 6 + (millisecond / 1000) * 6;
 
-      secondHand.style.transition = second === 0 ? 'none' : 'transform 0.5s linear';
-      secondHand.style.transform = `rotate(${secondDeg}deg)`;
+  
+  if (secondDeg < previousSecondDeg) {
+    secondDeg += 360; 
+  }
+  previousSecondDeg = secondDeg;
 
-      const digitalClock = document.querySelector('.digital-clock');
-      const timeString = `${hour}:${minute.toString().padStart(2, '0')}`;
-      digitalClock.textContent = timeString;
+  hourHand.style.transform = `rotate(${hourDeg}deg)`;
+  minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+  secondHand.style.transform = `rotate(${secondDeg}deg)`;
 
-      setTimeout(updateClock, 1000);
-    }
+  const digitalClock = document.querySelector('.digital-clock');
+  const timeString = `${hour}:${minute.toString().padStart(2, '0')}`;
+  digitalClock.textContent = timeString;
 
-    updateClock();
+  requestAnimationFrame(updateClock);
+}
+
+updateClock();
 
   </script>
 </body>
