@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://example.com/categories/hugo/'>
 
-<link rel="stylesheet" href="/scss/style.min.af8b1822441d9174e98686114ea917a07b4c6399d336d5e2c760c80503978c21.css"><meta property='og:title' content="Category: Hugo - serenNan">
+<link rel="stylesheet" href="/scss/style.min.10063acfdf7436301a79ae9139d27de6bb161110b885aa94d4b86bfe56dfac38.css"><meta property='og:title' content="Category: Hugo - serenNan">
 <meta property='og:description' content="hugo配置">
 <meta property='og:url' content='https://example.com/categories/hugo/'>
 <meta property='og:site_name' content='serenNan'>
@@ -385,14 +385,14 @@ function updateClock() {
   if (secondDeg < previousSecondDeg) {
     secondDeg += 360; 
   }
-  previousSecondDeg = secondDeg;
+  previousSecondDeg = secondDeg % 360; 
 
   hourHand.style.transform = `rotate(${hourDeg}deg)`;
   minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
   secondHand.style.transform = `rotate(${secondDeg}deg)`;
 
   const digitalClock = document.querySelector('.digital-clock');
-  const timeString = `${hour}:${minute.toString().padStart(2, '0')}`;
+  const timeString = `${hour}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
   digitalClock.textContent = timeString;
 
   requestAnimationFrame(updateClock);
@@ -403,6 +403,7 @@ updateClock();
   </script>
 </body>
 </html>
+
             
         
             
