@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Mon, 06 Jan 2025 23:39:59 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 06 Jan 2025 23:50:08 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>语音信号复习</title>
         <link>https://example.com/post/temp/</link>
         <pubDate>Mon, 06 Jan 2025 00:00:00 +0000</pubDate>
@@ -17,30 +17,30 @@
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;以下哪项不是浊音的特点？&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A. 由声带振动产生&lt;/li&gt;
-&lt;li&gt;B. 包括所有元音&lt;/li&gt;
-&lt;li&gt;C. 不经过声带振动产生&lt;/li&gt;
-&lt;li&gt;D. 包括部分辅音&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A. 由声带振动产生
+B. 包括所有元音
+C. 不经过声带振动产生
+D. 包括部分辅音&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;语音信号数字模型不包括以下哪个组成部分？&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A. 激励模型&lt;/li&gt;
-&lt;li&gt;B. 声道模型&lt;/li&gt;
-&lt;li&gt;C. 辐射模型&lt;/li&gt;
-&lt;li&gt;D. 噪声模型&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A. 激励模型
+B. 声道模型
+C. 辐射模型
+D. 噪声模型&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;共振峰模型中，不属于其分类的是：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A. 级联型&lt;/li&gt;
-&lt;li&gt;B. 并联型&lt;/li&gt;
-&lt;li&gt;C. 混合型&lt;/li&gt;
-&lt;li&gt;D. 分离型&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A. 级联型
+B. 并联型
+C. 混合型
+D. 分离型&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;二判断题&#34;&gt;二、判断题
@@ -80,13 +80,13 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;结合所学知识，分析并设计一个完整的语音识别系统，要求涵盖以下方面：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;语音信号的获取与预处理&lt;/strong&gt;：如何采集语音信号并进行初步处理。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;特征提取&lt;/strong&gt;：介绍常用的特征提取方法及其优缺点。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;模型建立&lt;/strong&gt;：选择合适的模型（如隐马尔可夫模型）并说明其参数设置。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;模式匹配&lt;/strong&gt;：描述如何通过模式匹配实现语音识别。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;后处理&lt;/strong&gt;：如何对识别结果进行优化和改进。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;语音信号的获取与预处理&lt;/strong&gt;：如何采集语音信号并进行初步处理。
+&lt;strong&gt;特征提取&lt;/strong&gt;：介绍常用的特征提取方法及其优缺点。
+&lt;strong&gt;模型建立&lt;/strong&gt;：选择合适的模型（如隐马尔可夫模型）并说明其参数设置。
+&lt;strong&gt;模式匹配&lt;/strong&gt;：描述如何通过模式匹配实现语音识别。
+&lt;strong&gt;后处理&lt;/strong&gt;：如何对识别结果进行优化和改进。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;希望这些题目能帮助你更好地准备考试。如果有任何其他问题或需要进一步的帮助，请随时告知！
@@ -95,30 +95,30 @@ UPDF AI:根据你提供的内容，我将为你生成一些考试题目。这些
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;下列哪一项不是语音信号数字模型的组成部分？&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A. 激励模型&lt;/li&gt;
-&lt;li&gt;B. 声道模型&lt;/li&gt;
-&lt;li&gt;C. 辐射模型&lt;/li&gt;
-&lt;li&gt;D. 频谱模型&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A. 激励模型
+B. 声道模型
+C. 辐射模型
+D. 频谱模型&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;浊音是由什么产生的？&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A. 声带完全舒展&lt;/li&gt;
-&lt;li&gt;B. 声带振动&lt;/li&gt;
-&lt;li&gt;C. 空气从鼻腔流出&lt;/li&gt;
-&lt;li&gt;D. 空气从口腔流出&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A. 声带完全舒展
+B. 声带振动
+C. 空气从鼻腔流出
+D. 空气从口腔流出&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;共振峰是指什么？&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;A. 声带的振动频率&lt;/li&gt;
-&lt;li&gt;B. 声道的谐振频率&lt;/li&gt;
-&lt;li&gt;C. 肺部的空气流动速度&lt;/li&gt;
-&lt;li&gt;D. 口腔的形状变化&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A. 声带的振动频率
+B. 声道的谐振频率
+C. 肺部的空气流动速度
+D. 口腔的形状变化&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h2 id=&#34;判断题&#34;&gt;判断题
@@ -138,12 +138,12 @@ UPDF AI:根据你提供的内容，我将为你生成一些考试题目。这些
 &lt;/h2&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;详细分析语音识别系统的整体流程，包括但不限于以下方面：&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;预处理&lt;/strong&gt;：声音提取、噪声消除等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;特征提取&lt;/strong&gt;：时域分析、频域分析、倒谱分析等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;模型建立&lt;/strong&gt;：隐马尔可夫模型、语码模型参数等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;模式匹配&lt;/strong&gt;：如何进行语音识别中的模式匹配。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;预处理&lt;/strong&gt;：声音提取、噪声消除等。
+&lt;strong&gt;特征提取&lt;/strong&gt;：时域分析、频域分析、倒谱分析等。
+&lt;strong&gt;模型建立&lt;/strong&gt;：隐马尔可夫模型、语码模型参数等。
+&lt;strong&gt;模式匹配&lt;/strong&gt;：如何进行语音识别中的模式匹配。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;结合所学知识，分析语音识别系统中谱减法的具体流程，并说明其在实际应用中的优缺点。&lt;/strong&gt;&lt;/p&gt;
@@ -159,150 +159,117 @@ UPDF AI:根据提供的文件内容，以下是题目和对应的答案：&lt;/p
 &lt;/h4&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;双门线&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;双门线法是一种用于语音信号处理中的端点检测方法。它通过设定高低两个阈值（门限）来确定语音信号的起始和结束位置。具体步骤包括：
-&lt;ul&gt;
-&lt;li&gt;计算语音信号的能量或过零率。&lt;/li&gt;
-&lt;li&gt;设定高门限和低门限。&lt;/li&gt;
-&lt;li&gt;当能量或过零率超过高门限时，认为语音开始；当低于低门限时，认为语音结束。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;双门线法是一种用于语音信号处理中的端点检测方法。它通过设定高低两个阈值（门限）来确定语音信号的起始和结束位置。具体步骤包括：
+计算语音信号的能量或过零率。
+设定高门限和低门限。
+当能量或过零率超过高门限时，认为语音开始；当低于低门限时，认为语音结束。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;谱减法&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;谱减法是一种常用的语音增强技术，用于去除背景噪声。其基本原理是假设噪声在频域上是加性的，并且可以通过估计噪声谱并从语音谱中减去噪声谱来恢复干净的语音信号。具体步骤如下：
-&lt;ul&gt;
-&lt;li&gt;估计噪声谱。&lt;/li&gt;
-&lt;li&gt;计算语音信号的频谱。&lt;/li&gt;
-&lt;li&gt;从语音频谱中减去噪声谱。&lt;/li&gt;
-&lt;li&gt;将结果转换回时域。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;谱减法是一种常用的语音增强技术，用于去除背景噪声。其基本原理是假设噪声在频域上是加性的，并且可以通过估计噪声谱并从语音谱中减去噪声谱来恢复干净的语音信号。具体步骤如下：
+估计噪声谱。
+计算语音信号的频谱。
+从语音频谱中减去噪声谱。
+将结果转换回时域。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;语言识别系统流程&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;语音识别系统的典型流程包括以下几个主要步骤：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;声音提取&lt;/strong&gt;：从输入音频中提取出语音部分。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;预处理&lt;/strong&gt;：对提取的语音进行预处理，如滤波、分帧等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;特征提取&lt;/strong&gt;：提取语音的特征参数，如梅尔频率倒谱系数（MFCC）、线性预测编码（LPC）等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;建立模型&lt;/strong&gt;：使用隐马尔可夫模型（HMM）、深度神经网络（DNN）等建立语音识别模型。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;模式匹配&lt;/strong&gt;：将提取的特征与模型进行匹配，识别出相应的文字。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;语音识别系统的典型流程包括以下几个主要步骤：
+&lt;strong&gt;声音提取&lt;/strong&gt;：从输入音频中提取出语音部分。
+&lt;strong&gt;预处理&lt;/strong&gt;：对提取的语音进行预处理，如滤波、分帧等。
+&lt;strong&gt;特征提取&lt;/strong&gt;：提取语音的特征参数，如梅尔频率倒谱系数（MFCC）、线性预测编码（LPC）等。
+&lt;strong&gt;建立模型&lt;/strong&gt;：使用隐马尔可夫模型（HMM）、深度神经网络（DNN）等建立语音识别模型。
+&lt;strong&gt;模式匹配&lt;/strong&gt;：将提取的特征与模型进行匹配，识别出相应的文字。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;基础知识&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;浊音和清音的区别：
-&lt;ul&gt;
-&lt;li&gt;浊音是由声带振动产生的音，包括所有的元音和一些辅音。&lt;/li&gt;
-&lt;li&gt;清音是由不经过声带振动产生的音，主要包括另一部分辅音。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;语音产生过程：
-&lt;ul&gt;
-&lt;li&gt;空气从肺部排出形成气流，冲击声带。&lt;/li&gt;
-&lt;li&gt;如果声带紧绷，则形成准周期性脉冲的空气流，产生浊音；若声带完全舒展，则形成摩擦音或爆破音。&lt;/li&gt;
-&lt;li&gt;经过声道调制后，空气流从口或鼻腔辐射出来，形成语音。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;共振峰：
-&lt;ul&gt;
-&lt;li&gt;共振峰是声道的重要声学特征，指声道作为谐振腔的谐振频率。&lt;/li&gt;
-&lt;li&gt;共振峰模型可分为级联型、并联型和混合型。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;浊音和清音的区别：
+浊音是由声带振动产生的音，包括所有的元音和一些辅音。
+清音是由不经过声带振动产生的音，主要包括另一部分辅音。
+语音产生过程：
+空气从肺部排出形成气流，冲击声带。
+如果声带紧绷，则形成准周期性脉冲的空气流，产生浊音；若声带完全舒展，则形成摩擦音或爆破音。
+经过声道调制后，空气流从口或鼻腔辐射出来，形成语音。
+共振峰：
+共振峰是声道的重要声学特征，指声道作为谐振腔的谐振频率。
+共振峰模型可分为级联型、并联型和混合型。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;语码模型参数&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;语码模型参数是指在语音识别系统中用于描述语音特征的参数，通常包括：
-&lt;ul&gt;
-&lt;li&gt;梅尔频率倒谱系数（MFCC）&lt;/li&gt;
-&lt;li&gt;线性预测编码（LPC）&lt;/li&gt;
-&lt;li&gt;其他统计特征参数&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;语码模型参数是指在语音识别系统中用于描述语音特征的参数，通常包括：
+梅尔频率倒谱系数（MFCC）
+线性预测编码（LPC）
+其他统计特征参数&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;时域分析和频域分析&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;时域分析&lt;/strong&gt;：直接对语音信号的时间序列进行分析，常用方法有时域平均幅度差函数（AMDF）、自相关函数等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;频域分析&lt;/strong&gt;：将语音信号转换到频域进行分析，常用方法有快速傅里叶变换（FFT）、短时傅里叶变换（STFT）等。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;时域分析&lt;/strong&gt;：直接对语音信号的时间序列进行分析，常用方法有时域平均幅度差函数（AMDF）、自相关函数等。
+&lt;strong&gt;频域分析&lt;/strong&gt;：将语音信号转换到频域进行分析，常用方法有快速傅里叶变换（FFT）、短时傅里叶变换（STFT）等。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;倒谱&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;倒谱是频谱的对数再进行傅里叶变换的结果，常用于语音信号处理中。倒谱可以分为：
-&lt;ul&gt;
-&lt;li&gt;梅尔频率倒谱（Mel-frequency cepstrum）&lt;/li&gt;
-&lt;li&gt;倒谱距离（Cepstral distance）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;倒谱是频谱的对数再进行傅里叶变换的结果，常用于语音信号处理中。倒谱可以分为：
+梅尔频率倒谱（Mel-frequency cepstrum）
+倒谱距离（Cepstral distance）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;端点检测&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;端点检测是语音信号处理中的一个重要步骤，用于确定语音信号的起始和结束位置。常用方法有双门线法、能量阈值法等。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;端点检测是语音信号处理中的一个重要步骤，用于确定语音信号的起始和结束位置。常用方法有双门线法、能量阈值法等。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;综合题-1&#34;&gt;综合题
 &lt;/h4&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;语音识别系统的一般流程&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;语音识别系统的一般流程包括以下几个步骤：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;声音提取&lt;/strong&gt;：从输入音频中提取出语音部分。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;预处理&lt;/strong&gt;：对提取的语音进行预处理，如滤波、分帧等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;特征提取&lt;/strong&gt;：提取语音的特征参数，如梅尔频率倒谱系数（MFCC）、线性预测编码（LPC）等。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;建立模型&lt;/strong&gt;：使用隐马尔可夫模型（HMM）、深度神经网络（DNN）等建立语音识别模型。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;模式匹配&lt;/strong&gt;：将提取的特征与模型进行匹配，识别出相应的文字。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;语音识别系统的一般流程包括以下几个步骤：
+&lt;strong&gt;声音提取&lt;/strong&gt;：从输入音频中提取出语音部分。
+&lt;strong&gt;预处理&lt;/strong&gt;：对提取的语音进行预处理，如滤波、分帧等。
+&lt;strong&gt;特征提取&lt;/strong&gt;：提取语音的特征参数，如梅尔频率倒谱系数（MFCC）、线性预测编码（LPC）等。
+&lt;strong&gt;建立模型&lt;/strong&gt;：使用隐马尔可夫模型（HMM）、深度神经网络（DNN）等建立语音识别模型。
+&lt;strong&gt;模式匹配&lt;/strong&gt;：将提取的特征与模型进行匹配，识别出相应的文字。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;模式匹配&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;模式匹配是语音识别系统中的关键步骤，用于将提取的特征与已知的语音模型进行比对，从而识别出相应的文字。常用的模式匹配方法包括动态时间规整（DTW）、隐马尔可夫模型（HMM）等。&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;模式匹配是语音识别系统中的关键步骤，用于将提取的特征与已知的语音模型进行比对，从而识别出相应的文字。常用的模式匹配方法包括动态时间规整（DTW）、隐马尔可夫模型（HMM）等。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;谱减法流程&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;谱减法的具体流程如下：
-&lt;ul&gt;
-&lt;li&gt;估计噪声谱。&lt;/li&gt;
-&lt;li&gt;计算语音信号的频谱。&lt;/li&gt;
-&lt;li&gt;从语音频谱中减去噪声谱。&lt;/li&gt;
-&lt;li&gt;将结果转换回时域。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;谱减法的具体流程如下：
+估计噪声谱。
+计算语音信号的频谱。
+从语音频谱中减去噪声谱。
+将结果转换回时域。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;双门线流程&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;双门线法的具体流程如下：
-&lt;ul&gt;
-&lt;li&gt;计算语音信号的能量或过零率。&lt;/li&gt;
-&lt;li&gt;设定高门限和低门限。&lt;/li&gt;
-&lt;li&gt;当能量或过零率超过高门限时，认为语音开始；当低于低门限时，认为语音结束。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;双门线法的具体流程如下：
+计算语音信号的能量或过零率。
+设定高门限和低门限。
+当能量或过零率超过高门限时，认为语音开始；当低于低门限时，认为语音结束。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 </description>
