@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Wed, 08 Jan 2025 16:48:16 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 08 Jan 2025 17:06:53 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>语音信号期末复习</title>
         <link>https://example.com/post/%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7/</link>
         <pubDate>Mon, 06 Jan 2025 00:00:00 +0000</pubDate>
@@ -44,22 +44,29 @@
 &lt;h4 id=&#34;语音生成过程&#34;&gt;语音生成过程
 &lt;/h4&gt;&lt;ol&gt;
 &lt;li&gt;空气从肺部排出形成气流。&lt;/li&gt;
-&lt;li&gt;冲击声带：
+&lt;li&gt;冲击声带：&lt;/li&gt;
+&lt;/ol&gt;
 &lt;ul&gt;
 &lt;li&gt;声带紧绷：形成准周期性脉冲空气流，产生浊音。&lt;/li&gt;
 &lt;li&gt;声带舒展：形成摩擦音或爆破音。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
+&lt;ol start=&#34;3&#34;&gt;
 &lt;li&gt;空气流经过声道调制后从口或鼻腔辐射，形成语音。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;h4 id=&#34;共振峰&#34;&gt;共振峰
-&lt;/h4&gt;&lt;p&gt;声道是谐振腔，有许多谐振频率，称为共振峰。&lt;/p&gt;
-&lt;p&gt;共振峰是声道的重要声学特征。&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;声道是谐振腔，有许多谐振频率，称为共振峰。
+共振峰是声道的重要声学特征。&lt;/p&gt;
 &lt;h3 id=&#34;听觉掩蔽效应&#34;&gt;听觉掩蔽效应
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;人耳听觉频率范围：20Hz-20kHz。&lt;/li&gt;
 &lt;li&gt;语音感知强度范围：0-130dB声压级。&lt;/li&gt;
 &lt;li&gt;掩蔽效应：一个声音的听觉感受性受到同时存在的另一个声音的影响。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;语音信号数字模型的组成&#34;&gt;语音信号数字模型的组成
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;语音信号数字模型：激励模型，声道模型，辐射模型&lt;/li&gt;
+&lt;li&gt;声道模型：声管模型，共振峰模型&lt;/li&gt;
+&lt;li&gt;共振峰模型：分为级联型，并联型和混合型&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;数字语音处理&#34;&gt;数字语音处理
 &lt;/h2&gt;&lt;h3 id=&#34;语音信号基本特性&#34;&gt;语音信号基本特性
@@ -68,7 +75,9 @@
 &lt;li&gt;常用采样率：8kHz。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;语音预处理&#34;&gt;语音预处理
-&lt;/h3&gt;&lt;h4 id=&#34;预加重&#34;&gt;预加重
+&lt;/h3&gt;&lt;h4 id=&#34;预处理&#34;&gt;预处理
+&lt;/h4&gt;&lt;p&gt;包括：预加重，端点检测，加窗分帧&lt;/p&gt;
+&lt;h4 id=&#34;预加重&#34;&gt;预加重
 &lt;/h4&gt;&lt;p&gt;目的：增强高频分辨率，减少口唇辐射影响。&lt;/p&gt;
 &lt;h4 id=&#34;短时处理&#34;&gt;短时处理
 &lt;/h4&gt;&lt;ul&gt;
