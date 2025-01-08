@@ -260,6 +260,14 @@
 &lt;li&gt;训练HMM。&lt;/li&gt;
 &lt;li&gt;测试集识别。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 id=&#34;参数&#34;&gt;参数
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;N：模型的状态数目&lt;/li&gt;
+&lt;li&gt;M：观测符号数&lt;/li&gt;
+&lt;li&gt;A：状态转移概率分布&lt;/li&gt;
+&lt;li&gt;B：状态的观测符号概率分布&lt;/li&gt;
+&lt;li&gt;π：初始状态分布&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;题目&#34;&gt;题目
 &lt;/h2&gt;&lt;h3 id=&#34;判断题&#34;&gt;判断题
 &lt;/h3&gt;&lt;ol&gt;
