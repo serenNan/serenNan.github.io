@@ -7,14 +7,14 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Wed, 08 Jan 2025 15:06:35 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 08 Jan 2025 16:20:03 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>语音信号复习</title>
         <link>https://example.com/post/temp/</link>
         <pubDate>Mon, 06 Jan 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/temp/</guid>
-        <description>&lt;h2 id=&#34;第二章-语音生成与感知模型&#34;&gt;第二章 语音生成与感知模型
-&lt;/h2&gt;&lt;h3 id=&#34;21-发音与感知模型&#34;&gt;2.1 发音与感知模型
+        <description>&lt;h2 id=&#34;语音生成与感知模型&#34;&gt;语音生成与感知模型
+&lt;/h2&gt;&lt;h3 id=&#34;发音与感知模型&#34;&gt;发音与感知模型
 &lt;/h3&gt;&lt;h4 id=&#34;声门&#34;&gt;声门
 &lt;/h4&gt;&lt;p&gt;声带之间的间隙称为声门。&lt;/p&gt;
 &lt;p&gt;主要功能：产生激励。&lt;/p&gt;
@@ -29,7 +29,7 @@
 &lt;li&gt;调制：通过声道形状的变化改变声波的频率特性。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;语音生成框图&#34;&gt;语音生成框图
-&lt;/h4&gt;&lt;p&gt;声门 (激励) ➔ 2. 声道 (调制) ➔ 3. 嘴唇 (辐射语音)&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;声门 (激励) ➔ 声道 (调制) ➔ 嘴唇 (辐射语音)&lt;/p&gt;
 &lt;h4 id=&#34;基音频率&#34;&gt;基音频率
 &lt;/h4&gt;&lt;p&gt;由声带张开闭合的周期决定。&lt;/p&gt;
 &lt;ul&gt;
@@ -55,19 +55,19 @@
 &lt;h4 id=&#34;共振峰&#34;&gt;共振峰
 &lt;/h4&gt;&lt;p&gt;声道是谐振腔，有许多谐振频率，称为共振峰。&lt;/p&gt;
 &lt;p&gt;共振峰是声道的重要声学特征。&lt;/p&gt;
-&lt;h3 id=&#34;22-听觉掩蔽效应&#34;&gt;2.2 听觉掩蔽效应
+&lt;h3 id=&#34;听觉掩蔽效应&#34;&gt;听觉掩蔽效应
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;人耳听觉频率范围：20Hz-20kHz。&lt;/li&gt;
 &lt;li&gt;语音感知强度范围：0-130dB声压级。&lt;/li&gt;
 &lt;li&gt;掩蔽效应：一个声音的听觉感受性受到同时存在的另一个声音的影响。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;第四章-数字语音处理&#34;&gt;第四章 数字语音处理
-&lt;/h2&gt;&lt;h3 id=&#34;41-语音信号基本特性&#34;&gt;4.1 语音信号基本特性
+&lt;h2 id=&#34;数字语音处理&#34;&gt;数字语音处理
+&lt;/h2&gt;&lt;h3 id=&#34;语音信号基本特性&#34;&gt;语音信号基本特性
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;语音信号频率范围：300-3400Hz。&lt;/li&gt;
 &lt;li&gt;常用采样率：8kHz。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;42-语音预处理&#34;&gt;4.2 语音预处理
+&lt;h3 id=&#34;语音预处理&#34;&gt;语音预处理
 &lt;/h3&gt;&lt;h4 id=&#34;预加重&#34;&gt;预加重
 &lt;/h4&gt;&lt;p&gt;目的：增强高频分辨率，减少口唇辐射影响。&lt;/p&gt;
 &lt;h4 id=&#34;短时处理&#34;&gt;短时处理
@@ -92,37 +92,43 @@
 &lt;li&gt;清音：无周期性，类似噪声。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;倒谱分析&#34;&gt;倒谱分析
-&lt;/h4&gt;&lt;ul&gt;
+&lt;/h4&gt;&lt;p&gt;实现：解卷（卷积关系变换为求和关系）&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;将语音信号的声门激励信息与声道响应信息分离。&lt;/li&gt;
 &lt;li&gt;用于提取声道共振特征和基音周期。&lt;/li&gt;
 &lt;li&gt;倒谱：频谱(Spectrum)的前四个字母倒过来。&lt;/li&gt;
-&lt;li&gt;共振峰：语音的主要频率成分，携带声音的辨识属性。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;第五章-语音端点检测&#34;&gt;第五章 语音端点检测
-&lt;/h2&gt;&lt;h3 id=&#34;51-方法&#34;&gt;5.1 方法
-&lt;/h3&gt;&lt;h4 id=&#34;双门限比较法&#34;&gt;双门限比较法
-&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;第一级判决：
+&lt;h4 id=&#34;共振峰-1&#34;&gt;共振峰
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;语音的主要频率成分，携带声音的辨识属性&lt;/li&gt;
+&lt;li&gt;提取共振峰：共振峰的位置和转变过程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;语音端点检测&#34;&gt;语音端点检测
+&lt;/h2&gt;&lt;h3 id=&#34;端点检测法&#34;&gt;端点检测法
+&lt;/h3&gt;&lt;p&gt;指从包含语音的一段信息中确定出语音的起始点和结束点。&lt;/p&gt;
+&lt;h3 id=&#34;双门限比较法&#34;&gt;双门限比较法
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;第一级判决：&lt;/li&gt;
+&lt;/ol&gt;
 &lt;ul&gt;
 &lt;li&gt;根据短时能量选较高门限T1，粗判定语音段。&lt;/li&gt;
 &lt;li&gt;根据背景噪声平均能量确定较低门限T2，精确定位语音段。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;第二级判决：
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;第二级判决：&lt;/li&gt;
+&lt;/ol&gt;
 &lt;ul&gt;
 &lt;li&gt;用短时平均过零率，进一步搜索语音段的起止点。&lt;/li&gt;
 &lt;li&gt;门限T3由背景噪声平均过零率确定。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;第六章-语音特性与噪声&#34;&gt;第六章 语音特性与噪声
-&lt;/h2&gt;&lt;h3 id=&#34;61-语音特性&#34;&gt;6.1 语音特性
+&lt;h2 id=&#34;语音特性与噪声&#34;&gt;语音特性与噪声
+&lt;/h2&gt;&lt;h3 id=&#34;语音特性&#34;&gt;语音特性
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;语音是时变、非平稳信号，同时具有短时平稳性。&lt;/li&gt;
+&lt;li&gt;语音是时变、非平稳的随机信号，同时具有短时平稳性。&lt;/li&gt;
 &lt;li&gt;语音分为清音与浊音。&lt;/li&gt;
 &lt;li&gt;语音信号可用统计分析描述。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;62-噪声特性&#34;&gt;6.2 噪声特性
+&lt;h3 id=&#34;噪声特性&#34;&gt;噪声特性
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;加性噪声：直接叠加在语音信号上。&lt;/li&gt;
 &lt;li&gt;非加性噪声：需通过变换处理成加性噪声。&lt;/li&gt;
@@ -130,40 +136,130 @@
 &lt;h4 id=&#34;噪声分类&#34;&gt;噪声分类
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;周期性噪声：如机械噪声，用功率谱与滤波去除。&lt;/li&gt;
-&lt;li&gt;冲激噪声：通过幅度阈值检测并消除。&lt;/li&gt;
+&lt;li&gt;冲激噪声（脉冲噪声）：通过幅度阈值检测并消除。&lt;/li&gt;
 &lt;li&gt;宽带噪声：难以去除，用白化处理或其他方法。&lt;/li&gt;
 &lt;li&gt;语音干扰噪声：如“鸡尾酒会效应”，通过语音增强算法处理。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;第七章-语音识别系统&#34;&gt;第七章 语音识别系统
-&lt;/h2&gt;&lt;h3 id=&#34;71-系统组成&#34;&gt;7.1 系统组成
+&lt;h3 id=&#34;语音增强算法分类&#34;&gt;语音增强算法分类
 &lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;根据是否建立模型：&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;模型算法：
+&lt;ul&gt;
+&lt;li&gt;参数方法&lt;/li&gt;
+&lt;li&gt;统计方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;非模型算法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;根据麦克风数量：&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;单通道语音增强算法&lt;/li&gt;
+&lt;li&gt;多通道语音增强算法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;&lt;strong&gt;根据处理域：&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;时域&lt;/li&gt;
+&lt;li&gt;频域&lt;/li&gt;
+&lt;li&gt;巴克域&lt;/li&gt;
+&lt;li&gt;子空间域&lt;/li&gt;
+&lt;li&gt;小波域&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;谱减法优缺点&#34;&gt;谱减法优缺点
+&lt;/h3&gt;&lt;h4 id=&#34;优点&#34;&gt;优点：
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;无需使用端点检测方法区分语音段和无声段。&lt;/li&gt;
+&lt;li&gt;算法简单，易于实现。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;缺点&#34;&gt;缺点：
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;频谱直接相减会导致增强后的语音产生“音乐噪声”。&lt;/li&gt;
+&lt;li&gt;适用的信噪比范围较窄。&lt;/li&gt;
+&lt;li&gt;在低信噪比时对语音可懂度损伤较大。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;语音识别系统&#34;&gt;语音识别系统
+&lt;/h2&gt;&lt;h3 id=&#34;系统组成&#34;&gt;系统组成
+&lt;/h3&gt;&lt;p&gt;流程图：
+&lt;img src=&#34;https://example.com/post/temp/image.png&#34;
+	width=&#34;1107&#34;
+	height=&#34;617&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;alt text&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;179&#34;
+		data-flex-basis=&#34;430px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ol&gt;
 &lt;li&gt;预处理：包括预加重、端点检测。&lt;/li&gt;
 &lt;li&gt;特征提取：获取语音信号特征参数。&lt;/li&gt;
 &lt;li&gt;训练识别网络：建立模板和模型。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&#34;72-识别方法&#34;&gt;7.2 识别方法
+&lt;h3 id=&#34;识别方法&#34;&gt;识别方法
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;基于声道模型与语音知识。&lt;/li&gt;
 &lt;li&gt;模式匹配方法：如VQ、DTW。&lt;/li&gt;
 &lt;li&gt;统计模型方法：如HMM。&lt;/li&gt;
 &lt;li&gt;人工神经网络方法：如深度学习。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;隐马尔可夫模型-hmm&#34;&gt;隐马尔可夫模型 (HMM)
+&lt;h3 id=&#34;语音识别过程&#34;&gt;语音识别过程
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/temp/image-1.png&#34;
+	width=&#34;1036&#34;
+	height=&#34;242&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;alt text&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;428&#34;
+		data-flex-basis=&#34;1027px&#34;
+	
+&gt;
+训练过程&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;预处理&lt;/strong&gt;：输入语音经过预处理。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;特征提取&lt;/strong&gt;：提取语音信号的特征。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;模板建立&lt;/strong&gt;：基于提取的特征建立语音模板。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;识别过程&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;特征比较&lt;/strong&gt;：将输入语音特征与现有语音模板进行比较。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;最优匹配&lt;/strong&gt;：找出一系列最优匹配的模板。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结果输出&lt;/strong&gt;：通过查表给出计算机的识别结果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;隐马尔可夫模型-hmm&#34;&gt;隐马尔可夫模型 (HMM)
+&lt;/h3&gt;&lt;p&gt;是一个统计模型&lt;/p&gt;
+&lt;h4 id=&#34;双重随机过程&#34;&gt;双重随机过程：
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;双重随机过程：
-&lt;ul&gt;
 &lt;li&gt;短时平稳段统计特征。&lt;/li&gt;
 &lt;li&gt;段间动态转变特性。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;步骤：
+&lt;h4 id=&#34;再语音识别的应用&#34;&gt;再语音识别的应用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;语音识别的困难：对语音的&lt;strong&gt;发音速率&lt;/strong&gt;和&lt;strong&gt;声学变化&lt;/strong&gt;建立模型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;HMM通过以下方式解决上述问题：&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;状态转移概率：模拟发音速率的变化，反映大脑根据语法和言语需求调整音素参数的过程。&lt;/li&gt;
+&lt;li&gt;观察输出概率：模拟声学变化，通过依赖状态的输出概率来描述可观测的语音时变序列。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;步骤&#34;&gt;步骤：
+&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;信号预处理。&lt;/li&gt;
 &lt;li&gt;特征提取。&lt;/li&gt;
 &lt;li&gt;训练HMM。&lt;/li&gt;
 &lt;li&gt;测试集识别。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;题目&#34;&gt;题目
 &lt;/h2&gt;&lt;h3 id=&#34;判断题&#34;&gt;判断题

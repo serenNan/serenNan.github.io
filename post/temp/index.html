@@ -10,7 +10,7 @@
 <meta property='og:description' content="temp">
 <meta property='og:url' content='https://example.com/post/temp/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-08T15:06:35&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-08T16:20:03&#43;08:00'/>
 <meta name="twitter:title" content="语音信号复习">
 <meta name="twitter:description" content="temp">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -326,9 +326,9 @@
         <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#第二章-语音生成与感知模型">第二章 语音生成与感知模型</a>
+    <li><a href="#语音生成与感知模型">语音生成与感知模型</a>
       <ol>
-        <li><a href="#21-发音与感知模型">2.1 发音与感知模型</a>
+        <li><a href="#发音与感知模型">发音与感知模型</a>
           <ol>
             <li><a href="#声门">声门</a></li>
             <li><a href="#声道">声道</a></li>
@@ -340,48 +340,57 @@
             <li><a href="#共振峰">共振峰</a></li>
           </ol>
         </li>
-        <li><a href="#22-听觉掩蔽效应">2.2 听觉掩蔽效应</a></li>
+        <li><a href="#听觉掩蔽效应">听觉掩蔽效应</a></li>
       </ol>
     </li>
-    <li><a href="#第四章-数字语音处理">第四章 数字语音处理</a>
+    <li><a href="#数字语音处理">数字语音处理</a>
       <ol>
-        <li><a href="#41-语音信号基本特性">4.1 语音信号基本特性</a></li>
-        <li><a href="#42-语音预处理">4.2 语音预处理</a>
+        <li><a href="#语音信号基本特性">语音信号基本特性</a></li>
+        <li><a href="#语音预处理">语音预处理</a>
           <ol>
             <li><a href="#预加重">预加重</a></li>
             <li><a href="#短时处理">短时处理</a></li>
             <li><a href="#短时平均能量">短时平均能量</a></li>
             <li><a href="#短时自相关函数">短时自相关函数</a></li>
             <li><a href="#倒谱分析">倒谱分析</a></li>
+            <li><a href="#共振峰-1">共振峰</a></li>
           </ol>
         </li>
       </ol>
     </li>
-    <li><a href="#第五章-语音端点检测">第五章 语音端点检测</a>
+    <li><a href="#语音端点检测">语音端点检测</a>
       <ol>
-        <li><a href="#51-方法">5.1 方法</a>
-          <ol>
-            <li><a href="#双门限比较法">双门限比较法</a></li>
-          </ol>
-        </li>
+        <li><a href="#端点检测法">端点检测法</a></li>
+        <li><a href="#双门限比较法">双门限比较法</a></li>
       </ol>
     </li>
-    <li><a href="#第六章-语音特性与噪声">第六章 语音特性与噪声</a>
+    <li><a href="#语音特性与噪声">语音特性与噪声</a>
       <ol>
-        <li><a href="#61-语音特性">6.1 语音特性</a></li>
-        <li><a href="#62-噪声特性">6.2 噪声特性</a>
+        <li><a href="#语音特性">语音特性</a></li>
+        <li><a href="#噪声特性">噪声特性</a>
           <ol>
             <li><a href="#噪声分类">噪声分类</a></li>
           </ol>
         </li>
+        <li><a href="#语音增强算法分类">语音增强算法分类</a></li>
+        <li><a href="#谱减法优缺点">谱减法优缺点</a>
+          <ol>
+            <li><a href="#优点">优点：</a></li>
+            <li><a href="#缺点">缺点：</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
-    <li><a href="#第七章-语音识别系统">第七章 语音识别系统</a>
+    <li><a href="#语音识别系统">语音识别系统</a>
       <ol>
-        <li><a href="#71-系统组成">7.1 系统组成</a></li>
-        <li><a href="#72-识别方法">7.2 识别方法</a>
+        <li><a href="#系统组成">系统组成</a></li>
+        <li><a href="#识别方法">识别方法</a></li>
+        <li><a href="#语音识别过程">语音识别过程</a></li>
+        <li><a href="#隐马尔可夫模型-hmm">隐马尔可夫模型 (HMM)</a>
           <ol>
-            <li><a href="#隐马尔可夫模型-hmm">隐马尔可夫模型 (HMM)</a></li>
+            <li><a href="#双重随机过程">双重随机过程：</a></li>
+            <li><a href="#再语音识别的应用">再语音识别的应用</a></li>
+            <li><a href="#步骤">步骤：</a></li>
           </ol>
         </li>
       </ol>
@@ -488,7 +497,7 @@
             <div class="article-time--lastmod">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
                 <time>
-                    2025-01-08 15:06
+                    2025-01-08 16:20
                 </time>
             </div></footer>
     
@@ -501,8 +510,8 @@
     <section class="article-content">
     
     
-    <h2 id="第二章-语音生成与感知模型">第二章 语音生成与感知模型
-</h2><h3 id="21-发音与感知模型">2.1 发音与感知模型
+    <h2 id="语音生成与感知模型">语音生成与感知模型
+</h2><h3 id="发音与感知模型">发音与感知模型
 </h3><h4 id="声门">声门
 </h4><p>声带之间的间隙称为声门。</p>
 <p>主要功能：产生激励。</p>
@@ -517,7 +526,7 @@
 <li>调制：通过声道形状的变化改变声波的频率特性。</li>
 </ul>
 <h4 id="语音生成框图">语音生成框图
-</h4><p>声门 (激励) ➔ 2. 声道 (调制) ➔ 3. 嘴唇 (辐射语音)</p>
+</h4><p>声门 (激励) ➔ 声道 (调制) ➔ 嘴唇 (辐射语音)</p>
 <h4 id="基音频率">基音频率
 </h4><p>由声带张开闭合的周期决定。</p>
 <ul>
@@ -543,19 +552,19 @@
 <h4 id="共振峰">共振峰
 </h4><p>声道是谐振腔，有许多谐振频率，称为共振峰。</p>
 <p>共振峰是声道的重要声学特征。</p>
-<h3 id="22-听觉掩蔽效应">2.2 听觉掩蔽效应
+<h3 id="听觉掩蔽效应">听觉掩蔽效应
 </h3><ul>
 <li>人耳听觉频率范围：20Hz-20kHz。</li>
 <li>语音感知强度范围：0-130dB声压级。</li>
 <li>掩蔽效应：一个声音的听觉感受性受到同时存在的另一个声音的影响。</li>
 </ul>
-<h2 id="第四章-数字语音处理">第四章 数字语音处理
-</h2><h3 id="41-语音信号基本特性">4.1 语音信号基本特性
+<h2 id="数字语音处理">数字语音处理
+</h2><h3 id="语音信号基本特性">语音信号基本特性
 </h3><ul>
 <li>语音信号频率范围：300-3400Hz。</li>
 <li>常用采样率：8kHz。</li>
 </ul>
-<h3 id="42-语音预处理">4.2 语音预处理
+<h3 id="语音预处理">语音预处理
 </h3><h4 id="预加重">预加重
 </h4><p>目的：增强高频分辨率，减少口唇辐射影响。</p>
 <h4 id="短时处理">短时处理
@@ -580,37 +589,43 @@
 <li>清音：无周期性，类似噪声。</li>
 </ul>
 <h4 id="倒谱分析">倒谱分析
-</h4><ul>
+</h4><p>实现：解卷（卷积关系变换为求和关系）</p>
+<ul>
 <li>将语音信号的声门激励信息与声道响应信息分离。</li>
 <li>用于提取声道共振特征和基音周期。</li>
 <li>倒谱：频谱(Spectrum)的前四个字母倒过来。</li>
-<li>共振峰：语音的主要频率成分，携带声音的辨识属性。</li>
 </ul>
-<h2 id="第五章-语音端点检测">第五章 语音端点检测
-</h2><h3 id="51-方法">5.1 方法
-</h3><h4 id="双门限比较法">双门限比较法
-</h4><ol>
-<li>第一级判决：
+<h4 id="共振峰-1">共振峰
+</h4><ul>
+<li>语音的主要频率成分，携带声音的辨识属性</li>
+<li>提取共振峰：共振峰的位置和转变过程</li>
+</ul>
+<h2 id="语音端点检测">语音端点检测
+</h2><h3 id="端点检测法">端点检测法
+</h3><p>指从包含语音的一段信息中确定出语音的起始点和结束点。</p>
+<h3 id="双门限比较法">双门限比较法
+</h3><ol>
+<li>第一级判决：</li>
+</ol>
 <ul>
 <li>根据短时能量选较高门限T1，粗判定语音段。</li>
 <li>根据背景噪声平均能量确定较低门限T2，精确定位语音段。</li>
 </ul>
-</li>
-<li>第二级判决：
+<ol start="2">
+<li>第二级判决：</li>
+</ol>
 <ul>
 <li>用短时平均过零率，进一步搜索语音段的起止点。</li>
 <li>门限T3由背景噪声平均过零率确定。</li>
 </ul>
-</li>
-</ol>
-<h2 id="第六章-语音特性与噪声">第六章 语音特性与噪声
-</h2><h3 id="61-语音特性">6.1 语音特性
+<h2 id="语音特性与噪声">语音特性与噪声
+</h2><h3 id="语音特性">语音特性
 </h3><ul>
-<li>语音是时变、非平稳信号，同时具有短时平稳性。</li>
+<li>语音是时变、非平稳的随机信号，同时具有短时平稳性。</li>
 <li>语音分为清音与浊音。</li>
 <li>语音信号可用统计分析描述。</li>
 </ul>
-<h3 id="62-噪声特性">6.2 噪声特性
+<h3 id="噪声特性">噪声特性
 </h3><ul>
 <li>加性噪声：直接叠加在语音信号上。</li>
 <li>非加性噪声：需通过变换处理成加性噪声。</li>
@@ -618,40 +633,130 @@
 <h4 id="噪声分类">噪声分类
 </h4><ul>
 <li>周期性噪声：如机械噪声，用功率谱与滤波去除。</li>
-<li>冲激噪声：通过幅度阈值检测并消除。</li>
+<li>冲激噪声（脉冲噪声）：通过幅度阈值检测并消除。</li>
 <li>宽带噪声：难以去除，用白化处理或其他方法。</li>
 <li>语音干扰噪声：如“鸡尾酒会效应”，通过语音增强算法处理。</li>
 </ul>
-<h2 id="第七章-语音识别系统">第七章 语音识别系统
-</h2><h3 id="71-系统组成">7.1 系统组成
+<h3 id="语音增强算法分类">语音增强算法分类
 </h3><ol>
+<li><strong>根据是否建立模型：</strong></li>
+</ol>
+<ul>
+<li>模型算法：
+<ul>
+<li>参数方法</li>
+<li>统计方法</li>
+</ul>
+</li>
+<li>非模型算法</li>
+</ul>
+<ol start="2">
+<li><strong>根据麦克风数量：</strong></li>
+</ol>
+<ul>
+<li>单通道语音增强算法</li>
+<li>多通道语音增强算法</li>
+</ul>
+<ol start="3">
+<li><strong>根据处理域：</strong></li>
+</ol>
+<ul>
+<li>时域</li>
+<li>频域</li>
+<li>巴克域</li>
+<li>子空间域</li>
+<li>小波域</li>
+</ul>
+<h3 id="谱减法优缺点">谱减法优缺点
+</h3><h4 id="优点">优点：
+</h4><ul>
+<li>无需使用端点检测方法区分语音段和无声段。</li>
+<li>算法简单，易于实现。</li>
+</ul>
+<h4 id="缺点">缺点：
+</h4><ul>
+<li>频谱直接相减会导致增强后的语音产生“音乐噪声”。</li>
+<li>适用的信噪比范围较窄。</li>
+<li>在低信噪比时对语音可懂度损伤较大。</li>
+</ul>
+<h2 id="语音识别系统">语音识别系统
+</h2><h3 id="系统组成">系统组成
+</h3><p>流程图：
+<img src="/post/temp/image.png"
+	width="1107"
+	height="617"
+	
+	loading="lazy"
+	
+		alt="alt text"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="179"
+		data-flex-basis="430px"
+	
+></p>
+<ol>
 <li>预处理：包括预加重、端点检测。</li>
 <li>特征提取：获取语音信号特征参数。</li>
 <li>训练识别网络：建立模板和模型。</li>
 </ol>
-<h3 id="72-识别方法">7.2 识别方法
+<h3 id="识别方法">识别方法
 </h3><ul>
 <li>基于声道模型与语音知识。</li>
 <li>模式匹配方法：如VQ、DTW。</li>
 <li>统计模型方法：如HMM。</li>
 <li>人工神经网络方法：如深度学习。</li>
 </ul>
-<h4 id="隐马尔可夫模型-hmm">隐马尔可夫模型 (HMM)
+<h3 id="语音识别过程">语音识别过程
+</h3><p><img src="/post/temp/image-1.png"
+	width="1036"
+	height="242"
+	
+	loading="lazy"
+	
+		alt="alt text"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="428"
+		data-flex-basis="1027px"
+	
+>
+训练过程</p>
+<ol>
+<li><strong>预处理</strong>：输入语音经过预处理。</li>
+<li><strong>特征提取</strong>：提取语音信号的特征。</li>
+<li><strong>模板建立</strong>：基于提取的特征建立语音模板。</li>
+</ol>
+<p>识别过程</p>
+<ol>
+<li><strong>特征比较</strong>：将输入语音特征与现有语音模板进行比较。</li>
+<li><strong>最优匹配</strong>：找出一系列最优匹配的模板。</li>
+<li><strong>结果输出</strong>：通过查表给出计算机的识别结果。</li>
+</ol>
+<h3 id="隐马尔可夫模型-hmm">隐马尔可夫模型 (HMM)
+</h3><p>是一个统计模型</p>
+<h4 id="双重随机过程">双重随机过程：
 </h4><ul>
-<li>双重随机过程：
-<ul>
 <li>短时平稳段统计特征。</li>
 <li>段间动态转变特性。</li>
 </ul>
-</li>
-<li>步骤：
+<h4 id="再语音识别的应用">再语音识别的应用
+</h4><ul>
+<li>语音识别的困难：对语音的<strong>发音速率</strong>和<strong>声学变化</strong>建立模型</li>
+</ul>
+<p>HMM通过以下方式解决上述问题：</p>
 <ul>
+<li>状态转移概率：模拟发音速率的变化，反映大脑根据语法和言语需求调整音素参数的过程。</li>
+<li>观察输出概率：模拟声学变化，通过依赖状态的输出概率来描述可观测的语音时变序列。</li>
+</ul>
+<h4 id="步骤">步骤：
+</h4><ul>
 <li>信号预处理。</li>
 <li>特征提取。</li>
 <li>训练HMM。</li>
 <li>测试集识别。</li>
-</ul>
-</li>
 </ul>
 <h2 id="题目">题目
 </h2><h3 id="判断题">判断题
