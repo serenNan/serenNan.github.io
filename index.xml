@@ -1397,13 +1397,13 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;博客背景&#34;&gt;博客背景
 &lt;/h2&gt;&lt;p&gt;我这里用的是&lt;code&gt;particles&lt;/code&gt;动态粒子背景&lt;/p&gt;
-&lt;p&gt;配置：\&lt;/p&gt;
+&lt;p&gt;配置：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;进入网站自定义配置：&lt;a class=&#34;link&#34; href=&#34;https://vincentgarreau.com/particles.js/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;particles&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;唯一需要注意的是有个选项改成window
-&lt;img src=&#34;particles1.png&#34; alt=&#34;Particles Image&#34; width=&#34;500&#34; &gt;&lt;/p&gt;
+&lt;p&gt;唯一需要注意的是有个选项改成window&lt;/p&gt;
+&lt;img src=&#34;particles1.png&#34; alt=&#34;Particles Image&#34; width=&#34;500&#34; &gt;
 &lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;配置好后下载文件&lt;/li&gt;
 &lt;/ol&gt;
