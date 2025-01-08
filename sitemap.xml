@@ -3,10 +3,10 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://example.com/post/</loc>
-    <lastmod>2025-01-08T16:31:47+08:00</lastmod>
+    <lastmod>2025-01-08T16:39:58+08:00</lastmod>
   </url><url>
     <loc>https://example.com/post/%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7/</loc>
-    <lastmod>2025-01-08T16:31:47+08:00</lastmod>
+    <lastmod>2025-01-08T16:39:58+08:00</lastmod>
   </url><url>
     <loc>https://example.com/categories/</loc>
     <lastmod>2025-01-06T23:39:59+08:00</lastmod>
@@ -24,7 +24,7 @@
     <lastmod>2025-01-02T23:47:16+08:00</lastmod>
   </url><url>
     <loc>https://example.com/page/</loc>
-    <lastmod>2025-01-06T13:53:58+08:00</lastmod>
+    <lastmod>2025-01-08T16:39:58+08:00</lastmod>
   </url><url>
     <loc>https://example.com/category/</loc>
     <lastmod>2025-01-02T16:41:04+08:00</lastmod>
@@ -59,7 +59,7 @@
     <lastmod>2025-01-02T16:07:18+08:00</lastmod>
   </url><url>
     <loc>https://example.com/links/</loc>
-    <lastmod>2025-01-06T13:53:58+08:00</lastmod>
+    <lastmod>2025-01-08T16:39:58+08:00</lastmod>
   </url><url>
     <loc>https://example.com/page/search/</loc>
     <lastmod>2024-12-30T15:26:13+08:00</lastmod>
