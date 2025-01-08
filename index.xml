@@ -8,11 +8,11 @@
         <language>zh-cn</language>
         <copyright>serenNan</copyright><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>语音信号期末复习</title>
-        <link>https://example.com/post/%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7/</link>
+        <link>https://example.com/post/speech-signal/</link>
         <pubDate>Mon, 06 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7/</guid>
-        <description>&lt;img src="https://example.com/post/%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7/image-2.png" alt="Featured image of post 语音信号期末复习" /&gt;&lt;h2 id=&#34;语音生成与感知模型&#34;&gt;语音生成与感知模型
+        <guid>https://example.com/post/speech-signal/</guid>
+        <description>&lt;img src="https://example.com/post/speech-signal/image-2.png" alt="Featured image of post 语音信号期末复习" /&gt;&lt;h2 id=&#34;语音生成与感知模型&#34;&gt;语音生成与感知模型
 &lt;/h2&gt;&lt;h3 id=&#34;发音与感知模型&#34;&gt;发音与感知模型
 &lt;/h3&gt;&lt;h4 id=&#34;声门&#34;&gt;声门
 &lt;/h4&gt;&lt;p&gt;声带之间的间隙称为声门。&lt;/p&gt;
@@ -193,7 +193,7 @@
 &lt;h2 id=&#34;语音识别系统&#34;&gt;语音识别系统
 &lt;/h2&gt;&lt;h3 id=&#34;系统组成&#34;&gt;系统组成
 &lt;/h3&gt;&lt;p&gt;流程图：
-&lt;img src=&#34;https://example.com/post/%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7/image.png&#34;
+&lt;img src=&#34;https://example.com/post/speech-signal/image.png&#34;
 	width=&#34;1107&#34;
 	height=&#34;617&#34;
 	
@@ -220,7 +220,7 @@
 &lt;li&gt;人工神经网络方法：如深度学习。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;语音识别过程&#34;&gt;语音识别过程
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E8%AF%AD%E9%9F%B3%E4%BF%A1%E5%8F%B7/image-1.png&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/speech-signal/image-1.png&#34;
 	width=&#34;1036&#34;
 	height=&#34;242&#34;
 	
@@ -233,8 +233,8 @@
 		data-flex-grow=&#34;428&#34;
 		data-flex-basis=&#34;1027px&#34;
 	
-&gt;
-训练过程&lt;/p&gt;
+&gt;&lt;/p&gt;
+&lt;p&gt;训练过程&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;预处理&lt;/strong&gt;：输入语音经过预处理。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;特征提取&lt;/strong&gt;：提取语音信号的特征。&lt;/li&gt;
