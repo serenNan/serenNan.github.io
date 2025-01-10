@@ -7,6 +7,107 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright><atom:link href="https://example.com/categories/c++/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>常用函数</title>
+        <link>https://example.com/post/function/</link>
+        <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/post/function/</guid>
+        <description>&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
+&lt;/h2&gt;&lt;h3 id=&#34;map&#34;&gt;map
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;map&lt;/code&gt;是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的，且按键的升序排列。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;m[key] = value&lt;/code&gt;：将键 &lt;code&gt;key&lt;/code&gt; 对应的值设置为 &lt;code&gt;value&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m.insert({key, value})&lt;/code&gt;：将键值对 &lt;code&gt;{key, value}&lt;/code&gt; 插入到 &lt;code&gt;map&lt;/code&gt; 中。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m.erase(key)&lt;/code&gt;：从 &lt;code&gt;map&lt;/code&gt; 中删除键为 &lt;code&gt;key&lt;/code&gt; 的元素。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m.count(key)&lt;/code&gt;：返回 &lt;code&gt;map&lt;/code&gt; 中键为 &lt;code&gt;key&lt;/code&gt; 的元素个数。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m.find(key)&lt;/code&gt;：返回指向 &lt;code&gt;map&lt;/code&gt; 中键为 &lt;code&gt;key&lt;/code&gt; 的元素的迭代器，如果 &lt;code&gt;key&lt;/code&gt; 不存在则返回 &lt;code&gt;m.end()&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m.lower_bound(key)&lt;/code&gt;：返回指向 &lt;code&gt;map&lt;/code&gt; 中第一个不小于 &lt;code&gt;key&lt;/code&gt; 的元素的迭代器。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m.upper_bound(key)&lt;/code&gt;：返回指向 &lt;code&gt;map&lt;/code&gt; 中第一个大于 &lt;code&gt;key&lt;/code&gt; 的元素的迭代器。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;unordered_map&#34;&gt;unordered_map
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;unordered_map&lt;/code&gt; 是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;umap[key] = value&lt;/code&gt;：将键 &lt;code&gt;key&lt;/code&gt; 对应的值设置为 &lt;code&gt;value&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;umap.insert({key, value})&lt;/code&gt;：将键值对 &lt;code&gt;{key, value}&lt;/code&gt; 插入到 &lt;code&gt;unordered_map&lt;/code&gt; 中。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;umap.erase(key)&lt;/code&gt;：从 &lt;code&gt;unordered_map&lt;/code&gt; 中删除键为 &lt;code&gt;key&lt;/code&gt; 的元素。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;umap.count(key)&lt;/code&gt;：返回 &lt;code&gt;unordered_map&lt;/code&gt; 中键为 &lt;code&gt;key&lt;/code&gt; 的元素个数。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;umap.find(key)&lt;/code&gt;：返回指向 &lt;code&gt;unordered_map&lt;/code&gt; 中键为 &lt;code&gt;key&lt;/code&gt; 的元素的迭代器，如果 &lt;code&gt;key&lt;/code&gt; 不存在则返回 &lt;code&gt;umap.end()&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;umap.size()&lt;/code&gt;：返回 &lt;code&gt;unordered_map&lt;/code&gt; 中元素的个数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;set&#34;&gt;set
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;set&lt;/code&gt; 是 C++ 标准库中的一个关联容器，用于存储唯一的元素。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nums&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;nums.insert(x)&lt;/code&gt;：将元素 x 插入到集合 nums 中。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nums.erase(x)&lt;/code&gt;：从集合 nums 中删除元素 x。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nums.count(x)&lt;/code&gt;：返回集合 nums 中元素 x 的个数。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nums.find(x)&lt;/code&gt;：返回指向集合 nums 中元素 x 的迭代器，如果 x 不存在则返回 &lt;code&gt;nums.end()&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;nums.lower_bound(x)&lt;/code&gt;：返回指向集合 nums 中第一个不小于 x 的元素的迭代器。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;emplace_back&#34;&gt;emplace_back
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;emplace_back&lt;/code&gt; 是 C++ 标准库中 &lt;code&gt;std::vector&lt;/code&gt;、&lt;code&gt;std::deque&lt;/code&gt;、&lt;code&gt;std::list&lt;/code&gt; 等容器的一个成员函数，用于在容器的末尾直接构造一个元素，而不是先创建一个临时对象再插入。这样可以避免不必要的拷贝或移动操作，提高效率。&lt;/p&gt;
+&lt;h3 id=&#34;queue&#34;&gt;queue
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;queue&lt;/code&gt; 是 C++ 标准库中的一个容器适配器，用于实现先进先出（FIFO）的队列。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;queue&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;q&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;q.push(x)&lt;/code&gt;：将元素 x 入队。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q.pop()&lt;/code&gt;：将队首元素出队。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q.front()&lt;/code&gt;：返回队首元素的引用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q.back()&lt;/code&gt;：返回队尾元素的引用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q.empty()&lt;/code&gt;：检查队列是否为空，返回布尔值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;q.size()&lt;/code&gt;：返回队列中元素的个数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;priority_queue&#34;&gt;priority_queue
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;priority_queue&lt;/code&gt; 是 C++ 标准库中的一个容器适配器，用于实现优先队列。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;priority_queue&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pq&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;pq.push(x)&lt;/code&gt;：将元素 x 入队，并按优先级排序。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pq.pop()&lt;/code&gt;：将优先级最高的元素出队。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pq.top()&lt;/code&gt;：返回优先级最高的元素的引用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pq.empty()&lt;/code&gt;：检查优先队列是否为空，返回布尔值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pq.size()&lt;/code&gt;：返回优先队列中元素的个数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;stack&#34;&gt;stack
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;stack&lt;/code&gt; 是 C++ 标准库中的一个容器适配器，用于实现后进先出（LIFO）的栈。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;stack&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;s.push(x)&lt;/code&gt;：将元素 x 压入栈顶。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s.pop()&lt;/code&gt;：弹出栈顶元素。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s.top()&lt;/code&gt;：返回栈顶元素的引用。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s.empty()&lt;/code&gt;：检查栈是否为空，返回布尔值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;s.size()&lt;/code&gt;：返回栈中元素的个数。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>C&#43;&#43;语法</title>
         <link>https://example.com/post/cpp_study/</link>
         <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
