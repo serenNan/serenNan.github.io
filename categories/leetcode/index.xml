@@ -12,7 +12,7 @@
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/function/</guid>
-        <description>&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
+        <description>&lt;img src="https://example.com/post/function/function.jpg" alt="Featured image of post 常用函数" /&gt;&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
 &lt;/h2&gt;&lt;h3 id=&#34;map&#34;&gt;map
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;map&lt;/code&gt;是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的，且按键的升序排列。&lt;/p&gt;
 &lt;ol&gt;
@@ -113,7 +113,7 @@
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/algorithm/</guid>
-        <description>&lt;img src="https://example.com/post/algorithm/%E7%AE%97%E6%B3%95.jpg" alt="Featured image of post 算法思路" /&gt;&lt;h2 id=&#34;前缀和&#34;&gt;前缀和
+        <description>&lt;img src="https://example.com/post/algorithm/algorithm.jpg" alt="Featured image of post 算法思路" /&gt;&lt;h2 id=&#34;前缀和&#34;&gt;前缀和
 &lt;/h2&gt;&lt;p&gt;前缀和的定义：
 给定数组 nums，我们可以定义前缀和数组 &lt;code&gt;prefix_sum&lt;/code&gt;，使得&lt;code&gt; prefix_sum[i] = nums[0] + nums[1] + ... + nums[i-1]&lt;/code&gt;。
 这样，对于任何子数组 &lt;code&gt;[l, r]&lt;/code&gt;，其和可以通过以下公式计算：&lt;/p&gt;

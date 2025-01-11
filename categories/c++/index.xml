@@ -12,7 +12,7 @@
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/function/</guid>
-        <description>&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
+        <description>&lt;img src="https://example.com/post/function/function.jpg" alt="Featured image of post 常用函数" /&gt;&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
 &lt;/h2&gt;&lt;h3 id=&#34;map&#34;&gt;map
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;map&lt;/code&gt;是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的，且按键的升序排列。&lt;/p&gt;
 &lt;ol&gt;
