@@ -1043,12 +1043,10 @@ class destruct!
 <li>执行 <code>return demo()</code> ，调用拷贝构造函数拷贝匿名对象，作为函数<code>get_demo()</code>的返回值（<code>get_demo()</code>执行完毕，匿名对象会被销毁）</li>
 <li>执行 <code>a(get_demo())</code>, 调用拷贝构造函数(此行代码执行完毕，<code>get_demo()</code>的返回值会被析构)</li>
 <li>程序结束前，<code>a</code>被析构。</li>
-</ol>
-</blockquote>
+</ol></blockquote>
 <p>在这个过程中，底层执行了2次深拷贝。如果指针指向的堆空间较大，会大大降低执行的效率。通过移动构造函数可以解决这个问题。</p>
 <blockquote>
-<p>何时调用拷贝构造函数？（详见：<a class="link" href="#%e8%b0%83%e7%94%a8%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e7%9a%84%e6%83%85%e5%bd%a2" >拷贝构造函数</a>）</p>
-</blockquote>
+<p>何时调用拷贝构造函数？（详见：<a class="link" href="#%e8%b0%83%e7%94%a8%e6%8b%b7%e8%b4%9d%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0%e7%9a%84%e6%83%85%e5%bd%a2" >拷贝构造函数</a>）</p></blockquote>
 <h4 id="移动构造函数">移动构造函数
 </h4><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1735,6 +1733,55 @@ console.log('particles.js loaded - callback');
 
 
 
+
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        right: 200px;  
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url('/icons/backTop.svg');  
+        background-size: cover;  
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop;
+        rightSideBar.appendChild(btn);
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    initScrollTop();
+</script>
 
     </body>
 </html>

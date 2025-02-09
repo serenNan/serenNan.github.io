@@ -375,8 +375,7 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;思维小技巧
-在编写函数时，可以当系统库中有一个同名函数，能实现你所需要的功能，直接调用即可。&lt;/p&gt;
-&lt;/blockquote&gt;
+在编写函数时，可以当系统库中有一个同名函数，能实现你所需要的功能，直接调用即可。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;典型题-2&#34;&gt;典型题
 &lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/copy-list-with-random-pointer/description/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;138. 随机链表的复制&lt;/a&gt;&lt;/p&gt;
