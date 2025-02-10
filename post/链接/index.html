@@ -10,7 +10,7 @@
 <meta property='og:description' content="搭建博客的适合老是反反复复遇到同样的问题，为此写一个博客，整理常见的问题">
 <meta property='og:url' content='https://example.com/post/%E9%93%BE%E6%8E%A5/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-10T17:47:48&#43;08:00'/><meta property='og:image' content='https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-10T21:48:53&#43;08:00'/><meta property='og:image' content='https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg' />
 <meta name="twitter:title" content="【Hugo】常见问题">
 <meta name="twitter:description" content="搭建博客的适合老是反反复复遇到同样的问题，为此写一个博客，整理常见的问题"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg' />
@@ -327,8 +327,12 @@
         <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#图片加载问题">图片加载问题</a></li>
-    <li><a href="#图片插入方式">图片插入方式</a></li>
+    <li><a href="#图片加载问题">图片加载问题</a>
+      <ol>
+        <li><a href="#问题描述">问题描述</a></li>
+        <li><a href="#解决方案">解决方案</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -443,7 +447,7 @@
             <div class="article-time--lastmod">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
                 <time>
-                    2025-02-10 17:47
+                    2025-02-10 21:48
                 </time>
             </div></footer>
     
@@ -457,8 +461,19 @@
     
     
     <h2 id="图片加载问题">图片加载问题
-</h2><p>有时会遇到在本地图片能成功加载，但部署到服务器上却不能成功显示。</p>
+</h2><h3 id="问题描述">问题描述
+</h3><p>有时会遇到在本地图片能成功加载，但部署到服务器上却不能成功显示。</p>
 <p>我在弄代码折叠图片时遇到了这个问题</p>
+<p>在 html 文件上加载图片的代码语句是</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;{{ (resources.Get &#34;img/codeMore.png&#34;).Permalink }}&#39;</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在本地成功加载</p>
 <p><img src="/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD1.png"
 	width="1871"
 	height="1333"
@@ -488,8 +503,34 @@
 		data-flex-basis="344px"
 	
 ></p>
-<h2 id="图片插入方式">图片插入方式
-</h2>
+<p>根本问题是服务端的图片加载路径出错</p>
+<p>按 f12 调出开发者工具查看（或者右键对应位置，点击检查，能快速跳转），会发现图片加载路径不是图片相对路径</p>
+<p><img src="/post/%E9%93%BE%E6%8E%A5/image.png"
+	width="1028"
+	height="64"
+	
+	loading="lazy"
+	
+		alt="开发者工具"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1606"
+		data-flex-basis="3855px"
+	
+></p>
+<h3 id="解决方案">解决方案
+</h3><p>将加载图片的代码语句改成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;{{ (resources.Get &#34;img/codeMore.png&#34;).RelPermalink }}&#39;</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>把最后的 <code>Permalink</code> 改成 <code>RelPermalink</code></p>
+
 </section>
 
 
@@ -944,7 +985,7 @@ console.log('particles.js loaded - callback');
       
       let img = document.createElement('img');
       img.classList.add('code-more-img');
-      img.src = 'https:\/\/example.com\/img\/codeMore.png';
+      img.src = '\/img\/codeMore.png';
 
       
       codeMoreBtn.appendChild(img);
