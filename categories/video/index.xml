@@ -13,7 +13,19 @@
         
         <guid>https://example.com/post/leixiaohua-note/</guid>
         <description>&lt;img src="https://example.com/post/leixiaohua-note/cover.jpg" alt="Featured image of post 雷霄骅课程笔记" /&gt;&lt;h2 id=&#34;ffmpeg基础命令行&#34;&gt;ffmpeg基础命令行
-&lt;/h2&gt;&lt;img src=&#34;命令行.png&#34; alt=&#34;命令行&#34;&gt;</description>
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note/%E5%91%BD%E4%BB%A4%E8%A1%8C.png&#34;
+	width=&#34;971&#34;
+	height=&#34;637&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;365px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>音视频基础</title>
