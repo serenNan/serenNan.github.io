@@ -7,6 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>雷霄骅课程笔记</title>
+        <link>https://example.com/post/leixiaohua-note/</link>
+        <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/post/leixiaohua-note/</guid>
+        <description>&lt;img src="https://example.com/post/leixiaohua-note/cover.jpg" alt="Featured image of post 雷霄骅课程笔记" /&gt;&lt;h2 id=&#34;ffmpeg基础命令行&#34;&gt;ffmpeg基础命令行
+&lt;/h2&gt;&lt;img src=&#34;命令行.png&#34; alt=&#34;命令行&#34;&gt;</description>
+        </item>
+        <item>
         <title>常用函数</title>
         <link>https://example.com/post/function/</link>
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
@@ -8167,7 +8176,8 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
         
         <guid>https://example.com/%E9%80%9A%E7%94%A8%E6%A0%BC%E5%BC%8F/</guid>
         <description>&lt;h2 id=&#34;文章&#34;&gt;文章
-&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;封面&#34;&gt;封面
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -8193,7 +8203,8 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nn&#34;&gt;---&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;分类&#34;&gt;分类
+&lt;/div&gt;&lt;h3 id=&#34;照片格式&#34;&gt;照片格式
+&lt;/h3&gt;&lt;h2 id=&#34;分类&#34;&gt;分类
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1

@@ -7,7 +7,16 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Mon, 27 Jan 2025 16:27:56 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 10 Feb 2025 13:52:13 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>雷霄骅课程笔记</title>
+        <link>https://example.com/post/leixiaohua-note/</link>
+        <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/post/leixiaohua-note/</guid>
+        <description>&lt;img src="https://example.com/post/leixiaohua-note/cover.jpg" alt="Featured image of post 雷霄骅课程笔记" /&gt;&lt;h2 id=&#34;ffmpeg基础命令行&#34;&gt;ffmpeg基础命令行
+&lt;/h2&gt;&lt;img src=&#34;命令行.png&#34; alt=&#34;命令行&#34;&gt;</description>
+        </item>
+        <item>
         <title>常用函数</title>
         <link>https://example.com/post/function/</link>
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
