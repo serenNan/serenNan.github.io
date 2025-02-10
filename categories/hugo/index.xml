@@ -32,8 +32,6 @@
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;本地图片加载&#34;
-	
 	
 		class=&#34;gallery-image&#34; 
 		data-flex-grow=&#34;140&#34;
@@ -47,8 +45,6 @@
 	
 	loading=&#34;lazy&#34;
 	
-		alt=&#34;服务端图片加载&#34;
-	
 	
 		class=&#34;gallery-image&#34; 
 		data-flex-grow=&#34;143&#34;
@@ -57,13 +53,11 @@
 &gt;&lt;/p&gt;
 &lt;p&gt;根本问题是服务端的图片加载路径出错&lt;/p&gt;
 &lt;p&gt;按 f12 调出开发者工具查看（或者右键对应位置，点击检查，能快速跳转），会发现图片加载路径不是图片相对路径&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%841.png&#34;
 	width=&#34;1028&#34;
 	height=&#34;64&#34;
 	
 	loading=&#34;lazy&#34;
-	
-		alt=&#34;开发者工具&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
@@ -82,6 +76,33 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;把最后的 &lt;code&gt;Permalink&lt;/code&gt; 改成 &lt;code&gt;RelPermalink&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;重新加载，会发现服务端正确显示&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD3.png&#34;
+	width=&#34;1328&#34;
+	height=&#34;1038&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;127&#34;
+		data-flex-basis=&#34;307px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;重新用开发者工具检查加载路径&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%842.png&#34;
+	width=&#34;626&#34;
+	height=&#34;39&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1605&#34;
+		data-flex-basis=&#34;3852px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;正确显示图片相对位置&lt;/p&gt;
 </description>
         </item>
         <item>
