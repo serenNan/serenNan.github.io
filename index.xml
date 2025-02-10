@@ -12,7 +12,10 @@
         <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/%E9%93%BE%E6%8E%A5/</guid>
-        <description>&lt;img src="https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg" alt="Featured image of post 【Hugo】常见问题" /&gt;</description>
+        <description>&lt;img src="https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg" alt="Featured image of post 【Hugo】常见问题" /&gt;&lt;h2 id=&#34;图片加载问题&#34;&gt;图片加载问题
+&lt;/h2&gt;&lt;p&gt;有时会遇到在本地图片能成功加载，但部署到服务器上却不能成功显示。&lt;/p&gt;
+&lt;p&gt;我在弄代码折叠图片时遇到了这个问题，&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>雷霄骅课程笔记</title>
