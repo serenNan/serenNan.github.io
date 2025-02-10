@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Mon, 10 Feb 2025 13:52:13 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 10 Feb 2025 16:36:54 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【Hugo】常见问题</title>
+        <link>https://example.com/post/%E9%93%BE%E6%8E%A5/</link>
+        <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/post/%E9%93%BE%E6%8E%A5/</guid>
+        <description>&lt;img src="https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg" alt="Featured image of post 【Hugo】常见问题" /&gt;</description>
+        </item>
+        <item>
         <title>雷霄骅课程笔记</title>
         <link>https://example.com/post/leixiaohua-note/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
@@ -886,12 +894,12 @@
 </description>
         </item>
         <item>
-        <title>Hugo动画</title>
+        <title>【Hugo】动画</title>
         <link>https://example.com/post/hugo-animation/</link>
         <pubDate>Sun, 05 Jan 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/hugo-animation/</guid>
-        <description>&lt;img src="https://example.com/post/hugo-animation/word.jpg" alt="Featured image of post Hugo动画" /&gt;&lt;p&gt;我是直接把这些动画效果全放一个css文件了&lt;/p&gt;
+        <description>&lt;img src="https://example.com/post/hugo-animation/word.jpg" alt="Featured image of post 【Hugo】动画" /&gt;&lt;p&gt;我是直接把这些动画效果全放一个css文件了&lt;/p&gt;
 &lt;p&gt;创建一个&lt;code&gt;hover-animation.css&lt;/code&gt;文件(可自定义)，然后记得在&lt;code&gt;assets/scss/style.scss&lt;/code&gt;下添加&lt;code&gt;@import &amp;quot;hover-animation&amp;quot;;&lt;/code&gt;
 然后在创建的css文件添加以下代码&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1104,12 +1112,12 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>Hugo时钟</title>
+        <title>【Hugo】时钟</title>
         <link>https://example.com/post/hugo-clock/</link>
         <pubDate>Sun, 05 Jan 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/hugo-clock/</guid>
-        <description>&lt;img src="https://example.com/post/hugo-clock/clock.jpg" alt="Featured image of post Hugo时钟" /&gt;&lt;p&gt;这个表盘的设计可能还是有些局限，后续会优化一下&lt;/p&gt;
+        <description>&lt;img src="https://example.com/post/hugo-clock/clock.jpg" alt="Featured image of post 【Hugo】时钟" /&gt;&lt;p&gt;这个表盘的设计可能还是有些局限，后续会优化一下&lt;/p&gt;
 &lt;h2 id=&#34;html部分&#34;&gt;HTML部分
 &lt;/h2&gt;&lt;p&gt;在&amp;rsquo;layouts/partials/widget/&amp;lsquo;文件夹下创建&lt;code&gt;clock.html&lt;/code&gt;文件，并添加以下代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1605,12 +1613,12 @@
 </description>
         </item>
         <item>
-        <title>Hugo美化&amp;优化(stack主题)</title>
+        <title>【Hugo】美化&amp;优化(stack主题)</title>
         <link>https://example.com/post/hugo-beautify/</link>
         <pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/hugo-beautify/</guid>
-        <description>&lt;img src="https://example.com/post/hugo-beautify/blog2.jpg" alt="Featured image of post Hugo美化&amp;优化(stack主题)" /&gt;&lt;h2 id=&#34;字体&#34;&gt;字体
+        <description>&lt;img src="https://example.com/post/hugo-beautify/blog2.jpg" alt="Featured image of post 【Hugo】美化&amp;优化(stack主题)" /&gt;&lt;h2 id=&#34;字体&#34;&gt;字体
 &lt;/h2&gt;&lt;p&gt;字体文件放在&lt;code&gt;assets/fonts&lt;/code&gt;下，然后在&lt;code&gt;layouts/partials/footer/costom.html&lt;/code&gt;(没有就创建)中引入,格式如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -2816,12 +2824,12 @@ Test的析构函数...
 </description>
         </item>
         <item>
-        <title>Hugo配置(stack主题)</title>
+        <title>【Hugo】配置(stack主题)</title>
         <link>https://example.com/post/hugo-config/</link>
         <pubDate>Sun, 29 Dec 2024 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/hugo-config/</guid>
-        <description>&lt;img src="https://example.com/post/hugo-config/blog1.jpg" alt="Featured image of post Hugo配置(stack主题)" /&gt;&lt;h2 id=&#34;yaml参数&#34;&gt;yaml参数
+        <description>&lt;img src="https://example.com/post/hugo-config/blog1.jpg" alt="Featured image of post 【Hugo】配置(stack主题)" /&gt;&lt;h2 id=&#34;yaml参数&#34;&gt;yaml参数
 &lt;/h2&gt;&lt;h3 id=&#34;主框架&#34;&gt;主框架
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
