@@ -10,7 +10,7 @@
 <meta property='og:description' content="跟着雷神的课程学习写的一些笔记">
 <meta property='og:url' content='https://example.com/post/leixiaohua-note/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-11T23:00:13&#43;08:00'/><meta property='og:image' content='https://example.com/post/leixiaohua-note/cover.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-11T23:12:12&#43;08:00'/><meta property='og:image' content='https://example.com/post/leixiaohua-note/cover.jpg' />
 <meta name="twitter:title" content="【雷霄骅课程笔记】0 vscode 配置">
 <meta name="twitter:description" content="跟着雷神的课程学习写的一些笔记"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://example.com/post/leixiaohua-note/cover.jpg' />
@@ -329,6 +329,7 @@
   <ol>
     <li><a href="#项目结构">项目结构</a></li>
     <li><a href="#书写-cmakelists">书写 <code>CMakeLists</code></a></li>
+    <li><a href="#解释器">解释器</a></li>
   </ol>
 </nav>
         </div>
@@ -443,7 +444,7 @@
             <div class="article-time--lastmod">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
                 <time>
-                    2025-02-11 23:00
+                    2025-02-11 23:12
                 </time>
             </div></footer>
     
@@ -477,7 +478,7 @@
 	
 ></p>
 <h2 id="书写-cmakelists">书写 <code>CMakeLists</code>
-</h2><p>在 CMakeLists.txt 下写入以下内容</p>
+</h2><p>在 <code>CMakeLists.txt</code> 下写入以下内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -548,6 +549,9 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果成功输出，说明配置成功</p>
+<h2 id="解释器">解释器
+</h2><p>如果成功输出了发现源文件仍然显示找不到头文件，可能是没安装好解释器，我使用的是 <code>clangd</code>，<code>linux</code> 环境安装很简单，问一下 ai 就行<br>
+安装完成之后，<code>clangd</code> 会依赖 <code>compile_commands.json</code> 文件来理解项目的编译环境</p>
 
 </section>
 
