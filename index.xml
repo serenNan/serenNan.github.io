@@ -113,6 +113,25 @@
         <guid>https://example.com/post/leixiaohua-note/</guid>
         <description>&lt;img src="https://example.com/post/leixiaohua-note/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 vscode 配置" /&gt;&lt;p&gt;本博客对应课程的 &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1gE411f7WT/?p=3&amp;amp;spm_id_from=333.880.my_history.page.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;p3&lt;/a&gt;&lt;/p&gt;
+
+
+
+
+
+
+    
+
+
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=3&amp;bvid=BV1gE411f7WT&#34;
+            scrolling=&#34;no&#34;
+            frameborder=&#34;no&#34;
+            framespacing=&#34;0&#34;
+            allowfullscreen=&#34;true&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;雷神的课程主要使用 &lt;code&gt;Visual Studio&lt;/code&gt; 进行演示，但由于我个人不太习惯使用 VS，因此我选择了在 &lt;code&gt;WSL&lt;/code&gt; 环境下使用 &lt;code&gt;VSCode&lt;/code&gt; 和 &lt;code&gt;CMake&lt;/code&gt; 来进行学习和实践&lt;br&gt;
 &lt;code&gt;windows&lt;/code&gt; 环境总是出现各种不必要的麻烦，而且其实 &lt;code&gt;linux&lt;/code&gt; 环境对音视频开发者更友好&lt;/p&gt;
 &lt;h2 id=&#34;项目结构&#34;&gt;项目结构
@@ -8468,7 +8487,62 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 &lt;div class=&#34;notice notice-tip&#34; &gt;
     &lt;div class=&#34;notice-title&#34;&gt;&lt;/div&gt;&lt;p&gt;你好。&lt;/p&gt;&lt;/div&gt;
 
-</description>
+&lt;h3 id=&#34;b站&#34;&gt;b站
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+
+
+
+
+
+    &lt;p&gt;Bilibili 视频av号或BV号错误！请检查视频av号或BV号是否正确&lt;/p&gt;
+    &lt;p&gt;当前视频av或BV号：VIDEO_ID，视频分P：PART_NUMBER&lt;/p&gt;
+
+
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=PART_NUMBER&amp;&#34;
+            scrolling=&#34;no&#34;
+            frameborder=&#34;no&#34;
+            framespacing=&#34;0&#34;
+            allowfullscreen=&#34;true&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;例如&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+
+
+
+
+
+    
+
+
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=3&amp;bvid=BV1gE411f7WT&#34;
+            scrolling=&#34;no&#34;
+            frameborder=&#34;no&#34;
+            framespacing=&#34;0&#34;
+            allowfullscreen=&#34;true&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>链接</title>

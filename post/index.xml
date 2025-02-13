@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Thu, 13 Feb 2025 14:51:42 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 13 Feb 2025 15:24:16 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【Hugo】常见问题</title>
         <link>https://example.com/post/%E9%93%BE%E6%8E%A5/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
@@ -114,6 +114,25 @@
         <guid>https://example.com/post/leixiaohua-note/</guid>
         <description>&lt;img src="https://example.com/post/leixiaohua-note/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 vscode 配置" /&gt;&lt;p&gt;本博客对应课程的 &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1gE411f7WT/?p=3&amp;amp;spm_id_from=333.880.my_history.page.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;p3&lt;/a&gt;&lt;/p&gt;
+
+
+
+
+
+
+    
+
+
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=3&amp;bvid=BV1gE411f7WT&#34;
+            scrolling=&#34;no&#34;
+            frameborder=&#34;no&#34;
+            framespacing=&#34;0&#34;
+            allowfullscreen=&#34;true&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;雷神的课程主要使用 &lt;code&gt;Visual Studio&lt;/code&gt; 进行演示，但由于我个人不太习惯使用 VS，因此我选择了在 &lt;code&gt;WSL&lt;/code&gt; 环境下使用 &lt;code&gt;VSCode&lt;/code&gt; 和 &lt;code&gt;CMake&lt;/code&gt; 来进行学习和实践&lt;br&gt;
 &lt;code&gt;windows&lt;/code&gt; 环境总是出现各种不必要的麻烦，而且其实 &lt;code&gt;linux&lt;/code&gt; 环境对音视频开发者更友好&lt;/p&gt;
 &lt;h2 id=&#34;项目结构&#34;&gt;项目结构
