@@ -450,11 +450,6 @@
 
         
         
-        
-        
-
-        
-        
             
             
         
@@ -487,14 +482,6 @@
         
             <span class="divider">|</span>
             
-            <div class="time-element">
-                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-                <span id="viewCount-fe96e8e94eeb8269e267b501c5a58e6c" class="view-count">加载中...</span>
-            </div>
-        
-        
-            <span class="divider">|</span>
-            
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
                     <time>2025-01-11 20:10</time>
@@ -505,25 +492,6 @@
     
 
     
-
-    
-    <script>
-        
-        (function() {
-            const storageKey = 'viewCount-fe96e8e94eeb8269e267b501c5a58e6c';
-            const counterElement = document.getElementById('viewCount-fe96e8e94eeb8269e267b501c5a58e6c');
-            
-            try {
-                let currentCount = parseInt(localStorage.getItem(storageKey)) || 0;
-                currentCount++;
-                localStorage.setItem(storageKey, currentCount);
-                counterElement.innerHTML = `${currentCount} 次阅读`;
-            } catch(e) {
-                console.error('本地存储访问失败:', e);
-                counterElement.innerHTML = '已阅读';
-            }
-        })();
-    </script>
 </div>
 </header>
 
