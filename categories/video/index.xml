@@ -7,12 +7,142 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright><atom:link href="https://example.com/categories/video/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【雷霄骅课程笔记】1</title>
+        <link>https://example.com/post/leixiaohua-note-1/</link>
+        <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/post/leixiaohua-note-1/</guid>
+        <description>&lt;img src="https://example.com/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1" /&gt;&lt;h2 id=&#34;ffmpeg-库介绍&#34;&gt;FFmpeg 库介绍
+&lt;/h2&gt;&lt;p&gt;FFmpeg 一共包含 8 个库：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;avcodec: 编解码（最重要的库）*&lt;/li&gt;
+&lt;li&gt;avformat: 封装格式处理 *&lt;/li&gt;
+&lt;li&gt;avfilter: 滤镜特效处理&lt;/li&gt;
+&lt;li&gt;avdevice: 各种设备的输入输出&lt;/li&gt;
+&lt;li&gt;avutil: 工具库（大部分库都需要这个库的支持）*&lt;/li&gt;
+&lt;li&gt;postproc: 后加工&lt;/li&gt;
+&lt;li&gt;swresample: 音频采样数据格式转换&lt;/li&gt;
+&lt;li&gt;swscale: 视频像素数据格式转换 *&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中 * 表示本次课程中会涉及到的库&lt;/p&gt;
+&lt;h2 id=&#34;ffmpeg-解码流程&#34;&gt;FFmpeg 解码流程
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;函数名&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avformat_open_input&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;打开输入文件并创建 &lt;code&gt;AVFormatContext&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avformat_find_stream_info&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;获取流信息&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avcodec_find_decoder&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;查找解码器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avcodec_alloc_context3&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;分配解码器上下文&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avcodec_parameters_to_context&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;复制编解码器参数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avcodec_open2&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;打开解码器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;av_read_frame&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;读取数据包&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avcodec_send_packet&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;发送数据包到解码器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avcodec_receive_frame&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;接收解码后的帧&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;sws_scale&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;像素格式转换&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;fwrite&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;写入转换后的帧数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;av_packet_unref&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;释放数据包&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avcodec_free_context&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;释放解码器上下文&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;avformat_close_input&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;关闭输入流&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;ffmpeg-解码的数据结构&#34;&gt;FFmpeg 解码的数据结构
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVFormatContext.png&#34;
+	width=&#34;955&#34;
+	height=&#34;186&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;513&#34;
+		data-flex-basis=&#34;1232px&#34;
+	
+&gt;&lt;/p&gt;
+
+&lt;div class=&#34;notice notice-note&#34; &gt;
+    &lt;div class=&#34;notice-title&#34;&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;AV&lt;/code&gt; 表示 &lt;code&gt;Audio Video&lt;/code&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;AVFormatContext&lt;/code&gt;: 用于处理&lt;strong&gt;封装格式&lt;/strong&gt;的上下文，包含视频最外层的信息&lt;br&gt;
+&lt;code&gt;AVInputFormat&lt;/code&gt;: 输入格式&lt;br&gt;
+&lt;code&gt;AVStream&lt;/code&gt;: 是一个数组，包含多个流，但是一般就包含视频流和音频流，第 0 个是视频流，第 1 个是音频流&lt;br&gt;
+&lt;code&gt;AVCodecContext&lt;/code&gt;: &lt;strong&gt;编解码器&lt;/strong&gt;上下文&lt;br&gt;
+&lt;code&gt;AVCodec&lt;/code&gt;: 编解码器，指明编码器的类型（h.264之类的）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt;: 压缩编码后的数据包 &lt;br&gt;
+&lt;code&gt;AVFrame&lt;/code&gt;: 解码后的数据包&lt;br&gt;
+&lt;code&gt;AVPacket&lt;/code&gt; 解码完为 &lt;code&gt;AVFrame&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;avformatcontext&#34;&gt;&lt;code&gt;AVFormatContext&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;iformat: 输入视频的 &lt;code&gt;AVInputFormat&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;nb_streams: 输入视频的 &lt;code&gt;AVStream&lt;/code&gt; 个数&lt;/li&gt;
+&lt;li&gt;streams: 输入视频的 &lt;code&gt;AVStream&lt;/code&gt; 数组&lt;/li&gt;
+&lt;li&gt;duration: 输入视频的时长（以微秒为单位）&lt;/li&gt;
+&lt;li&gt;bit_rate: 输入视频的码率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;avinputformat&#34;&gt;&lt;code&gt;AVInputFormat&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;name: 输入视频的格式名称&lt;/li&gt;
+&lt;li&gt;long_name: 输入视频格式的长名称&lt;/li&gt;
+&lt;li&gt;extensions: 输入视频格式的扩展名&lt;/li&gt;
+&lt;li&gt;id: 输入视频格式的 ID&lt;/li&gt;
+&lt;li&gt;一些封装格式处理的接口函数&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>【雷霄骅课程笔记】0 vscode 配置</title>
-        <link>https://example.com/post/leixiaohua-note/</link>
+        <link>https://example.com/post/leixiaohua-note-0/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 vscode 配置" /&gt;&lt;p&gt;本博客对应课程的 &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1gE411f7WT/?p=3&amp;amp;spm_id_from=333.880.my_history.page.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>https://example.com/post/leixiaohua-note-0/</guid>
+        <description>&lt;img src="https://example.com/post/leixiaohua-note-0/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 vscode 配置" /&gt;&lt;p&gt;TODO： 完善教程&lt;/p&gt;
+&lt;p&gt;本博客对应课程的 &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1gE411f7WT/?p=3&amp;amp;spm_id_from=333.880.my_history.page.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;p3&lt;/a&gt;&lt;/p&gt;
 
 
@@ -39,7 +169,7 @@
 &lt;/h2&gt;&lt;p&gt;跟着视频复制文件下来之后（动态库其实可以不用复制, &lt;code&gt;.dll&lt;/code&gt; 是 &lt;code&gt;windows&lt;/code&gt; 环境的动态库）&lt;br&gt;
 在根目录创建 &lt;code&gt;CMakeLists.txt&lt;/code&gt; , &lt;code&gt;build&lt;/code&gt; 文件夹和 &lt;code&gt;src&lt;/code&gt; 文件夹&lt;br&gt;
 如下&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png&#34;
 	width=&#34;358&#34;
 	height=&#34;518&#34;
 	

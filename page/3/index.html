@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="搭建博客的适合老是反反复复遇到同样的问题，为此写一个博客，整理常见的问题">
-<title>【Hugo】常见问题</title>
+    <head>
+	<meta name="generator" content="Hugo 0.144.2"><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="个人博客">
+<title>Pager 3 - serenNan</title>
 
-<link rel='canonical' href='https://example.com/post/%E9%93%BE%E6%8E%A5/'>
+<link rel='canonical' href='https://example.com/'>
 
-<link rel="stylesheet" href="/scss/style.min.2045f7068f5e0b72f0d644ad11bd9b8ac88ba1988eecf9db2b54693ac36d4e6f.css"><meta property='og:title' content="【Hugo】常见问题">
-<meta property='og:description' content="搭建博客的适合老是反反复复遇到同样的问题，为此写一个博客，整理常见的问题">
-<meta property='og:url' content='https://example.com/post/%E9%93%BE%E6%8E%A5/'>
+<link rel="stylesheet" href="/scss/style.min.2045f7068f5e0b72f0d644ad11bd9b8ac88ba1988eecf9db2b54693ac36d4e6f.css"><meta property='og:title' content="serenNan">
+<meta property='og:description' content="个人博客">
+<meta property='og:url' content='https://example.com/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-13T14:51:42&#43;08:00'/><meta property='og:image' content='https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg' />
-<meta name="twitter:title" content="【Hugo】常见问题">
-<meta name="twitter:description" content="搭建博客的适合老是反反复复遇到同样的问题，为此写一个博客，整理常见的问题"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg' />
+<meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-02-20T00:29:11&#43;08:00 '/>
+<meta name="twitter:title" content="serenNan">
+<meta name="twitter:description" content="个人博客"><link rel="alternate" type="application/rss&#43;xml" href="https://example.com/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
-    <body class="
-    article-page
-    ">
+    <body class="">
     <script>
         (function() {
             const colorSchemeKey = 'StackColorScheme';
@@ -168,7 +166,7 @@
         
         
         
-        <li >
+        <li  class='current' >
             <a href='/' >
                 
                 
@@ -308,10 +306,171 @@
     <aside class="sidebar right-sidebar sticky">
         
             
-                
-    <section class="widget archives">
+                <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时钟表盘</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section class="widget clock">
+    <div class="widget--clock">
+      <div class="clock-face">
+        <div class="digital-clock"></div>
+        <div class="hand hour-hand"></div>
+        <div class="hand minute-hand"></div>
+        <div class="hand second-hand"></div>
+        <div class="center-dot"></div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const clockFace = document.querySelector('.clock-face');
+    const radius = 83;
+    const center = 88;
+
+    for (let i = 0; i < 60; i++) {
+      const angle = i * 6;
+      const radians = (angle * Math.PI) / 180;
+      const x = center + radius * Math.sin(radians);
+      const y = center - radius * Math.cos(radians);
+
+      const mark = document.createElement('div');
+      mark.className = 'mark';
+      mark.style.left = `${x}px`;
+      mark.style.top = `${y}px`;
+      mark.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+
+      if (i % 5 === 0) {
+        mark.classList.add('long-mark');
+        const numberRadius = radius - 15;
+        const numberX = center + numberRadius * Math.sin(radians);
+        const numberY = center - numberRadius * Math.cos(radians);
+
+        const number = document.createElement('div');
+        number.textContent = (i / 5) || 12;
+        number.className = 'clock-number';
+        number.style.left = `${numberX}px`;
+        number.style.top = `${numberY}px`;
+        number.style.transform = `translate(-50%, -50%)`;
+        clockFace.appendChild(number);
+      } else if (i % 5 === 0) {
+        mark.classList.add('middle-mark');
+      } else {
+        mark.classList.add('short-mark');
+      }
+
+      clockFace.appendChild(mark);
+    }
+
+    let previousSecondDeg = 0; 
+
+function updateClock() {
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+  const millisecond = now.getMilliseconds();
+
+  const hourHand = document.querySelector('.hour-hand');
+  const minuteHand = document.querySelector('.minute-hand');
+  const secondHand = document.querySelector('.second-hand');
+
+  const hourDeg = (hour % 12) * 30 + (minute / 60) * 30;
+  const minuteDeg = minute * 6 + (second / 60) * 6;
+  let secondDeg = second * 6 + (millisecond / 1000) * 6;
+
+  
+  if (secondDeg < previousSecondDeg) {
+    secondDeg += 360; 
+  }
+  previousSecondDeg = secondDeg % 360; 
+
+  hourHand.style.transform = `rotate(${hourDeg}deg)`;
+  minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+  secondHand.style.transform = `rotate(${secondDeg}deg)`;
+
+  const digitalClock = document.querySelector('.digital-clock');
+  const timeString = `${hour}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
+  digitalClock.textContent = timeString;
+
+  requestAnimationFrame(updateClock);
+}
+
+updateClock();
+
+  </script>
+</body>
+</html>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+            
+        
+            
+                <section class="widget archives">
         <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2025">
+                        
+                            <span class="year">2025</span>
+                            <span class="count">9</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2024">
+                        
+                            <span class="year">2024</span>
+                            <span class="count">3</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <line x1="5" y1="9" x2="19" y2="9" />
   <line x1="5" y1="15" x2="19" y2="15" />
@@ -321,76 +480,69 @@
 
 
 
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-        <nav id="TableOfContents">
-  <ol>
-    <li><a href="#图片加载问题">图片加载问题</a>
-      <ol>
-        <li><a href="#问题描述">问题描述</a></li>
-        <li><a href="#解决方案">解决方案</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
 
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/hugo/" class="font_size_5">
+                Hugo
+            </a>
+        
+            <a href="/categories/video/" class="font_size_3">
+                Video
+            </a>
+        
+            <a href="/categories/c&#43;&#43;/" class="font_size_2">
+                C&#43;&#43;
+            </a>
+        
+            <a href="/categories/leetcode/" class="font_size_2">
+                Leetcode
+            </a>
+        
+            <a href="/categories/%E5%85%B6%E4%BB%96/" class="font_size_1">
+                其他
+            </a>
+        
+    </div>
+</section>
 
-<script>
-    function initTocHide() {
-        
-        let toc = document.querySelector(".widget--toc");
-        if (!toc) {
-            return;
-        }
-        
-        window.addEventListener('scroll', function() {
-            
-            let currentLi = document.querySelector(".active-class");
-            if (!currentLi) {
-                return
-            }
-            
-            let elementsByClassName = document.querySelectorAll(".open");
-            if (elementsByClassName.length > 0) {
-                elementsByClassName.forEach((ul) => {
-                    ul.classList.remove("open")
-                })
-            }
-            
-            if (currentLi.children.length > 1) {
-                currentLi.children[1].classList.add("open")
-            }
-            
-            let ul = currentLi.parentElement;
-            do {
-                ul.classList.add("open");
-                ul = ul.parentElement.parentElement
-            } while (ul !== undefined && (ul.localName === 'ul' || ul.localName === 'ol'))
-        });
-    }
-    initTocHide()
-</script>
             
         
     </aside>
 
 
             <main class="main full-width">
-    <article class="has-image main-article ">
     
-        <header class="article-header">
+    
+    
+    
+    
+<div class="welcome">
+  <p style="font-size: 2rem; text-align: center; font-weight: bold">
+    <span class="shake">👋</span>
+    <span class="jump-text1" > Welcome</span>
+    <span class="jump-text2"> To </span>
+    <span class="jump-text3" style="color:#e99312">s</span><span class="jump-text4" style="color:#e99312">e</span><span class="jump-text5" style="color:#e99312">r</span><span class="jump-text6" style="color:#e99312">e</span><span class="jump-text7" style="color:#e99312">n</span><span class="jump-text8" style="color:#e99312">Nan</span></span><span class="jump-text9" style="color:#e99312">'s</span>
+    <span class="jump-text10" style="color:#e99312">Blog</span>
+  </p>
+</div>
+
+
+    <section class="article-list">
+        
+            
+<article class="has-image">
+    <header class="article-header">
         <div class="article-image">
-            <a href="/post/%E9%93%BE%E6%8E%A5/">
-                <img src="/post/%E9%93%BE%E6%8E%A5/cover.jpg"
+            <a href="/post/hugo-animation/">
+                <img src="/post/hugo-animation/word.jpg"
                         
-                        width="4016" 
-                        height="6016" 
+                        width="5302" 
+                        height="3535" 
                         loading="lazy"
-                        alt="Featured image of post 【Hugo】常见问题" />
+                        alt="Featured image of post 【Hugo】动画" />
                 
             </a>
         </div>
@@ -409,12 +561,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/%E9%93%BE%E6%8E%A5/">【Hugo】常见问题</a>
+            <a href="/post/hugo-animation/">【Hugo】动画</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            搭建博客的适合老是反反复复遇到同样的问题，为此写一个博客，整理常见的问题
+            Hugo 添加一些按键动画的教程
         </h3>
         
     </div>
@@ -460,7 +612,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-02-10</time>
+                    <time>2025-01-05</time>
                 </div>
             
         
@@ -468,7 +620,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>238 字</span>
+                    <span>457 字</span>
                 </div>
             
         
@@ -476,7 +628,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-02-13 14:51</time>
+                    <time>2025-02-10 16:36</time>
                 </div>
             
         
@@ -486,278 +638,249 @@
     
 </div>
 </header>
-    
-    <section class="article-content">
-    
-    
-    <h2 id="图片加载问题">图片加载问题
-</h2><h3 id="问题描述">问题描述
-</h3><p>有时会遇到在本地图片能成功加载，但部署到服务器上却不能成功显示。</p>
-<p>我在弄代码折叠图片时遇到了这个问题</p>
-<p>在 html 文件上加载图片的代码语句是</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;{{ (resources.Get &#34;img/codeMore.png&#34;).Permalink }}&#39;</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>在本地成功加载</p>
-<p><img src="/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD1.png"
-	width="1871"
-	height="1333"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="140"
-		data-flex-basis="336px"
-	
-></p>
-<p>但是到发布到服务端就不行了</p>
-<p><img src="/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD2.png"
-	width="1568"
-	height="1091"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="143"
-		data-flex-basis="344px"
-	
-></p>
-<p>根本问题是服务端的图片加载路径出错</p>
-<p>按 f12 调出开发者工具查看（或者右键对应位置，点击检查，能快速跳转），会发现图片加载路径不是图片相对路径</p>
-<p><img src="/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%841.png"
-	width="1028"
-	height="64"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="1606"
-		data-flex-basis="3855px"
-	
-></p>
-<h3 id="解决方案">解决方案
-</h3><p>将加载图片的代码语句改成</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">img</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="s1">&#39;{{ (resources.Get &#34;img/codeMore.png&#34;).RelPermalink }}&#39;</span><span class="p">;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>把最后的 <code>Permalink</code> 改成 <code>RelPermalink</code></p>
-<p>重新加载，会发现服务端正确显示</p>
-<p><img src="/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD3.png"
-	width="1328"
-	height="1038"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="127"
-		data-flex-basis="307px"
-	
-></p>
-<p>重新用开发者工具检查加载路径</p>
-<p><img src="/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%842.png"
-	width="626"
-	height="39"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="1605"
-		data-flex-basis="3852px"
-	
-></p>
-<p>正确显示图片相对位置</p>
-
-</section>
-
-    <footer class="article-footer">
-    
-
-    
-</footer>
-
 </article>
-
-    
-
-    
-
-<aside class="related-content--wrapper">
-    <h2 class="section-title">相关文章</h2>
-    <div class="related-content">
-        <div class="flex article-list--tile">
+        
             
-                
 <article class="has-image">
-    <a href="/post/hugo-animation/">
-        
-        
-            <div class="article-image">
-                <img src="/post/hugo-animation/word.6e76835d7cf0793932eb34a565393b3e.jpg" 
-                        width="5302" 
-                        height="3535" 
-                        loading="lazy"
-                        alt="Featured image of post 【Hugo】动画"
-                        data-key="hugo-animation" 
-                        data-hash="md5-bnaDXXzweTky6zSlZTk7Pg==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Hugo】动画</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/post/hugo-clock/">
-        
-        
-            <div class="article-image">
-                <img src="/post/hugo-clock/clock.ca389cf70554ff9d3d8fcd6a28a695e5.jpg" 
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/hugo-clock/">
+                <img src="/post/hugo-clock/clock.jpg"
+                        
                         width="2439" 
                         height="2657" 
                         loading="lazy"
-                        alt="Featured image of post 【Hugo】时钟"
-                        data-key="hugo-clock" 
-                        data-hash="md5-yjic9wVU/509j81qKKaV5Q==">
+                        alt="Featured image of post 【Hugo】时钟" />
                 
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Hugo】时钟</h2>
+            </a>
         </div>
-    </a>
-</article>
+    
 
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/hugo/" style="background-color: #8EA885; color: #fff;">
+                Hugo
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/hugo-clock/">【Hugo】时钟</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            个人设计的 Hugo 时钟组件
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+
+    
+    <footer class="article-time">
+        
+        
+        
+        
             
-                
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time>2025-01-05</time>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                    <span>1295 字</span>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
+                    <time>2025-02-10 16:36</time>
+                </div>
+            
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+</article>
+        
+            
 <article class="has-image">
-    <a href="/post/hugo-beautify/">
-        
-        
-            <div class="article-image">
-                <img src="/post/hugo-beautify/blog2.2ff488cfcaaa77f83c93a9c00d7110ee.jpg" 
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/hugo-beautify/">
+                <img src="/post/hugo-beautify/blog2.jpg"
+                        
                         width="6000" 
                         height="3582" 
                         loading="lazy"
-                        alt="Featured image of post 【Hugo】美化&amp;优化(stack主题)"
-                        data-key="hugo-beautify" 
-                        data-hash="md5-L/SIz8qqd/g8k6nADXEQ7g==">
+                        alt="Featured image of post 【Hugo】美化&amp;优化(stack主题)" />
                 
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Hugo】美化&amp;优化(stack主题)</h2>
+            </a>
         </div>
-    </a>
-</article>
+    
 
-            
-                
-<article class="has-image">
-    <a href="/post/hugo-config/">
+    <div class="article-details">
+    
+    <header class="article-category">
         
+            <a href="/categories/hugo/" style="background-color: #8EA885; color: #fff;">
+                Hugo
+            </a>
         
-            <div class="article-image">
-                <img src="/post/hugo-config/blog1.adef6c612501b913b8d4b5db5a2e9f64.jpg" 
-                        width="2968" 
-                        height="1657" 
-                        loading="lazy"
-                        alt="Featured image of post 【Hugo】配置(stack主题)"
-                        data-key="hugo-config" 
-                        data-hash="md5-re9sYSUBuRO41LXbWi6fZA==">
-                
-            </div>
-        
+    </header>
+    
 
-        <div class="article-details">
-            <h2 class="article-title">【Hugo】配置(stack主题)</h2>
-        </div>
-    </a>
-</article>
-
-            
-        </div>
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/hugo-beautify/">【Hugo】美化&amp;优化(stack主题)</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Hugo 美化教程，使用的stack主题
+        </h3>
+        
     </div>
-</aside>
 
-     
     
+    
+    
+    
+
+    
+    <footer class="article-time">
         
-    <script
-    src="https://giscus.app/client.js"
-    data-repo="serenNan/serenNan.github.io"
-    data-repo-id="R_kgDONieGHg"
-    data-category="Announcements"
-    data-category-id="DIC_kwDONieGHs4ClphA"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="light"
-    data-lang="zh-CN"
-    data-loading=""
-    crossorigin="anonymous"
-    async
-></script>
-<script>
-    function setGiscusTheme(theme) {
-        let giscus = document.querySelector("iframe.giscus-frame");
-        if (giscus) {
-            giscus.contentWindow.postMessage(
-                {
-                    giscus: {
-                        setConfig: {
-                            theme: theme,
-                        },
-                    },
-                },
-                "https://giscus.app"
-            );
-        }
-    }
+        
+        
+        
+            
+            
+        
 
-    (function () {
-        addEventListener("message", (e) => {
-            if (event.origin !== "https://giscus.app") return;
-            handler();
-        });
-        window.addEventListener("onColorSchemeChange", handler);
+        
+        
+            
+            
+        
 
-        function handler() {
-            if (document.documentElement.dataset.scheme === "light") {
-                setGiscusTheme('light');
-            } else {
-                setGiscusTheme('dark');
-            }
-        }
-    })();
-</script>
+        
+        
+            
+            
+        
 
+        
+        
+            
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time>2025-01-02</time>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                    <span>781 字</span>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
+                    <time>2025-02-10 16:36</time>
+                </div>
+            
+        
+    </footer>
     
 
-    <footer class="site-footer">
+    
+</div>
+</header>
+</article>
+        
+    </section>
+    <nav class='pagination'>
+        
+        
+
+        
+            
+                    <a class='page-link' href='/'>1</a>
+                
+            
+            
+                    <a class='page-link' href='/page/2/'>2</a>
+                
+            
+            
+                <span class='page-link current'>3</span>
+                
+            
+            
+                    <a class='page-link' href='/page/4/'>4</a>
+                
+            
+    </nav>
+
+<footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -771,85 +894,6 @@
         主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
-
-
-    
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    
-    <div class="pswp__bg"></div>
-
-    
-    <div class="pswp__scroll-wrap">
-
-        
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                
-                
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
-                defer
-                >
-            </script><script 
-                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
-                defer
-                >
-            </script><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
-            ><link 
-                rel="stylesheet" 
-                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
-            >
 
             </main>
         </div>
