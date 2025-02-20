@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Thu, 20 Feb 2025 15:53:31 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 20 Feb 2025 16:56:11 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【雷霄骅课程笔记】1</title>
         <link>https://example.com/post/leixiaohua-note-1/</link>
         <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
@@ -32,8 +32,9 @@
     &lt;/iframe&gt;
 &lt;/div&gt;
 
-&lt;h2 id=&#34;ffmpeg-库介绍&#34;&gt;FFmpeg 库介绍
-&lt;/h2&gt;&lt;p&gt;FFmpeg 一共包含 8 个库：&lt;/p&gt;
+&lt;h2 id=&#34;ffmpeg-介绍&#34;&gt;FFmpeg 介绍
+&lt;/h2&gt;&lt;h3 id=&#34;ffmpeg-库&#34;&gt;FFmpeg 库
+&lt;/h3&gt;&lt;p&gt;FFmpeg 一共包含 8 个库：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;avcodec: 编解码（最重要的库）*&lt;/li&gt;
 &lt;li&gt;avformat: 封装格式处理 *&lt;/li&gt;
@@ -45,8 +46,8 @@
 &lt;li&gt;swscale: 视频像素数据格式转换 *&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;其中 * 表示本次课程中会涉及到的库&lt;/p&gt;
-&lt;h2 id=&#34;ffmpeg-解码流程&#34;&gt;FFmpeg 解码流程
-&lt;/h2&gt;&lt;table&gt;
+&lt;h3 id=&#34;ffmpeg-解码流程&#34;&gt;FFmpeg 解码流程
+&lt;/h3&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;函数名&lt;/th&gt;
@@ -112,8 +113,8 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h2 id=&#34;ffmpeg-解码的数据结构&#34;&gt;FFmpeg 解码的数据结构
-&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVFormatContext.png&#34;
+&lt;h3 id=&#34;ffmpeg-解码的数据结构&#34;&gt;FFmpeg 解码的数据结构
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVFormatContext.png&#34;
 	width=&#34;955&#34;
 	height=&#34;186&#34;
 	
@@ -153,7 +154,8 @@
 &lt;li&gt;id: 输入视频格式的 ID&lt;/li&gt;
 &lt;li&gt;一些封装格式处理的接口函数&lt;/li&gt;
 &lt;/ul&gt;
-</description>
+&lt;h2 id=&#34;运行代码&#34;&gt;运行代码
+&lt;/h2&gt;</description>
         </item>
         <item>
         <title>【Hugo】常见问题</title>
@@ -283,6 +285,10 @@
 &lt;p&gt;雷神的课程主要使用 &lt;code&gt;Visual Studio&lt;/code&gt; 进行演示，但由于我个人不太习惯使用 VS，因此我选择了在 &lt;code&gt;WSL&lt;/code&gt; 环境下使用 &lt;code&gt;VSCode&lt;/code&gt; 和 &lt;code&gt;CMake&lt;/code&gt; 来进行学习和实践&lt;br&gt;
 &lt;code&gt;windows&lt;/code&gt; 环境总是出现各种不必要的麻烦，而且其实 &lt;code&gt;linux&lt;/code&gt; 环境对音视频开发者更友好&lt;br&gt;
 配置过程些许复杂，但只要按照步骤来，不会有太大问题，有问题可以留言，我会尽力解答&lt;/p&gt;
+
+&lt;div class=&#34;notice notice-info&#34; &gt;
+    &lt;div class=&#34;notice-title&#34;&gt;&lt;/div&gt;&lt;p&gt;我使用的资料都是比较新的（2025年2月），所以博客的一些代码和流程什么的可能和雷神介绍的有些不同&lt;/p&gt;&lt;/div&gt;
+
 &lt;h2 id=&#34;ffmpeg配置&#34;&gt;ffmpeg配置
 &lt;/h2&gt;&lt;h3 id=&#34;前提准备&#34;&gt;前提准备
 &lt;/h3&gt;&lt;p&gt;安装好 &lt;code&gt;Ubuntu&lt;/code&gt; 和 &lt;code&gt;VSCode&lt;/code&gt;, 并且配置好 &lt;code&gt;WSL&lt;/code&gt; 和 &lt;code&gt;VSCode&lt;/code&gt; 的连接&lt;br&gt;
