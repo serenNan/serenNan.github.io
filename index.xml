@@ -12,7 +12,26 @@
         <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/leixiaohua-note-1/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1" /&gt;&lt;h2 id=&#34;ffmpeg-库介绍&#34;&gt;FFmpeg 库介绍
+        <description>&lt;img src="https://example.com/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1" /&gt;
+
+
+
+
+
+    
+
+
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=5&amp;bvid=BV1gE411f7WT&#34;
+            scrolling=&#34;no&#34;
+            frameborder=&#34;no&#34;
+            framespacing=&#34;0&#34;
+            allowfullscreen=&#34;true&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&#34;ffmpeg-库介绍&#34;&gt;FFmpeg 库介绍
 &lt;/h2&gt;&lt;p&gt;FFmpeg 一共包含 8 个库：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;avcodec: 编解码（最重要的库）*&lt;/li&gt;
@@ -235,14 +254,12 @@
 </description>
         </item>
         <item>
-        <title>【雷霄骅课程笔记】0 vscode 配置</title>
+        <title>【雷霄骅课程笔记】0 配置</title>
         <link>https://example.com/post/leixiaohua-note-0/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/post/leixiaohua-note-0/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-0/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 vscode 配置" /&gt;&lt;p&gt;TODO： 完善教程&lt;/p&gt;
-&lt;p&gt;本博客对应课程的 &lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1gE411f7WT/?p=3&amp;amp;spm_id_from=333.880.my_history.page.click&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;p3&lt;/a&gt;&lt;/p&gt;
+        <description>&lt;img src="https://example.com/post/leixiaohua-note-0/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 配置" /&gt;&lt;p&gt;这里的配置教程是另一处的，不是雷神的&lt;/p&gt;
 
 
 
@@ -253,7 +270,7 @@
 
 
 &lt;div class=&#34;video-wrapper&#34;&gt;
-    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=3&amp;bvid=BV1gE411f7WT&#34;
+    &lt;iframe src=&#34;https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=2&amp;bvid=BV1DB4y1o7XX&#34;
             scrolling=&#34;no&#34;
             frameborder=&#34;no&#34;
             framespacing=&#34;0&#34;
@@ -263,25 +280,309 @@
 &lt;/div&gt;
 
 &lt;p&gt;雷神的课程主要使用 &lt;code&gt;Visual Studio&lt;/code&gt; 进行演示，但由于我个人不太习惯使用 VS，因此我选择了在 &lt;code&gt;WSL&lt;/code&gt; 环境下使用 &lt;code&gt;VSCode&lt;/code&gt; 和 &lt;code&gt;CMake&lt;/code&gt; 来进行学习和实践&lt;br&gt;
-&lt;code&gt;windows&lt;/code&gt; 环境总是出现各种不必要的麻烦，而且其实 &lt;code&gt;linux&lt;/code&gt; 环境对音视频开发者更友好&lt;/p&gt;
-&lt;h2 id=&#34;项目结构&#34;&gt;项目结构
-&lt;/h2&gt;&lt;p&gt;跟着视频复制文件下来之后（动态库其实可以不用复制, &lt;code&gt;.dll&lt;/code&gt; 是 &lt;code&gt;windows&lt;/code&gt; 环境的动态库）&lt;br&gt;
-在根目录创建 &lt;code&gt;CMakeLists.txt&lt;/code&gt; , &lt;code&gt;build&lt;/code&gt; 文件夹和 &lt;code&gt;src&lt;/code&gt; 文件夹&lt;br&gt;
-如下&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84.png&#34;
-	width=&#34;358&#34;
-	height=&#34;518&#34;
+&lt;code&gt;windows&lt;/code&gt; 环境总是出现各种不必要的麻烦，而且其实 &lt;code&gt;linux&lt;/code&gt; 环境对音视频开发者更友好&lt;br&gt;
+配置过程些许复杂，但只要按照步骤来，不会有太大问题，有问题可以留言，我会尽力解答&lt;/p&gt;
+&lt;h2 id=&#34;ffmpeg配置&#34;&gt;ffmpeg配置
+&lt;/h2&gt;&lt;h3 id=&#34;前提准备&#34;&gt;前提准备
+&lt;/h3&gt;&lt;p&gt;安装好 &lt;code&gt;Ubuntu&lt;/code&gt; 和 &lt;code&gt;VSCode&lt;/code&gt;, 并且配置好 &lt;code&gt;WSL&lt;/code&gt; 和 &lt;code&gt;VSCode&lt;/code&gt; 的连接&lt;br&gt;
+这里网上很多教程，就不多说了&lt;/p&gt;
+&lt;h3 id=&#34;编译安装&#34;&gt;编译安装
+&lt;/h3&gt;&lt;p&gt;创建安装目录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo mkdir -p /usr/local/ffmpeg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;下载 &lt;code&gt;FFmpeg&lt;/code&gt; 源码：
+我这里都是用最新的 &lt;code&gt;FFmpeg&lt;/code&gt; 源码&lt;br&gt;
+点击链接：&lt;a class=&#34;link&#34; href=&#34;https://ffmpeg.org/download.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;下载地址&lt;/a&gt;&lt;br&gt;
+目前最新版是 &lt;code&gt;7.1&lt;/code&gt; ，而且我是 &lt;code&gt;ubuntu&lt;/code&gt; 环境&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image.png&#34;
+	width=&#34;811&#34;
+	height=&#34;849&#34;
 	
 	loading=&#34;lazy&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;69&#34;
-		data-flex-basis=&#34;165px&#34;
+		data-flex-grow=&#34;95&#34;
+		data-flex-basis=&#34;229px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;h2 id=&#34;书写-cmakelists&#34;&gt;书写 &lt;code&gt;CMakeLists&lt;/code&gt;
-&lt;/h2&gt;&lt;p&gt;在 &lt;code&gt;CMakeLists.txt&lt;/code&gt; 下写入以下内容：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image-1.png&#34;
+	width=&#34;890&#34;
+	height=&#34;132&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;674&#34;
+		data-flex-basis=&#34;1618px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image-2.png&#34;
+	width=&#34;521&#34;
+	height=&#34;335&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;155&#34;
+		data-flex-basis=&#34;373px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;下载压缩包之后进行解压：（具体解压指令可以问问 ai ）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tar -xv ffmpeg-7.1.tar.xz
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;解压完之后要进入目录：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;cd&lt;/span&gt; ffmpeg-7.1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;然后进行配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./configure &lt;span class=&#34;se&#34;&gt;\ &lt;/span&gt;                                                                                &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;20.192s&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &amp;lt; 14:23:34          --prefix&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/usr/local/ffmpeg&amp;#39;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-gpl &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-nonfree &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-ffplay &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-libfdk-aac &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-libmp3lame &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-libx264 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-libx265 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-filter&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;delogo &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-debug &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --disable-optimizations &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-libspeex &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-shared &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-pthreads &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-version3 &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --enable-hardcoded-tables &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --extra-cflags&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;-I/usr/local/ffmpeg/include&amp;#34;&lt;/span&gt; &lt;span class=&#34;se&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;se&#34;&gt;&lt;/span&gt;          --extra-ldflags&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;-L/usr/local/ffmpeg/lib&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里可能会不断报错，显示缺各种库，那根据提示去安装对应库就行&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%853.png&#34;
+	width=&#34;1042&#34;
+	height=&#34;771&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;135&#34;
+		data-flex-basis=&#34;324px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%854.png&#34;
+	width=&#34;693&#34;
+	height=&#34;545&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;127&#34;
+		data-flex-basis=&#34;305px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%855.png&#34;
+	width=&#34;716&#34;
+	height=&#34;495&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;347px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%856.png&#34;
+	width=&#34;718&#34;
+	height=&#34;297&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;241&#34;
+		data-flex-basis=&#34;580px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%857.png&#34;
+	width=&#34;703&#34;
+	height=&#34;269&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;261&#34;
+		data-flex-basis=&#34;627px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%858.png&#34;
+	width=&#34;722&#34;
+	height=&#34;529&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;136&#34;
+		data-flex-basis=&#34;327px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%859.png&#34;
+	width=&#34;709&#34;
+	height=&#34;442&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8510.png&#34;
+	width=&#34;704&#34;
+	height=&#34;577&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;122&#34;
+		data-flex-basis=&#34;292px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8511.png&#34;
+	width=&#34;715&#34;
+	height=&#34;523&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;136&#34;
+		data-flex-basis=&#34;328px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8512.png&#34;
+	width=&#34;715&#34;
+	height=&#34;536&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;下载：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install libasound2-dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install libpulse-dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install libx11-dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt-get install xorg-dev
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;配置：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./configure --prefix&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/ffmpeg --enable-shared --enable-video-x11 --enable-x11-shared --enable-video-x11-vm
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8513.png&#34;
+	width=&#34;714&#34;
+	height=&#34;317&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;225&#34;
+		data-flex-basis=&#34;540px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8514.png&#34;
+	width=&#34;696&#34;
+	height=&#34;376&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;444px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;ffplay&lt;/code&gt; 一直无法播放视频的话（因为我是用的wsl2），尝试在终端配置文件加上 &lt;code&gt;SDL_RENDER_DRIVER=software&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;fish&lt;/code&gt; 终端配置文件加&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SDL_RENDER_DRIVER&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;software&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;具体怎么加可以问问 ai&lt;/p&gt;
+&lt;h2 id=&#34;cmake配置&#34;&gt;&lt;code&gt;CMake&lt;/code&gt;配置
+&lt;/h2&gt;&lt;h3 id=&#34;安装-cmake&#34;&gt;安装 &lt;code&gt;CMake&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;安装插件 &lt;code&gt;CMake Tools&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;书写-cmakeliststxt&#34;&gt;书写 &lt;code&gt;CMakeLists.txt&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;在 &lt;code&gt;CMakeLists.txt&lt;/code&gt; 下写入以下内容：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -308,6 +609,9 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cmake&#34; data-lang=&#34;cmake&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# 指定 CMake 的最低版本要求
@@ -323,20 +627,55 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 依赖 compile_commands.json 文件来理解项目的编译环境
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;CMAKE_EXPORT_COMPILE_COMMANDS&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;ON&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 设置 FFmpeg 库的路径
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;FFmpeg_DIR&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;/usr/local/ffmpeg&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 添加项目中的头文件目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;include_directories&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;PROJECT_SOURCE_DIR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;/include&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;include_directories&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;FFmpeg_DIR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;/include&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 添加库文件目录
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;link_directories&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;PROJECT_SOURCE_DIR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;/lib&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;link_directories&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;${&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;FFmpeg_DIR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;/lib&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 添加可执行文件
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 添加可执行文件（就是源码的位置）
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;add_executable&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;main&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;src/testffmpeg.cpp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;&lt;span class=&#34;c&#34;&gt;# 链接 FFmpeg 库
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;target_link_libraries&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;main&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;avcodec&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;avformat&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;avutil&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;输入指令&lt;/p&gt;
+&lt;/div&gt;&lt;h3 id=&#34;测试代码&#34;&gt;测试代码
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-cpp&#34; data-lang=&#34;cpp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define __STDC_CONSTANT_MACROS
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;extern&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;C&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;libavcodec/avcodec.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;argc&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;argv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;%s&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;avcodec_configuration&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;());&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;编译&#34;&gt;编译
+&lt;/h3&gt;&lt;p&gt;输入指令&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -352,8 +691,9 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;如果成功输出，说明配置成功&lt;/p&gt;
-&lt;h2 id=&#34;解释器&#34;&gt;解释器
-&lt;/h2&gt;&lt;p&gt;如果成功输出了发现源文件仍然显示找不到头文件，可能是没安装好解释器，我使用的是 &lt;code&gt;clangd&lt;/code&gt;，&lt;code&gt;linux&lt;/code&gt; 环境安装很简单，问一下 ai 就行&lt;br&gt;
+&lt;h2 id=&#34;常见问题&#34;&gt;常见问题
+&lt;/h2&gt;&lt;h3 id=&#34;解释器&#34;&gt;解释器
+&lt;/h3&gt;&lt;p&gt;如果成功输出了发现源文件仍然显示找不到头文件，可能是没安装好解释器，我使用的是 &lt;code&gt;clangd&lt;/code&gt;，&lt;code&gt;linux&lt;/code&gt; 环境安装很简单，问一下 ai 就行&lt;br&gt;
 安装完成之后，&lt;code&gt;clangd&lt;/code&gt; 会依赖 &lt;code&gt;compile_commands.json&lt;/code&gt; 文件来理解项目的编译环境&lt;/p&gt;
 </description>
         </item>
