@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Thu, 20 Feb 2025 20:57:21 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 20 Feb 2025 23:28:22 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【雷霄骅课程笔记】1</title>
         <link>https://example.com/post/leixiaohua-note-1/</link>
         <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
@@ -47,7 +47,21 @@
 &lt;/ul&gt;
 &lt;p&gt;其中 * 表示本次课程中会涉及到的库&lt;/p&gt;
 &lt;h3 id=&#34;ffmpeg-解码流程&#34;&gt;FFmpeg 解码流程
-&lt;/h3&gt;&lt;table&gt;
+&lt;/h3&gt;&lt;h4 id=&#34;主要步骤&#34;&gt;主要步骤
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/%E6%B5%81%E7%A8%8B%E5%9B%BE.png&#34;
+	width=&#34;621&#34;
+	height=&#34;816&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;76&#34;
+		data-flex-basis=&#34;182px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;主要函数&#34;&gt;主要函数
+&lt;/h4&gt;&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;函数名&lt;/th&gt;
@@ -187,7 +201,7 @@
 &lt;li&gt;dts: 解码时间戳&lt;/li&gt;
 &lt;li&gt;data: 压缩编码的数据&lt;/li&gt;
 &lt;li&gt;size: 数据的大小&lt;/li&gt;
-&lt;li&gt;stream_index: 所属的 AVStream&lt;/li&gt;
+&lt;li&gt;stream_index: 所属的 AVStream （音频流还是视频流）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;avframe&#34;&gt;&lt;code&gt;AVFrame&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;理解成装 &lt;code&gt;yuv&lt;/code&gt; 数据的盒子&lt;/p&gt;
@@ -198,6 +212,25 @@
 &lt;li&gt;key_frame: 是否是关键帧&lt;/li&gt;
 &lt;li&gt;pict_type: 帧类型（I, B, P 帧）&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;补充小知识&#34;&gt;补充小知识
+&lt;/h3&gt;&lt;p&gt;解码后的数据为什么要经过 &lt;code&gt;sws_scale&lt;/code&gt; 转换？
+解码后 YUV 数据格式的视频像素数据保存在 AVFrame 的 data[0]，data[1]，data[2]，但是这些像素值并不是连续存储的，每行有效像素之后存储的是无效像素。
+以亮度 Y 数据为例，data[0] 中一共包含了 linesize[0] * height 个数据。但是出于优化等方面考虑，linesize[0] 可能大于 width 。因此需要使用 &lt;code&gt;sws_scale&lt;/code&gt; 进行转换。&lt;br&gt;
+转换后去除了无效数据，width 和 linesize[0] 就相等了。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/image-1.png&#34;
+	width=&#34;1160&#34;
+	height=&#34;472&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;alt text&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;245&#34;
+		data-flex-basis=&#34;589px&#34;
+	
+&gt;&lt;/p&gt;
 &lt;h2 id=&#34;运行代码&#34;&gt;运行代码
 &lt;/h2&gt;&lt;h3 id=&#34;代码和-cmakeliststxt&#34;&gt;代码和 &lt;code&gt;CMakeLists.txt&lt;/code&gt;
 &lt;/h3&gt;&lt;p&gt;这里代码和雷神视频中的代码略有不同，修改了很多：&lt;/p&gt;
@@ -789,7 +822,9 @@
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-json&#34; data-lang=&#34;json&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;cwd&amp;#34;&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;${workspaceFolder}&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h2 id=&#34;练习&#34;&gt;练习
+&lt;/h2&gt;&lt;h3 id=&#34;获取解码前的-h264-文件&#34;&gt;获取解码前的 h264 文件
+&lt;/h3&gt;</description>
         </item>
         <item>
         <title>【Hugo】常见问题</title>
