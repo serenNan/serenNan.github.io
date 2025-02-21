@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://example.com/post/hugo-animation/'>
 
-<link rel="stylesheet" href="/scss/style.min.d5c3cdcc978bee69c6732e290dc06b2307a4817628276c77cfb2accc3c3a7ab5.css"><meta property='og:title' content="【Hugo】动画">
+<link rel="stylesheet" href="/scss/style.min.2bc07dc3a228d05c74f50ccca5cddaf8ca036f5de78cc5fe92fab09b4dc01d70.css"><meta property='og:title' content="【Hugo】动画">
 <meta property='og:description' content="Hugo 添加一些按键动画的教程">
 <meta property='og:url' content='https://example.com/post/hugo-animation/'>
 <meta property='og:site_name' content='serenNan'>
@@ -1012,85 +1012,6 @@ console.log('particles.js loaded - callback');
     initScrollTop();
 </script>
 
-<style>
-    .highlight {
-         
-        max-height: 400px;
-        overflow: hidden;
-    }
-
-    .code-show {
-        max-height: none !important;
-    }
-
-    .code-more-box {
-        width: 100%;
-        padding-top: 78px;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0)), to(#fff));
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-    }
-
-    .code-more-btn {
-        display: block;
-        margin: auto;
-        width: 44px;
-        height: 25px;
-        background: #313535;
-        border-top-left-radius: 16px;
-        border-top-right-radius: 16px;
-        padding-top: 6px;
-        cursor: pointer;
-    }
-
-    .code-more-img {
-        cursor: pointer !important;
-        display: block;
-        margin: auto;
-        width: 22px;
-        height: 16px;
-    }
-</style>
-
-<script>
-  function initCodeMoreBox() {
-    let codeBlocks = document.querySelectorAll(".highlight");
-    if (!codeBlocks) {
-      return;
-    }
-    codeBlocks.forEach(codeBlock => {
-      
-      if (codeBlock.scrollHeight <= codeBlock.clientHeight) {
-        return;
-      }
-      
-      
-      let codeMoreBox = document.createElement('div');
-      codeMoreBox.classList.add('code-more-box');
-      
-      let codeMoreBtn = document.createElement('span');
-      codeMoreBtn.classList.add('code-more-btn');
-      codeMoreBtn.addEventListener('click', () => {
-        codeBlock.classList.add('code-show');
-        codeMoreBox.style.display = 'none';
-      })
-      
-      let img = document.createElement('img');
-      img.classList.add('code-more-img');
-      img.src = '\/img\/codeMore.png';
-
-      
-      codeMoreBtn.appendChild(img);
-      codeMoreBox.appendChild(codeMoreBtn);
-      codeBlock.appendChild(codeMoreBox)
-    })
-  }
-  
-  initCodeMoreBox();
-</script>
 
     </body>
 </html>
