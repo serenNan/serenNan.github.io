@@ -842,7 +842,7 @@
 &lt;/h2&gt;&lt;h3 id=&#34;获取解码前的-h264-文件&#34;&gt;获取解码前的 h264 文件
 &lt;/h3&gt;
 &lt;div class=&#34;notice notice-info&#34; &gt;
-    &lt;div class=&#34;notice-title&#34;&gt;&lt;/div&gt;&lt;p&gt;注意这里只获取MPEG-TS，AVI格式的文件，如果是别的文件，无法直接获取&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&#34;notice-title&#34;&gt;&lt;/div&gt;&lt;p&gt;注意这里只获取 MPEG-TS ，AVI 格式的文件，如果是别的文件，无法直接获取&lt;/p&gt;&lt;/div&gt;
 
 &lt;p&gt;这样重新编码后，就可以获取到解码前的 h264 文件了。&lt;/p&gt;
 &lt;h4 id=&#34;代码分析&#34;&gt;代码分析
