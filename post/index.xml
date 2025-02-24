@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Mon, 24 Feb 2025 17:49:14 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 24 Feb 2025 22:03:07 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【雷霄骅课程笔记】2 最简单的视频播放器</title>
         <link>https://example.com/post/leixiaohua-note-2/</link>
         <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
@@ -32,6 +32,20 @@
     &lt;/iframe&gt;
 &lt;/div&gt;
 
+&lt;h3 id=&#34;sdl-视频显示流程&#34;&gt;SDL 视频显示流程
+&lt;/h3&gt;&lt;h4 id=&#34;流程图&#34;&gt;流程图
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-2/sdl%E6%B5%81%E7%A8%8B3.png&#34;
+	width=&#34;1488&#34;
+	height=&#34;2073&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;71&#34;
+		data-flex-basis=&#34;172px&#34;
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -74,17 +88,17 @@
 &lt;/ul&gt;
 &lt;p&gt;其中 * 表示本次课程中会涉及到的库&lt;/p&gt;
 &lt;h3 id=&#34;ffmpeg-解码流程&#34;&gt;FFmpeg 解码流程
-&lt;/h3&gt;&lt;h4 id=&#34;主要步骤&#34;&gt;主要步骤
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/%E6%B5%81%E7%A8%8B%E5%9B%BE.png&#34;
-	width=&#34;621&#34;
-	height=&#34;816&#34;
+&lt;/h3&gt;&lt;h4 id=&#34;流程图&#34;&gt;流程图
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/%E8%A7%A3%E7%A0%81%E6%B5%81%E7%A8%8B2.png&#34;
+	width=&#34;1710&#34;
+	height=&#34;2346&#34;
 	
 	loading=&#34;lazy&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;76&#34;
-		data-flex-basis=&#34;182px&#34;
+		data-flex-grow=&#34;72&#34;
+		data-flex-basis=&#34;174px&#34;
 	
 &gt;&lt;/p&gt;
 &lt;h4 id=&#34;主要函数&#34;&gt;主要函数
