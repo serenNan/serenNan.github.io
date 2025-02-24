@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Mon, 24 Feb 2025 22:03:07 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 24 Feb 2025 23:35:22 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【雷霄骅课程笔记】2 最简单的视频播放器</title>
         <link>https://example.com/post/leixiaohua-note-2/</link>
         <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
@@ -170,15 +170,15 @@
 &lt;/table&gt;
 &lt;h3 id=&#34;ffmpeg-解码的数据结构&#34;&gt;FFmpeg 解码的数据结构
 &lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVFormatContext.png&#34;
-	width=&#34;955&#34;
-	height=&#34;186&#34;
+	width=&#34;1935&#34;
+	height=&#34;459&#34;
 	
 	loading=&#34;lazy&#34;
 	
 	
 		class=&#34;gallery-image&#34; 
-		data-flex-grow=&#34;513&#34;
-		data-flex-basis=&#34;1232px&#34;
+		data-flex-grow=&#34;421&#34;
+		data-flex-basis=&#34;1011px&#34;
 	
 &gt;&lt;/p&gt;
 
@@ -192,8 +192,19 @@
 &lt;code&gt;AVCodec&lt;/code&gt;: 编解码器，指明编码器的类型（h.264之类的）&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt;: 压缩编码后的数据包 &lt;br&gt;
 &lt;code&gt;AVFrame&lt;/code&gt;: 解码后的数据包&lt;/p&gt;
-&lt;p&gt;TODO：弄个图
-&lt;code&gt;AVPacket&lt;/code&gt; 解码完为 &lt;code&gt;AVFrame&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt; 解码完为 &lt;code&gt;AVFrame&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVPacket.png&#34;
+	width=&#34;963&#34;
+	height=&#34;153&#34;
+	
+	loading=&#34;lazy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;629&#34;
+		data-flex-basis=&#34;1510px&#34;
+	
+&gt;&lt;/p&gt;
 &lt;h4 id=&#34;avformatcontext&#34;&gt;&lt;code&gt;AVFormatContext&lt;/code&gt;
 &lt;/h4&gt;&lt;p&gt;用于处理&lt;strong&gt;封装格式&lt;/strong&gt;的上下文，包含视频最外层的信息&lt;/p&gt;
 &lt;ul&gt;
