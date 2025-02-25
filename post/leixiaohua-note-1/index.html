@@ -2,16 +2,16 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="跟着雷神的课程学习写的一些笔记">
-<title>【雷霄骅课程笔记】1 最简单的解码器</title>
+<title>【雷霄骅课程笔记】1 FFmpeg 视频解码器</title>
 
 <link rel='canonical' href='https://example.com/post/leixiaohua-note-1/'>
 
-<link rel="stylesheet" href="/scss/style.min.3be4ea0613347eebde811617472398249447293dd6adb321d645aee7f32d5548.css"><meta property='og:title' content="【雷霄骅课程笔记】1 最简单的解码器">
+<link rel="stylesheet" href="/scss/style.min.3be4ea0613347eebde811617472398249447293dd6adb321d645aee7f32d5548.css"><meta property='og:title' content="【雷霄骅课程笔记】1 FFmpeg 视频解码器">
 <meta property='og:description' content="跟着雷神的课程学习写的一些笔记">
 <meta property='og:url' content='https://example.com/post/leixiaohua-note-1/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-24T23:35:22&#43;08:00'/><meta property='og:image' content='https://example.com/post/leixiaohua-note-1/cover.jpg' />
-<meta name="twitter:title" content="【雷霄骅课程笔记】1 最简单的解码器">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-25T16:58:41&#43;08:00'/><meta property='og:image' content='https://example.com/post/leixiaohua-note-1/cover.jpg' />
+<meta name="twitter:title" content="【雷霄骅课程笔记】1 FFmpeg 视频解码器">
 <meta name="twitter:description" content="跟着雷神的课程学习写的一些笔记"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://example.com/post/leixiaohua-note-1/cover.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -332,7 +332,7 @@
         <li><a href="#ffmpeg-解码流程">FFmpeg 解码流程</a>
           <ol>
             <li><a href="#流程图">流程图</a></li>
-            <li><a href="#主要函数">主要函数</a></li>
+            <li><a href="#函数介绍">函数介绍</a></li>
           </ol>
         </li>
         <li><a href="#ffmpeg-解码的数据结构">FFmpeg 解码的数据结构</a>
@@ -349,9 +349,10 @@
         <li><a href="#补充小知识">补充小知识</a></li>
       </ol>
     </li>
-    <li><a href="#运行代码">运行代码</a>
+    <li><a href="#代码运行">代码运行</a>
       <ol>
-        <li><a href="#代码和-cmakeliststxt">代码和 <code>CMakeLists.txt</code></a></li>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#cmakeliststxt">CMakeLists.txt</a></li>
         <li><a href="#调试">调试</a></li>
       </ol>
     </li>
@@ -389,7 +390,7 @@
                         width="4608" 
                         height="3456" 
                         loading="lazy"
-                        alt="Featured image of post 【雷霄骅课程笔记】1 最简单的解码器" />
+                        alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器" />
                 
             </a>
         </div>
@@ -412,7 +413,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/leixiaohua-note-1/">【雷霄骅课程笔记】1 最简单的解码器</a>
+            <a href="/post/leixiaohua-note-1/">【雷霄骅课程笔记】1 FFmpeg 视频解码器</a>
         </h2>
     
         
@@ -471,7 +472,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>4748 字</span>
+                    <span>4770 字</span>
                 </div>
             
         
@@ -479,7 +480,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-02-24 23:35</time>
+                    <time>2025-02-25 16:58</time>
                 </div>
             
         
@@ -540,12 +541,12 @@
 		data-flex-basis="174px"
 	
 ></p>
-<h4 id="主要函数">主要函数
+<h4 id="函数介绍">函数介绍
 </h4><div class="table-wrapper"><table>
   <thead>
       <tr>
           <th>函数名</th>
-          <th>描述</th>
+          <th>功能描述</th>
       </tr>
   </thead>
   <tbody>
@@ -726,9 +727,9 @@
 		data-flex-basis="589px"
 	
 ></p>
-<h2 id="运行代码">运行代码
+<h2 id="代码运行">代码运行
 </h2><p>雷神给的这些代码，在资源释放上有些问题（资源的释放都集中在最后，如果程序提前终止，那就导致资源没有释放），但这里先不考虑这些。</p>
-<h3 id="代码和-cmakeliststxt">代码和 <code>CMakeLists.txt</code>
+<h3 id="代码">代码
 </h3><p>头文件 <code>lib</code> 和库文件 <code>include</code> 的配置在前面博客说到，可以复制到这个项目中（上一个博客我讲的是放在 <code>usr/local/ffmpeg</code> ）
 这里代码和雷神视频中的代码略有不同，修改了很多：</p>
 <div class="highlight"><div class="chroma">
@@ -1135,8 +1136,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>CMakeLists.txt</code>:</p>
-<div class="highlight"><div class="chroma">
+</div><h3 id="cmakeliststxt">CMakeLists.txt
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1303,7 +1304,8 @@
 <pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;cwd&#34;</span><span class="err">:</span> <span class="s2">&#34;${workspaceFolder}&#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="练习">练习
+</div><p>后续博客就不讲调试的文件书写了，基本都差不多</p>
+<h2 id="练习">练习
 </h2><h3 id="获取解码前的-h264-文件">获取解码前的 h264 文件
 </h3>
 <div class="notice notice-info" >
@@ -1998,7 +2000,7 @@
                         width="4608" 
                         height="3456" 
                         loading="lazy"
-                        alt="Featured image of post 【雷霄骅课程笔记】2 最简单的视频播放器"
+                        alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器"
                         data-key="leixiaohua-note-2" 
                         data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
                 
@@ -2006,7 +2008,31 @@
         
 
         <div class="article-details">
-            <h2 class="article-title">【雷霄骅课程笔记】2 最简单的视频播放器</h2>
+            <h2 class="article-title">【雷霄骅课程笔记】2 SDL 视频播放器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/leixiaohua-note-2/">
+        
+        
+            <div class="article-image">
+                <img src="/post/leixiaohua-note-2/cover.26c6bb1e5c3c89a60ddf413fcb42b8ed.jpg" 
+                        width="4608" 
+                        height="3456" 
+                        loading="lazy"
+                        alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器"
+                        data-key="leixiaohua-note-2" 
+                        data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【雷霄骅课程笔记】2 SDL 视频播放器</h2>
         </div>
     </a>
 </article>

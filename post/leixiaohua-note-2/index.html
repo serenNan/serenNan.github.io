@@ -2,16 +2,16 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="跟着雷神的课程学习写的一些笔记">
-<title>【雷霄骅课程笔记】2 最简单的视频播放器</title>
+<title>【雷霄骅课程笔记】2 SDL 视频播放器</title>
 
 <link rel='canonical' href='https://example.com/post/leixiaohua-note-2/'>
 
-<link rel="stylesheet" href="/scss/style.min.3be4ea0613347eebde811617472398249447293dd6adb321d645aee7f32d5548.css"><meta property='og:title' content="【雷霄骅课程笔记】2 最简单的视频播放器">
+<link rel="stylesheet" href="/scss/style.min.3be4ea0613347eebde811617472398249447293dd6adb321d645aee7f32d5548.css"><meta property='og:title' content="【雷霄骅课程笔记】2 SDL 视频播放器">
 <meta property='og:description' content="跟着雷神的课程学习写的一些笔记">
 <meta property='og:url' content='https://example.com/post/leixiaohua-note-2/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-24T22:03:07&#43;08:00'/><meta property='og:image' content='https://example.com/post/leixiaohua-note-2/cover.jpg' />
-<meta name="twitter:title" content="【雷霄骅课程笔记】2 最简单的视频播放器">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-02-25T16:58:41&#43;08:00'/><meta property='og:image' content='https://example.com/post/leixiaohua-note-2/cover.jpg' />
+<meta name="twitter:title" content="【雷霄骅课程笔记】2 SDL 视频播放器">
 <meta name="twitter:description" content="跟着雷神的课程学习写的一些笔记"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://example.com/post/leixiaohua-note-2/cover.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -326,13 +326,21 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#sdl-介绍">SDL 介绍</a>
       <ol>
         <li><a href="#sdl-视频显示流程">SDL 视频显示流程</a>
           <ol>
             <li><a href="#流程图">流程图</a></li>
+            <li><a href="#函数介绍">函数介绍</a></li>
           </ol>
         </li>
+        <li><a href="#sdl-视频显示的数据结构">SDL 视频显示的数据结构</a></li>
+      </ol>
+    </li>
+    <li><a href="#代码运行">代码运行</a>
+      <ol>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#cmakeliststxt">CMakeLists.txt</a></li>
       </ol>
     </li>
   </ol>
@@ -357,7 +365,7 @@
                         width="4608" 
                         height="3456" 
                         loading="lazy"
-                        alt="Featured image of post 【雷霄骅课程笔记】2 最简单的视频播放器" />
+                        alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" />
                 
             </a>
         </div>
@@ -380,7 +388,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/leixiaohua-note-2/">【雷霄骅课程笔记】2 最简单的视频播放器</a>
+            <a href="/post/leixiaohua-note-2/">【雷霄骅课程笔记】2 SDL 视频播放器</a>
         </h2>
     
         
@@ -439,7 +447,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>10 字</span>
+                    <span>1408 字</span>
                 </div>
             
         
@@ -447,7 +455,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-02-24 22:03</time>
+                    <time>2025-02-25 16:58</time>
                 </div>
             
         
@@ -480,21 +488,391 @@
     </iframe>
 </div>
 
-<h3 id="sdl-视频显示流程">SDL 视频显示流程
+<h2 id="sdl-介绍">SDL 介绍
+</h2><h3 id="sdl-视频显示流程">SDL 视频显示流程
 </h3><h4 id="流程图">流程图
-</h4><p><img src="/post/leixiaohua-note-2/sdl%E6%B5%81%E7%A8%8B3.png"
-	width="1488"
-	height="2073"
+</h4><p><img src="/sdl%e6%b5%81%e7%a8%8b3.png"
+	
+	
 	
 	loading="lazy"
 	
 	
-		class="gallery-image" 
-		data-flex-grow="71"
-		data-flex-basis="172px"
+></p>
+<h4 id="函数介绍">函数介绍
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>功能描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>SDL_Init()</code></td>
+          <td>初始化SDL系统</td>
+      </tr>
+      <tr>
+          <td><code>SDL_CreateWindow()</code></td>
+          <td>创建窗口 <code>SDL_Window</code></td>
+      </tr>
+      <tr>
+          <td><code>SDL_CreateRenderer()</code></td>
+          <td>创建渲染器 <code>SDL_Renderer</code></td>
+      </tr>
+      <tr>
+          <td><code>SDL_CreateTexture()</code></td>
+          <td>创建纹理 <code>SDL_Texture</code></td>
+      </tr>
+      <tr>
+          <td><code>SDL_UpdateTexture()</code></td>
+          <td>设置纹理的数据</td>
+      </tr>
+      <tr>
+          <td><code>SDL_RenderCopy()</code></td>
+          <td>将纹理的数据拷贝给渲染器</td>
+      </tr>
+      <tr>
+          <td><code>SDL_RenderPresent()</code></td>
+          <td>显示</td>
+      </tr>
+      <tr>
+          <td><code>SDL_Delay()</code></td>
+          <td>工具函数，用于延时</td>
+      </tr>
+      <tr>
+          <td><code>SDL_Quit()</code></td>
+          <td>退出SDL系统</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="sdl-视频显示的数据结构">SDL 视频显示的数据结构
+</h3><p><img src="/sdl%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84.png"
+	
+	
+	
+	loading="lazy"
+	
 	
 ></p>
-
+<p>解释：</p>
+<ul>
+<li><code>SDL_Texture</code>：纹理，一个纹理对应一个 YUV
+<ul>
+<li>一个窗口不一定只有一个纹理，可以放很多个</li>
+</ul>
+</li>
+<li><code>SDL_Rect</code> ： <code>SDL</code> 中的一个结构体，用于描述一个矩形的位置和尺寸</li>
+<li><code>SDL_Renderer</code>：渲染器，把纹理的数据给窗口</li>
+<li><code>SDL_Window</code>：窗口</li>
+</ul>
+<h2 id="代码运行">代码运行
+</h2><h3 id="代码">代码
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="s">&#34;C&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;SDL2/SDL.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">bpp</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 窗口的宽度和高度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">screen_w</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">screen_h</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 视频像素的宽度和高度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="n">pixel_w</span> <span class="o">=</span> <span class="mi">320</span><span class="p">,</span> <span class="n">pixel_h</span> <span class="o">=</span> <span class="mi">180</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 用于存储一帧 YUV 数据的缓冲区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">pixel_w</span> <span class="o">*</span> <span class="n">pixel_h</span> <span class="o">*</span> <span class="n">bpp</span> <span class="o">/</span> <span class="mi">8</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 初始化 SDL 库
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Could not initialize SDL - %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Window</span> <span class="o">*</span><span class="n">screen</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// SDL 2.0 Support for multiple windows
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// title 窗口标题，x y 窗口位置，w h 窗口大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// flags 标志包括允许改变窗口大小（SDL_WINDOW_RESIZABLE）和使用OpenGL（SDL_WINDOW_OPENGL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">screen</span> <span class="o">=</span> <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&#34;Simplest Video Play SDL2&#34;</span><span class="p">,</span> <span class="n">SDL_WINDOWPOS_CENTERED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">SDL_WINDOWPOS_UNDEFINED</span><span class="p">,</span> <span class="n">screen_w</span><span class="p">,</span> <span class="n">screen_h</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">SDL_WINDOW_OPENGL</span> <span class="o">|</span> <span class="n">SDL_WINDOW_RESIZABLE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;SDL: could not create window - exiting:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建渲染器，将窗口与渲染器关联
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// index 使用默认的渲染驱动，flags 标志为 0 （不使用加速功能）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Renderer</span> <span class="o">*</span><span class="n">sdlRenderer</span> <span class="o">=</span> <span class="n">SDL_CreateRenderer</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Uint32</span> <span class="n">pixformat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// IYUV: Y + U + V  (3 planes)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// YV12: Y + V + U  (3 planes)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 设置像素格式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// SDL_PIXELFORMAT_IYUV 表示使用 YUV420
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">pixformat</span> <span class="o">=</span> <span class="n">SDL_PIXELFORMAT_IYUV</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建纹理，用于存储视频数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pixformat 使用之前设置的像素格式 IYUV，access 纹理访问模式为流式访问（适合频繁更新纹理数据）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// w h 纹理宽度和高度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Texture</span> <span class="o">*</span><span class="n">sdlTexture</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDL_CreateTexture</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">,</span> <span class="n">pixformat</span><span class="p">,</span> <span class="n">SDL_TEXTUREACCESS_STREAMING</span><span class="p">,</span> <span class="n">pixel_w</span><span class="p">,</span> <span class="n">pixel_h</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;../video/test_yuv420p_320x180.yuv&#34;</span><span class="p">,</span> <span class="s">&#34;rb+&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;cannot open this file</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">SDL_Rect</span> <span class="n">sdlRect</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 从文件中读取一帧 YUV 数据到 buffer 中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">fread</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pixel_w</span> <span class="o">*</span> <span class="n">pixel_h</span> <span class="o">*</span> <span class="n">bpp</span> <span class="o">/</span> <span class="mi">8</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pixel_w</span> <span class="o">*</span> <span class="n">pixel_h</span> <span class="o">*</span> <span class="n">bpp</span> <span class="o">/</span> <span class="mi">8</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 重新定位文件指针实现循环播放
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">fseek</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">SEEK_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fread</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pixel_w</span> <span class="o">*</span> <span class="n">pixel_h</span> <span class="o">*</span> <span class="n">bpp</span> <span class="o">/</span> <span class="mi">8</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 更新纹理中的数据，将 buffer 中的内容传递给纹理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// pitch 每行像素占用的字节数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SDL_UpdateTexture</span><span class="p">(</span><span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">pixel_w</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置渲染区域
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 这表示这个矩形从屏幕的左上角(0, 0)开始，宽度和高度与屏幕相同，即覆盖整个屏幕
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">sdlRect</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sdlRect</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sdlRect</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">screen_w</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sdlRect</span><span class="p">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">screen_h</span> <span class="o">-</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 清楚渲染器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 复制纹理到渲染器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SDL_RenderCopy</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">,</span> <span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sdlRect</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 呈现渲染结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 将渲染器中的后缓冲区内容呈现到前缓冲区，即更新屏幕显示内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 延迟以控制帧率
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SDL_Quit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里讲一下循环中读取数据到 <code>buffer</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">fread</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">pixel_w</span> <span class="o">*</span> <span class="n">pixel_h</span> <span class="o">*</span> <span class="n">bpp</span> <span class="o">/</span> <span class="mi">8</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pixel_w</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第二个参数是每个元素的字节数，第三个参数是要读取的元素数量<br>
+成功读取的话是返回读取的元素数量<br>
+元素数量是视频宽度 * 视频高度 * 每像素占用的位数（<code>bpp</code>）
+<code>bpp</code> （Bits Per Pixel）的计算如下：</p>
+<ul>
+<li>Y（亮度）平面：每个像素占8位。</li>
+<li>U（色度）平面：每个像素占8位，但水平和垂直方向各下采样一倍，因此每个宏像素的 U 和 V 各占4位。</li>
+<li>V（色度）平面：同上。</li>
+</ul>
+<p>所以总共有：</p>
+<ul>
+<li>Y 平面：width × height × 8 位</li>
+<li>U 平面：(width/2) × (height/2) × 8 位</li>
+<li>V 平面：(width/2) × (height/2) × 8 位</li>
+</ul>
+<p>总位数为：<br>
+width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8 + 2 + 2) = width × height × 12 位<br>
+因此，每个像素平均占用12位。</p>
+<h3 id="cmakeliststxt">CMakeLists.txt
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmake" data-lang="cmake"><span class="line"><span class="cl"><span class="c"># 指定 CMake 的最低版本要求
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.10</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 设置项目名称和版本
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">project</span><span class="p">(</span><span class="s">MyProject</span> <span class="s">VERSION</span> <span class="s">1.0</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 设置 C++ 标准
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_BUILD_TYPE</span> <span class="s">Debug</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 依赖 compile_commands.json 文件来理解项目的编译环境
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_EXPORT_COMPILE_COMMANDS</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加头文件路径
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="o">}</span><span class="s">/include</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加库文件路径
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">link_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="o">}</span><span class="s">/lib</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加可执行文件
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">main</span> <span class="s">src/videoPlayer.cpp</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 链接 FFmpeg 库
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span> <span class="s">avcodec</span> <span class="s">avformat</span> <span class="s">avutil</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 链接 SDL2 库·
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span> <span class="s">SDL2</span> <span class="s">SDL2main</span><span class="p">)</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
     <footer class="article-footer">
@@ -516,6 +894,30 @@
             
                 
 <article class="has-image">
+    <a href="/post/leixiaohua-note-2/">
+        
+        
+            <div class="article-image">
+                <img src="/post/leixiaohua-note-2/cover.26c6bb1e5c3c89a60ddf413fcb42b8ed.jpg" 
+                        width="4608" 
+                        height="3456" 
+                        loading="lazy"
+                        alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器"
+                        data-key="leixiaohua-note-2" 
+                        data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【雷霄骅课程笔记】2 SDL 视频播放器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/post/leixiaohua-note-1/">
         
         
@@ -524,7 +926,7 @@
                         width="4608" 
                         height="3456" 
                         loading="lazy"
-                        alt="Featured image of post 【雷霄骅课程笔记】1 最简单的解码器"
+                        alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器"
                         data-key="leixiaohua-note-1" 
                         data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
                 
@@ -532,7 +934,7 @@
         
 
         <div class="article-details">
-            <h2 class="article-title">【雷霄骅课程笔记】1 最简单的解码器</h2>
+            <h2 class="article-title">【雷霄骅课程笔记】1 FFmpeg 视频解码器</h2>
         </div>
     </a>
 </article>
