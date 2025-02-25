@@ -448,7 +448,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>891 字</span>
+                    <span>693 字</span>
                 </div>
             
         
@@ -508,86 +508,44 @@
 <code>SDL_Event</code>：代表一个事件</li>
 </ul>
 <h4 id="流程图">流程图
-</h4><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">flowchart TD
-</span></span><span class="line"><span class="cl">    A[&#34;程序启动&#34;]
-</span></span><span class="line"><span class="cl">    A --&gt; B[&#34;主线程&#34;]
-</span></span><span class="line"><span class="cl">    A --&gt; C[&#34;刷新线程 (refresh_video)&#34;]
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    %% 刷新线程流程
-</span></span><span class="line"><span class="cl">    C --&gt; D[&#34;进入循环: while(!thread_exit)&#34;]
-</span></span><span class="line"><span class="cl">    D --&gt; E[&#34;每次循环执行:&#34;]
-</span></span><span class="line"><span class="cl">    E --&gt; F[&#34;1. 推送 REFRESH_EVENT 事件&#34;]
-</span></span><span class="line"><span class="cl">    F --&gt; G[&#34;2. 延时 40 毫秒&#34;]
-</span></span><span class="line"><span class="cl">    G --&gt; D
-</span></span><span class="line"><span class="cl">    D -- &#34;检测到 thread_exit&#34; --&gt; H[&#34;退出循环&#34;]
-</span></span><span class="line"><span class="cl">    H --&gt; I[&#34;推送 BREAK_EVENT 事件&#34;]
-</span></span><span class="line"><span class="cl">    I --&gt; J[&#34;刷新线程结束&#34;]
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    %% 主线程流程
-</span></span><span class="line"><span class="cl">    B --&gt; K[&#34;事件循环: SDL_WaitEvent&#34;]
-</span></span><span class="line"><span class="cl">    K --&gt; L{&#34;收到的事件类型?&#34;}
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    %% 当收到 REFRESH_EVENT
-</span></span><span class="line"><span class="cl">    L -- &#34;REFRESH_EVENT&#34; --&gt; M[&#34;读取下一个视频帧&lt;br/&gt;(如果读到文件末尾则重头读)&#34;]
-</span></span><span class="line"><span class="cl">    M --&gt; N[&#34;更新纹理: SDL_UpdateTexture&#34;]
-</span></span><span class="line"><span class="cl">    N --&gt; O[&#34;设置渲染目标矩形(根据当前窗口大小)&#34;]
-</span></span><span class="line"><span class="cl">    O --&gt; P[&#34;渲染视频帧: SDL_RenderClear -&gt; SDL_RenderCopy -&gt; SDL_RenderPresent&#34;]
-</span></span><span class="line"><span class="cl">    P --&gt; K
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    %% 当收到 SDL_WINDOWEVENT
-</span></span><span class="line"><span class="cl">    L -- &#34;SDL_WINDOWEVENT&#34; --&gt; Q[&#34;更新窗口大小: SDL_GetWindowSize&#34;]
-</span></span><span class="line"><span class="cl">    Q --&gt; K
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    %% 当收到 SDL_QUIT
-</span></span><span class="line"><span class="cl">    L -- &#34;SDL_QUIT&#34; --&gt; R[&#34;设置 thread_exit = 1&lt;br/&gt;(通知刷新线程退出)&#34;]
-</span></span><span class="line"><span class="cl">    R --&gt; K
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    %% 当收到 BREAK_EVENT
-</span></span><span class="line"><span class="cl">    L -- &#34;BREAK_EVENT&#34; --&gt; S[&#34;退出事件循环&lt;br/&gt;进入清理阶段&#34;]
-</span></span><span class="line"><span class="cl">    S --&gt; T[&#34;释放资源并调用 SDL_Quit&#34;]
-</span></span></code></pre></td></tr></table>
-</div>
+</h4><div class="mermaid">
+flowchart TD
+    A["程序启动"]
+    A --> B["主线程"]
+    A --> C["刷新线程 (refresh_video)"]
+    
+    %% 刷新线程流程
+    C --> D["进入循环: while(!thread_exit)"]
+    D --> E["每次循环执行:"]
+    E --> F["1. 推送 REFRESH_EVENT 事件"]
+    F --> G["2. 延时 40 毫秒"]
+    G --> D
+    D -- "检测到 thread_exit" --> H["退出循环"]
+    H --> I["推送 BREAK_EVENT 事件"]
+    I --> J["刷新线程结束"]
+    
+    %% 主线程流程
+    B --> K["事件循环: SDL_WaitEvent"]
+    K --> L{"收到的事件类型?"}
+    
+    %% 当收到 REFRESH_EVENT
+    L -- "REFRESH_EVENT" --> M["读取下一个视频帧<br/>(如果读到文件末尾则重头读)"]
+    M --> N["更新纹理: SDL_UpdateTexture"]
+    N --> O["设置渲染目标矩形(根据当前窗口大小)"]
+    O --> P["渲染视频帧: SDL_RenderClear -> SDL_RenderCopy -> SDL_RenderPresent"]
+    P --> K
+    
+    %% 当收到 SDL_WINDOWEVENT
+    L -- "SDL_WINDOWEVENT" --> Q["更新窗口大小: SDL_GetWindowSize"]
+    Q --> K
+    
+    %% 当收到 SDL_QUIT
+    L -- "SDL_QUIT" --> R["设置 thread_exit = 1<br/>(通知刷新线程退出)"]
+    R --> K
+    
+    %% 当收到 BREAK_EVENT
+    L -- "BREAK_EVENT" --> S["退出事件循环<br/>进入清理阶段"]
+    S --> T["释放资源并调用 SDL_Quit"]
 </div><p>主线程：负责处理所有 SDL 事件（窗口关闭，窗口大小改变，视频刷新等）</p>
 <h4 id="函数介绍">函数介绍
 </h4><pre><code>                 |
@@ -663,6 +621,15 @@
 
     <footer class="article-footer">
     
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'dark',
+    securityLevel: 'loose'
+  });
+</script>
 
     
 </footer>

@@ -50,86 +50,44 @@
 &lt;code&gt;SDL_Event&lt;/code&gt;：代表一个事件&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;流程图&#34;&gt;流程图
-&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;flowchart TD
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A[&amp;#34;程序启动&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A --&amp;gt; B[&amp;#34;主线程&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A --&amp;gt; C[&amp;#34;刷新线程 (refresh_video)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 刷新线程流程
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    C --&amp;gt; D[&amp;#34;进入循环: while(!thread_exit)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    D --&amp;gt; E[&amp;#34;每次循环执行:&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    E --&amp;gt; F[&amp;#34;1. 推送 REFRESH_EVENT 事件&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    F --&amp;gt; G[&amp;#34;2. 延时 40 毫秒&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    G --&amp;gt; D
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    D -- &amp;#34;检测到 thread_exit&amp;#34; --&amp;gt; H[&amp;#34;退出循环&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    H --&amp;gt; I[&amp;#34;推送 BREAK_EVENT 事件&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    I --&amp;gt; J[&amp;#34;刷新线程结束&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 主线程流程
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    B --&amp;gt; K[&amp;#34;事件循环: SDL_WaitEvent&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    K --&amp;gt; L{&amp;#34;收到的事件类型?&amp;#34;}
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 当收到 REFRESH_EVENT
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    L -- &amp;#34;REFRESH_EVENT&amp;#34; --&amp;gt; M[&amp;#34;读取下一个视频帧&amp;lt;br/&amp;gt;(如果读到文件末尾则重头读)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    M --&amp;gt; N[&amp;#34;更新纹理: SDL_UpdateTexture&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    N --&amp;gt; O[&amp;#34;设置渲染目标矩形(根据当前窗口大小)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    O --&amp;gt; P[&amp;#34;渲染视频帧: SDL_RenderClear -&amp;gt; SDL_RenderCopy -&amp;gt; SDL_RenderPresent&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    P --&amp;gt; K
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 当收到 SDL_WINDOWEVENT
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    L -- &amp;#34;SDL_WINDOWEVENT&amp;#34; --&amp;gt; Q[&amp;#34;更新窗口大小: SDL_GetWindowSize&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Q --&amp;gt; K
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 当收到 SDL_QUIT
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    L -- &amp;#34;SDL_QUIT&amp;#34; --&amp;gt; R[&amp;#34;设置 thread_exit = 1&amp;lt;br/&amp;gt;(通知刷新线程退出)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    R --&amp;gt; K
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 当收到 BREAK_EVENT
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    L -- &amp;#34;BREAK_EVENT&amp;#34; --&amp;gt; S[&amp;#34;退出事件循环&amp;lt;br/&amp;gt;进入清理阶段&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    S --&amp;gt; T[&amp;#34;释放资源并调用 SDL_Quit&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
+&lt;/h4&gt;&lt;div class=&#34;mermaid&#34;&gt;
+flowchart TD
+    A[&#34;程序启动&#34;]
+    A --&gt; B[&#34;主线程&#34;]
+    A --&gt; C[&#34;刷新线程 (refresh_video)&#34;]
+    
+    %% 刷新线程流程
+    C --&gt; D[&#34;进入循环: while(!thread_exit)&#34;]
+    D --&gt; E[&#34;每次循环执行:&#34;]
+    E --&gt; F[&#34;1. 推送 REFRESH_EVENT 事件&#34;]
+    F --&gt; G[&#34;2. 延时 40 毫秒&#34;]
+    G --&gt; D
+    D -- &#34;检测到 thread_exit&#34; --&gt; H[&#34;退出循环&#34;]
+    H --&gt; I[&#34;推送 BREAK_EVENT 事件&#34;]
+    I --&gt; J[&#34;刷新线程结束&#34;]
+    
+    %% 主线程流程
+    B --&gt; K[&#34;事件循环: SDL_WaitEvent&#34;]
+    K --&gt; L{&#34;收到的事件类型?&#34;}
+    
+    %% 当收到 REFRESH_EVENT
+    L -- &#34;REFRESH_EVENT&#34; --&gt; M[&#34;读取下一个视频帧&lt;br/&gt;(如果读到文件末尾则重头读)&#34;]
+    M --&gt; N[&#34;更新纹理: SDL_UpdateTexture&#34;]
+    N --&gt; O[&#34;设置渲染目标矩形(根据当前窗口大小)&#34;]
+    O --&gt; P[&#34;渲染视频帧: SDL_RenderClear -&gt; SDL_RenderCopy -&gt; SDL_RenderPresent&#34;]
+    P --&gt; K
+    
+    %% 当收到 SDL_WINDOWEVENT
+    L -- &#34;SDL_WINDOWEVENT&#34; --&gt; Q[&#34;更新窗口大小: SDL_GetWindowSize&#34;]
+    Q --&gt; K
+    
+    %% 当收到 SDL_QUIT
+    L -- &#34;SDL_QUIT&#34; --&gt; R[&#34;设置 thread_exit = 1&lt;br/&gt;(通知刷新线程退出)&#34;]
+    R --&gt; K
+    
+    %% 当收到 BREAK_EVENT
+    L -- &#34;BREAK_EVENT&#34; --&gt; S[&#34;退出事件循环&lt;br/&gt;进入清理阶段&#34;]
+    S --&gt; T[&#34;释放资源并调用 SDL_Quit&#34;]
 &lt;/div&gt;&lt;p&gt;主线程：负责处理所有 SDL 事件（窗口关闭，窗口大小改变，视频刷新等）&lt;/p&gt;
 &lt;h4 id=&#34;函数介绍&#34;&gt;函数介绍
 &lt;/h4&gt;&lt;pre&gt;&lt;code&gt;                 |
