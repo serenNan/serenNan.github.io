@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://example.com/post/leixiaohua-note-3/'>
 
-<link rel="stylesheet" href="/scss/style.min.4266617c86791f5bbd8d7d95fd2e60cfef2a1cfa4fcf21760129d06a88a883ef.css"><meta property='og:title' content="【雷霄骅课程笔记】3 SDL 视频播放器-进阶">
+<link rel="stylesheet" href="/scss/style.min.03afe71d2501b62cb3482ee5abfc963a95af5a81b3cde152af55f1691c1200bc.css"><meta property='og:title' content="【雷霄骅课程笔记】3 SDL 视频播放器-进阶">
 <meta property='og:description' content="跟着雷神的课程学习写的一些笔记">
 <meta property='og:url' content='https://example.com/post/leixiaohua-note-3/'>
 <meta property='og:site_name' content='serenNan'>
@@ -1009,11 +1009,33 @@ console.log('particles.js loaded - callback');
         <link rel="stylesheet" href="/css/mermaid.css">
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
   
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    flowchart: {
+      htmlLabels: false,
+      useMaxWidth: false, 
+      nodeSpacing: 50,
+      rankSpacing: 50,
+      defaultRenderer: 'svg'
+    },
+    theme: 'dark',
+    securityLevel: 'loose',
+    themeVariables: {
+      nodeBorder: '#000',
+      mainBkg: '#fff',
+      nodeTextColor: '#000',
+      fontSize: '14px'
+    }
+  });
+</script>
+
   
   <div class="mermaid-overlay" id="mermaidOverlay"></div>
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      
       let currentScale = 1;
       let initialClickX = null, initialClickY = null;
       let dragOffsetX = 0, dragOffsetY = 0;
@@ -1045,10 +1067,10 @@ console.log('particles.js loaded - callback');
             
             const translateX = baseTranslateX + dragOffsetX;
             const translateY = baseTranslateY + dragOffsetY;
-            mermaidElement.style.transformOrigin = 'top left';
+            mermaidElement.style.transformOrigin = 'center center'; 
             mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
           } else {
-            mermaidElement.style.transformOrigin = 'top left';
+            mermaidElement.style.transformOrigin = 'center center'; 
             mermaidElement.style.transform = `scale(${currentScale})`;
           }
           isAnimating = false;
@@ -1175,13 +1197,28 @@ console.log('particles.js loaded - callback');
       });
 
       
-      window.addEventListener('resize', () => {
-        if (isZoomed) handleOverlayClick();
-      });
+      container.addEventListener('wheel', handleWheel, { passive: false });
 
       
-      container.addEventListener('wheel', handleWheel, { passive: false });
+    const adjustNodeSize = () => {
+      document.querySelectorAll('.mermaid .node').forEach(node => {
+        const rect = node.querySelector('rect');
+        const text = node.querySelector('text');
+        if (rect && text) {
+          const bbox = text.getBBox();
+          const padding = 16; 
+          const minWidth = parseFloat(rect.getAttribute('width')) || 160;
+          const newWidth = Math.max(bbox.width + padding, minWidth);
+          rect.setAttribute('width', newWidth);
+        }
+      });
+    };
+
+    
+    adjustNodeSize();
+    window.addEventListener('resize', adjustNodeSize);
     });
+    
   </script>  
     </body>
 </html>
