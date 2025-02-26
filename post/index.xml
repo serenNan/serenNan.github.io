@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Wed, 26 Feb 2025 14:27:29 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 26 Feb 2025 14:27:57 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【雷霄骅课程笔记】3 SDL 视频播放器-进阶</title>
         <link>https://example.com/post/leixiaohua-note-3/</link>
         <pubDate>Tue, 25 Feb 2025 00:00:00 +0000</pubDate>
@@ -63,7 +63,47 @@
 		data-flex-basis=&#34;311px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;主线程：负责处理所有 SDL 事件（窗口关闭，窗口大小改变，视频刷新等）&lt;/p&gt;
+&lt;div class=&#34;mermaid-container&#34;&gt;
+  &lt;div class=&#34;mermaid&#34;&gt;
+    flowchart TD
+    A[&#34;程序启动&#34;]
+    A --&gt; B[&#34;主线程&#34;]
+    A --&gt; C[&#34;刷新线程 (refresh_video)&#34;]
+    
+    %% 刷新线程流程
+    C --&gt; D[&#34;进入循环: while(!thread_exit)&#34;]
+    D --&gt; E[&#34;每次循环执行:&#34;]
+    E --&gt; F[&#34;1. 推送 REFRESH_EVENT 事件&#34;]
+    F --&gt; G[&#34;2. 延时 40 毫秒&#34;]
+    G --&gt; D
+    D -- &#34;检测到 thread_exit&#34; --&gt; H[&#34;退出循环&#34;]
+    H --&gt; I[&#34;推送 BREAK_EVENT 事件&#34;]
+    I --&gt; J[&#34;刷新线程结束&#34;]
+    
+    %% 主线程流程
+    B --&gt; K[&#34;事件循环: SDL_WaitEvent&#34;]
+    K --&gt; L{&#34;收到的事件类型?&#34;}
+    
+    %% 当收到 REFRESH_EVENT
+    L -- &#34;REFRESH_EVENT&#34; --&gt; M[&#34;读取下一个视频帧&lt;br/&gt;(如果读到文件末尾则重头读)&#34;]
+    M --&gt; N[&#34;更新纹理: SDL_UpdateTexture&#34;]
+    N --&gt; O[&#34;设置渲染目标矩形(根据当前窗口大小)&#34;]
+    O --&gt; P[&#34;渲染视频帧: SDL_RenderClear -&gt; SDL_RenderCopy -&gt; SDL_RenderPresent&#34;]
+    P --&gt; K
+    
+    %% 当收到 SDL_WINDOWEVENT
+    L -- &#34;SDL_WINDOWEVENT&#34; --&gt; Q[&#34;更新窗口大小: SDL_GetWindowSize&#34;]
+    Q --&gt; K
+    
+    %% 当收到 SDL_QUIT
+    L -- &#34;SDL_QUIT&#34; --&gt; R[&#34;设置 thread_exit = 1&lt;br/&gt;(通知刷新线程退出)&#34;]
+    R --&gt; K
+    
+    %% 当收到 BREAK_EVENT
+    L -- &#34;BREAK_EVENT&#34; --&gt; S[&#34;退出事件循环&lt;br/&gt;进入清理阶段&#34;]
+    S --&gt; T[&#34;释放资源并调用 SDL_Quit&#34;]
+  &lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;主线程：负责处理所有 SDL 事件（窗口关闭，窗口大小改变，视频刷新等）&lt;/p&gt;
 &lt;h4 id=&#34;函数介绍&#34;&gt;函数介绍
 &lt;/h4&gt;&lt;pre&gt;&lt;code&gt;                 |
 &lt;/code&gt;&lt;/pre&gt;
