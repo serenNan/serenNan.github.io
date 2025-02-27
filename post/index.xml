@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on serenNan</title>
-        <link>https://example.com/post/</link>
+        <link>https://serennan.github.io/post/</link>
         <description>Recent content in Posts on serenNan</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Thu, 27 Feb 2025 21:46:22 +0800</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 27 Feb 2025 21:46:22 +0800</lastBuildDate><atom:link href="https://serennan.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【雷霄骅课程笔记】3 SDL 视频播放器-进阶</title>
-        <link>https://example.com/post/leixiaohua-note-3/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-3/</link>
         <pubDate>Tue, 25 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-3/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-3/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】3 SDL 视频播放器-进阶" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-3/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-3/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】3 SDL 视频播放器-进阶" /&gt;
 
 
 
@@ -904,11 +904,11 @@
         </item>
         <item>
         <title>【雷霄骅课程笔记】2 SDL 视频播放器</title>
-        <link>https://example.com/post/leixiaohua-note-2/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-2/</link>
         <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-2/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-2/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-2/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-2/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" /&gt;
 
 
 
@@ -930,7 +930,7 @@
 &lt;h2 id=&#34;sdl-介绍&#34;&gt;SDL 介绍
 &lt;/h2&gt;&lt;h3 id=&#34;sdl-视频显示流程&#34;&gt;SDL 视频显示流程
 &lt;/h3&gt;&lt;h4 id=&#34;流程图&#34;&gt;流程图
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-2/sdl%E6%B5%81%E7%A8%8B3.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-2/sdl%E6%B5%81%E7%A8%8B3.png&#34;
 	width=&#34;1488&#34;
 	height=&#34;2073&#34;
 	
@@ -990,7 +990,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;sdl-视频显示的数据结构&#34;&gt;SDL 视频显示的数据结构
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-2/sdl%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-2/sdl%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png&#34;
 	width=&#34;1743&#34;
 	height=&#34;1083&#34;
 	
@@ -1323,11 +1323,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【雷霄骅课程笔记】1 FFmpeg 视频解码器</title>
-        <link>https://example.com/post/leixiaohua-note-1/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-1/</link>
         <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-1/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-1/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器" /&gt;
 
 
 
@@ -1362,7 +1362,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;p&gt;其中 * 表示本次课程中会涉及到的库&lt;/p&gt;
 &lt;h3 id=&#34;ffmpeg-解码流程&#34;&gt;FFmpeg 解码流程
 &lt;/h3&gt;&lt;h4 id=&#34;流程图&#34;&gt;流程图
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/%E8%A7%A3%E7%A0%81%E6%B5%81%E7%A8%8B2.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/%E8%A7%A3%E7%A0%81%E6%B5%81%E7%A8%8B2.png&#34;
 	width=&#34;1710&#34;
 	height=&#34;2346&#34;
 	
@@ -1442,7 +1442,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;ffmpeg-解码的数据结构&#34;&gt;FFmpeg 解码的数据结构
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVFormatContext.png&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/AVFormatContext.png&#34;
 	width=&#34;1935&#34;
 	height=&#34;459&#34;
 	
@@ -1466,7 +1466,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt;: 压缩编码后的数据包 &lt;br&gt;
 &lt;code&gt;AVFrame&lt;/code&gt;: 解码后的数据包&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt; 解码完为 &lt;code&gt;AVFrame&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVPacket.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/AVPacket.png&#34;
 	width=&#34;963&#34;
 	height=&#34;153&#34;
 	
@@ -1548,7 +1548,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 解码后 YUV 数据格式的视频像素数据保存在 AVFrame 的 data[0]，data[1]，data[2]，但是这些像素值并不是连续存储的，每行有效像素之后存储的是无效像素。
 以亮度 Y 数据为例，data[0] 中一共包含了 linesize[0] * height 个数据。但是出于优化等方面考虑，linesize[0] 可能大于 width 。因此需要使用 &lt;code&gt;sws_scale&lt;/code&gt; 进行转换。&lt;br&gt;
 转换后去除了无效数据，width 和 linesize[0] 就相等了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/image-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/image-1.png&#34;
 	width=&#34;1160&#34;
 	height=&#34;472&#34;
 	
@@ -2050,7 +2050,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 我这里源码放在 &lt;code&gt;src/decoder.cpp&lt;/code&gt;，播放视频放在&lt;code&gt;video/input.mkv&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;调试&#34;&gt;调试
 &lt;/h3&gt;&lt;p&gt;在左侧工具栏找到&lt;code&gt;运行和调试&lt;/code&gt;工具&lt;br&gt;
-&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/image.png&#34;
+&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/image.png&#34;
 	width=&#34;240&#34;
 	height=&#34;232&#34;
 	
@@ -2809,11 +2809,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【Hugo】常见问题</title>
-        <link>https://example.com/post/%E9%93%BE%E6%8E%A5/</link>
+        <link>https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/%E9%93%BE%E6%8E%A5/</guid>
-        <description>&lt;img src="https://example.com/post/%E9%93%BE%E6%8E%A5/cover.jpg" alt="Featured image of post 【Hugo】常见问题" /&gt;&lt;h2 id=&#34;图片加载问题&#34;&gt;图片加载问题
+        <guid>https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/cover.jpg" alt="Featured image of post 【Hugo】常见问题" /&gt;&lt;h2 id=&#34;图片加载问题&#34;&gt;图片加载问题
 &lt;/h2&gt;&lt;h3 id=&#34;问题描述&#34;&gt;问题描述
 &lt;/h3&gt;&lt;p&gt;有时会遇到在本地图片能成功加载，但部署到服务器上却不能成功显示。&lt;/p&gt;
 &lt;p&gt;我在弄代码折叠图片时遇到了这个问题&lt;/p&gt;
@@ -2827,7 +2827,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在本地成功加载&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD1.png&#34;
 	width=&#34;1871&#34;
 	height=&#34;1333&#34;
 	
@@ -2840,7 +2840,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;但是到发布到服务端就不行了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD2.png&#34;
 	width=&#34;1568&#34;
 	height=&#34;1091&#34;
 	
@@ -2854,7 +2854,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &gt;&lt;/p&gt;
 &lt;p&gt;根本问题是服务端的图片加载路径出错&lt;/p&gt;
 &lt;p&gt;按 f12 调出开发者工具查看（或者右键对应位置，点击检查，能快速跳转），会发现图片加载路径不是图片相对路径&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%841.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%841.png&#34;
 	width=&#34;1028&#34;
 	height=&#34;64&#34;
 	
@@ -2878,7 +2878,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;把最后的 &lt;code&gt;Permalink&lt;/code&gt; 改成 &lt;code&gt;RelPermalink&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;重新加载，会发现服务端正确显示&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD3.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD3.png&#34;
 	width=&#34;1328&#34;
 	height=&#34;1038&#34;
 	
@@ -2891,7 +2891,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;重新用开发者工具检查加载路径&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%842.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%842.png&#34;
 	width=&#34;626&#34;
 	height=&#34;39&#34;
 	
@@ -2908,11 +2908,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【雷霄骅课程笔记】0 配置</title>
-        <link>https://example.com/post/leixiaohua-note-0/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-0/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-0/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-0/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 配置" /&gt;&lt;p&gt;这里的配置教程是另一处的，不是雷神的&lt;/p&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-0/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-0/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 配置" /&gt;&lt;p&gt;这里的配置教程是另一处的，不是雷神的&lt;/p&gt;
 
 
 
@@ -2958,7 +2958,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 点击链接：&lt;a class=&#34;link&#34; href=&#34;https://ffmpeg.org/download.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;下载地址&lt;/a&gt;&lt;br&gt;
 目前最新版是 &lt;code&gt;7.1&lt;/code&gt; ，而且我是 &lt;code&gt;ubuntu&lt;/code&gt; 环境&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/image.png&#34;
 	width=&#34;811&#34;
 	height=&#34;849&#34;
 	
@@ -2970,7 +2970,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;229px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/image-1.png&#34;
 	width=&#34;890&#34;
 	height=&#34;132&#34;
 	
@@ -2982,7 +2982,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;1618px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image-2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/image-2.png&#34;
 	width=&#34;521&#34;
 	height=&#34;335&#34;
 	
@@ -3056,7 +3056,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这里可能会不断报错，显示缺各种库，那根据提示去安装对应库就行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%853.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%853.png&#34;
 	width=&#34;1042&#34;
 	height=&#34;771&#34;
 	
@@ -3068,7 +3068,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;324px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%854.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%854.png&#34;
 	width=&#34;693&#34;
 	height=&#34;545&#34;
 	
@@ -3080,7 +3080,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;305px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%855.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%855.png&#34;
 	width=&#34;716&#34;
 	height=&#34;495&#34;
 	
@@ -3092,7 +3092,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;347px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%856.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%856.png&#34;
 	width=&#34;718&#34;
 	height=&#34;297&#34;
 	
@@ -3104,7 +3104,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;580px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%857.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%857.png&#34;
 	width=&#34;703&#34;
 	height=&#34;269&#34;
 	
@@ -3116,7 +3116,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;627px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%858.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%858.png&#34;
 	width=&#34;722&#34;
 	height=&#34;529&#34;
 	
@@ -3128,7 +3128,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;327px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%859.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%859.png&#34;
 	width=&#34;709&#34;
 	height=&#34;442&#34;
 	
@@ -3140,7 +3140,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;384px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8510.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8510.png&#34;
 	width=&#34;704&#34;
 	height=&#34;577&#34;
 	
@@ -3152,7 +3152,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;292px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8511.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8511.png&#34;
 	width=&#34;715&#34;
 	height=&#34;523&#34;
 	
@@ -3164,7 +3164,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;328px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8512.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8512.png&#34;
 	width=&#34;715&#34;
 	height=&#34;536&#34;
 	
@@ -3200,7 +3200,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./configure --prefix&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/ffmpeg --enable-shared --enable-video-x11 --enable-x11-shared --enable-video-x11-vm
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8513.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8513.png&#34;
 	width=&#34;714&#34;
 	height=&#34;317&#34;
 	
@@ -3212,7 +3212,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;540px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8514.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8514.png&#34;
 	width=&#34;696&#34;
 	height=&#34;376&#34;
 	
@@ -3356,11 +3356,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>常用函数</title>
-        <link>https://example.com/post/function/</link>
+        <link>https://serennan.github.io/post/function/</link>
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/function/</guid>
-        <description>&lt;img src="https://example.com/post/function/function.jpg" alt="Featured image of post 常用函数" /&gt;&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
+        <guid>https://serennan.github.io/post/function/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/function/function.jpg" alt="Featured image of post 常用函数" /&gt;&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
 &lt;/h2&gt;&lt;h3 id=&#34;map&#34;&gt;map
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;map&lt;/code&gt;是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的，且按键的升序排列。&lt;/p&gt;
 &lt;ol&gt;
@@ -3457,11 +3457,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>算法思路</title>
-        <link>https://example.com/post/algorithm/</link>
+        <link>https://serennan.github.io/post/algorithm/</link>
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/algorithm/</guid>
-        <description>&lt;img src="https://example.com/post/algorithm/algorithm.jpg" alt="Featured image of post 算法思路" /&gt;&lt;h2 id=&#34;前缀和&#34;&gt;前缀和
+        <guid>https://serennan.github.io/post/algorithm/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/algorithm/algorithm.jpg" alt="Featured image of post 算法思路" /&gt;&lt;h2 id=&#34;前缀和&#34;&gt;前缀和
 &lt;/h2&gt;&lt;p&gt;前缀和的定义：
 给定数组 nums，我们可以定义前缀和数组 &lt;code&gt;prefix_sum&lt;/code&gt;，使得&lt;code&gt; prefix_sum[i] = nums[0] + nums[1] + ... + nums[i-1]&lt;/code&gt;。
 这样，对于任何子数组 &lt;code&gt;[l, r]&lt;/code&gt;，其和可以通过以下公式计算：&lt;/p&gt;
@@ -3738,11 +3738,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>语音信号期末复习</title>
-        <link>https://example.com/post/speech-signal/</link>
+        <link>https://serennan.github.io/post/speech-signal/</link>
         <pubDate>Mon, 06 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/speech-signal/</guid>
-        <description>&lt;img src="https://example.com/post/speech-signal/image-2.png" alt="Featured image of post 语音信号期末复习" /&gt;&lt;h2 id=&#34;语音生成与感知模型&#34;&gt;语音生成与感知模型
+        <guid>https://serennan.github.io/post/speech-signal/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/speech-signal/image-2.png" alt="Featured image of post 语音信号期末复习" /&gt;&lt;h2 id=&#34;语音生成与感知模型&#34;&gt;语音生成与感知模型
 &lt;/h2&gt;&lt;h3 id=&#34;发音与感知模型&#34;&gt;发音与感知模型
 &lt;/h3&gt;&lt;h4 id=&#34;声门&#34;&gt;声门
 &lt;/h4&gt;&lt;p&gt;声带之间的间隙称为声门。&lt;/p&gt;
@@ -3923,7 +3923,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;h2 id=&#34;语音识别系统&#34;&gt;语音识别系统
 &lt;/h2&gt;&lt;h3 id=&#34;系统组成&#34;&gt;系统组成
 &lt;/h3&gt;&lt;p&gt;流程图：
-&lt;img src=&#34;https://example.com/post/speech-signal/image.png&#34;
+&lt;img src=&#34;https://serennan.github.io/post/speech-signal/image.png&#34;
 	width=&#34;1107&#34;
 	height=&#34;617&#34;
 	
@@ -3950,7 +3950,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;li&gt;人工神经网络方法：如深度学习。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;语音识别过程&#34;&gt;语音识别过程
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/speech-signal/image-1.png&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/speech-signal/image-1.png&#34;
 	width=&#34;1036&#34;
 	height=&#34;242&#34;
 	
@@ -4225,11 +4225,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【Hugo】动画</title>
-        <link>https://example.com/post/hugo-animation/</link>
+        <link>https://serennan.github.io/post/hugo-animation/</link>
         <pubDate>Sun, 05 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/hugo-animation/</guid>
-        <description>&lt;img src="https://example.com/post/hugo-animation/word.jpg" alt="Featured image of post 【Hugo】动画" /&gt;&lt;p&gt;我是直接把这些动画效果全放一个css文件了&lt;/p&gt;
+        <guid>https://serennan.github.io/post/hugo-animation/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/hugo-animation/word.jpg" alt="Featured image of post 【Hugo】动画" /&gt;&lt;p&gt;我是直接把这些动画效果全放一个css文件了&lt;/p&gt;
 &lt;p&gt;创建一个&lt;code&gt;hover-animation.css&lt;/code&gt;文件(可自定义)，然后记得在&lt;code&gt;assets/scss/style.scss&lt;/code&gt;下添加&lt;code&gt;@import &amp;quot;hover-animation&amp;quot;;&lt;/code&gt;
 然后在创建的css文件添加以下代码&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4443,11 +4443,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【Hugo】时钟</title>
-        <link>https://example.com/post/hugo-clock/</link>
+        <link>https://serennan.github.io/post/hugo-clock/</link>
         <pubDate>Sun, 05 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/hugo-clock/</guid>
-        <description>&lt;img src="https://example.com/post/hugo-clock/clock.jpg" alt="Featured image of post 【Hugo】时钟" /&gt;&lt;p&gt;这个表盘的设计可能还是有些局限，后续会优化一下&lt;/p&gt;
+        <guid>https://serennan.github.io/post/hugo-clock/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/hugo-clock/clock.jpg" alt="Featured image of post 【Hugo】时钟" /&gt;&lt;p&gt;这个表盘的设计可能还是有些局限，后续会优化一下&lt;/p&gt;
 &lt;h2 id=&#34;html部分&#34;&gt;HTML部分
 &lt;/h2&gt;&lt;p&gt;在&amp;rsquo;layouts/partials/widget/&amp;lsquo;文件夹下创建&lt;code&gt;clock.html&lt;/code&gt;文件，并添加以下代码：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4944,11 +4944,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【Hugo】美化&amp;优化(stack主题)</title>
-        <link>https://example.com/post/hugo-beautify/</link>
+        <link>https://serennan.github.io/post/hugo-beautify/</link>
         <pubDate>Thu, 02 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/hugo-beautify/</guid>
-        <description>&lt;img src="https://example.com/post/hugo-beautify/blog2.jpg" alt="Featured image of post 【Hugo】美化&amp;优化(stack主题)" /&gt;&lt;h2 id=&#34;字体&#34;&gt;字体
+        <guid>https://serennan.github.io/post/hugo-beautify/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/hugo-beautify/blog2.jpg" alt="Featured image of post 【Hugo】美化&amp;优化(stack主题)" /&gt;&lt;h2 id=&#34;字体&#34;&gt;字体
 &lt;/h2&gt;&lt;p&gt;字体文件放在&lt;code&gt;assets/fonts&lt;/code&gt;下，然后在&lt;code&gt;layouts/partials/footer/costom.html&lt;/code&gt;(没有就创建)中引入,格式如下&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -4991,7 +4991,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;ol&gt;
 &lt;li&gt;先在 github page 上打开 discussion 功能&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-beautify/discussion.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-beautify/discussion.png&#34;
 	width=&#34;1791&#34;
 	height=&#34;964&#34;
 	
@@ -5004,7 +5004,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;点击setting，向下滑找到discussion，勾选discussion&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-beautify/discussion2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-beautify/discussion2.png&#34;
 	width=&#34;1715&#34;
 	height=&#34;849&#34;
 	
@@ -5022,7 +5022,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
     &gt;giscus app&lt;/a&gt;&lt;br&gt;
 选择仓库地址&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-beautify/install.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-beautify/install.png&#34;
 	width=&#34;1024&#34;
 	height=&#34;376&#34;
 	
@@ -5040,7 +5040,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
     &gt;giscus&lt;/a&gt;&lt;br&gt;
 按照步骤配置，最后复制代码&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-beautify/config1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-beautify/config1.png&#34;
 	width=&#34;587&#34;
 	height=&#34;156&#34;
 	
@@ -5052,7 +5052,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;903px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-beautify/config2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-beautify/config2.png&#34;
 	width=&#34;949&#34;
 	height=&#34;254&#34;
 	
@@ -5072,7 +5072,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;li&gt;data-category-id&lt;/li&gt;
 &lt;li&gt;data-mapping&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-beautify/config3.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-beautify/config3.png&#34;
 	width=&#34;625&#34;
 	height=&#34;366&#34;
 	
@@ -5187,11 +5187,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>C&#43;&#43;语法</title>
-        <link>https://example.com/post/cpp_study/</link>
+        <link>https://serennan.github.io/post/cpp_study/</link>
         <pubDate>Mon, 30 Dec 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/cpp_study/</guid>
-        <description>&lt;img src="https://example.com/post/cpp_study/cpp.jpg" alt="Featured image of post C&#43;&#43;语法" /&gt;&lt;h2 id=&#34;拷贝构造函数&#34;&gt;拷贝构造函数
+        <guid>https://serennan.github.io/post/cpp_study/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/cpp_study/cpp.jpg" alt="Featured image of post C&#43;&#43;语法" /&gt;&lt;h2 id=&#34;拷贝构造函数&#34;&gt;拷贝构造函数
 &lt;/h2&gt;&lt;h3 id=&#34;参考文章&#34;&gt;参考文章
 &lt;/h3&gt;&lt;p&gt;csdn：&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/weixin_59179454/article/details/124853916?ops_request_misc=%257B%2522request%255Fid%2522%253A%252224aaa153760a2e35be9b14554b6f1a33%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;amp;request_id=24aaa153760a2e35be9b14554b6f1a33&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-1-124853916-null-null.142%5ev100%5epc_search_result_base6&amp;amp;utm_term=c%2B%2B%20%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0&amp;amp;spm=1018.2226.3001.4187&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;C++拷贝构造函数&lt;/a&gt;&lt;/p&gt;
@@ -6151,11 +6151,11 @@ Test的析构函数...
         </item>
         <item>
         <title>【Hugo】配置(stack主题)</title>
-        <link>https://example.com/post/hugo-config/</link>
+        <link>https://serennan.github.io/post/hugo-config/</link>
         <pubDate>Sun, 29 Dec 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/hugo-config/</guid>
-        <description>&lt;img src="https://example.com/post/hugo-config/blog1.jpg" alt="Featured image of post 【Hugo】配置(stack主题)" /&gt;&lt;h2 id=&#34;yaml参数&#34;&gt;yaml参数
+        <guid>https://serennan.github.io/post/hugo-config/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/hugo-config/blog1.jpg" alt="Featured image of post 【Hugo】配置(stack主题)" /&gt;&lt;h2 id=&#34;yaml参数&#34;&gt;yaml参数
 &lt;/h2&gt;&lt;h3 id=&#34;主框架&#34;&gt;主框架
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6546,7 +6546,7 @@ toc: 目录&lt;/p&gt;
 &lt;div class=&#34;notice notice-warning&#34; &gt;
     &lt;div class=&#34;notice-title&#34;&gt;&lt;/div&gt;&lt;p&gt;注意缩进要对&lt;/p&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/hugo-config/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-config/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2.png&#34;
 	width=&#34;1034&#34;
 	height=&#34;743&#34;
 	
@@ -6659,11 +6659,11 @@ toc: 目录&lt;/p&gt;
         </item>
         <item>
         <title>音视频基础</title>
-        <link>https://example.com/post/video_base/</link>
+        <link>https://serennan.github.io/post/video_base/</link>
         <pubDate>Sun, 29 Dec 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/video_base/</guid>
-        <description>&lt;img src="https://example.com/post/video_base/player1.jpg" alt="Featured image of post 音视频基础" /&gt;&lt;h2 id=&#34;基础命令&#34;&gt;基础命令
+        <guid>https://serennan.github.io/post/video_base/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/video_base/player1.jpg" alt="Featured image of post 音视频基础" /&gt;&lt;h2 id=&#34;基础命令&#34;&gt;基础命令
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/wenmingzheng/article/details/88373192?ops_request_misc=%257B%2522request%255Fid%2522%253A%25228EA3F7CC-D940-48CA-A46F-A57216709319%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;amp;request_id=8EA3F7CC-D940-48CA-A46F-A57216709319&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-88373192-null-null.142%5ev100%5epc_search_result_base1&amp;amp;utm_term=ffmpeg%E5%91%BD%E4%BB%A4&amp;amp;spm=1018.2226.3001.4187&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CSDN博主总结常用命令&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;获得基础信息输出metadata&#34;&gt;获得基础信息，输出Metadata
@@ -10452,7 +10452,7 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ffmpeg -hide_banner -devices
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/video_base/%E8%AE%BE%E5%A4%87%E5%88%97%E8%A1%A8.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/video_base/%E8%AE%BE%E5%A4%87%E5%88%97%E8%A1%A8.png&#34;
 	width=&#34;752&#34;
 	height=&#34;229&#34;
 	

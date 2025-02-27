@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Video on serenNan</title>
-        <link>https://example.com/categories/video/</link>
+        <link>https://serennan.github.io/categories/video/</link>
         <description>Recent content in Video on serenNan</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>serenNan</copyright><atom:link href="https://example.com/categories/video/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>serenNan</copyright><atom:link href="https://serennan.github.io/categories/video/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【雷霄骅课程笔记】3 SDL 视频播放器-进阶</title>
-        <link>https://example.com/post/leixiaohua-note-3/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-3/</link>
         <pubDate>Tue, 25 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-3/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-3/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】3 SDL 视频播放器-进阶" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-3/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-3/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】3 SDL 视频播放器-进阶" /&gt;
 
 
 
@@ -903,11 +903,11 @@
         </item>
         <item>
         <title>【雷霄骅课程笔记】2 SDL 视频播放器</title>
-        <link>https://example.com/post/leixiaohua-note-2/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-2/</link>
         <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-2/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-2/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-2/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-2/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" /&gt;
 
 
 
@@ -929,7 +929,7 @@
 &lt;h2 id=&#34;sdl-介绍&#34;&gt;SDL 介绍
 &lt;/h2&gt;&lt;h3 id=&#34;sdl-视频显示流程&#34;&gt;SDL 视频显示流程
 &lt;/h3&gt;&lt;h4 id=&#34;流程图&#34;&gt;流程图
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-2/sdl%E6%B5%81%E7%A8%8B3.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-2/sdl%E6%B5%81%E7%A8%8B3.png&#34;
 	width=&#34;1488&#34;
 	height=&#34;2073&#34;
 	
@@ -989,7 +989,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;sdl-视频显示的数据结构&#34;&gt;SDL 视频显示的数据结构
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-2/sdl%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-2/sdl%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png&#34;
 	width=&#34;1743&#34;
 	height=&#34;1083&#34;
 	
@@ -1322,11 +1322,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【雷霄骅课程笔记】1 FFmpeg 视频解码器</title>
-        <link>https://example.com/post/leixiaohua-note-1/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-1/</link>
         <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-1/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-1/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器" /&gt;
 
 
 
@@ -1361,7 +1361,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;p&gt;其中 * 表示本次课程中会涉及到的库&lt;/p&gt;
 &lt;h3 id=&#34;ffmpeg-解码流程&#34;&gt;FFmpeg 解码流程
 &lt;/h3&gt;&lt;h4 id=&#34;流程图&#34;&gt;流程图
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/%E8%A7%A3%E7%A0%81%E6%B5%81%E7%A8%8B2.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/%E8%A7%A3%E7%A0%81%E6%B5%81%E7%A8%8B2.png&#34;
 	width=&#34;1710&#34;
 	height=&#34;2346&#34;
 	
@@ -1441,7 +1441,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;ffmpeg-解码的数据结构&#34;&gt;FFmpeg 解码的数据结构
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVFormatContext.png&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/AVFormatContext.png&#34;
 	width=&#34;1935&#34;
 	height=&#34;459&#34;
 	
@@ -1465,7 +1465,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt;: 压缩编码后的数据包 &lt;br&gt;
 &lt;code&gt;AVFrame&lt;/code&gt;: 解码后的数据包&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt; 解码完为 &lt;code&gt;AVFrame&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVPacket.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/AVPacket.png&#34;
 	width=&#34;963&#34;
 	height=&#34;153&#34;
 	
@@ -1547,7 +1547,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 解码后 YUV 数据格式的视频像素数据保存在 AVFrame 的 data[0]，data[1]，data[2]，但是这些像素值并不是连续存储的，每行有效像素之后存储的是无效像素。
 以亮度 Y 数据为例，data[0] 中一共包含了 linesize[0] * height 个数据。但是出于优化等方面考虑，linesize[0] 可能大于 width 。因此需要使用 &lt;code&gt;sws_scale&lt;/code&gt; 进行转换。&lt;br&gt;
 转换后去除了无效数据，width 和 linesize[0] 就相等了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/image-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/image-1.png&#34;
 	width=&#34;1160&#34;
 	height=&#34;472&#34;
 	
@@ -2049,7 +2049,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 我这里源码放在 &lt;code&gt;src/decoder.cpp&lt;/code&gt;，播放视频放在&lt;code&gt;video/input.mkv&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;调试&#34;&gt;调试
 &lt;/h3&gt;&lt;p&gt;在左侧工具栏找到&lt;code&gt;运行和调试&lt;/code&gt;工具&lt;br&gt;
-&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/image.png&#34;
+&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/image.png&#34;
 	width=&#34;240&#34;
 	height=&#34;232&#34;
 	
@@ -2808,11 +2808,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【雷霄骅课程笔记】0 配置</title>
-        <link>https://example.com/post/leixiaohua-note-0/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-0/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-0/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-0/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 配置" /&gt;&lt;p&gt;这里的配置教程是另一处的，不是雷神的&lt;/p&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-0/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-0/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】0 配置" /&gt;&lt;p&gt;这里的配置教程是另一处的，不是雷神的&lt;/p&gt;
 
 
 
@@ -2858,7 +2858,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 点击链接：&lt;a class=&#34;link&#34; href=&#34;https://ffmpeg.org/download.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;下载地址&lt;/a&gt;&lt;br&gt;
 目前最新版是 &lt;code&gt;7.1&lt;/code&gt; ，而且我是 &lt;code&gt;ubuntu&lt;/code&gt; 环境&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/image.png&#34;
 	width=&#34;811&#34;
 	height=&#34;849&#34;
 	
@@ -2870,7 +2870,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;229px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/image-1.png&#34;
 	width=&#34;890&#34;
 	height=&#34;132&#34;
 	
@@ -2882,7 +2882,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;1618px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/image-2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/image-2.png&#34;
 	width=&#34;521&#34;
 	height=&#34;335&#34;
 	
@@ -2956,7 +2956,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;这里可能会不断报错，显示缺各种库，那根据提示去安装对应库就行&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%853.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%853.png&#34;
 	width=&#34;1042&#34;
 	height=&#34;771&#34;
 	
@@ -2968,7 +2968,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;324px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%854.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%854.png&#34;
 	width=&#34;693&#34;
 	height=&#34;545&#34;
 	
@@ -2980,7 +2980,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;305px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%855.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%855.png&#34;
 	width=&#34;716&#34;
 	height=&#34;495&#34;
 	
@@ -2992,7 +2992,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;347px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%856.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%856.png&#34;
 	width=&#34;718&#34;
 	height=&#34;297&#34;
 	
@@ -3004,7 +3004,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;580px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%857.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%857.png&#34;
 	width=&#34;703&#34;
 	height=&#34;269&#34;
 	
@@ -3016,7 +3016,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;627px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%858.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%858.png&#34;
 	width=&#34;722&#34;
 	height=&#34;529&#34;
 	
@@ -3028,7 +3028,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;327px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%859.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%859.png&#34;
 	width=&#34;709&#34;
 	height=&#34;442&#34;
 	
@@ -3040,7 +3040,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;384px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8510.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8510.png&#34;
 	width=&#34;704&#34;
 	height=&#34;577&#34;
 	
@@ -3052,7 +3052,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;292px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8511.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8511.png&#34;
 	width=&#34;715&#34;
 	height=&#34;523&#34;
 	
@@ -3064,7 +3064,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;328px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8512.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8512.png&#34;
 	width=&#34;715&#34;
 	height=&#34;536&#34;
 	
@@ -3100,7 +3100,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;./configure --prefix&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/local/ffmpeg --enable-shared --enable-video-x11 --enable-x11-shared --enable-video-x11-vm
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8513.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8513.png&#34;
 	width=&#34;714&#34;
 	height=&#34;317&#34;
 	
@@ -3112,7 +3112,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 		data-flex-basis=&#34;540px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8514.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8514.png&#34;
 	width=&#34;696&#34;
 	height=&#34;376&#34;
 	
@@ -3256,11 +3256,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>音视频基础</title>
-        <link>https://example.com/post/video_base/</link>
+        <link>https://serennan.github.io/post/video_base/</link>
         <pubDate>Sun, 29 Dec 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/video_base/</guid>
-        <description>&lt;img src="https://example.com/post/video_base/player1.jpg" alt="Featured image of post 音视频基础" /&gt;&lt;h2 id=&#34;基础命令&#34;&gt;基础命令
+        <guid>https://serennan.github.io/post/video_base/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/video_base/player1.jpg" alt="Featured image of post 音视频基础" /&gt;&lt;h2 id=&#34;基础命令&#34;&gt;基础命令
 &lt;/h2&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/wenmingzheng/article/details/88373192?ops_request_misc=%257B%2522request%255Fid%2522%253A%25228EA3F7CC-D940-48CA-A46F-A57216709319%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;amp;request_id=8EA3F7CC-D940-48CA-A46F-A57216709319&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-88373192-null-null.142%5ev100%5epc_search_result_base1&amp;amp;utm_term=ffmpeg%E5%91%BD%E4%BB%A4&amp;amp;spm=1018.2226.3001.4187&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CSDN博主总结常用命令&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;获得基础信息输出metadata&#34;&gt;获得基础信息，输出Metadata
@@ -7049,7 +7049,7 @@ RGB1、RGB4、RGB8 是计算机图形学中常见的颜色编码格式，它们�
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ffmpeg -hide_banner -devices
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/video_base/%E8%AE%BE%E5%A4%87%E5%88%97%E8%A1%A8.png&#34;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/video_base/%E8%AE%BE%E5%A4%87%E5%88%97%E8%A1%A8.png&#34;
 	width=&#34;752&#34;
 	height=&#34;229&#34;
 	

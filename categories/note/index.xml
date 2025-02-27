@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Note on serenNan</title>
-        <link>https://example.com/categories/note/</link>
+        <link>https://serennan.github.io/categories/note/</link>
         <description>Recent content in Note on serenNan</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>serenNan</copyright><atom:link href="https://example.com/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>serenNan</copyright><atom:link href="https://serennan.github.io/categories/note/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【雷霄骅课程笔记】3 SDL 视频播放器-进阶</title>
-        <link>https://example.com/post/leixiaohua-note-3/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-3/</link>
         <pubDate>Tue, 25 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-3/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-3/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】3 SDL 视频播放器-进阶" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-3/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-3/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】3 SDL 视频播放器-进阶" /&gt;
 
 
 
@@ -903,11 +903,11 @@
         </item>
         <item>
         <title>【雷霄骅课程笔记】2 SDL 视频播放器</title>
-        <link>https://example.com/post/leixiaohua-note-2/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-2/</link>
         <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-2/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-2/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-2/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-2/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" /&gt;
 
 
 
@@ -929,7 +929,7 @@
 &lt;h2 id=&#34;sdl-介绍&#34;&gt;SDL 介绍
 &lt;/h2&gt;&lt;h3 id=&#34;sdl-视频显示流程&#34;&gt;SDL 视频显示流程
 &lt;/h3&gt;&lt;h4 id=&#34;流程图&#34;&gt;流程图
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-2/sdl%E6%B5%81%E7%A8%8B3.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-2/sdl%E6%B5%81%E7%A8%8B3.png&#34;
 	width=&#34;1488&#34;
 	height=&#34;2073&#34;
 	
@@ -989,7 +989,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;sdl-视频显示的数据结构&#34;&gt;SDL 视频显示的数据结构
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-2/sdl%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-2/sdl%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png&#34;
 	width=&#34;1743&#34;
 	height=&#34;1083&#34;
 	
@@ -1322,11 +1322,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【雷霄骅课程笔记】1 FFmpeg 视频解码器</title>
-        <link>https://example.com/post/leixiaohua-note-1/</link>
+        <link>https://serennan.github.io/post/leixiaohua-note-1/</link>
         <pubDate>Tue, 18 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/leixiaohua-note-1/</guid>
-        <description>&lt;img src="https://example.com/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器" /&gt;
+        <guid>https://serennan.github.io/post/leixiaohua-note-1/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-1/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器" /&gt;
 
 
 
@@ -1361,7 +1361,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;p&gt;其中 * 表示本次课程中会涉及到的库&lt;/p&gt;
 &lt;h3 id=&#34;ffmpeg-解码流程&#34;&gt;FFmpeg 解码流程
 &lt;/h3&gt;&lt;h4 id=&#34;流程图&#34;&gt;流程图
-&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/%E8%A7%A3%E7%A0%81%E6%B5%81%E7%A8%8B2.png&#34;
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/%E8%A7%A3%E7%A0%81%E6%B5%81%E7%A8%8B2.png&#34;
 	width=&#34;1710&#34;
 	height=&#34;2346&#34;
 	
@@ -1441,7 +1441,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h3 id=&#34;ffmpeg-解码的数据结构&#34;&gt;FFmpeg 解码的数据结构
-&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVFormatContext.png&#34;
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/AVFormatContext.png&#34;
 	width=&#34;1935&#34;
 	height=&#34;459&#34;
 	
@@ -1465,7 +1465,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt;: 压缩编码后的数据包 &lt;br&gt;
 &lt;code&gt;AVFrame&lt;/code&gt;: 解码后的数据包&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;AVPacket&lt;/code&gt; 解码完为 &lt;code&gt;AVFrame&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/AVPacket.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/AVPacket.png&#34;
 	width=&#34;963&#34;
 	height=&#34;153&#34;
 	
@@ -1547,7 +1547,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 解码后 YUV 数据格式的视频像素数据保存在 AVFrame 的 data[0]，data[1]，data[2]，但是这些像素值并不是连续存储的，每行有效像素之后存储的是无效像素。
 以亮度 Y 数据为例，data[0] 中一共包含了 linesize[0] * height 个数据。但是出于优化等方面考虑，linesize[0] 可能大于 width 。因此需要使用 &lt;code&gt;sws_scale&lt;/code&gt; 进行转换。&lt;br&gt;
 转换后去除了无效数据，width 和 linesize[0] 就相等了。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/image-1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/image-1.png&#34;
 	width=&#34;1160&#34;
 	height=&#34;472&#34;
 	
@@ -2049,7 +2049,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 我这里源码放在 &lt;code&gt;src/decoder.cpp&lt;/code&gt;，播放视频放在&lt;code&gt;video/input.mkv&lt;/code&gt;&lt;/p&gt;
 &lt;h3 id=&#34;调试&#34;&gt;调试
 &lt;/h3&gt;&lt;p&gt;在左侧工具栏找到&lt;code&gt;运行和调试&lt;/code&gt;工具&lt;br&gt;
-&lt;img src=&#34;https://example.com/post/leixiaohua-note-1/image.png&#34;
+&lt;img src=&#34;https://serennan.github.io/post/leixiaohua-note-1/image.png&#34;
 	width=&#34;240&#34;
 	height=&#34;232&#34;
 	

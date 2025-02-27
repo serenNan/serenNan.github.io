@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Leetcode on serenNan</title>
-        <link>https://example.com/categories/leetcode/</link>
+        <link>https://serennan.github.io/categories/leetcode/</link>
         <description>Recent content in Leetcode on serenNan</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
-        <copyright>serenNan</copyright><atom:link href="https://example.com/categories/leetcode/index.xml" rel="self" type="application/rss+xml" /><item>
+        <copyright>serenNan</copyright><atom:link href="https://serennan.github.io/categories/leetcode/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>常用函数</title>
-        <link>https://example.com/post/function/</link>
+        <link>https://serennan.github.io/post/function/</link>
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/function/</guid>
-        <description>&lt;img src="https://example.com/post/function/function.jpg" alt="Featured image of post 常用函数" /&gt;&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
+        <guid>https://serennan.github.io/post/function/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/function/function.jpg" alt="Featured image of post 常用函数" /&gt;&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
 &lt;/h2&gt;&lt;h3 id=&#34;map&#34;&gt;map
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;map&lt;/code&gt;是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的，且按键的升序排列。&lt;/p&gt;
 &lt;ol&gt;
@@ -109,11 +109,11 @@
         </item>
         <item>
         <title>算法思路</title>
-        <link>https://example.com/post/algorithm/</link>
+        <link>https://serennan.github.io/post/algorithm/</link>
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/post/algorithm/</guid>
-        <description>&lt;img src="https://example.com/post/algorithm/algorithm.jpg" alt="Featured image of post 算法思路" /&gt;&lt;h2 id=&#34;前缀和&#34;&gt;前缀和
+        <guid>https://serennan.github.io/post/algorithm/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/algorithm/algorithm.jpg" alt="Featured image of post 算法思路" /&gt;&lt;h2 id=&#34;前缀和&#34;&gt;前缀和
 &lt;/h2&gt;&lt;p&gt;前缀和的定义：
 给定数组 nums，我们可以定义前缀和数组 &lt;code&gt;prefix_sum&lt;/code&gt;，使得&lt;code&gt; prefix_sum[i] = nums[0] + nums[1] + ... + nums[i-1]&lt;/code&gt;。
 这样，对于任何子数组 &lt;code&gt;[l, r]&lt;/code&gt;，其和可以通过以下公式计算：&lt;/p&gt;

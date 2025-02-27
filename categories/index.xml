@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Categories on serenNan</title>
-        <link>https://example.com/categories/</link>
+        <link>https://serennan.github.io/categories/</link>
         <description>Recent content in Categories on serenNan</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Mon, 24 Feb 2025 17:49:14 +0800</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 24 Feb 2025 17:49:14 +0800</lastBuildDate><atom:link href="https://serennan.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>C&#43;&#43;</title>
-        <link>https://example.com/categories/c&#43;&#43;/</link>
+        <link>https://serennan.github.io/categories/c&#43;&#43;/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/categories/c&#43;&#43;/</guid>
+        <guid>https://serennan.github.io/categories/c&#43;&#43;/</guid>
         <description></description>
         </item>
         <item>
         <title>Hugo</title>
-        <link>https://example.com/categories/hugo/</link>
+        <link>https://serennan.github.io/categories/hugo/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/categories/hugo/</guid>
+        <guid>https://serennan.github.io/categories/hugo/</guid>
         <description></description>
         </item>
         <item>
         <title>Leetcode</title>
-        <link>https://example.com/categories/leetcode/</link>
+        <link>https://serennan.github.io/categories/leetcode/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/categories/leetcode/</guid>
+        <guid>https://serennan.github.io/categories/leetcode/</guid>
         <description></description>
         </item>
         <item>
         <title>Note</title>
-        <link>https://example.com/categories/note/</link>
+        <link>https://serennan.github.io/categories/note/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/categories/note/</guid>
+        <guid>https://serennan.github.io/categories/note/</guid>
         <description></description>
         </item>
         <item>
         <title>Video</title>
-        <link>https://example.com/categories/video/</link>
+        <link>https://serennan.github.io/categories/video/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/categories/video/</guid>
+        <guid>https://serennan.github.io/categories/video/</guid>
         <description></description>
         </item>
         <item>
         <title>其他</title>
-        <link>https://example.com/categories/%E5%85%B6%E4%BB%96/</link>
+        <link>https://serennan.github.io/categories/%E5%85%B6%E4%BB%96/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://example.com/categories/%E5%85%B6%E4%BB%96/</guid>
+        <guid>https://serennan.github.io/categories/%E5%85%B6%E4%BB%96/</guid>
         <description></description>
         </item>
         
