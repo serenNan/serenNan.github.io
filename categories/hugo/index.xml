@@ -7,6 +7,28 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright><atom:link href="https://serennan.github.io/categories/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【Hugo】引入mermaid</title>
+        <link>https://serennan.github.io/post/hugo-mermaid/</link>
+        <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://serennan.github.io/post/hugo-mermaid/</guid>
+        <description>&lt;div class=&#34;mermaid-container&#34;&gt;
+  &lt;div class=&#34;mermaid&#34;&gt;
+    flowchart TD
+    A[&#34;程序启动&#34;]
+    A --&gt; B[&#34;主线程&#34;]
+    A --&gt; C[&#34;刷新线程 (refresh_video)&#34;]
+  &lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid-container&#34;&gt;
+  &lt;div class=&#34;mermaid&#34;&gt;
+    flowchart TD
+    A[&#34;程序启动&#34;]
+    A --&gt; B[&#34;主线程&#34;]
+    A --&gt; C[&#34;刷新线程 (refresh_video)&#34;]
+  &lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>【Hugo】常见问题</title>
         <link>https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>

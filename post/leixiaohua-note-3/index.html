@@ -1752,217 +1752,192 @@ console.log('particles.js loaded - callback');
 
         <link rel="stylesheet" href="/css/mermaid.css">
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-  
-<script>
-  mermaid.initialize({
-    startOnLoad: true,
-    flowchart: {
-      htmlLabels: false,
-      useMaxWidth: false, 
-      nodeSpacing: 50,
-      rankSpacing: 50,
-      defaultRenderer: 'svg'
-    },
-    theme: 'default',
-    securityLevel: 'loose',
-    themeVariables: {
-      nodeBorder: '#000',
-      mainBkg: '#fff',
-      nodeTextColor: '#000',
-      fontSize: '14px'
-    }
-  });
-</script>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      flowchart: {
+        htmlLabels: false,
+        useMaxWidth: false,
+        nodeSpacing: 50,
+        rankSpacing: 50,
+        defaultRenderer: 'svg'
+      },
+      theme: 'default',
+      securityLevel: 'loose',
+      themeVariables: {
+        nodeBorder: '#000',
+        mainBkg: '#fff',
+        nodeTextColor: '#000',
+        fontSize: '14px'
+      }
+    });
+  </script>
 
   
   <div class="mermaid-overlay" id="mermaidOverlay"></div>
-  
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       
-      let currentScale = 1;
-      let initialClickX = null, initialClickY = null;
-      let dragOffsetX = 0, dragOffsetY = 0;
-      let isDragging = false;
-      let dragStartX = 0, dragStartY = 0;
-
-      const container = document.querySelector('.mermaid-container');
-      const mermaidElement = document.querySelector('.mermaid');
-      const overlay = document.getElementById('mermaidOverlay');
-      let isAnimating = false;
-      let isZoomed = false;
-
-      
-      const originalParent = container.parentElement;
-      const originalNextSibling = container.nextElementSibling;
-
-      
-      const applyScale = () => {
-        if (isAnimating) return;
-        isAnimating = true;
-        requestAnimationFrame(() => {
-          if (isZoomed && initialClickX !== null && initialClickY !== null) {
-            const containerRect = container.getBoundingClientRect();
-            const centerX = containerRect.width / 2;
-            const centerY = containerRect.height / 2;
-            
-            const baseTranslateX = centerX - initialClickX * currentScale;
-            const baseTranslateY = centerY - initialClickY * currentScale;
-            
-            const translateX = baseTranslateX + dragOffsetX;
-            const translateY = baseTranslateY + dragOffsetY;
-            mermaidElement.style.transformOrigin = 'center center'; 
-            mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
-          } else {
-            mermaidElement.style.transformOrigin = 'center center'; 
-            mermaidElement.style.transform = `scale(${currentScale})`;
+      const adjustNodeSize = () => {
+        document.querySelectorAll('.mermaid .node').forEach(node => {
+          const rect = node.querySelector('rect');
+          const text = node.querySelector('text');
+          if (rect && text) {
+            const bbox = text.getBBox();
+            const padding = 16;
+            const minWidth = parseFloat(rect.getAttribute('width')) || 160;
+            const newWidth = Math.max(bbox.width + padding, minWidth);
+            rect.setAttribute('width', newWidth);
           }
-          isAnimating = false;
         });
       };
 
       
-      const handleContainerClick = (e) => {
-        if (!isZoomed) {
-          isZoomed = true;
-          container.classList.add('zoomed');
-          overlay.style.display = 'flex';
-          
-          overlay.appendChild(container);
-
-          const containerRect = container.getBoundingClientRect();
-          
-          const clickX = e.clientX - containerRect.left;
-          const clickY = e.clientY - containerRect.top;
-          initialClickX = clickX;
-          initialClickY = clickY;
-          
-          dragOffsetX = 0;
-          dragOffsetY = 0;
-
-          
-          const scaleX = window.innerWidth / containerRect.width;
-          const scaleY = window.innerHeight / containerRect.height;
-          currentScale = Math.min(scaleX, scaleY, 5);
-          applyScale();
-        }
-      };
+      adjustNodeSize();
+      window.addEventListener('resize', adjustNodeSize);
 
       
-      const handleOverlayClick = () => {
-        if (isZoomed) {
-          isZoomed = false;
-          container.classList.remove('zoomed');
-          overlay.style.display = 'none';
-          
-          if (originalNextSibling) {
-            originalParent.insertBefore(container, originalNextSibling);
+      document.querySelectorAll('.mermaid-container').forEach(container => {
+        let currentScale = 1;
+        let initialClickX = null, initialClickY = null;
+        let dragOffsetX = 0, dragOffsetY = 0;
+        let isDragging = false;
+        let dragStartX = 0, dragStartY = 0;
+        let isZoomed = false;
+
+        const mermaidElement = container.querySelector('.mermaid');
+        const overlay = document.getElementById('mermaidOverlay');
+        const originalParent = container.parentElement;
+        const originalNextSibling = container.nextElementSibling;
+
+        
+        const applyScale = () => {
+          if (isZoomed && initialClickX !== null && initialClickY !== null) {
+            const containerRect = container.getBoundingClientRect();
+            const centerX = containerRect.width / 2;
+            const centerY = containerRect.height / 2;
+            const baseTranslateX = centerX - initialClickX * currentScale;
+            const baseTranslateY = centerY - initialClickY * currentScale;
+            const translateX = baseTranslateX + dragOffsetX;
+            const translateY = baseTranslateY + dragOffsetY;
+            mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
           } else {
-            originalParent.appendChild(container);
+            mermaidElement.style.transform = `scale(${currentScale})`;
           }
-          currentScale = 1;
-          initialClickX = null;
-          initialClickY = null;
-          dragOffsetX = 0;
-          dragOffsetY = 0;
-          applyScale();
-        }
-      };
+        };
 
-      
-      const handleWheel = (e) => {
-        if (isZoomed) {
-          e.preventDefault();
-          const sensitivity = 0.0006;
-          const delta = e.deltaY || e.wheelDelta;
-          const scaleDelta = 1 + (-delta * sensitivity);
-          currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
-          applyScale();
-        } else if (e.ctrlKey) {
-          e.preventDefault();
-          const sensitivity = 0.0006;
-          const delta = e.deltaY || e.wheelDelta;
-          const scaleDelta = 1 + (-delta * sensitivity);
-          currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
-          applyScale();
-        }
-      };
+        
+        const handleContainerClick = (e) => {
+          if (!isZoomed) {
+            isZoomed = true;
+            container.classList.add('zoomed');
+            overlay.style.display = 'flex';
+            overlay.appendChild(container);
 
-      
-      container.addEventListener('mousedown', (e) => {
-        if (isZoomed) {
-          isDragging = true;
-          dragStartX = e.clientX;
-          dragStartY = e.clientY;
-          container.style.cursor = 'grabbing';
-        }
-      });
+            const containerRect = container.getBoundingClientRect();
+            initialClickX = e.clientX - containerRect.left;
+            initialClickY = e.clientY - containerRect.top;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
 
-      
-      document.addEventListener('mousemove', (e) => {
-        if (isDragging) {
-          const deltaX = e.clientX - dragStartX;
-          const deltaY = e.clientY - dragStartY;
-          dragOffsetX += deltaX;
-          dragOffsetY += deltaY;
-          dragStartX = e.clientX;
-          dragStartY = e.clientY;
-          applyScale();
-        }
-      });
+            const scaleX = window.innerWidth / containerRect.width;
+            const scaleY = window.innerHeight / containerRect.height;
+            currentScale = Math.min(scaleX, scaleY, 5);
+            applyScale();
+          }
+        };
 
-      
-      document.addEventListener('mouseup', () => {
-        if (isDragging) {
+        
+        const exitZoom = () => {
+          if (isZoomed) {
+            isZoomed = false;
+            container.classList.remove('zoomed');
+            overlay.style.display = 'none';
+            if (originalNextSibling) {
+              originalParent.insertBefore(container, originalNextSibling);
+            } else {
+              originalParent.appendChild(container);
+            }
+            currentScale = 1;
+            initialClickX = null;
+            initialClickY = null;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+            applyScale();
+          }
+        };
+
+        
+        const handleWheel = (e) => {
+          if (isZoomed) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          } else if (e.ctrlKey) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          }
+        };
+
+        
+        container.addEventListener('click', (e) => {
+          if (!isZoomed) handleContainerClick(e);
+        });
+
+        container.addEventListener('dblclick', exitZoom);
+        container.addEventListener('wheel', handleWheel);
+
+        
+        container.addEventListener('mousedown', (e) => {
+          if (isZoomed) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            container.style.cursor = 'grabbing';
+          }
+        });
+
+        const handleMouseMove = (e) => {
+          if (isDragging) {
+            const deltaX = e.clientX - dragStartX;
+            const deltaY = e.clientY - dragStartY;
+            dragOffsetX += deltaX;
+            dragOffsetY += deltaY;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            applyScale();
+          }
+        };
+
+        const handleMouseUp = () => {
           isDragging = false;
           container.style.cursor = 'grab';
-        }
-      });
+        };
 
-      
-      container.addEventListener('click', (e) => {
-        if (!isZoomed) {
-          handleContainerClick(e);
-        }
-      });
-
-      
-      container.addEventListener('dblclick', (e) => {
-        if (isZoomed) {
-          handleOverlayClick();
-        }
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
       });
 
       
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isZoomed) {
-          handleOverlayClick();
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.mermaid-container').forEach(container => {
+            if (container.classList.contains('zoomed')) {
+              container.dispatchEvent(new Event('dblclick'));
+            }
+          });
         }
       });
-
-      
-      container.addEventListener('wheel', handleWheel, { passive: false });
-
-      
-    const adjustNodeSize = () => {
-      document.querySelectorAll('.mermaid .node').forEach(node => {
-        const rect = node.querySelector('rect');
-        const text = node.querySelector('text');
-        if (rect && text) {
-          const bbox = text.getBBox();
-          const padding = 16; 
-          const minWidth = parseFloat(rect.getAttribute('width')) || 160;
-          const newWidth = Math.max(bbox.width + padding, minWidth);
-          rect.setAttribute('width', newWidth);
-        }
-      });
-    };
-
-    
-    adjustNodeSize();
-    window.addEventListener('resize', adjustNodeSize);
     });
-    
   </script>  
     </body>
 </html>
