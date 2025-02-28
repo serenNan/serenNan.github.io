@@ -7,13 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Fri, 28 Feb 2025 11:11:23 +0800</lastBuildDate><atom:link href="https://serennan.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 28 Feb 2025 11:19:25 +0800</lastBuildDate><atom:link href="https://serennan.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【Hugo】引入mermaid</title>
         <link>https://serennan.github.io/post/hugo-mermaid/</link>
         <pubDate>Thu, 27 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/hugo-mermaid/</guid>
-        <description>&lt;p&gt;介绍Mermaid并分享优化配置的博客内容：&lt;/p&gt;
+        <description>&lt;img src="https://serennan.github.io/post/hugo-mermaid/cover.jpg" alt="Featured image of post 【Hugo】引入mermaid" /&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/isaac-smith-AT77Q0Njnt0-unsplash.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;alt text&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;介绍Mermaid并分享优化配置的博客内容：&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;mermaid-流程图优化配置指南&#34;&gt;Mermaid 流程图优化配置指南
 &lt;/h1&gt;&lt;p&gt;Mermaid 是一个强大的流程图绘制工具，支持多种图表类型，包括流程图、类图、状态图等。但在实际使用中，官方默认配置可能存在一些问题，比如节点文字过长导致显示不整齐、图表放大后文字模糊等。&lt;/p&gt;
