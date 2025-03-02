@@ -10,7 +10,7 @@
 <meta property='og:description' content="跟着雷神的课程学习写的一些笔记">
 <meta property='og:url' content='https://serennan.github.io/post/leixiaohua-note-4/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-02T20:16:21&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/leixiaohua-note-4/cover.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-02T20:21:23&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/leixiaohua-note-4/cover.jpg' />
 <meta name="twitter:title" content="【雷霄骅课程笔记】FFmpeg + SDL 视频播放器">
 <meta name="twitter:description" content="跟着雷神的课程学习写的一些笔记"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://serennan.github.io/post/leixiaohua-note-4/cover.jpg' />
@@ -440,7 +440,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>1908 字</span>
+                    <span>1901 字</span>
                 </div>
             
         
@@ -448,7 +448,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-02 20:16</time>
+                    <time>2025-03-02 20:21</time>
                 </div>
             
         
@@ -788,7 +788,6 @@
 </span><span class="lnt">293
 </span><span class="lnt">294
 </span><span class="lnt">295
-</span><span class="lnt">296
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">extern</span> <span class="s">&#34;C&#34;</span>
@@ -985,51 +984,50 @@
 </span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">((</span><span class="n">av_read_frame</span><span class="p">(</span><span class="n">pFormatCtx</span><span class="p">,</span> <span class="n">packet</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">thread_exit</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">                    <span class="n">thread_exit</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">packet</span><span class="o">-&gt;</span><span class="n">stream_index</span> <span class="o">==</span> <span class="n">videoindex</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">packet</span><span class="o">-&gt;</span><span class="n">stream_index</span> <span class="o">==</span> <span class="n">videoindex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">ret</span> <span class="o">=</span> <span class="n">avcodec_send_packet</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">packet</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">ret</span> <span class="o">=</span> <span class="n">avcodec_send_packet</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">packet</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error sending a packet for decoding</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ret</span> <span class="o">=</span> <span class="n">avcodec_receive_frame</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">pFrame</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="n">AVERROR</span><span class="p">(</span><span class="n">EAGAIN</span><span class="p">)</span> <span class="o">||</span> <span class="n">ret</span> <span class="o">==</span> <span class="n">AVERROR_EOF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error sending a packet for decoding</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error during decoding</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">                <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="k">while</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">ret</span> <span class="o">=</span> <span class="n">avcodec_receive_frame</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">pFrame</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="n">AVERROR</span><span class="p">(</span><span class="n">EAGAIN</span><span class="p">)</span> <span class="o">||</span> <span class="n">ret</span> <span class="o">==</span> <span class="n">AVERROR_EOF</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error during decoding</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sws_scale</span><span class="p">(</span><span class="n">img_convert_ctx</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="o">*</span><span class="p">)</span><span class="n">pFrame</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="n">pFrame</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                    <span class="n">sws_scale</span><span class="p">(</span><span class="n">img_convert_ctx</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="o">*</span><span class="p">)</span><span class="n">pFrame</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                              <span class="n">pFrame</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">                              <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">y_size</span> <span class="o">=</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span> <span class="o">*</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="c1">// U V 是分量，宽高各压缩一半，所以大小是 Y 的 1/4
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">y_size</span> <span class="o">=</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span> <span class="o">*</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// U V 是分量，宽高各压缩一半，所以大小是 Y 的 1/4
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl">                    <span class="n">SDL_UpdateTexture</span><span class="p">(</span><span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">SDL_UpdateTexture</span><span class="p">(</span><span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                    <span class="c1">// FIX: If window is resize
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">sdlRect</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">sdlRect</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">sdlRect</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">screen_w</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">sdlRect</span><span class="p">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">screen_h</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// FIX: If window is resize
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">sdlRect</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sdlRect</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sdlRect</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">screen_w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sdlRect</span><span class="p">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">screen_h</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                    <span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">SDL_RenderCopy</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">,</span> <span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sdlRect</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Succeed to decode 1 frame!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">SDL_RenderCopy</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">,</span> <span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sdlRect</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Succeed to decode 1 frame!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="n">av_packet_unref</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// SDL_WINDOWEVENT 当窗口大小改变时，更新屏幕宽度和高度
