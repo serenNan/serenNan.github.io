@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="跟着雷神的课程学习写的一些笔记">
+<title>【雷霄骅课程笔记】FFmpeg &#43; SDL 视频播放器</title>
+
+<link rel='canonical' href='https://serennan.github.io/post/leixiaohua-note-4/'>
+
+<link rel="stylesheet" href="/scss/style.min.54bf0863ff3c9ff57f1d03934f8cf1f194aeb23c5e2654eebc47eaa1a9a1175f.css"><meta property='og:title' content="【雷霄骅课程笔记】FFmpeg + SDL 视频播放器">
+<meta property='og:description' content="跟着雷神的课程学习写的一些笔记">
+<meta property='og:url' content='https://serennan.github.io/post/leixiaohua-note-4/'>
+<meta property='og:site_name' content='serenNan'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-02T17:51:43&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/leixiaohua-note-4/cover.jpg' />
+<meta name="twitter:title" content="【雷霄骅课程笔记】FFmpeg + SDL 视频播放器">
+<meta name="twitter:description" content="跟着雷神的课程学习写的一些笔记"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://serennan.github.io/post/leixiaohua-note-4/cover.jpg' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_47dcc2efc37d0778.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🐈‍⬛</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">serenNan</a></h1>
+            <h2 class="site-description">个人博客</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/450940909'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M488.6 104.1C505.3 122.2 513 143.8 511.9 169.8V372.2C511.5 398.6 502.7 420.3 485.4 437.3C468.2 454.3 446.3 463.2 419.9 464H92.02C65.57 463.2 43.81 454.2 26.74 436.8C9.682 419.4 .7667 396.5 0 368.2V169.8C.7667 143.8 9.682 122.2 26.74 104.1C43.81 87.75 65.57 78.77 92.02 78H121.4L96.05 52.19C90.3 46.46 87.42 39.19 87.42 30.4C87.42 21.6 90.3 14.34 96.05 8.603C101.8 2.868 109.1 0 117.9 0C126.7 0 134 2.868 139.8 8.603L213.1 78H301.1L375.6 8.603C381.7 2.868 389.2 0 398 0C406.8 0 414.1 2.868 419.9 8.603C425.6 14.34 428.5 21.6 428.5 30.4C428.5 39.19 425.6 46.46 419.9 52.19L394.6 78L423.9 78C450.3 78.77 471.9 87.75 488.6 104.1H488.6zM449.8 173.8C449.4 164.2 446.1 156.4 439.1 150.3C433.9 144.2 425.1 140.9 416.4 140.5H96.05C86.46 140.9 78.6 144.2 72.47 150.3C66.33 156.4 63.07 164.2 62.69 173.8V368.2C62.69 377.4 65.95 385.2 72.47 391.7C78.99 398.2 86.85 401.5 96.05 401.5H416.4C425.6 401.5 433.4 398.2 439.7 391.7C446 385.2 449.4 377.4 449.8 368.2L449.8 173.8zM185.5 216.5C191.8 222.8 195.2 230.6 195.6 239.7V273C195.2 282.2 191.9 289.9 185.8 296.2C179.6 302.5 171.8 305.7 162.2 305.7C152.6 305.7 144.7 302.5 138.6 296.2C132.5 289.9 129.2 282.2 128.8 273V239.7C129.2 230.6 132.6 222.8 138.9 216.5C145.2 210.2 152.1 206.9 162.2 206.5C171.4 206.9 179.2 210.2 185.5 216.5H185.5zM377 216.5C383.3 222.8 386.7 230.6 387.1 239.7V273C386.7 282.2 383.4 289.9 377.3 296.2C371.2 302.5 363.3 305.7 353.7 305.7C344.1 305.7 336.3 302.5 330.1 296.2C323.1 289.9 320.7 282.2 320.4 273V239.7C320.7 230.6 324.1 222.8 330.4 216.5C336.7 210.2 344.5 206.9 353.7 206.5C362.9 206.9 370.7 210.2 377 216.5H377z"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/serenNan'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549" style="enable-background:new 0 0 438.549 438.549;"
+	 xml:space="preserve">
+<g>
+	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
+		c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
+		c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
+		c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
+		c-4.187,0.767-9.469,1.092-15.846,1c-6.374-0.089-12.991-0.757-19.842-1.999c-6.854-1.231-13.229-4.086-19.13-8.559
+		c-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559
+		c-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-0.951-2.568-2.098-3.711-3.429c-1.142-1.331-1.997-2.663-2.568-3.997
+		c-0.572-1.335-0.098-2.43,1.427-3.289c1.525-0.859,4.281-1.276,8.28-1.276l5.708,0.853c3.807,0.763,8.516,3.042,14.133,6.851
+		c5.614,3.806,10.229,8.754,13.846,14.842c4.38,7.806,9.657,13.754,15.846,17.847c6.184,4.093,12.419,6.136,18.699,6.136
+		c6.28,0,11.704-0.476,16.274-1.423c4.565-0.952,8.848-2.383,12.847-4.285c1.713-12.758,6.377-22.559,13.988-29.41
+		c-10.848-1.14-20.601-2.857-29.264-5.14c-8.658-2.286-17.605-5.996-26.835-11.14c-9.235-5.137-16.896-11.516-22.985-19.126
+		c-6.09-7.614-11.088-17.61-14.987-29.979c-3.901-12.374-5.852-26.648-5.852-42.826c0-23.035,7.52-42.637,22.557-58.817
+		c-7.044-17.318-6.379-36.732,1.997-58.24c5.52-1.715,13.706-0.428,24.554,3.853c10.85,4.283,18.794,7.952,23.84,10.994
+		c5.046,3.041,9.089,5.618,12.135,7.708c17.705-4.947,35.976-7.421,54.818-7.421s37.117,2.474,54.823,7.421l10.849-6.849
+		c7.419-4.57,16.18-8.758,26.262-12.565c10.088-3.805,17.802-4.853,23.134-3.138c8.562,21.509,9.325,40.922,2.279,58.24
+		c15.036,16.18,22.559,35.787,22.559,58.817c0,16.178-1.958,30.497-5.853,42.966c-3.9,12.471-8.941,22.457-15.125,29.979
+		c-6.191,7.521-13.901,13.85-23.131,18.986c-9.232,5.14-18.182,8.85-26.84,11.136c-8.662,2.286-18.415,4.004-29.263,5.146
+		c9.894,8.562,14.842,22.077,14.842,40.539v60.237c0,3.422,1.19,6.279,3.572,8.562c2.379,2.279,6.136,2.95,11.276,1.995
+		c44.163-14.653,80.185-41.062,108.068-79.226c27.88-38.161,41.825-81.126,41.825-128.906
+		C438.536,184.851,428.728,148.168,409.132,114.573z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/category/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M9 4h3l2 2h5a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"></path> <path d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h2"></path> </svg> 
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+<section class="widget archives">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">目录</h2>
+    <div class="widget--toc">
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#视频链接">视频链接</a></li>
+    <li><a href="#整合方式">整合方式</a></li>
+    <li><a href="#代码运行">代码运行</a>
+      <ol>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#cmakeliststxt">CMakeLists.txt</a></li>
+      </ol>
+    </li>
+    <li><a href="#代码分析">代码分析</a>
+      <ol>
+        <li><a href="#1-纹理数据">1. 纹理数据</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+    </div>
+</section>
+
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article ">
+    
+        <header class="article-header">
+        <div class="article-image">
+            <a href="/post/leixiaohua-note-4/">
+                <img src="/post/leixiaohua-note-4/cover.jpg"
+                        
+                        width="4608" 
+                        height="3456" 
+                        loading="lazy"
+                        alt="Featured image of post 【雷霄骅课程笔记】FFmpeg &#43; SDL 视频播放器" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/video/" style="background-color: #8464C6; color: #fff;">
+                Video
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/leixiaohua-note-4/">【雷霄骅课程笔记】FFmpeg &#43; SDL 视频播放器</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            跟着雷神的课程学习写的一些笔记
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+
+    
+    <footer class="article-time">
+        
+        
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time>2025-03-02</time>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                    <span>1606 字</span>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
+                    <time>2025-03-02 17:51</time>
+                </div>
+            
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+    
+    <section class="article-content">
+    
+    
+    <h1 id="ffmpeg-和-sdl-整合实现视频播放器">FFmpeg 和 SDL 整合实现视频播放器
+</h1><h2 id="视频链接">视频链接
+</h2>
+
+
+
+
+
+    
+
+
+<div class="video-wrapper">
+    <iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;high_quality=1&amp;page=8&bvid=BV1gE411f7WT"
+            scrolling="no"
+            frameborder="no"
+            framespacing="0"
+            allowfullscreen="true"
+    >
+    </iframe>
+</div>
+
+<h2 id="整合方式">整合方式
+</h2><ul>
+<li>FFmpeg 解码器实现了：视频文件 -&gt; YUV</li>
+<li>SDL 视频显示实现了：YUV -&gt; 屏幕</li>
+<li>整合：FFmpeg + SDL = 视频文件 -&gt; 屏幕</li>
+</ul>
+<h2 id="代码运行">代码运行
+</h2><h3 id="代码">代码
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">extern</span> <span class="s">&#34;C&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;SDL2/SDL.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;libavcodec/avcodec.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;libavformat/avformat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;libavutil/imgutils.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;libswscale/swscale.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">bpp</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">screen_w</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">screen_h</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">pixel_w</span> <span class="o">=</span> <span class="mi">320</span><span class="p">,</span> <span class="n">pixel_h</span> <span class="o">=</span> <span class="mi">180</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">pixel_w</span> <span class="o">*</span> <span class="n">pixel_h</span> <span class="o">*</span> <span class="n">bpp</span> <span class="o">/</span> <span class="mi">8</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// SDL_USEREVENT是SDL库中预定义的一个用户事件起始值
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 刷新事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define REFRESH_EVENT (SDL_USEREVENT + 1)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// 中断事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define BREAK_EVENT (SDL_USEREVENT + 2)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 线程退出标志
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">thread_exit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">refresh_video</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">opaque</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thread_exit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">thread_exit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDL_Event</span> <span class="n">event</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">REFRESH_EVENT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDL_PushEvent</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDL_Delay</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">thread_exit</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 推送一个退出主线程的事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Event</span> <span class="n">event</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">BREAK_EVENT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SDL_PushEvent</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AVFormatContext</span> <span class="o">*</span><span class="n">pFormatCtx</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">videoindex</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AVCodecContext</span> <span class="o">*</span><span class="n">pCodecCtx</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">AVCodec</span> <span class="o">*</span><span class="n">pCodec</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AVFrame</span> <span class="o">*</span><span class="n">pFrame</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">*</span><span class="n">pFrameYUV</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="n">out_buffer</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AVPacket</span> <span class="o">*</span><span class="n">packet</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">SwsContext</span> <span class="o">*</span><span class="n">img_convert_ctx</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">filepath</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;../video/Titanic.ts&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span> <span class="o">*</span><span class="n">fp_yuv</span> <span class="o">=</span> <span class="n">fopen</span><span class="p">(</span><span class="s">&#34;output.yuv&#34;</span><span class="p">,</span> <span class="s">&#34;wb+&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 初始化FFmpeg库
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">avformat_network_init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 打开输入文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">avformat_open_input</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pFormatCtx</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Couldn&#39;t open input stream.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获取流信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">avformat_find_stream_info</span><span class="p">(</span><span class="n">pFormatCtx</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Couldn&#39;t find stream information.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;时长：%ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">pFormatCtx</span><span class="o">-&gt;</span><span class="n">duration</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 查找视频流
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">pFormatCtx</span><span class="o">-&gt;</span><span class="n">nb_streams</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">pFormatCtx</span><span class="o">-&gt;</span><span class="n">streams</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">codecpar</span><span class="o">-&gt;</span><span class="n">codec_type</span> <span class="o">==</span> <span class="n">AVMEDIA_TYPE_VIDEO</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">videoindex</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">videoindex</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Didn&#39;t find a video stream.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 获取解码器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">pCodec</span> <span class="o">=</span> <span class="n">avcodec_find_decoder</span><span class="p">(</span><span class="n">pFormatCtx</span><span class="o">-&gt;</span><span class="n">streams</span><span class="p">[</span><span class="n">videoindex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">codecpar</span><span class="o">-&gt;</span><span class="n">codec_id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pCodec</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Codec not found.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建解码器上下文
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">pCodecCtx</span> <span class="o">=</span> <span class="n">avcodec_alloc_context3</span><span class="p">(</span><span class="n">pCodec</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">pCodecCtx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Could not allocate video codec context</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 复制流参数到解码器上下文
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">avcodec_parameters_to_context</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">pFormatCtx</span><span class="o">-&gt;</span><span class="n">streams</span><span class="p">[</span><span class="n">videoindex</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">codecpar</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Could not copy codec parameters to context</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 打开解码器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">avcodec_open2</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">pCodec</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Could not open codec.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">pFrame</span> <span class="o">=</span> <span class="n">av_frame_alloc</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pFrameYUV</span> <span class="o">=</span> <span class="n">av_frame_alloc</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">out_buffer</span> <span class="o">=</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">av_malloc</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">av_image_get_buffer_size</span><span class="p">(</span><span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">av_image_fill_arrays</span><span class="p">(</span><span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">,</span> <span class="n">out_buffer</span><span class="p">,</span> <span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">packet</span> <span class="o">=</span> <span class="n">av_packet_alloc</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 输出文件信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;--------------- File Information ----------------</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">av_dump_format</span><span class="p">(</span><span class="n">pFormatCtx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">filepath</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;-------------------------------------------------</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">img_convert_ctx</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sws_getContext</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">pix_fmt</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="n">AV_PIX_FMT_YUV420P</span><span class="p">,</span> <span class="n">SWS_BICUBIC</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//==================SDL==================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 初始化 SDL 库
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">SDL_Init</span><span class="p">(</span><span class="n">SDL_INIT_VIDEO</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Could not initialize SDL - %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建一个窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Window</span> <span class="o">*</span><span class="n">screen</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// SDL 2.0 Support for multiple windows
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">screen_w</span> <span class="o">=</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen_h</span> <span class="o">=</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">screen</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDL_CreateWindow</span><span class="p">(</span><span class="s">&#34;Simplest Video Play SDL2&#34;</span><span class="p">,</span> <span class="n">SDL_WINDOWPOS_CENTERED</span><span class="p">,</span> <span class="n">SDL_WINDOWPOS_CENTERED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                         <span class="n">screen_w</span><span class="p">,</span> <span class="n">screen_h</span><span class="p">,</span> <span class="n">SDL_WINDOW_OPENGL</span> <span class="o">|</span> <span class="n">SDL_WINDOW_RESIZABLE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">screen</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;SDL: could not create window - exiting:%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">SDL_GetError</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建一个渲染器，将窗口与渲染器关联
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Renderer</span> <span class="o">*</span><span class="n">sdlRenderer</span> <span class="o">=</span> <span class="n">SDL_CreateRenderer</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Uint32</span> <span class="n">pixformat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// IYUV: Y + U + V  (3 planes)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// YV12: Y + V + U  (3 planes)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 设置像素格式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// SDL_PIXELFORMAT_IYUV 表示使用 YUV420
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">pixformat</span> <span class="o">=</span> <span class="n">SDL_PIXELFORMAT_IYUV</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建纹理，用于存储视频数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Texture</span> <span class="o">*</span><span class="n">sdlTexture</span> <span class="o">=</span> <span class="n">SDL_CreateTexture</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">,</span> <span class="n">pixformat</span><span class="p">,</span> <span class="n">SDL_TEXTUREACCESS_STREAMING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">SDL_Rect</span> <span class="n">sdlRect</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建一个子线程，用于定时触发视频刷新事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 第一个参数是函数指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Thread</span> <span class="o">*</span><span class="n">refresh_thread</span> <span class="o">=</span> <span class="n">SDL_CreateThread</span><span class="p">(</span><span class="n">refresh_video</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SDL_Event</span> <span class="n">event</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDL_WaitEvent</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">REFRESH_EVENT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">((</span><span class="n">av_read_frame</span><span class="p">(</span><span class="n">pFormatCtx</span><span class="p">,</span> <span class="n">packet</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">thread_exit</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">packet</span><span class="o">-&gt;</span><span class="n">stream_index</span> <span class="o">==</span> <span class="n">videoindex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">packet</span><span class="o">-&gt;</span><span class="n">stream_index</span> <span class="o">==</span> <span class="n">videoindex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ret</span> <span class="o">=</span> <span class="n">avcodec_send_packet</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">packet</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error sending a packet for decoding</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">while</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">ret</span> <span class="o">=</span> <span class="n">avcodec_receive_frame</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">pFrame</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="n">AVERROR</span><span class="p">(</span><span class="n">EAGAIN</span><span class="p">)</span> <span class="o">||</span> <span class="n">ret</span> <span class="o">==</span> <span class="n">AVERROR_EOF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error during decoding</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="n">sws_scale</span><span class="p">(</span><span class="n">img_convert_ctx</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="o">*</span><span class="p">)</span><span class="n">pFrame</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">pFrame</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="kt">int</span> <span class="n">y_size</span> <span class="o">=</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span> <span class="o">*</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// U V 是分量，宽高各压缩一半，所以大小是 Y 的 1/4
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">                    <span class="n">SDL_UpdateTexture</span><span class="p">(</span><span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="c1">// FIX: If window is resize
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">sdlRect</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">sdlRect</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">sdlRect</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">screen_w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">sdlRect</span><span class="p">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">screen_h</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                    <span class="n">SDL_RenderClear</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">SDL_RenderCopy</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">,</span> <span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sdlRect</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">SDL_RenderPresent</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Succeed to decode 1 frame!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">av_packet_unref</span><span class="p">(</span><span class="n">packet</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// SDL_WINDOWEVENT 当窗口大小改变时，更新屏幕宽度和高度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">SDL_WINDOWEVENT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// window
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">SDL_GetWindowSize</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">screen_w</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">screen_h</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 当用户关闭窗口时，设置退出标志使子线程退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">SDL_QUIT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">thread_exit</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 当接收到退出事件时，退出主循环并释放资源
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 这个退出事件由子线程提供
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">BREAK_EVENT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 刷新解码器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">avcodec_send_packet</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ret</span> <span class="o">=</span> <span class="n">avcodec_receive_frame</span><span class="p">(</span><span class="n">pCodecCtx</span><span class="p">,</span> <span class="n">pFrame</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="n">AVERROR</span><span class="p">(</span><span class="n">EAGAIN</span><span class="p">)</span> <span class="o">||</span> <span class="n">ret</span> <span class="o">==</span> <span class="n">AVERROR_EOF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error during decoding</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">sws_scale</span><span class="p">(</span><span class="n">img_convert_ctx</span><span class="p">,</span> <span class="p">(</span><span class="k">const</span> <span class="kt">unsigned</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="o">*</span><span class="p">)</span><span class="n">pFrame</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">pFrame</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">y_size</span> <span class="o">=</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span> <span class="o">*</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fwrite</span><span class="p">(</span><span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_size</span><span class="p">,</span> <span class="n">fp_yuv</span><span class="p">);</span>     <span class="c1">// Y
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">fwrite</span><span class="p">(</span><span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_size</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">fp_yuv</span><span class="p">);</span> <span class="c1">// U
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">fwrite</span><span class="p">(</span><span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_size</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">fp_yuv</span><span class="p">);</span> <span class="c1">// V
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Flush Decoder: Succeed to decode 1 frame!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">sws_freeContext</span><span class="p">(</span><span class="n">img_convert_ctx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">fclose</span><span class="p">(</span><span class="n">fp_yuv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">av_frame_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pFrameYUV</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">av_frame_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pFrame</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">av_packet_free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">packet</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avcodec_free_context</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pCodecCtx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avformat_close_input</span><span class="p">(</span><span class="o">&amp;</span><span class="n">pFormatCtx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="cmakeliststxt">CMakeLists.txt
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmake" data-lang="cmake"><span class="line"><span class="cl"><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.10</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">project</span><span class="p">(</span><span class="s">MyProject</span> <span class="s">VERSION</span> <span class="s">1.0</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_BUILD_TYPE</span> <span class="s">DEBUG</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_EXPORT_COMPILE_COMMANDS</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加头文件路径
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="o">}</span><span class="s">/include</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加库文件路径
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">link_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_SOURCE_DIR</span><span class="o">}</span><span class="s">/lib</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加可执行文件
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">main</span> <span class="s">src/testPlayer.cpp</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 链接 FFmpeg 库
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span>
+</span></span><span class="line"><span class="cl">    <span class="s">avutil</span>
+</span></span><span class="line"><span class="cl">    <span class="s">avcodec</span>
+</span></span><span class="line"><span class="cl">    <span class="s">avformat</span>
+</span></span><span class="line"><span class="cl">    <span class="s">swscale</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 链接 SDL 库
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span>
+</span></span><span class="line"><span class="cl">    <span class="s">SDL2</span>
+</span></span><span class="line"><span class="cl">    <span class="s">SDL2main</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="代码分析">代码分析
+</h2><p>这段代码主要是整合我们前面所写的解码器和 SDL 视频播放器<br>
+主要注意下面的几点</p>
+<h3 id="1-纹理数据">1. 纹理数据
+</h3><p>在创建纹理和更新纹理时，要给视频的数据，换成前面解码出来的视频数据就行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 创建纹理，用于存储视频数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">SDL_Texture</span> <span class="o">*</span><span class="n">sdlTexture</span> <span class="o">=</span> <span class="n">SDL_CreateTexture</span><span class="p">(</span><span class="n">sdlRenderer</span><span class="p">,</span> <span class="n">pixformat</span><span class="p">,</span> <span class="n">SDL_TEXTUREACCESS_STREAMING</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                                <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 更新纹理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">SDL_UpdateTexture</span><span class="p">(</span><span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>                                          
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+
+
+    
+</footer>
+
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/leixiaohua-note-3/">
+        
+        
+            <div class="article-image">
+                <img src="/post/leixiaohua-note-3/cover.26c6bb1e5c3c89a60ddf413fcb42b8ed.jpg" 
+                        width="4608" 
+                        height="3456" 
+                        loading="lazy"
+                        alt="Featured image of post 【雷霄骅课程笔记】3 SDL 视频播放器-进阶"
+                        data-key="leixiaohua-note-3" 
+                        data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【雷霄骅课程笔记】3 SDL 视频播放器-进阶</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/leixiaohua-note-2/">
+        
+        
+            <div class="article-image">
+                <img src="/post/leixiaohua-note-2/cover.26c6bb1e5c3c89a60ddf413fcb42b8ed.jpg" 
+                        width="4608" 
+                        height="3456" 
+                        loading="lazy"
+                        alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器"
+                        data-key="leixiaohua-note-2" 
+                        data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【雷霄骅课程笔记】2 SDL 视频播放器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/leixiaohua-note-1/">
+        
+        
+            <div class="article-image">
+                <img src="/post/leixiaohua-note-1/cover.26c6bb1e5c3c89a60ddf413fcb42b8ed.jpg" 
+                        width="4608" 
+                        height="3456" 
+                        loading="lazy"
+                        alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器"
+                        data-key="leixiaohua-note-1" 
+                        data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【雷霄骅课程笔记】1 FFmpeg 视频解码器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/leixiaohua-note-0/">
+        
+        
+            <div class="article-image">
+                <img src="/post/leixiaohua-note-0/cover.26c6bb1e5c3c89a60ddf413fcb42b8ed.jpg" 
+                        width="4608" 
+                        height="3456" 
+                        loading="lazy"
+                        alt="Featured image of post 【雷霄骅课程笔记】0 配置"
+                        data-key="leixiaohua-note-0" 
+                        data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【雷霄骅课程笔记】0 配置</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/video_base/">
+        
+        
+            <div class="article-image">
+                <img src="/post/video_base/player1.94150b0072b4a37c4bfb37c1f06bb3d7.jpg" 
+                        width="3200" 
+                        height="2400" 
+                        loading="lazy"
+                        alt="Featured image of post 音视频基础"
+                        data-key="video_base" 
+                        data-hash="md5-lBULAHK0o3xL&#43;zfB8Guz1w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">音视频基础</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="serenNan/serenNan.github.io"
+    data-repo-id="R_kgDONieGHg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONieGHs4ClphA"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 serenNan
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+  @font-face {
+    font-family: 'MapleMono2';
+    src: url('https://serennan.github.io/font/MapleMono2.ttf') format('truetype');
+  }
+
+  :root {
+    --base-font-family: 'MapleMono2';
+    --code-font-family: 'MapleMono2';
+  }
+</style>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+<div id="particles-js"></div>
+<script src="/background/particles.min.js"></script>
+<script>
+particlesJS.load('particles-js', '\/background\/particlesjs-config.json', function() {
+console.log('particles.js loaded - callback');
+});
+</script>
+
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
+
+
+
+
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 5%;
+        right: 24%;  
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url('/icons/backTop.svg');  
+        background-size: cover;  
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop;
+        rightSideBar.appendChild(btn);
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    initScrollTop();
+</script>
+
+
+        <link rel="stylesheet" href="/css/mermaid.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      flowchart: {
+        htmlLabels: false,
+        useMaxWidth: false,
+        nodeSpacing: 50,
+        rankSpacing: 50,
+        defaultRenderer: 'svg'
+      },
+      theme: 'default',
+      securityLevel: 'loose',
+      themeVariables: {
+        nodeBorder: '#000',
+        mainBkg: '#fff',
+        nodeTextColor: '#000',
+        fontSize: '14px'
+      }
+    });
+  </script>
+
+  
+  <div class="mermaid-overlay" id="mermaidOverlay"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const adjustNodeSize = () => {
+        document.querySelectorAll('.mermaid .node').forEach(node => {
+          const rect = node.querySelector('rect');
+          const text = node.querySelector('text');
+          if (rect && text) {
+            const bbox = text.getBBox();
+            const padding = 16;
+            const minWidth = parseFloat(rect.getAttribute('width')) || 160;
+            const newWidth = Math.max(bbox.width + padding, minWidth);
+            rect.setAttribute('width', newWidth);
+          }
+        });
+      };
+
+      
+      adjustNodeSize();
+      window.addEventListener('resize', adjustNodeSize);
+
+      
+      document.querySelectorAll('.mermaid-container').forEach(container => {
+        let currentScale = 1;
+        let initialClickX = null, initialClickY = null;
+        let dragOffsetX = 0, dragOffsetY = 0;
+        let isDragging = false;
+        let dragStartX = 0, dragStartY = 0;
+        let isZoomed = false;
+
+        const mermaidElement = container.querySelector('.mermaid');
+        const overlay = document.getElementById('mermaidOverlay');
+        const originalParent = container.parentElement;
+        const originalNextSibling = container.nextElementSibling;
+
+        
+        const applyScale = () => {
+          if (isZoomed && initialClickX !== null && initialClickY !== null) {
+            const containerRect = container.getBoundingClientRect();
+            const centerX = containerRect.width / 2;
+            const centerY = containerRect.height / 2;
+            const baseTranslateX = centerX - initialClickX * currentScale;
+            const baseTranslateY = centerY - initialClickY * currentScale;
+            const translateX = baseTranslateX + dragOffsetX;
+            const translateY = baseTranslateY + dragOffsetY;
+            mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+          } else {
+            mermaidElement.style.transform = `scale(${currentScale})`;
+          }
+        };
+
+        
+        const handleContainerClick = (e) => {
+          if (!isZoomed) {
+            isZoomed = true;
+            container.classList.add('zoomed');
+            overlay.style.display = 'flex';
+            overlay.appendChild(container);
+
+            const containerRect = container.getBoundingClientRect();
+            initialClickX = e.clientX - containerRect.left;
+            initialClickY = e.clientY - containerRect.top;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+
+            const scaleX = window.innerWidth / containerRect.width;
+            const scaleY = window.innerHeight / containerRect.height;
+            currentScale = Math.min(scaleX, scaleY, 5);
+            applyScale();
+          }
+        };
+
+        
+        const exitZoom = () => {
+          if (isZoomed) {
+            isZoomed = false;
+            container.classList.remove('zoomed');
+            overlay.style.display = 'none';
+            if (originalNextSibling) {
+              originalParent.insertBefore(container, originalNextSibling);
+            } else {
+              originalParent.appendChild(container);
+            }
+            currentScale = 1;
+            initialClickX = null;
+            initialClickY = null;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+            applyScale();
+          }
+        };
+
+        
+        const handleWheel = (e) => {
+          if (isZoomed) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          } else if (e.ctrlKey) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          }
+        };
+
+        
+        container.addEventListener('click', (e) => {
+          if (!isZoomed) handleContainerClick(e);
+        });
+
+        container.addEventListener('dblclick', exitZoom);
+        container.addEventListener('wheel', handleWheel);
+
+        
+        container.addEventListener('mousedown', (e) => {
+          if (isZoomed) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            container.style.cursor = 'grabbing';
+          }
+        });
+
+        const handleMouseMove = (e) => {
+          if (isDragging) {
+            const deltaX = e.clientX - dragStartX;
+            const deltaY = e.clientY - dragStartY;
+            dragOffsetX += deltaX;
+            dragOffsetY += deltaY;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            applyScale();
+          }
+        };
+
+        const handleMouseUp = () => {
+          isDragging = false;
+          container.style.cursor = 'grab';
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+      });
+
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.mermaid-container').forEach(container => {
+            if (container.classList.contains('zoomed')) {
+              container.dispatchEvent(new Event('dblclick'));
+            }
+          });
+        }
+      });
+    });
+  </script>  
+    </body>
+</html>
