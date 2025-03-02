@@ -10,7 +10,7 @@
 <meta property='og:description' content="跟着雷神的课程学习写的一些笔记">
 <meta property='og:url' content='https://serennan.github.io/post/leixiaohua-note-4/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-02T17:51:43&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/leixiaohua-note-4/cover.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-02T20:16:21&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/leixiaohua-note-4/cover.jpg' />
 <meta name="twitter:title" content="【雷霄骅课程笔记】FFmpeg + SDL 视频播放器">
 <meta name="twitter:description" content="跟着雷神的课程学习写的一些笔记"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://serennan.github.io/post/leixiaohua-note-4/cover.jpg' />
@@ -337,6 +337,7 @@
     <li><a href="#代码分析">代码分析</a>
       <ol>
         <li><a href="#1-纹理数据">1. 纹理数据</a></li>
+        <li><a href="#2-循环读取一帧数据">2. 循环读取一帧数据</a></li>
       </ol>
     </li>
   </ol>
@@ -439,7 +440,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>1606 字</span>
+                    <span>1908 字</span>
                 </div>
             
         
@@ -447,7 +448,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-02 17:51</time>
+                    <time>2025-03-02 20:16</time>
                 </div>
             
         
@@ -1177,10 +1178,72 @@
 </span></span><span class="line"><span class="cl">                                                <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">width</span><span class="p">,</span> <span class="n">pCodecCtx</span><span class="o">-&gt;</span><span class="n">height</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 更新纹理
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">SDL_UpdateTexture</span><span class="p">(</span><span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>                                          
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">SDL_UpdateTexture</span><span class="p">(</span><span class="n">sdlTexture</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pFrameYUV</span><span class="o">-&gt;</span><span class="n">linesize</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>    
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h3 id="2-循环读取一帧数据">2. 循环读取一帧数据
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">SDL_WaitEvent</span><span class="p">(</span><span class="o">&amp;</span><span class="n">event</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="p">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">REFRESH_EVENT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">((</span><span class="n">av_read_frame</span><span class="p">(</span><span class="n">pFormatCtx</span><span class="p">,</span> <span class="n">packet</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">thread_exit</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">packet</span><span class="o">-&gt;</span><span class="n">stream_index</span> <span class="o">==</span> <span class="n">videoindex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p>外层循环如果使用 <code>while(av_read_frame(pFormatCtx, packet) &gt;= 0)</code> 可能导致的问题：</p>
+<ol>
+<li>解码流程混乱：</li>
+</ol>
+<ul>
+<li>
+<p>原代码采用事件<strong>驱动模型</strong>，由独立线程定时触发刷新事件，保证按正确帧率解码和渲染。</p>
+</li>
+<li>
+<p>修改后的外层 <code>while (av_read_frame(...)) </code>循环破坏了原有同步机制，导致：</p>
+<ul>
+<li>过快读取 <code>Packet </code>：可能连续发送多个 <code>Packet </code>到解码器，未等待 SDL 渲染完成</li>
+<li>未处理 B 帧依赖：H.264 的 B 帧需要前后参考帧，若解码顺序错误，导致参考帧丢失（reference picture missing）</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>SDL事件处理冲突：</li>
+</ol>
+<ul>
+<li>外层循环强制不断读取 <code>Packet</code> ，可能覆盖正在处理的数据，导致多线程竞争</li>
+<li><code>SDL_WaitEvent</code> 在内层阻塞时，外层循环可能持续读取，导致 <code>Packet</code> 堆积或处理顺序错乱</li>
+</ul>
+
 </section>
 
 
