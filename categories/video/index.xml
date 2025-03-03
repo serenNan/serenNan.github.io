@@ -7,12 +7,12 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright><atom:link href="https://serennan.github.io/categories/video/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>【雷霄骅课程笔记】FFmpeg &#43; SDL 视频播放器</title>
+        <title>【雷霄骅课程笔记】4 FFmpeg &#43; SDL 视频播放器</title>
         <link>https://serennan.github.io/post/leixiaohua-note-4/</link>
         <pubDate>Sun, 02 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/leixiaohua-note-4/</guid>
-        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-4/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】FFmpeg &#43; SDL 视频播放器" /&gt;&lt;h1 id=&#34;ffmpeg-和-sdl-整合实现视频播放器&#34;&gt;FFmpeg 和 SDL 整合实现视频播放器
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-4/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】4 FFmpeg &#43; SDL 视频播放器" /&gt;&lt;h1 id=&#34;ffmpeg-和-sdl-整合实现视频播放器&#34;&gt;FFmpeg 和 SDL 整合实现视频播放器
 &lt;/h1&gt;&lt;h2 id=&#34;视频链接&#34;&gt;视频链接
 &lt;/h2&gt;
 
@@ -1738,7 +1738,9 @@
         <pubDate>Mon, 24 Feb 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/leixiaohua-note-2/</guid>
-        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-2/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" /&gt;
+        <description>&lt;img src="https://serennan.github.io/post/leixiaohua-note-2/cover.jpg" alt="Featured image of post 【雷霄骅课程笔记】2 SDL 视频播放器" /&gt;&lt;h1 id=&#34;sdl-视频播放&#34;&gt;SDL 视频播放
+&lt;/h1&gt;&lt;h2 id=&#34;视频链接&#34;&gt;视频链接
+&lt;/h2&gt;
 
 
 
