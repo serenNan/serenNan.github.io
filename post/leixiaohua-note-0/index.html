@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://serennan.github.io/post/leixiaohua-note-0/'>
 
-<link rel="stylesheet" href="/scss/style.min.d5c93aa2812126cf038f666acc9504726e54721586c357df76ef7261754cc10e.css"><meta property='og:title' content="【雷霄骅课程笔记】0 配置">
+<link rel="stylesheet" href="/scss/style.min.689e8a82fdf31a6c0e806c8904a42fde0d2a93ba02a062e0837491b6fe2e3f27.css"><meta property='og:title' content="【雷霄骅课程笔记】0 配置">
 <meta property='og:description' content="FFmpeg 配置教程，以及如何使用 cmake 配置 FFmpeg 项目">
 <meta property='og:url' content='https://serennan.github.io/post/leixiaohua-note-0/'>
 <meta property='og:site_name' content='serenNan'>
@@ -1355,5 +1355,36 @@ console.log('particles.js loaded - callback');
   });
 </script>
 
+
+<script>
+
+let lastClientX = 0;
+document.addEventListener('mousemove', e => {
+  const edgeThreshold = 50;
+  const btnLeft = document.getElementById('toggle-left-sidebar');
+  const btnRight = document.getElementById('toggle-right-sidebar');
+  
+  
+  lastClientX = e.clientX;
+
+  
+  if (e.clientX < edgeThreshold) {
+    btnLeft.style.opacity = '1';
+    btnLeft.style.pointerEvents = 'auto';
+  } else {
+    btnLeft.style.opacity = '0';
+    btnLeft.style.pointerEvents = 'none';
+  }
+
+  
+  if (window.innerWidth - e.clientX < edgeThreshold) {
+    btnRight.style.opacity = '1';
+    btnRight.style.pointerEvents = 'auto';
+  } else {
+    btnRight.style.opacity = '0';
+    btnRight.style.pointerEvents = 'none';
+  }
+});
+</script>
     </body>
 </html>

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://serennan.github.io/%E9%80%9A%E7%94%A8%E6%A0%BC%E5%BC%8F/'>
 
-<link rel="stylesheet" href="/scss/style.min.d5c93aa2812126cf038f666acc9504726e54721586c357df76ef7261754cc10e.css"><meta property='og:title' content="">
+<link rel="stylesheet" href="/scss/style.min.689e8a82fdf31a6c0e806c8904a42fde0d2a93ba02a062e0837491b6fe2e3f27.css"><meta property='og:title' content="">
 <meta property='og:description' content="文章 封面 1 2 3 4 5 6 7 8 9 10 --- title: 标题 status: description: 描述 date: 2025-12-01 slug: 链接 image: categories: - --- 照片格式 设置宽度和高度： 设置图片对齐方式（通过CSS）： 添加标题（通过title属性）： ">
 <meta property='og:url' content='https://serennan.github.io/%E9%80%9A%E7%94%A8%E6%A0%BC%E5%BC%8F/'>
 <meta property='og:site_name' content='serenNan'>
@@ -887,5 +887,36 @@ console.log('particles.js loaded - callback');
   });
 </script>
 
+
+<script>
+
+let lastClientX = 0;
+document.addEventListener('mousemove', e => {
+  const edgeThreshold = 50;
+  const btnLeft = document.getElementById('toggle-left-sidebar');
+  const btnRight = document.getElementById('toggle-right-sidebar');
+  
+  
+  lastClientX = e.clientX;
+
+  
+  if (e.clientX < edgeThreshold) {
+    btnLeft.style.opacity = '1';
+    btnLeft.style.pointerEvents = 'auto';
+  } else {
+    btnLeft.style.opacity = '0';
+    btnLeft.style.pointerEvents = 'none';
+  }
+
+  
+  if (window.innerWidth - e.clientX < edgeThreshold) {
+    btnRight.style.opacity = '1';
+    btnRight.style.pointerEvents = 'auto';
+  } else {
+    btnRight.style.opacity = '0';
+    btnRight.style.pointerEvents = 'none';
+  }
+});
+</script>
     </body>
 </html>
