@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Wed, 05 Mar 2025 19:43:54 +0800</lastBuildDate><atom:link href="https://serennan.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 08 Mar 2025 00:06:31 +0800</lastBuildDate><atom:link href="https://serennan.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>滑动窗口</title>
         <link>https://serennan.github.io/post/leetcode-window/</link>
         <pubDate>Wed, 05 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/leetcode-window/</guid>
-        <description>&lt;p&gt;本文参考：&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/find-all-anagrams-in-a-string/solutions/9749/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <description>&lt;img src="https://serennan.github.io/post/leetcode-window/cover.png" alt="Featured image of post 滑动窗口" /&gt;&lt;p&gt;本文参考：&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/find-all-anagrams-in-a-string/solutions/9749/hua-dong-chuang-kou-tong-yong-si-xiang-jie-jue-zi-/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;我写了一首诗，把滑动窗口算法变成了默写题&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;算法逻辑&#34;&gt;算法逻辑
