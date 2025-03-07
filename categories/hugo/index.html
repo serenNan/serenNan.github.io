@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://serennan.github.io/categories/hugo/'>
 
-<link rel="stylesheet" href="/scss/style.min.54bf0863ff3c9ff57f1d03934f8cf1f194aeb23c5e2654eebc47eaa1a9a1175f.css"><meta property='og:title' content="Category: Hugo - serenNan">
+<link rel="stylesheet" href="/scss/style.min.d5c93aa2812126cf038f666acc9504726e54721586c357df76ef7261754cc10e.css"><meta property='og:title' content="Category: Hugo - serenNan">
 <meta property='og:description' content="hugo配置">
 <meta property='og:url' content='https://serennan.github.io/categories/hugo/'>
 <meta property='og:site_name' content='serenNan'>
@@ -301,6 +301,7 @@
         </li>
     </ol>
 </aside>
+
 
     <aside class="sidebar right-sidebar sticky">
         
@@ -797,5 +798,23 @@ console.log('particles.js loaded - callback');
 
 
           
+        <div id="toggle-buttons">
+  <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
+  <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
+</div>
+<script>
+  
+  document.getElementById('toggle-left-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('left-sidebar-hidden');
+    this.textContent = document.body.classList.contains('left-sidebar-hidden') ? '->' : '<-';
+  });
+
+  
+  document.getElementById('toggle-right-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('right-sidebar-hidden');
+    this.textContent = document.body.classList.contains('right-sidebar-hidden') ? '<-' : '->';
+  });
+</script>
+
     </body>
 </html>

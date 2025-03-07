@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://serennan.github.io/about/'>
 
-<link rel="stylesheet" href="/scss/style.min.54bf0863ff3c9ff57f1d03934f8cf1f194aeb23c5e2654eebc47eaa1a9a1175f.css"><meta property='og:title' content="关于">
+<link rel="stylesheet" href="/scss/style.min.d5c93aa2812126cf038f666acc9504726e54721586c357df76ef7261754cc10e.css"><meta property='og:title' content="关于">
 <meta property='og:description' content="关于本站 用于存放一些笔记，以及一些个人博客\n">
 <meta property='og:url' content='https://serennan.github.io/about/'>
 <meta property='og:site_name' content='serenNan'>
@@ -303,6 +303,7 @@
         </li>
     </ol>
 </aside>
+
 
     
 
@@ -690,5 +691,23 @@ console.log('particles.js loaded - callback');
 
 
           
+        <div id="toggle-buttons">
+  <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
+  <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
+</div>
+<script>
+  
+  document.getElementById('toggle-left-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('left-sidebar-hidden');
+    this.textContent = document.body.classList.contains('left-sidebar-hidden') ? '->' : '<-';
+  });
+
+  
+  document.getElementById('toggle-right-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('right-sidebar-hidden');
+    this.textContent = document.body.classList.contains('right-sidebar-hidden') ? '<-' : '->';
+  });
+</script>
+
     </body>
 </html>
