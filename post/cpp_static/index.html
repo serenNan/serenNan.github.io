@@ -10,7 +10,7 @@
 <meta property='og:description' content="const 用法">
 <meta property='og:url' content='https://serennan.github.io/post/cpp_static/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-04T22:41:52&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp_static/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-08T14:59:21&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp_static/cover.png' />
 <meta name="twitter:title" content="【C++ 基础进阶】 Static">
 <meta name="twitter:description" content="const 用法"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://serennan.github.io/post/cpp_static/cover.png' />
@@ -306,7 +306,46 @@
 </aside>
 
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+<section class="widget archives">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">目录</h2>
+    <div class="widget--toc">
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#静态变量">静态变量</a></li>
+    <li><a href="#类中的静态变量">类中的静态变量</a>
+      <ol>
+        <li><a href="#初始化">初始化</a></li>
+        <li><a href="#静态对象">静态对象</a></li>
+        <li><a href="#静态函数">静态函数</a></li>
+      </ol>
+    </li>
+    <li><a href="#限定访问范围">限定访问范围</a></li>
+  </ol>
+</nav>
+    </div>
+</section>
+
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article ">
@@ -397,7 +436,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>1623 字</span>
+                    <span>1550 字</span>
                 </div>
             
         
@@ -405,7 +444,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-04 22:41</time>
+                    <time>2025-03-08 14:59</time>
                 </div>
             
         
@@ -423,16 +462,14 @@
 </h1><p>本博客参照：<a class="link" href="https://github.com/Light-City/CPlusPlusThings"  target="_blank" rel="noopener"
     >CPlusPlusThings</a><br>
 加上了一些自己的理解</p>
+<p>当与不同类型一起使用时，static关键字具有不同的含义。我们可以使用static关键字：<br>
+<strong>静态变量：</strong> 函数中的变量，类中的变量<br>
+<strong>静态类的成员：</strong> 类对象和类中的函数</p>
+<p>现在让我们详细看一下静态的这些用法</p>
 <hr>
-<p>当与不同类型一起使用时，static关键字具有不同的含义。我们可以使用static关键字：</p>
-<p><strong>静态变量：</strong> 函数中的变量，类中的变量</p>
-<p><strong>静态类的成员：</strong> 类对象和类中的函数</p>
-<p>现在让我们详细看一下静态的这些用法：</p>
-<p><strong>静态变量</strong></p>
-<ul>
-<li>函数中的静态变量</li>
-</ul>
-<p>当变量声明为static时，空间<strong>将在程序的生命周期内分配</strong>。即使多次调用该函数，静态变量的空间也<strong>只分配一次</strong>，前一次调用中的变量值通过下一次函数调用传递。这对于在C / C ++或需要存储先前函数状态的任何其他应用程序非常有用。</p>
+<h2 id="静态变量">静态变量
+</h2><p>函数中的静态变量</p>
+<p>当变量声明为static时，空间<strong>将在程序的生命周期内分配</strong>。即使多次调用该函数，静态变量的空间也<strong>只分配一次</strong>，前一次调用中的变量值通过下一次函数调用传递。这对于在C / C ++或<strong>需要存储先前函数状态</strong>的任何其他应用程序非常有用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -459,28 +496,28 @@
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"> 
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"> 
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="c1">// static variable 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">static</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">count</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="c1">// value is updated and 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// will be carried to next 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// function calls 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">count</span><span class="o">++</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span> 
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">demo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// static variable
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">static</span> <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">count</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>	 
-</span></span><span class="line"><span class="cl">		<span class="n">demo</span><span class="p">();</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span> 
+</span></span><span class="line"><span class="cl">    <span class="c1">// value is updated and
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// will be carried to next
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// function calls
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">demo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出：</p>
@@ -492,135 +529,11 @@
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0 1 2 3 4 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>您可以在上面的程序中看到变量count被声明为static。因此，它的值通过函数调用来传递。每次调用函数时，都不会对变量计数进行初始化。</p>
-<ul>
-<li>类中的静态变量</li>
-</ul>
-<p>由于声明为static的变量只被初始化一次，因为它们在单独的静态存储中分配了空间，因此类中的静态变量<strong>由对象共享</strong>。对于不同的对象，不能有相同静态变量的多个副本。也是因为这个原因，静态变量不能使用构造函数初始化。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">#include&lt;iostream&gt; 
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="n">Apple</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl">	<span class="p">{</span> 
-</span></span><span class="line"><span class="cl">		<span class="c1">// Do nothing 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">};</span> 
-</span></span><span class="line"><span class="cl"><span class="p">};</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl"><span class="n">Apple</span> <span class="n">obj1</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="n">Apple</span> <span class="n">obj2</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="n">obj1</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span><span class="mi">2</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="n">obj2</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl"><span class="c1">// prints value of i 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">obj1</span><span class="p">.</span><span class="n">i</span><span class="o">&lt;&lt;</span><span class="s">&#34; &#34;</span><span class="o">&lt;&lt;</span><span class="n">obj2</span><span class="p">.</span><span class="n">i</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span> 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>您可以在上面的程序中看到我们已经尝试为多个对象创建静态变量i的多个副本。但这并没有发生。因此，类中的静态变量应由用户使用类外的类名和范围解析运算符显式初始化，如下所示：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">#include&lt;iostream&gt; 
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="n">Apple</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl">	<span class="p">{</span> 
-</span></span><span class="line"><span class="cl">		<span class="c1">// Do nothing 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">};</span> 
-</span></span><span class="line"><span class="cl"><span class="p">};</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">Apple</span><span class="o">::</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="n">Apple</span> <span class="n">obj</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="c1">// prints value of i 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">obj</span><span class="p">.</span><span class="n">i</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span> 
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>输出：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>静态成员</strong></p>
-<ul>
-<li>类对象为静态</li>
-</ul>
-<p>就像变量一样，对象也在声明为static时具有范围，直到程序的生命周期。</p>
-<p>考虑以下程序，其中对象是非静态的。</p>
+</div><p>可以在上面的程序中看到变量count被声明为static。因此，它的值通过函数调用来传递。每次调用函数时，都不会对变量计数进行初始化。</p>
+<hr>
+<h2 id="类中的静态变量">类中的静态变量
+</h2><h3 id="初始化">初始化
+</h3><p>由于声明为static的变量只被初始化一次，因为它们在单独的静态存储中分配了空间，因此类中的静态变量<strong>由对象共享</strong>。对于不同的对象，不能有相同静态变量的多个副本。也是因为这个原因，静态变量不能使用构造函数初始化。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -652,33 +565,107 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include&lt;iostream&gt; 
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// variables inside a class
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">public</span><span class="o">:</span> 
-</span></span><span class="line"><span class="cl">		<span class="n">Apple</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl">		<span class="p">{</span> 
-</span></span><span class="line"><span class="cl">			<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">			<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Inside Constructor</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">		<span class="p">}</span> 
-</span></span><span class="line"><span class="cl">		<span class="o">~</span><span class="n">Apple</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl">		<span class="p">{</span> 
-</span></span><span class="line"><span class="cl">			<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Inside Destructor</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">		<span class="p">}</span> 
-</span></span><span class="line"><span class="cl"><span class="p">};</span> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl">	<span class="p">{</span> 
-</span></span><span class="line"><span class="cl">		<span class="n">Apple</span> <span class="n">obj</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="p">}</span> 
-</span></span><span class="line"><span class="cl">	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;End of main</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">Apple</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// Do nothing
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">Apple</span><span class="o">::</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 要在类外初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Apple</span> <span class="n">obj1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Apple</span> <span class="n">obj2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">obj1</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">obj2</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// prints value of i
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">obj1</span><span class="p">.</span><span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">obj2</span><span class="p">.</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">3 3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="静态对象">静态对象
+</h3><p>就像变量一样，对象也在声明为static时具有范围，直到程序的生命周期。</p>
+<p>对象是<strong>非静态</strong>的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Apple</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Inside Constructor</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">Apple</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Inside Destructor</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Apple</span> <span class="n">obj</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;End of main</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出：</p>
@@ -696,6 +683,7 @@
 </div>
 </div><p>在上面的程序中，对象在if块内声明为非静态。因此，变量的范围仅在if块内。因此，当创建对象时，将调用构造函数，并且在if块的控制权越过析构函数的同时调用，因为对象的范围仅在声明它的if块内。
 如果我们将对象声明为静态，现在让我们看看输出的变化。</p>
+<p>对象是<strong>静态</strong>的：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -725,35 +713,37 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
+</span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include&lt;iostream&gt; 
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">public</span><span class="o">:</span> 
-</span></span><span class="line"><span class="cl">		<span class="n">Apple</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl">		<span class="p">{</span> 
-</span></span><span class="line"><span class="cl">			<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">			<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Inside Constructor</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">		<span class="p">}</span> 
-</span></span><span class="line"><span class="cl">		<span class="o">~</span><span class="n">Apple</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl">		<span class="p">{</span> 
-</span></span><span class="line"><span class="cl">			<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Inside Destructor</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">		<span class="p">}</span> 
-</span></span><span class="line"><span class="cl"><span class="p">};</span> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> 
-</span></span><span class="line"><span class="cl">	<span class="p">{</span> 
-</span></span><span class="line"><span class="cl">		<span class="k">static</span> <span class="n">Apple</span> <span class="n">obj</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">	<span class="p">}</span> 
-</span></span><span class="line"><span class="cl">	<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;End of main</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Apple</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Inside Constructor</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">Apple</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Inside Destructor</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">static</span> <span class="n">Apple</span> <span class="n">obj</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;End of main</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出：</p>
@@ -769,12 +759,9 @@
 </span></span><span class="line"><span class="cl">Inside Destructor
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>您可以清楚地看到输出的变化。现在，在main结束后调用析构函数。这是因为静态对象的范围是贯穿程序的生命周期。</p>
-<ul>
-<li>类中的静态函数</li>
-</ul>
-<p>就像类中的静态数据成员或静态变量一样，静态成员函数也不依赖于类的对象。我们被允许使用对象和&rsquo;.&lsquo;来调用静态成员函数。但建议使用类名和范围解析运算符调用静态成员。</p>
-<p>允许静态成员函数仅访问静态数据成员或其他静态成员函数，它们无法访问类的非静态数据成员或成员函数。</p>
+</div><p>可以清楚地看到输出的变化。现在，在main结束后调用析构函数。这是因为静态对象的范围是贯穿程序的生命周期。</p>
+<h3 id="静态函数">静态函数
+</h3><p>就像类中的静态数据成员或静态变量一样，静态成员函数也不依赖于类的对象。允许使用对象和 <code>.</code> 来调用静态成员函数。但建议使用<strong>类名和范围解析运算符</strong>调用静态成员。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -796,76 +783,118 @@
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include&lt;iostream&gt; 
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span> 
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">    <span class="k">public</span><span class="o">:</span> 
-</span></span><span class="line"><span class="cl">        <span class="c1">// static member function 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">static</span> <span class="kt">void</span> <span class="n">printMsg</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">&#34;Welcome to Apple!&#34;</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Apple</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">A</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_static</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">non_static</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">B</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;A&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">void</span> <span class="nf">B</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_static</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">non_static</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// error
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">A</span><span class="p">();</span> <span class="c1">// error
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;B&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// main function 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">    <span class="c1">// invoking a static member function 
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Apple</span><span class="o">::</span><span class="n">printMsg</span><span class="p">();</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span> 
+</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">non_static</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">int</span> <span class="n">_static</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// main function
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Apple</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="p">.</span><span class="n">A</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">Apple</span> <span class="o">::</span> <span class="n">B</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>输出：</p>
+</div><p>静态成员函数仅能访问静态数据成员或其他静态成员函数，它们无法访问类的非静态数据成员或成员函数。</p>
+<h2 id="限定访问范围">限定访问范围
+</h2><p>static还有限定访问范围的作用（类似于匿名名字空间）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Welcome to Apple!
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><strong>限定访问范围</strong>
-static还有限定访问范围的作用（类似于匿名名字空间）。来自issue:https://github.com/Light-City/CPlusPlusThings/issues/142</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// source1.cpp
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">extern</span> <span class="kt">void</span> <span class="nf">sayHello</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span> <span class="o">=</span> <span class="s">&#34;Hello World!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span> <span class="o">=</span> <span class="s">&#34;Hello World!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">sayHello</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// source2.cpp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// source2.cpp
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;cstdio&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">extern</span> <span class="kt">char</span><span class="o">*</span> <span class="n">msg</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">extern</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">sayHello</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>编译指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">g++ -c source1.cpp -o source1.o
+</span></span><span class="line"><span class="cl">g++ -c source2.cpp -o source2.o
+</span></span><span class="line"><span class="cl">g++ source1.o source2.o -o hello_program
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>g++对于上面两个代码文件是可以正常编译并且打印Hello World!，但如果给source1.cpp中的msg加上static，则会导致undefined reference to &lsquo;msg&rsquo;的编译错误：</p>
@@ -891,7 +920,8 @@ static还有限定访问范围的作用（类似于匿名名字空间）。来�
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><p>static关键字将变量的作用域限制在其定义的编译单元内部。这样，msg变量只能在source1.cpp中使用，对其他文件不可见。</p>
+
 </section>
 
 
