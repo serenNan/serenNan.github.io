@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="FFmpeg 配置教程，以及如何使用 cmake 配置 FFmpeg 项目">
-<title>【雷霄骅课程笔记】0 配置</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="使用vscode开发qt项目">
+<title>VS &#43; Qt6</title>
 
-<link rel='canonical' href='https://serennan.github.io/post/leixiaohua-note-0/'>
+<link rel='canonical' href='https://serennan.github.io/post/vscodeqt/'>
 
-<link rel="stylesheet" href="/scss/style.min.98d8053be62a6d9ae18871a7ab15d56c5cfab2726e8a7f16f72b420af002e4be.css"><meta property='og:title' content="【雷霄骅课程笔记】0 配置">
-<meta property='og:description' content="FFmpeg 配置教程，以及如何使用 cmake 配置 FFmpeg 项目">
-<meta property='og:url' content='https://serennan.github.io/post/leixiaohua-note-0/'>
+<link rel="stylesheet" href="/scss/style.min.98d8053be62a6d9ae18871a7ab15d56c5cfab2726e8a7f16f72b420af002e4be.css"><meta property='og:title' content="VS + Qt6">
+<meta property='og:description' content="使用vscode开发qt项目">
+<meta property='og:url' content='https://serennan.github.io/post/vscodeqt/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-02-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-02T17:51:43&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/leixiaohua-note-0/cover.jpg' />
-<meta name="twitter:title" content="【雷霄骅课程笔记】0 配置">
-<meta name="twitter:description" content="FFmpeg 配置教程，以及如何使用 cmake 配置 FFmpeg 项目"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://serennan.github.io/post/leixiaohua-note-0/cover.jpg' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-09T14:02:03&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/vscodeqt/cover.jpg' />
+<meta name="twitter:title" content="VS + Qt6">
+<meta name="twitter:description" content="使用vscode开发qt项目"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://serennan.github.io/post/vscodeqt/cover.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -327,27 +327,11 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#视频链接">视频链接</a></li>
-    <li><a href="#课程简介">课程简介</a></li>
-    <li><a href="#ffmpeg-配置">FFmpeg 配置</a>
-      <ol>
-        <li><a href="#前提准备">前提准备</a></li>
-        <li><a href="#编译安装">编译安装</a></li>
-      </ol>
-    </li>
-    <li><a href="#cmake配置"><code>CMake</code>配置</a>
-      <ol>
-        <li><a href="#安装-cmake">安装 <code>CMake</code></a></li>
-        <li><a href="#书写-cmakeliststxt">书写 <code>CMakeLists.txt</code></a></li>
-        <li><a href="#测试代码">测试代码</a></li>
-        <li><a href="#编译">编译</a></li>
-      </ol>
-    </li>
-    <li><a href="#常见问题">常见问题</a>
-      <ol>
-        <li><a href="#解释器">解释器</a></li>
-      </ol>
-    </li>
+    <li><a href="#1-安装qt6">1. 安装qt6</a></li>
+    <li><a href="#2-安装插件">2. 安装插件</a></li>
+    <li><a href="#3-启动项目">3. 启动项目</a></li>
+    <li><a href="#4-单独修改ui界面">4. 单独修改ui界面</a></li>
+    <li><a href="#问题">问题</a></li>
   </ol>
 </nav>
     </div>
@@ -364,13 +348,13 @@
     
         <header class="article-header">
         <div class="article-image">
-            <a href="/post/leixiaohua-note-0/">
-                <img src="/post/leixiaohua-note-0/cover.jpg"
+            <a href="/post/vscodeqt/">
+                <img src="/post/vscodeqt/cover.jpg"
                         
                         width="4608" 
                         height="3456" 
                         loading="lazy"
-                        alt="Featured image of post 【雷霄骅课程笔记】0 配置" />
+                        alt="Featured image of post VS &#43; Qt6" />
                 
             </a>
         </div>
@@ -389,12 +373,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/leixiaohua-note-0/">【雷霄骅课程笔记】0 配置</a>
+            <a href="/post/vscodeqt/">VS &#43; Qt6</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            FFmpeg 配置教程，以及如何使用 cmake 配置 FFmpeg 项目
+            使用vscode开发qt项目
         </h3>
         
     </div>
@@ -440,7 +424,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-02-10</time>
+                    <time>2025-03-09</time>
                 </div>
             
         
@@ -448,7 +432,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>870 字</span>
+                    <span>538 字</span>
                 </div>
             
         
@@ -456,7 +440,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-02 17:51</time>
+                    <time>2025-03-09 14:02</time>
                 </div>
             
         
@@ -470,9 +454,155 @@
     <section class="article-content">
     
     
-    <h1 id="vscode-配置-ffmpeg">vscode 配置 FFmpeg
-</h1><h2 id="视频链接">视频链接
-</h2><p>这里的配置教程是另一处的，不是雷神的</p>
+    <h1 id="vs-配置-qt6-教程">VS 配置 Qt6 教程
+</h1><p>雷神后面的视频是要开发一个图形界面，这里我使用vscode + qt + cmake来开发。</p>
+<hr>
+<h2 id="1-安装qt6">1. 安装qt6
+</h2><p>这里网上很多教程，推荐一个 CSDN 上的教程：<a class="link" href="https://blog.csdn.net/caoshangpa/article/details/135420524"  target="_blank" rel="noopener"
+    >Qt6入门教程 2：Qt6下载与安装</a></p>
+
+<div class="notice notice-warning" >
+    <div class="notice-title"></div><p>主要区别是我下载的是 linux版本<br>
+以及选择组件时，我使用的是6.5.3版本</p></div>
+
+<p><img src="/post/vscodeqt/image-1.png"
+	width="1312"
+	height="598"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="219"
+		data-flex-basis="526px"
+	
+></p>
+<hr>
+<h2 id="2-安装插件">2. 安装插件
+</h2><p>vscode安装好 Qt Tools 和 Qt Configure 这两个插件，并配置一下Qt Configure。</p>
+<p><img src="/post/vscodeqt/image-2.png"
+	width="1234"
+	height="714"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="172"
+		data-flex-basis="414px"
+	
+></p>
+
+<div class="notice notice-info" >
+    <div class="notice-title"></div><p>注意这里的Qt Dir 存放的是安装好的qt的根目录，我这里多一个 Qt文件夹是因为我下载了多个版本的qt</p></div>
+
+<hr>
+<h2 id="3-启动项目">3. 启动项目
+</h2><p>打开一个空文件夹，按下<code>shift + ctrl + p</code> 输入指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">QtConfigure:New Project
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后根据提示，项目名字 -&gt; qt 组件 -&gt; cmake -&gt; 是否生成 ui 文件</p>
+<p>然后会生成下面这些文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">├── CMakeLists.txt
+</span></span><span class="line"><span class="cl">└── src
+</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.cpp
+</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.h
+</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.ui
+</span></span><span class="line"><span class="cl">    └── main.cpp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+
+<div class="notice notice-info" >
+    <div class="notice-title"></div><p>注意这里打开 CMakeLists.txt 文件会发现用的是 Qt5 的东西<br>
+但我下载的是 Qt6 ，所以这里得改成 Qt6</p></div>
+
+<p><img src="/post/vscodeqt/image-3.png"
+	width="1217"
+	height="734"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="165"
+		data-flex-basis="397px"
+	
+></p>
+<p>接下来用 CMake 来配置项目，按下<code>shift + ctrl + p</code> 输入指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CMake：Configure with CMake Debugger
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置完运行项目</p>
+<p><img src="/post/vscodeqt/image-4.png"
+	width="1799"
+	height="1208"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="148"
+		data-flex-basis="357px"
+	
+></p>
+<p>出现窗口说明配置成功</p>
+<h2 id="4-单独修改ui界面">4. 单独修改ui界面
+</h2><p>右键 ui 文件选择 Edit in Qt Designer 可以修改 ui 文件</p>
+<p><img src="/post/vscodeqt/image-5.png"
+	width="1756"
+	height="1139"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="154"
+		data-flex-basis="370px"
+	
+></p>
+<p>拖入一个按钮检验一下，保存并退出，再去查看ui文件会发现已经帮我们加上相应的代码，重新运行项目</p>
+<p><img src="/post/vscodeqt/image-6.png"
+	width="1594"
+	height="1105"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="144"
+		data-flex-basis="346px"
+	
+></p>
+<h2 id="问题">问题
+</h2>
+<div class="notice notice-info" >
+    <div class="notice-title"></div><p>如果没有出现窗口，可能还需要安装一个 VcXsrv</p></div>
+
+<p>后续再找时间写一个安装教程，这里先放一个别人的视频教程：</p>
 
 
 
@@ -483,7 +613,7 @@
 
 
 <div class="video-wrapper">
-    <iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;high_quality=1&amp;page=2&bvid=BV1DB4y1o7XX"
+    <iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;high_quality=1&amp;page=1&bvid=BV1RK411n79v"
             scrolling="no"
             frameborder="no"
             framespacing="0"
@@ -492,427 +622,6 @@
     </iframe>
 </div>
 
-<h2 id="课程简介">课程简介
-</h2><p>雷神的课程主要使用 <code>Visual Studio</code> 进行演示，但由于我个人不太习惯使用 VS，因此我选择了在 <code>WSL</code> 环境下使用 <code>VSCode</code> 和 <code>CMake</code> 来进行学习和实践<br>
-<code>windows</code> 环境总是出现各种不必要的麻烦，而且其实 <code>linux</code> 环境对音视频开发者更友好<br>
-配置过程些许复杂，但只要按照步骤来，不会有太大问题，有问题可以留言，我会尽力解答</p>
-
-<div class="notice notice-info" >
-    <div class="notice-title"></div><p>我使用的资料都是比较新的（2025年2月），所以博客的一些代码和流程什么的可能和雷神介绍的有些不同</p></div>
-
-<h2 id="ffmpeg-配置">FFmpeg 配置
-</h2><h3 id="前提准备">前提准备
-</h3><p>安装好 <code>Ubuntu</code> 和 <code>VSCode</code>, 并且配置好 <code>WSL</code> 和 <code>VSCode</code> 的连接<br>
-这里网上很多教程，就不多说了</p>
-<h3 id="编译安装">编译安装
-</h3><p>创建安装目录：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo mkdir -p /usr/local/ffmpeg
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>下载 <code>FFmpeg</code> 源码：
-我这里都是用最新的 <code>FFmpeg</code> 源码<br>
-点击链接：<a class="link" href="https://ffmpeg.org/download.html"  target="_blank" rel="noopener"
-    >下载地址</a><br>
-目前最新版是 <code>7.1</code> ，而且我是 <code>ubuntu</code> 环境</p>
-<p><img src="/post/leixiaohua-note-0/image.png"
-	width="811"
-	height="849"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="95"
-		data-flex-basis="229px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/image-1.png"
-	width="890"
-	height="132"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="674"
-		data-flex-basis="1618px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/image-2.png"
-	width="521"
-	height="335"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="155"
-		data-flex-basis="373px"
-	
-></p>
-<p>下载压缩包之后进行解压：（具体解压指令可以问问 ai ）</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">tar -xv ffmpeg-7.1.tar.xz
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>解压完之后要进入目录：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ffmpeg-7.1
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后进行配置：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure <span class="se">\ </span>                                                                                <span class="m">0</span> <span class="o">(</span>20.192s<span class="o">)</span> &lt; 14:23:34          --prefix<span class="o">=</span><span class="s1">&#39;/usr/local/ffmpeg&#39;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-gpl <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-nonfree <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-ffplay <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-libfdk-aac <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-libmp3lame <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-libx264 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-libx265 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-filter<span class="o">=</span>delogo <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-debug <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --disable-optimizations <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-libspeex <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-shared <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-pthreads <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-version3 <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --enable-hardcoded-tables <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --extra-cflags<span class="o">=</span><span class="s2">&#34;-I/usr/local/ffmpeg/include&#34;</span> <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>          --extra-ldflags<span class="o">=</span><span class="s2">&#34;-L/usr/local/ffmpeg/lib&#34;</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>这里可能会不断报错，显示缺各种库，那根据提示去安装对应库就行</p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%853.png"
-	width="1042"
-	height="771"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="135"
-		data-flex-basis="324px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%854.png"
-	width="693"
-	height="545"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="127"
-		data-flex-basis="305px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%855.png"
-	width="716"
-	height="495"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="144"
-		data-flex-basis="347px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%856.png"
-	width="718"
-	height="297"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="241"
-		data-flex-basis="580px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%857.png"
-	width="703"
-	height="269"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="261"
-		data-flex-basis="627px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%858.png"
-	width="722"
-	height="529"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="136"
-		data-flex-basis="327px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%859.png"
-	width="709"
-	height="442"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="160"
-		data-flex-basis="384px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8510.png"
-	width="704"
-	height="577"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="122"
-		data-flex-basis="292px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8511.png"
-	width="715"
-	height="523"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="136"
-		data-flex-basis="328px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8512.png"
-	width="715"
-	height="536"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="133"
-		data-flex-basis="320px"
-	
-></p>
-<p>下载：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install libasound2-dev
-</span></span><span class="line"><span class="cl">sudo apt-get install libpulse-dev
-</span></span><span class="line"><span class="cl">sudo apt-get install libx11-dev
-</span></span><span class="line"><span class="cl">sudo apt-get install xorg-dev
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>配置：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./configure --prefix<span class="o">=</span>/usr/local/ffmpeg --enable-shared --enable-video-x11 --enable-x11-shared --enable-video-x11-vm
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8513.png"
-	width="714"
-	height="317"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="225"
-		data-flex-basis="540px"
-	
-></p>
-<p><img src="/post/leixiaohua-note-0/%E5%AE%89%E8%A3%8514.png"
-	width="696"
-	height="376"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="185"
-		data-flex-basis="444px"
-	
-></p>
-<p><code>ffplay</code> 一直无法播放视频的话（因为我是用的wsl2），尝试在终端配置文件加上 <code>SDL_RENDER_DRIVER=software</code></p>
-<p>在 <code>fish</code> 终端配置文件加</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">set</span> <span class="o">-</span><span class="n">x</span> <span class="n">SDL_RENDER_DRIVER</span> <span class="n">software</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>具体怎么加可以问问 ai</p>
-<h2 id="cmake配置"><code>CMake</code>配置
-</h2><h3 id="安装-cmake">安装 <code>CMake</code>
-</h3><p>安装插件 <code>CMake Tools</code></p>
-<h3 id="书写-cmakeliststxt">书写 <code>CMakeLists.txt</code>
-</h3><p>在 <code>CMakeLists.txt</code> 下写入以下内容：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cmake" data-lang="cmake"><span class="line"><span class="cl"><span class="c"># 指定 CMake 的最低版本要求
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.10</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 设置项目名称和版本
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">project</span><span class="p">(</span><span class="s">MyProject</span> <span class="s">VERSION</span> <span class="s">1.0</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 设置 C++ 标准
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">11</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 依赖 compile_commands.json 文件来理解项目的编译环境
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_EXPORT_COMPILE_COMMANDS</span> <span class="s">ON</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 设置 FFmpeg 库的路径
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">set</span><span class="p">(</span><span class="s">FFmpeg_DIR</span> <span class="s">/usr/local/ffmpeg</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加项目中的头文件目录
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">FFmpeg_DIR</span><span class="o">}</span><span class="s">/include</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加库文件目录
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">link_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">FFmpeg_DIR</span><span class="o">}</span><span class="s">/lib</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 添加可执行文件（就是源码的位置）
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">main</span> <span class="s">src/testffmpeg.cpp</span><span class="p">)</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 链接 FFmpeg 库
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">main</span> <span class="s">avcodec</span> <span class="s">avformat</span> <span class="s">avutil</span><span class="p">)</span><span class="err">
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="测试代码">测试代码
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define __STDC_CONSTANT_MACROS
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="s">&#34;C&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;libavcodec/avcodec.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%s&#34;</span><span class="p">,</span> <span class="n">avcodec_configuration</span><span class="p">());</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="编译">编译
-</h3><p>输入指令</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> build
-</span></span><span class="line"><span class="cl">cmake ..
-</span></span><span class="line"><span class="cl">make
-</span></span><span class="line"><span class="cl">./main
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>如果成功输出，说明配置成功</p>
-<h2 id="常见问题">常见问题
-</h2><h3 id="解释器">解释器
-</h3><p>如果成功输出了发现源文件仍然显示找不到头文件，可能是没安装好解释器，我使用的是 <code>clangd</code>，<code>linux</code> 环境安装很简单，问一下 ai 就行<br>
-安装完成之后，<code>clangd</code> 会依赖 <code>compile_commands.json</code> 文件来理解项目的编译环境</p>
 
 </section>
 
@@ -935,30 +644,6 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/post/vscodeqt/">
-        
-        
-            <div class="article-image">
-                <img src="/post/vscodeqt/cover.26c6bb1e5c3c89a60ddf413fcb42b8ed.jpg" 
-                        width="4608" 
-                        height="3456" 
-                        loading="lazy"
-                        alt="Featured image of post VS &#43; Qt6"
-                        data-key="vscode&amp;&amp;qt" 
-                        data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">VS &#43; Qt6</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="has-image">
@@ -1051,6 +736,30 @@
 
         <div class="article-details">
             <h2 class="article-title">【雷霄骅课程笔记】2 SDL 视频播放器</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/leixiaohua-note-1/">
+        
+        
+            <div class="article-image">
+                <img src="/post/leixiaohua-note-1/cover.26c6bb1e5c3c89a60ddf413fcb42b8ed.jpg" 
+                        width="4608" 
+                        height="3456" 
+                        loading="lazy"
+                        alt="Featured image of post 【雷霄骅课程笔记】1 FFmpeg 视频解码器"
+                        data-key="leixiaohua-note-1" 
+                        data-hash="md5-Jsa7Hlw8iaYN30E/y0K47Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【雷霄骅课程笔记】1 FFmpeg 视频解码器</h2>
         </div>
     </a>
 </article>
@@ -1336,7 +1045,195 @@ console.log('particles.js loaded - callback');
 </script>
 
 
-          
+        <link rel="stylesheet" href="/css/mermaid.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      flowchart: {
+        htmlLabels: false,
+        useMaxWidth: false,
+        nodeSpacing: 50,
+        rankSpacing: 50,
+        defaultRenderer: 'svg'
+      },
+      theme: 'default',
+      securityLevel: 'loose',
+      themeVariables: {
+        nodeBorder: '#000',
+        mainBkg: '#fff',
+        nodeTextColor: '#000',
+        fontSize: '14px'
+      }
+    });
+  </script>
+
+  
+  <div class="mermaid-overlay" id="mermaidOverlay"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const adjustNodeSize = () => {
+        document.querySelectorAll('.mermaid .node').forEach(node => {
+          const rect = node.querySelector('rect');
+          const text = node.querySelector('text');
+          if (rect && text) {
+            const bbox = text.getBBox();
+            const padding = 16;
+            const minWidth = parseFloat(rect.getAttribute('width')) || 160;
+            const newWidth = Math.max(bbox.width + padding, minWidth);
+            rect.setAttribute('width', newWidth);
+          }
+        });
+      };
+
+      
+      adjustNodeSize();
+      window.addEventListener('resize', adjustNodeSize);
+
+      
+      document.querySelectorAll('.mermaid-container').forEach(container => {
+        let currentScale = 1;
+        let initialClickX = null, initialClickY = null;
+        let dragOffsetX = 0, dragOffsetY = 0;
+        let isDragging = false;
+        let dragStartX = 0, dragStartY = 0;
+        let isZoomed = false;
+
+        const mermaidElement = container.querySelector('.mermaid');
+        const overlay = document.getElementById('mermaidOverlay');
+        const originalParent = container.parentElement;
+        const originalNextSibling = container.nextElementSibling;
+
+        
+        const applyScale = () => {
+          if (isZoomed && initialClickX !== null && initialClickY !== null) {
+            const containerRect = container.getBoundingClientRect();
+            const centerX = containerRect.width / 2;
+            const centerY = containerRect.height / 2;
+            const baseTranslateX = centerX - initialClickX * currentScale;
+            const baseTranslateY = centerY - initialClickY * currentScale;
+            const translateX = baseTranslateX + dragOffsetX;
+            const translateY = baseTranslateY + dragOffsetY;
+            mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+          } else {
+            mermaidElement.style.transform = `scale(${currentScale})`;
+          }
+        };
+
+        
+        const handleContainerClick = (e) => {
+          if (!isZoomed) {
+            isZoomed = true;
+            container.classList.add('zoomed');
+            overlay.style.display = 'flex';
+            overlay.appendChild(container);
+
+            const containerRect = container.getBoundingClientRect();
+            initialClickX = e.clientX - containerRect.left;
+            initialClickY = e.clientY - containerRect.top;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+
+            const scaleX = window.innerWidth / containerRect.width;
+            const scaleY = window.innerHeight / containerRect.height;
+            currentScale = Math.min(scaleX, scaleY, 5);
+            applyScale();
+          }
+        };
+
+        
+        const exitZoom = () => {
+          if (isZoomed) {
+            isZoomed = false;
+            container.classList.remove('zoomed');
+            overlay.style.display = 'none';
+            if (originalNextSibling) {
+              originalParent.insertBefore(container, originalNextSibling);
+            } else {
+              originalParent.appendChild(container);
+            }
+            currentScale = 1;
+            initialClickX = null;
+            initialClickY = null;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+            applyScale();
+          }
+        };
+
+        
+        const handleWheel = (e) => {
+          if (isZoomed) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          } else if (e.ctrlKey) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          }
+        };
+
+        
+        container.addEventListener('click', (e) => {
+          if (!isZoomed) handleContainerClick(e);
+        });
+
+        container.addEventListener('dblclick', exitZoom);
+        container.addEventListener('wheel', handleWheel);
+
+        
+        container.addEventListener('mousedown', (e) => {
+          if (isZoomed) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            container.style.cursor = 'grabbing';
+          }
+        });
+
+        const handleMouseMove = (e) => {
+          if (isDragging) {
+            const deltaX = e.clientX - dragStartX;
+            const deltaY = e.clientY - dragStartY;
+            dragOffsetX += deltaX;
+            dragOffsetY += deltaY;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            applyScale();
+          }
+        };
+
+        const handleMouseUp = () => {
+          isDragging = false;
+          container.style.cursor = 'grab';
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+      });
+
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.mermaid-container').forEach(container => {
+            if (container.classList.contains('zoomed')) {
+              container.dispatchEvent(new Event('dblclick'));
+            }
+          });
+        }
+      });
+    });
+  </script>  
         <div id="toggle-buttons">
   <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
   <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
