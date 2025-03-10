@@ -10,7 +10,7 @@
 <meta property='og:description' content="Qt 基础介绍">
 <meta property='og:url' content='https://serennan.github.io/post/qt-base-1/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-09T21:27:13&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-10T16:21:41&#43;08:00'/>
 <meta name="twitter:title" content="【Qt 入门】1 第一个项目">
 <meta name="twitter:description" content="Qt 基础介绍">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -329,6 +329,8 @@
     <li><a href="#视频链接">视频链接</a></li>
     <li><a href="#maincpp">main.cpp</a></li>
     <li><a href="#mainwindowui">mainwindow.ui</a></li>
+    <li><a href="#mainwindowh">mainwindow.h</a></li>
+    <li><a href="#mainwindowcpp">mainwindow.cpp</a></li>
   </ol>
 </nav>
     </div>
@@ -417,7 +419,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>349 字</span>
+                    <span>530 字</span>
                 </div>
             
         
@@ -425,7 +427,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-09 21:27</time>
+                    <time>2025-03-10 16:21</time>
                 </div>
             
         
@@ -557,6 +559,80 @@
 </span></span><span class="line"><span class="cl"> <span class="nt">&lt;resources/&gt;</span>
 </span></span><span class="line"><span class="cl"> <span class="nt">&lt;connections/&gt;</span>
 </span></span><span class="line"><span class="cl"><span class="nt">&lt;/ui&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="mainwindowh">mainwindow.h
+</h2><p>这个文件是窗口界面对应的类的头文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;ui_mainwindow.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QMainWindow&gt;</span><span class="cp"> </span><span class="c1">// Qt 标准窗口类头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">mainwindow</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QMainWindow</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Q_OBJECT</span><span class="p">;</span> <span class="c1">// 这个宏是为了能够使用Qt中的信号槽机制
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mainwindow</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">mainwindow</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Ui_mainwindow</span> <span class="o">*</span><span class="n">ui</span><span class="p">;</span> <span class="c1">// 定义指针指向窗口的 UI 对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="mainwindowcpp">mainwindow.cpp
+</h2><p>这个文件是窗口界面对应的类的源文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;mainwindow.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">mainwindow</span><span class="o">::</span><span class="n">mainwindow</span><span class="p">(</span><span class="n">QWidget</span><span class="o">*</span> <span class="n">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">:</span> <span class="n">QMainWindow</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">,</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui_mainwindow</span><span class="p">)</span> <span class="c1">// 基于 mainwindow.ui 创建一个实例对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将 mainwindow.ui 的示例对象和当前类的对象进行关联
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">mainwindow</span><span class="o">::~</span><span class="n">mainwindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
