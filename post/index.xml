@@ -7,7 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright>
-        <lastBuildDate>Wed, 12 Mar 2025 11:01:46 +0800</lastBuildDate><atom:link href="https://serennan.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 12 Mar 2025 11:23:44 +0800</lastBuildDate><atom:link href="https://serennan.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>【Qt 配置】工程结构调整</title>
         <link>https://serennan.github.io/post/qt-structure/</link>
         <pubDate>Wed, 12 Mar 2025 00:00:00 +0000</pubDate>
@@ -406,6 +406,10 @@
 且这时候我们无法关闭 widget 窗口，只有当我们把dialog窗口关闭时，widget窗口才能被聚焦，且主窗口也会显示。&lt;/p&gt;
 &lt;h2 id=&#34;qmainwindow&#34;&gt;QMainWindow
 &lt;/h2&gt;&lt;p&gt;具有菜单栏，工具栏，状态栏&lt;/p&gt;
+&lt;h2 id=&#34;工程结构调整&#34;&gt;工程结构调整
+&lt;/h2&gt;&lt;p&gt;太多窗口类堆在src文件夹下可能难以维护，所以可以看这篇文章调整一下工程结构：
+&lt;a class=&#34;link&#34; href=&#34;https://serennan.github.io/post/qt-structure/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【Qt配置】工程结构调整&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>

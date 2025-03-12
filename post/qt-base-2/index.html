@@ -10,7 +10,7 @@
 <meta property='og:description' content="Qt 基础介绍">
 <meta property='og:url' content='https://serennan.github.io/post/qt-base-2/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-11T16:43:17&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-12T11:23:44&#43;08:00'/>
 <meta name="twitter:title" content="【Qt 入门】2 Qt 窗口类">
 <meta name="twitter:description" content="Qt 基础介绍">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -338,6 +338,7 @@
       </ol>
     </li>
     <li><a href="#qmainwindow">QMainWindow</a></li>
+    <li><a href="#工程结构调整">工程结构调整</a></li>
   </ol>
 </nav>
     </div>
@@ -426,7 +427,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>909 字</span>
+                    <span>966 字</span>
                 </div>
             
         
@@ -434,7 +435,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-11 16:43</time>
+                    <time>2025-03-12 11:23</time>
                 </div>
             
         
@@ -694,6 +695,10 @@
 且这时候我们无法关闭 widget 窗口，只有当我们把dialog窗口关闭时，widget窗口才能被聚焦，且主窗口也会显示。</p>
 <h2 id="qmainwindow">QMainWindow
 </h2><p>具有菜单栏，工具栏，状态栏</p>
+<h2 id="工程结构调整">工程结构调整
+</h2><p>太多窗口类堆在src文件夹下可能难以维护，所以可以看这篇文章调整一下工程结构：
+<a class="link" href="https://serennan.github.io/post/qt-structure/"  target="_blank" rel="noopener"
+    >【Qt配置】工程结构调整</a></p>
 
 </section>
 
