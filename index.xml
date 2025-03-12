@@ -12,7 +12,7 @@
         <pubDate>Wed, 12 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/qt-structure/</guid>
-        <description>&lt;p&gt;由于插件 Qt Configure 帮我们创建的文件全都丢在 src 文件夹下，这时如果创建多个窗口类，工程结构就显得复杂。所以本次博客帮助大家完善一下工程结构。&lt;/p&gt;
+        <description>&lt;img src="https://serennan.github.io/post/qt-structure/cover.png" alt="Featured image of post 【Qt 配置】工程结构调整" /&gt;&lt;p&gt;由于插件 Qt Configure 帮我们创建的文件全都丢在 src 文件夹下，这时如果创建多个窗口类，工程结构就显得复杂。所以本次博客帮助大家完善一下工程结构。&lt;/p&gt;
 &lt;p&gt;特别鸣谢小伙伴 YusJade 帮我解决结构调整带来的问题。&lt;br&gt;
 博客链接：&lt;a class=&#34;link&#34; href=&#34;https://yusjade.github.io/posts/cmake_autouic_problem/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;CMake + Qt 无法编译.ui 文件的解决办法&lt;/a&gt;&lt;/p&gt;
@@ -159,7 +159,7 @@
         <pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/qt-base-2/</guid>
-        <description>&lt;h1 id=&#34;qt-窗口类&#34;&gt;Qt 窗口类
+        <description>&lt;img src="https://serennan.github.io/post/qt-base-2/cover.png" alt="Featured image of post 【Qt 入门】2 Qt 窗口类" /&gt;&lt;h1 id=&#34;qt-窗口类&#34;&gt;Qt 窗口类
 &lt;/h1&gt;&lt;h2 id=&#34;基础窗口类&#34;&gt;基础窗口类
 &lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/qt-base-2/%E5%9F%BA%E7%A1%80%E7%AA%97%E5%8F%A3%E7%B1%BB.png&#34;
 	width=&#34;1773&#34;
@@ -417,7 +417,7 @@
         <pubDate>Sun, 09 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/qt-base-1/</guid>
-        <description>&lt;p&gt;这里的笔记是根据&lt;a class=&#34;link&#34; href=&#34;https://subingwen.cn/qt/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <description>&lt;img src="https://serennan.github.io/post/qt-base-1/cover.png" alt="Featured image of post 【Qt 入门】1 第一个 Qt 项目" /&gt;&lt;p&gt;这里的笔记是根据&lt;a class=&#34;link&#34; href=&#34;https://subingwen.cn/qt/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;爱编程的大丙&lt;/a&gt;所写，写的很详细，也有对应的视频讲解。&lt;/p&gt;
 &lt;h1 id=&#34;第一个qt项目&#34;&gt;第一个Qt项目
 &lt;/h1&gt;
@@ -619,7 +619,7 @@
         <pubDate>Sat, 08 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/qt-configure/</guid>
-        <description>&lt;img src="https://serennan.github.io/post/qt-configure/cover.jpg" alt="Featured image of post 【Qt 配置】 VS &#43; Qt6" /&gt;&lt;h1 id=&#34;vs-配置-qt6-教程&#34;&gt;VS 配置 Qt6 教程
+        <description>&lt;img src="https://serennan.github.io/post/qt-configure/cover.png" alt="Featured image of post 【Qt 配置】 VS &#43; Qt6" /&gt;&lt;h1 id=&#34;vs-配置-qt6-教程&#34;&gt;VS 配置 Qt6 教程
 &lt;/h1&gt;&lt;p&gt;雷神后面的视频是要开发一个图形界面，这里我使用vscode + qt + cmake来开发。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;1-安装qt6&#34;&gt;1. 安装qt6
