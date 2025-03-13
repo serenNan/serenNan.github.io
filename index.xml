@@ -8791,11 +8791,11 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
         </item>
         <item>
         <title>【Hugo】常见问题</title>
-        <link>https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/</link>
+        <link>https://serennan.github.io/post/hugo-problem/</link>
         <pubDate>Mon, 10 Feb 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/</guid>
-        <description>&lt;img src="https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/cover.jpg" alt="Featured image of post 【Hugo】常见问题" /&gt;&lt;h2 id=&#34;图片加载问题&#34;&gt;图片加载问题
+        <guid>https://serennan.github.io/post/hugo-problem/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/hugo-problem/cover.jpg" alt="Featured image of post 【Hugo】常见问题" /&gt;&lt;h2 id=&#34;图片加载问题&#34;&gt;图片加载问题
 &lt;/h2&gt;&lt;h3 id=&#34;问题描述&#34;&gt;问题描述
 &lt;/h3&gt;&lt;p&gt;有时会遇到在本地图片能成功加载，但部署到服务器上却不能成功显示。&lt;/p&gt;
 &lt;p&gt;我在弄代码折叠图片时遇到了这个问题&lt;/p&gt;
@@ -8809,7 +8809,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在本地成功加载&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD1.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-problem/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD1.png&#34;
 	width=&#34;1871&#34;
 	height=&#34;1333&#34;
 	
@@ -8822,7 +8822,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;但是到发布到服务端就不行了&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD2.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-problem/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD2.png&#34;
 	width=&#34;1568&#34;
 	height=&#34;1091&#34;
 	
@@ -8836,7 +8836,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &gt;&lt;/p&gt;
 &lt;p&gt;根本问题是服务端的图片加载路径出错&lt;/p&gt;
 &lt;p&gt;按 f12 调出开发者工具查看（或者右键对应位置，点击检查，能快速跳转），会发现图片加载路径不是图片相对路径&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%841.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-problem/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%841.png&#34;
 	width=&#34;1028&#34;
 	height=&#34;64&#34;
 	
@@ -8860,7 +8860,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;把最后的 &lt;code&gt;Permalink&lt;/code&gt; 改成 &lt;code&gt;RelPermalink&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;重新加载，会发现服务端正确显示&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD3.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-problem/%E5%9B%BE%E7%89%87%E5%8A%A0%E8%BD%BD3.png&#34;
 	width=&#34;1328&#34;
 	height=&#34;1038&#34;
 	
@@ -8873,7 +8873,7 @@ width × height × 8 + (width/2) × (height/2) × 8 × 2 = width × height × (8
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;重新用开发者工具检查加载路径&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/%E9%93%BE%E6%8E%A5/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%842.png&#34;
+&lt;p&gt;&lt;img src=&#34;https://serennan.github.io/post/hugo-problem/%E5%8A%A0%E8%BD%BD%E8%B7%AF%E5%BE%842.png&#34;
 	width=&#34;626&#34;
 	height=&#34;39&#34;
 	
