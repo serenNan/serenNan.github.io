@@ -2,16 +2,16 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Qt 基础介绍">
-<title>【Qt 入门】2 Qt 窗口类</title>
+<title>【Qt 入门】2 基础数据类型</title>
 
 <link rel='canonical' href='https://serennan.github.io/post/qt-base-2/'>
 
-<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 入门】2 Qt 窗口类">
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 入门】2 基础数据类型">
 <meta property='og:description' content="Qt 基础介绍">
 <meta property='og:url' content='https://serennan.github.io/post/qt-base-2/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-12T14:23:09&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-base-2/cover.png' />
-<meta name="twitter:title" content="【Qt 入门】2 Qt 窗口类">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-17T12:12:39&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-base-2/cover.png' />
+<meta name="twitter:title" content="【Qt 入门】2 基础数据类型">
 <meta name="twitter:description" content="Qt 基础介绍"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://serennan.github.io/post/qt-base-2/cover.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -327,19 +327,33 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#基础窗口类">基础窗口类</a></li>
-    <li><a href="#qwidget">QWidget</a>
+    <li><a href="#1-qbytearray">1. QByteArray</a>
       <ol>
-        <li><a href="#代码">代码</a></li>
+        <li><a href="#构造函数">构造函数</a></li>
+        <li><a href="#数据操作">数据操作</a></li>
+        <li><a href="#子字符串查找和判断">子字符串查找和判断</a></li>
+        <li><a href="#遍历">遍历</a></li>
+        <li><a href="#查看字节数">查看字节数</a></li>
+        <li><a href="#类型转换">类型转换</a></li>
       </ol>
     </li>
-    <li><a href="#qdialog">QDialog</a>
+    <li><a href="#2-qstring">2. QString</a>
       <ol>
-        <li><a href="#代码-1">代码</a></li>
+        <li><a href="#构造函数-1">构造函数</a></li>
+        <li><a href="#数据操作-1">数据操作</a></li>
+        <li><a href="#子字符串查找和判断-1">子字符串查找和判断</a></li>
+        <li><a href="#遍历-1">遍历</a></li>
+        <li><a href="#查看字节数-1">查看字节数</a></li>
+        <li><a href="#类型转换-1">类型转换</a></li>
+        <li><a href="#字符串格式">字符串格式</a></li>
       </ol>
     </li>
-    <li><a href="#qmainwindow">QMainWindow</a></li>
-    <li><a href="#工程结构调整">工程结构调整</a></li>
+    <li><a href="#3-qvariant">3. QVariant</a>
+      <ol>
+        <li><a href="#标准类型">标准类型</a></li>
+        <li><a href="#自定义类型">自定义类型</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
     </div>
@@ -362,7 +376,7 @@
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 入门】2 Qt 窗口类" />
+                        alt="Featured image of post 【Qt 入门】2 基础数据类型" />
                 
             </a>
         </div>
@@ -381,7 +395,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/qt-base-2/">【Qt 入门】2 Qt 窗口类</a>
+            <a href="/post/qt-base-2/">【Qt 入门】2 基础数据类型</a>
         </h2>
     
         
@@ -432,7 +446,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-03-11</time>
+                    <time>2025-03-12</time>
                 </div>
             
         
@@ -440,7 +454,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>966 字</span>
+                    <span>3808 字</span>
                 </div>
             
         
@@ -448,7 +462,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-12 14:23</time>
+                    <time>2025-03-17 12:12</time>
                 </div>
             
         
@@ -470,74 +484,514 @@
     <section class="article-content">
     
     
-    <h1 id="qt-窗口类">Qt 窗口类
-</h1><h2 id="基础窗口类">基础窗口类
-</h2><p><img src="/post/qt-base-2/%E5%9F%BA%E7%A1%80%E7%AA%97%E5%8F%A3%E7%B1%BB.png"
-	width="1773"
-	height="1602"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="110"
-		data-flex-basis="265px"
-	
-></p>
-<ul>
-<li>
-<p>常用的窗口类有3个<br></p>
-<ul>
-<li>在创建Qt窗口的时候, 需要让自己的窗口类继承上述三个窗口类的其中一个<br></li>
-</ul>
-</li>
-<li>
-<p>QWidget<br></p>
-<ul>
-<li>所有窗口类的基类<br></li>
-<li>Qt中的控件(按钮, 输入框, 单选框…)也属于窗口, 基类都是 QWidget<br></li>
-<li>可以内嵌到其他窗口中: 没有边框</li>
-<li>可以不内嵌单独显示: 独立的窗口, 有边框<br></li>
-</ul>
-</li>
-<li>
-<p>QDialog</p>
-<ul>
-<li>对话框类, 后边的章节会具体介绍这个窗口</li>
-<li>不能内嵌到其他窗口中<br></li>
-</ul>
-</li>
-<li>
-<p>QMainWindow</p>
-<ul>
-<li>有工具栏, 状态栏, 菜单栏, 后边的章节会具体介绍这个窗口不能内嵌到其他窗口中</li>
-</ul>
-</li>
-</ul>
-<h2 id="qwidget">QWidget
-</h2><p>所有窗口的基类</p>
-<ul>
-<li>
-<p>内嵌窗口</p>
-<ul>
-<li>依附于某一个大的窗口, 作为了大窗口的一部分</li>
-<li>大窗口就是这个内嵌窗口的父窗口</li>
-<li>父窗口显示的时候, 内嵌的窗口也就被显示出来了</li>
-</ul>
-</li>
-<li>
-<p>不内嵌窗口</p>
-<ul>
-<li>这类窗口有边框, 有标题栏</li>
-<li>需要<strong>调用函数</strong>才可以显示</li>
-</ul>
-</li>
-</ul>
-<h3 id="代码">代码
-</h3><p>由于我们使用的是 cmake 构建项目，即使使用的是Qtcreator，也没法跟视频一样直接添加一个新文件，所以我们只能手动添加。</p>
-<p>不过依然可以在 VScode使用Qtconfigure快速构建一个新的项目，命名为widget好了，但是需要做一些修改：</p>
-<p>widget.h</p>
-<div class="highlight"><div class="chroma">
+    <h1 id="qt中的基础数据类型">Qt中的基础数据类型
+</h1><h2 id="1-qbytearray">1. QByteArray
+</h2><p>在Qt中QByteArray可以看做是c语言中 char*的升级版本。我们在使用这种类型的时候可通过这个类的构造函数申请一块动态内存，用于存储我们需要处理的字符串数据。</p>
+<p>下面给大家介绍一下这个类中常用的一些API函数，大家要养成遇到问题主动查询帮助文档的好习惯。</p>
+<h3 id="构造函数">构造函数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 构造空对象, 里边没有数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span><span class="o">::</span><span class="n">QByteArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 将data中的size个字符进行构造, 得到一个字节数组对象
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 如果 size==-1 函数内部自动计算字符串长度, 计算方式为: strlen(data)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span><span class="o">::</span><span class="n">QByteArray</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 构造一个长度为size个字节, 并且每个字节值都为ch的字节数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span><span class="o">::</span><span class="n">QByteArray</span><span class="p">(</span><span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">char</span> <span class="n">ch</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="数据操作">数据操作
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 在尾部追加数据
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">append</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 头部添加数据
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">prepend</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">push_front</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 插入数据, 将ba插入到数组第 i 个字节的位置(从0开始)
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 删除数据
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 从大字符串中删除len个字符, 从第pos个字符的位置开始删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">remove</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">int</span> <span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 从字符数组的尾部删除 n 个字节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">chop</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 从字节数组的 pos 位置将数组截断 (前边部分留下, 后边部分被删除)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">truncate</span><span class="p">(</span><span class="kt">int</span> <span class="n">pos</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 将对象中的数据清空, 使其为null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 字符串替换
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 将字节数组中的 子字符串 before 替换为 after
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">replace</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">before</span><span class="p">,</span> <span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">after</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="子字符串查找和判断">子字符串查找和判断
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 判断字节数组中是否包含子字符串 ba, 包含返回true, 否则返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">contains</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">contains</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ba</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断字节数组中是否包含子字符 ch, 包含返回true, 否则返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">contains</span><span class="p">(</span><span class="kt">char</span> <span class="n">ch</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断字节数组是否以字符串 ba 开始, 是返回true, 不是返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">startsWith</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">startsWith</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ba</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断字节数组是否以字符 ch 开始, 是返回true, 不是返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">startsWith</span><span class="p">(</span><span class="kt">char</span> <span class="n">ch</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断字节数组是否以字符串 ba 结尾, 是返回true, 不是返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ba</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断字节数组是否以字符 ch 结尾, 是返回true, 不是返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="kt">char</span> <span class="n">ch</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="遍历">遍历
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 使用迭代器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">iterator</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">begin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">iterator</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">end</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用数组的方式进行遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1">// i的取值范围 0 &lt;= i &lt; size()
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 用的更多
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">char</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">at</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">QByteArray</span><span class="o">::</span><span class="k">operator</span><span class="p">[](</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看字节数">查看字节数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 返回字节数组对象中字符的个数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">length</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">size</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">count</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 返回字节数组对象中 子字符串ba 出现的次数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">count</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">count</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ba</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 返回字节数组对象中 字符串ch 出现的次数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">count</span><span class="p">(</span><span class="kt">char</span> <span class="n">ch</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="类型转换">类型转换
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 将QByteArray类型的字符串 转换为 char* 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">char</span> <span class="o">*</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">data</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">data</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// int, short, long, float, double -&gt; QByteArray
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">short</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="n">qlonglong</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">float</span> <span class="n">n</span><span class="p">,</span> <span class="kt">char</span> <span class="n">f</span> <span class="o">=</span> <span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="kt">int</span> <span class="n">prec</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">QByteArray</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">double</span> <span class="n">n</span><span class="p">,</span> <span class="kt">char</span> <span class="n">f</span> <span class="o">=</span> <span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="kt">int</span> <span class="n">prec</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QByteArray</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">number</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QByteArray</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">number</span><span class="p">(</span><span class="n">qlonglong</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QByteArray</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">number</span><span class="p">(</span><span class="kt">double</span> <span class="n">n</span><span class="p">,</span> <span class="kt">char</span> <span class="n">f</span> <span class="o">=</span> <span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="kt">int</span> <span class="n">prec</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// QByteArray -&gt; int, short, long, float, double
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">toInt</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">short</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">toShort</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">toLong</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">toFloat</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">toDouble</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// std::string -&gt; QByteArray
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QByteArray</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">fromStdString</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// QByteArray -&gt; std::string
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">toStdString</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 所有字符转换为大写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">toUpper</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 所有字符转换为小写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="n">QByteArray</span><span class="o">::</span><span class="n">toLower</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="2-qstring">2. QString
+</h2><p>QString也是封装了字符串, 但是内部的编码为utf8, UTF-8属于Unicode字符集, 它固定使用多个字节（window为2字节, linux为3字节）来表示一个字符，这样可以将世界上几乎所有语言的常用字符收录其中。</p>
+<p>下面给大家介绍一下这个类中常用的一些API函数。</p>
+<h3 id="构造函数-1">构造函数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 构造一个空字符串对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span><span class="o">::</span><span class="n">QString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 将 char* 字符串 转换为 QString 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span><span class="o">::</span><span class="n">QString</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 将 QByteArray 转换为 QString 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span><span class="o">::</span><span class="n">QString</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名构造函数可参考Qt帮助文档, 此处略
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="数据操作-1">数据操作
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 尾部追加数据
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">append</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">append</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">append</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QString</span><span class="o">::</span><span class="n">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 头部添加数据
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">prepend</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">prepend</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">prepend</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">ba</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QString</span><span class="o">::</span><span class="n">push_front</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 插入数据, 将 str 插入到字符串第 position 个字符的位置(从0开始)
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">,</span> <span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">,</span> <span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 删除数据
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 从大字符串中删除len个字符, 从第pos个字符的位置开始删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">remove</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 从字符串的尾部删除 n 个字符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QString</span><span class="o">::</span><span class="n">chop</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 从字节串的 position 位置将字符串截断 (前边部分留下, 后边部分被删除)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QString</span><span class="o">::</span><span class="n">truncate</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 将对象中的数据清空, 使其为null
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QString</span><span class="o">::</span><span class="n">clear</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 字符串替换
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 将字节数组中的 子字符串 before 替换为 after
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 参数 cs 为是否区分大小写, 默认区分大小写
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">replace</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">before</span><span class="p">,</span> <span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">after</span><span class="p">,</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitivity</span> <span class="n">cs</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitive</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="子字符串查找和判断-1">子字符串查找和判断
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 参数 cs 为是否区分大小写, 默认区分大小写
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断字符串中是否包含子字符串 str, 包含返回true, 否则返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QString</span><span class="o">::</span><span class="n">contains</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitivity</span> <span class="n">cs</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitive</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断字符串是否以字符串 ba 开始, 是返回true, 不是返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QString</span><span class="o">::</span><span class="n">startsWith</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitivity</span> <span class="n">cs</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitive</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断字符串是否以字符串 ba 结尾, 是返回true, 不是返回false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QString</span><span class="o">::</span><span class="n">endsWith</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">,</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitivity</span> <span class="n">cs</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitive</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="遍历-1">遍历
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 使用迭代器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">iterator</span> <span class="n">QString</span><span class="o">::</span><span class="n">begin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">iterator</span> <span class="n">QString</span><span class="o">::</span><span class="n">end</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用数组的方式进行遍历
+</span></span></span><span class="line"><span class="cl"><span class="c1">// i的取值范围 0 &lt;= position &lt; size()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="n">QChar</span> <span class="n">QString</span><span class="o">::</span><span class="n">at</span><span class="p">(</span><span class="kt">int</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="n">QChar</span> <span class="n">QString</span><span class="o">::</span><span class="k">operator</span><span class="p">[](</span><span class="kt">int</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看字节数-1">查看字节数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 返回字节数组对象中字符的个数 (字符个数和字节个数是不同的概念)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">QString</span><span class="o">::</span><span class="n">length</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">QString</span><span class="o">::</span><span class="n">size</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">QString</span><span class="o">::</span><span class="n">count</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 返回字节串对象中 子字符串 str 出现的次数
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 参数 cs 为是否区分大小写, 默认区分大小写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">QString</span><span class="o">::</span><span class="n">count</span><span class="p">(</span><span class="k">const</span> <span class="n">QStringRef</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">,</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitivity</span> <span class="n">cs</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">::</span><span class="n">CaseSensitive</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="类型转换-1">类型转换
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 将int, short, long, float, double 转换为 QString 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">short</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">long</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">float</span> <span class="n">n</span><span class="p">,</span> <span class="kt">char</span> <span class="n">format</span> <span class="o">=</span> <span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="kt">int</span> <span class="n">precision</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="o">&amp;</span><span class="n">QString</span><span class="o">::</span><span class="n">setNum</span><span class="p">(</span><span class="kt">double</span> <span class="n">n</span><span class="p">,</span> <span class="kt">char</span> <span class="n">format</span> <span class="o">=</span> <span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="kt">int</span> <span class="n">precision</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QString</span> <span class="n">QString</span><span class="o">::</span><span class="n">number</span><span class="p">(</span><span class="kt">long</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QString</span> <span class="n">QString</span><span class="o">::</span><span class="n">number</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QString</span> <span class="n">QString</span><span class="o">::</span><span class="n">number</span><span class="p">(</span><span class="kt">double</span> <span class="n">n</span><span class="p">,</span> <span class="kt">char</span> <span class="n">format</span> <span class="o">=</span> <span class="sc">&#39;g&#39;</span><span class="p">,</span> <span class="kt">int</span> <span class="n">precision</span> <span class="o">=</span> <span class="mi">6</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 将 QString 转换为 int, short, long, float, double 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">QString</span><span class="o">::</span><span class="n">toInt</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">short</span> <span class="n">QString</span><span class="o">::</span><span class="n">toShort</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="n">QString</span><span class="o">::</span><span class="n">toLong</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">,</span> <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="k">const</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">QString</span><span class="o">::</span><span class="n">toFloat</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">QString</span><span class="o">::</span><span class="n">toDouble</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 将标准C++中的 std::string 类型 转换为 QString 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QString</span> <span class="n">QString</span><span class="o">::</span><span class="n">fromStdString</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 将 QString 转换为 标准C++中的 std::string 类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">QString</span><span class="o">::</span><span class="n">toStdString</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// QString -&gt; QByteArray
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 转换为本地编码, 跟随操作系统
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="n">QString</span><span class="o">::</span><span class="n">toLocal8Bit</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 转换为 Latin-1 编码的字符串 不支持中文
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="n">QString</span><span class="o">::</span><span class="n">toLatin1</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 转换为 utf8 编码格式的字符串 (常用)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QByteArray</span> <span class="n">QString</span><span class="o">::</span><span class="n">toUtf8</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 所有字符转换为大写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="n">QString</span><span class="o">::</span><span class="n">toUpper</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 所有字符转换为小写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="n">QString</span><span class="o">::</span><span class="n">toLower</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="字符串格式">字符串格式
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -556,24 +1010,30 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#pragma once
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;ui_widget.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QWidget&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">widget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span> <span class="c1">// 继承 QWidget 而不是 QMainWindow
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">Q_OBJECT</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 其他重载的同名函数可参考Qt帮助文档, 此处略
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="n">QString</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">          <span class="kt">int</span> <span class="n">fieldWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">          <span class="n">QChar</span> <span class="n">fillChar</span> <span class="o">=</span> <span class="n">QLatin1Char</span><span class="p">(</span> <span class="sc">&#39; &#39;</span> <span class="p">))</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="n">QString</span><span class="o">::</span><span class="n">arg</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fieldWidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">          <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">          <span class="n">QChar</span> <span class="n">fillChar</span> <span class="o">=</span> <span class="n">QLatin1Char</span><span class="p">(</span> <span class="sc">&#39; &#39;</span> <span class="p">))</span> <span class="k">const</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">widget</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Ui_widget</span> <span class="o">*</span><span class="n">ui</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 示例程序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">i</span><span class="p">;</span>                <span class="c1">// 假设该变量表示当前文件的编号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">total</span><span class="p">;</span>            <span class="c1">// 假设该变量表示文件的总个数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="n">fileName</span><span class="p">;</span>     <span class="c1">// 假设该变量表示当前文件的名字
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 使用以上三个变量拼接一个动态字符串
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="n">status</span> <span class="o">=</span> <span class="n">QString</span><span class="p">(</span><span class="s">&#34;Processing file %1 of %2: %3&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">.</span><span class="n">arg</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">arg</span><span class="p">(</span><span class="n">total</span><span class="p">).</span><span class="n">arg</span><span class="p">(</span><span class="n">fileName</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>widget.cpp</p>
+</div><hr>
+<h2 id="3-qvariant">3. QVariant
+</h2><p>QVariant这个类很神奇，或者说方便。很多时候，需要几种不同的数据类型需要传递，如果用结构体，又不大方便，容器保存的也只是一种数据类型，而QVariant则可以统统搞定。</p>
+<p>QVariant 这个类型充当着最常见的数据类型的联合。QVariant 可以保存很多Qt的数据类型，包括QBrush、QColor、QCursor、QDateTime、QFont、QKeySequence、 QPalette、QPen、QPixmap、QPoint、QRect、QRegion、QSize和QString，并且还有C++基本类型，如 int、float等。</p>
+<hr>
+<h3 id="标准类型">标准类型
+</h3><p>将标准类型转换为 QVariant 类型：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -589,34 +1049,90 @@
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;widget.h&#34;</span><span class="cp">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 这类转换需要使用QVariant类的构造函数, 由于比较多, 大家可自行查阅Qt帮助文档, 在这里简单写几个
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QVariant</span><span class="o">::</span><span class="n">QVariant</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QVariant</span><span class="o">::</span><span class="n">QVariant</span><span class="p">(</span><span class="kt">bool</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QVariant</span><span class="o">::</span><span class="n">QVariant</span><span class="p">(</span><span class="kt">double</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QVariant</span><span class="o">::</span><span class="n">QVariant</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QVariant</span><span class="o">::</span><span class="n">QVariant</span><span class="p">(</span><span class="k">const</span> <span class="n">QByteArray</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">QVariant</span><span class="o">::</span><span class="n">QVariant</span><span class="p">(</span><span class="k">const</span> <span class="n">QString</span> <span class="o">&amp;</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">......</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用设置函数也可以将支持的类型的数据设置到QVariant对象中
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 这里的 T 类型, 就是QVariant支持的类型
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">setValue</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 该函数行为和 setValue() 函数完全相同
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QVariant</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 例子:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#if 1
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">QVariant</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#else
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">QVariant</span> <span class="n">v</span> <span class="o">=</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="n">widget</span><span class="o">::</span><span class="n">widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="c1">// 初始化列表也要记得修改类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui_widget</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">widget</span><span class="o">::~</span><span class="n">widget</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">toInt</span><span class="p">();</span>          <span class="c1">// i is now 5
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QString</span> <span class="n">s</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">toString</span><span class="p">();</span>   <span class="c1">// s is now &#34;5&#34;
+</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>widget.ui</p>
+</div><p>判断 QVariant 中封装的实际数据类型</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;widget</span> <span class="na">class=</span><span class="s">&#34;QWidget&#34;</span> <span class="na">name=</span><span class="s">&#34;newwindow&#34;</span><span class="nt">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">QVariant</span><span class="o">::</span><span class="n">typeId</span><span class="p">()</span> <span class="o">==</span> <span class="n">QMetaType</span><span class="o">::</span><span class="n">type</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>要修改成 QWidget</p>
-<p>mainwindow.cpp</p>
+</div><p>将QVariant对象转换为实际的数据类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 如果要实现该操作, 可以使用QVariant类提供的 toxxx() 方法, 全部转换可以参考Qt帮助文档
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 在此举列举几个常用函数:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">toBool</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">QByteArray</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">toByteArray</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">double</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">toDouble</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">toFloat</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">toInt</span><span class="p">(</span><span class="kt">bool</span> <span class="o">*</span><span class="n">ok</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">QString</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">toString</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">......</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>演示代码
+头文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-h" data-lang="h"><span class="line"><span class="cl"><span class="n">QVariant</span> <span class="nf">dataPlus</span><span class="p">(</span><span class="n">QVariant</span> <span class="n">a</span><span class="p">,</span> <span class="n">QVariant</span> <span class="n">b</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>源文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -646,43 +1162,99 @@
 </span><span class="lnt">25
 </span><span class="lnt">26
 </span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;mainwindow.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;src/newwindow.h&#34;</span><span class="cp">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;MainWindow.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;qcontainerinfo.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;qdebug.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;qglobal.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;qobjectdefs.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;qvariant.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="n">mainwindow</span><span class="o">::</span><span class="n">mainwindow</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">:</span> <span class="n">QMainWindow</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui_mainwindow</span><span class="p">)</span> <span class="c1">// 基于 mainwindow.ui 创建一个实例对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 将 mainwindow.ui 的示例对象和当前类的对象进行关联
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">MainWindow</span><span class="o">::</span><span class="n">MainWindow</span><span class="p">(</span><span class="n">QWidget</span><span class="o">*</span> <span class="n">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">:</span> <span class="n">QMainWindow</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">,</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui_MainWindow</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">dataPlus</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">).</span><span class="n">toInt</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QString</span> <span class="n">str</span> <span class="o">=</span> <span class="n">dataPlus</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="s">&#34;world&#34;</span><span class="p">).</span><span class="n">toString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Int :&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;String :&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 一般在 qt 的构造函数中进行初始化操作（窗口，数据，...）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 显示当前窗口的时候，显示另外一个窗口 NewWindow
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#if 0</span><span class="c">
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 创建窗口对象，没有给 w 对象指定父对象
-</span></span></span><span class="line"><span class="cl"><span class="c">    newwindow *w = new newwindow;
-</span></span></span><span class="line"><span class="cl"><span class="c">    w-&gt;show();
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#else
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="c1">// 创建窗口对象，没有给 w 对象指定父对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// newwindow(QWidget* parent = nullptr);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">newwindow</span> <span class="o">*</span><span class="n">w</span> <span class="o">=</span> <span class="k">new</span> <span class="n">newwindow</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">mainwindow</span><span class="o">::~</span><span class="n">mainwindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">MainWindow</span><span class="o">::~</span><span class="n">MainWindow</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">QVariant</span> <span class="n">MainWindow</span><span class="o">::</span><span class="n">dataPlus</span><span class="p">(</span><span class="n">QVariant</span> <span class="n">a</span><span class="p">,</span> <span class="n">QVariant</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QVariant</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">typeId</span><span class="p">()</span> <span class="o">==</span> <span class="n">QMetaType</span><span class="o">::</span><span class="n">Int</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">typeId</span><span class="p">()</span> <span class="o">==</span> <span class="n">QMetaType</span><span class="o">::</span><span class="n">Int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="n">QVariant</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">toInt</span><span class="p">()</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">toInt</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">typeId</span><span class="p">()</span> <span class="o">==</span> <span class="n">QMetaType</span><span class="o">::</span><span class="n">QString</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">typeId</span><span class="p">()</span> <span class="o">==</span> <span class="n">QMetaType</span><span class="o">::</span><span class="n">QString</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">toString</span><span class="p">()</span> <span class="o">+</span> <span class="n">b</span><span class="p">.</span><span class="n">toString</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="qdialog">QDialog
-</h2><p>对话框窗口类<br>
-有模态和非模态两种<br>
-不能内嵌</p>
-<h3 id="代码-1">代码
-</h3><div class="highlight"><div class="chroma">
+</div><br>
+
+<div class="notice notice-info" >
+    <div class="notice-title"></div><p>我用的是qt6，有些函数已被弃用，所以具体代码和视频讲解的有些不同</p></div>
+
+<hr>
+<h3 id="自定义类型">自定义类型
+</h3><p>除了标准类型, 我们自定义的类型也可以使用QVariant类进行封装, 被QVariant存储的数据类型需要有一个默认的构造函数和一个拷贝构造函数。为了实现这个功能，首先必须使用Q_DECLARE_METATYPE()宏。通常会将这个宏放在类的声明所在头文件的下面， 原型为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Q_DECLARE_METATYPE(Type)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用的具体步骤如下:</p>
+<ol>
+<li>在头文件中声明</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-h" data-lang="h"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">Person</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QString</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 自定义类型注册
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">Q_DECLARE_METATYPE</span><span class="p">(</span><span class="n">Person</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>在源文件中定义</li>
+</ol>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -696,31 +1268,56 @@
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 创建对话框窗口
-</span></span></span><span class="line"><span class="cl"><span class="c">    dialog *dlg = new dialog(this);
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 非模态
-</span></span></span><span class="line"><span class="cl"><span class="c">    dlg-&gt;show();
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">   <span class="n">Person</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#34;person&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">    QVariant v;
+</span></span></span><span class="line"><span class="cl"><span class="c">    v.setValue(p);
 </span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#else
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="c1">// 创建对话框窗口
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dialog</span> <span class="o">*</span><span class="n">dlg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">dialog</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 模态,exec()
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 阻塞程序运行
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dlg</span><span class="o">-&gt;</span><span class="n">exec</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="n">QVariant</span> <span class="n">v</span> <span class="o">=</span> <span class="n">QVariant</span><span class="o">::</span><span class="n">fromValue</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 提取出 v 对象中的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Person</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">value</span><span class="o">&lt;</span><span class="n">Person</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">qDebug</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">tmp</span><span class="p">.</span><span class="n">id</span> <span class="o">&lt;&lt;</span> <span class="n">tmp</span><span class="p">.</span><span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>canConvert函数官方文档：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">QVariant</span> <span class="n">v</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>            <span class="c1">// return true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">v</span><span class="p">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span><span class="p">();</span>        <span class="c1">// return true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">MyCustomStruct</span> <span class="n">s</span><span class="p">;</span>      
+</span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>                 
+</span></span><span class="line"><span class="cl"><span class="n">v</span><span class="p">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>            <span class="c1">// return false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">v</span><span class="p">.</span><span class="n">canConvert</span><span class="o">&lt;</span><span class="n">MyCustomStruct</span><span class="o">&gt;</span><span class="p">();</span> <span class="c1">// return true
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>使用模态时，启动程序发现只有两个子窗口，主窗口没显示，这是因为 <code>exec()</code> 函数阻塞程序运行，导致主窗口的构造函数没有运行完。<br>
-且这时候我们无法关闭 widget 窗口，只有当我们把dialog窗口关闭时，widget窗口才能被聚焦，且主窗口也会显示。</p>
-<h2 id="qmainwindow">QMainWindow
-</h2><p>具有菜单栏，工具栏，状态栏</p>
-<h2 id="工程结构调整">工程结构调整
-</h2><p>太多窗口类堆在src文件夹下可能难以维护，所以可以看这篇文章调整一下工程结构：
-<a class="link" href="https://serennan.github.io/post/qt-structure/"  target="_blank" rel="noopener"
-    >【Qt配置】工程结构调整</a></p>
-
+</div>
 </section>
 
 
@@ -745,54 +1342,6 @@
             
                 
 <article class="has-image">
-    <a href="/post/qt-base-5/">
-        
-        
-            <div class="article-image">
-                <img src="/post/qt-base-5/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【Qt 入门】5 信号槽"
-                        data-key="qt-base-5" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Qt 入门】5 信号槽</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/post/qt-base-4/">
-        
-        
-            <div class="article-image">
-                <img src="/post/qt-base-4/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【Qt 入门】4 QVariant类"
-                        data-key="qt-base-4" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Qt 入门】4 QVariant类</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/post/qt-base-3/">
         
         
@@ -801,7 +1350,7 @@
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 入门】3 字符串类型"
+                        alt="Featured image of post 【Qt 入门】3 信号槽"
                         data-key="qt-base-3" 
                         data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
                 
@@ -809,7 +1358,7 @@
         
 
         <div class="article-details">
-            <h2 class="article-title">【Qt 入门】3 字符串类型</h2>
+            <h2 class="article-title">【Qt 入门】3 信号槽</h2>
         </div>
     </a>
 </article>
@@ -849,7 +1398,7 @@
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 入门】1 第一个 Qt 项目"
+                        alt="Featured image of post 【Qt 入门】1 入门"
                         data-key="qt-base-1" 
                         data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
                 
@@ -857,7 +1406,31 @@
         
 
         <div class="article-details">
-            <h2 class="article-title">【Qt 入门】1 第一个 Qt 项目</h2>
+            <h2 class="article-title">【Qt 入门】1 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/qt-configure/">
+        
+        
+            <div class="article-image">
+                <img src="/post/qt-configure/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【Qt 配置】 VS &#43; Qt6"
+                        data-key="qt-configure" 
+                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Qt 配置】 VS &#43; Qt6</h2>
         </div>
     </a>
 </article>
