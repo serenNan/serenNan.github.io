@@ -2,18 +2,18 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Qt 基础介绍">
-<title>【Qt 入门】2 Qt 窗口类</title>
+<title>【Qt 入门】5 信号槽</title>
 
-<link rel='canonical' href='https://serennan.github.io/post/qt-base-2/'>
+<link rel='canonical' href='https://serennan.github.io/post/qt-base-5/'>
 
-<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 入门】2 Qt 窗口类">
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 入门】5 信号槽">
 <meta property='og:description' content="Qt 基础介绍">
-<meta property='og:url' content='https://serennan.github.io/post/qt-base-2/'>
+<meta property='og:url' content='https://serennan.github.io/post/qt-base-5/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-12T14:23:09&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-base-2/cover.png' />
-<meta name="twitter:title" content="【Qt 入门】2 Qt 窗口类">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-17T11:57:29&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-base-5/cover.png' />
+<meta name="twitter:title" content="【Qt 入门】5 信号槽">
 <meta name="twitter:description" content="Qt 基础介绍"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://serennan.github.io/post/qt-base-2/cover.png' />
+    <meta name="twitter:image" content='https://serennan.github.io/post/qt-base-5/cover.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -327,19 +327,13 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#基础窗口类">基础窗口类</a></li>
-    <li><a href="#qwidget">QWidget</a>
+    <li><a href="#1-信号和槽概述">1. 信号和槽概述</a>
       <ol>
-        <li><a href="#代码">代码</a></li>
+        <li><a href="#11-信号的本质">1.1 信号的本质</a></li>
+        <li><a href="#12-槽的本质">1.2 槽的本质</a></li>
+        <li><a href="#13-信号和槽的关系">1.3 信号和槽的关系</a></li>
       </ol>
     </li>
-    <li><a href="#qdialog">QDialog</a>
-      <ol>
-        <li><a href="#代码-1">代码</a></li>
-      </ol>
-    </li>
-    <li><a href="#qmainwindow">QMainWindow</a></li>
-    <li><a href="#工程结构调整">工程结构调整</a></li>
   </ol>
 </nav>
     </div>
@@ -356,13 +350,13 @@
     
         <header class="article-header">
         <div class="article-image">
-            <a href="/post/qt-base-2/">
-                <img src="/post/qt-base-2/cover.png"
+            <a href="/post/qt-base-5/">
+                <img src="/post/qt-base-5/cover.png"
                         
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 入门】2 Qt 窗口类" />
+                        alt="Featured image of post 【Qt 入门】5 信号槽" />
                 
             </a>
         </div>
@@ -381,7 +375,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/qt-base-2/">【Qt 入门】2 Qt 窗口类</a>
+            <a href="/post/qt-base-5/">【Qt 入门】5 信号槽</a>
         </h2>
     
         
@@ -432,7 +426,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-03-11</time>
+                    <time>2025-03-17</time>
                 </div>
             
         
@@ -440,7 +434,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>966 字</span>
+                    <span>1280 字</span>
                 </div>
             
         
@@ -448,7 +442,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-12 14:23</time>
+                    <time>2025-03-17 11:57</time>
                 </div>
             
         
@@ -470,153 +464,69 @@
     <section class="article-content">
     
     
-    <h1 id="qt-窗口类">Qt 窗口类
-</h1><h2 id="基础窗口类">基础窗口类
-</h2><p><img src="/post/qt-base-2/%E5%9F%BA%E7%A1%80%E7%AA%97%E5%8F%A3%E7%B1%BB.png"
-	width="1773"
-	height="1602"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="110"
-		data-flex-basis="265px"
-	
-></p>
+    <h1 id="qt中的信号槽">Qt中的信号槽
+</h1><h2 id="1-信号和槽概述">1. 信号和槽概述
+</h2>
+<div class="notice notice-tip" >
+    <div class="notice-title"></div><p>信号槽是 Qt 框架引以为豪的机制之一。所谓信号槽，实际就是观察者模式(发布-订阅模式)。当某个事件发生之后，比如，按钮检测到自己被点击了一下，它就会发出一个信号（signal）。这种发出是没有目的的，类似广播。如果有对象对这个信号感兴趣，它就会使用连接（connect）函数，意思是，将想要处理的信号和自己的一个函数（称为槽（slot））绑定来处理这个信号。也就是说，当信号发出时，被连接的槽函数会自动被回调。这就类似观察者模式：当发生了感兴趣的事件，某一个操作就会被自动触发。</p></div>
+
+<h3 id="11-信号的本质">1.1 信号的本质
+</h3>
+<div class="notice notice-tip" >
+    <div class="notice-title"></div><p>信号是由于用户对窗口或控件进行了某些操作，导致窗口或控件产生了某个特定事件，这时候Qt对应的窗口类会发出某个信号，以此对用户的挑选做出反应。</p></div>
+
+<p>因此根据上述的描述我们得到一个结论 – <font color = red>信号的本质就是事件</font>，比如：</p>
 <ul>
-<li>
-<p>常用的窗口类有3个<br></p>
+<li>按钮单击、双击</li>
+<li>窗口刷新</li>
+<li>鼠标移动、鼠标按下、鼠标释放</li>
+<li>键盘输入</li>
+</ul>
+<p>那么在Qt中信号是通过什么形式呈现给使用者的呢？</p>
 <ul>
-<li>在创建Qt窗口的时候, 需要让自己的窗口类继承上述三个窗口类的其中一个<br></li>
+<li>我们对哪个窗口进行操作, 哪个窗口就可以捕捉到这些被触发的事件。</li>
+<li>对于使用者来说触发了一个事件，我们就可以得到Qt框架给我们发出的某个特定信号。</li>
+<li>信号的呈现形式就是<strong>函数</strong>， 也就是说某个事件产生了， Qt框架就会调用某个对应的信号函数， 通知使用者。</li>
 </ul>
-</li>
-<li>
-<p>QWidget<br></p>
-<ul>
-<li>所有窗口类的基类<br></li>
-<li>Qt中的控件(按钮, 输入框, 单选框…)也属于窗口, 基类都是 QWidget<br></li>
-<li>可以内嵌到其他窗口中: 没有边框</li>
-<li>可以不内嵌单独显示: 独立的窗口, 有边框<br></li>
-</ul>
-</li>
-<li>
-<p>QDialog</p>
-<ul>
-<li>对话框类, 后边的章节会具体介绍这个窗口</li>
-<li>不能内嵌到其他窗口中<br></li>
-</ul>
-</li>
-<li>
-<p>QMainWindow</p>
-<ul>
-<li>有工具栏, 状态栏, 菜单栏, 后边的章节会具体介绍这个窗口不能内嵌到其他窗口中</li>
-</ul>
-</li>
-</ul>
-<h2 id="qwidget">QWidget
-</h2><p>所有窗口的基类</p>
-<ul>
-<li>
-<p>内嵌窗口</p>
-<ul>
-<li>依附于某一个大的窗口, 作为了大窗口的一部分</li>
-<li>大窗口就是这个内嵌窗口的父窗口</li>
-<li>父窗口显示的时候, 内嵌的窗口也就被显示出来了</li>
-</ul>
-</li>
-<li>
-<p>不内嵌窗口</p>
-<ul>
-<li>这类窗口有边框, 有标题栏</li>
-<li>需要<strong>调用函数</strong>才可以显示</li>
-</ul>
-</li>
-</ul>
-<h3 id="代码">代码
-</h3><p>由于我们使用的是 cmake 构建项目，即使使用的是Qtcreator，也没法跟视频一样直接添加一个新文件，所以我们只能手动添加。</p>
-<p>不过依然可以在 VScode使用Qtconfigure快速构建一个新的项目，命名为widget好了，但是需要做一些修改：</p>
-<p>widget.h</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#pragma once
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;ui_widget.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QWidget&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">widget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span> <span class="c1">// 继承 QWidget 而不是 QMainWindow
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">Q_OBJECT</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">widget</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Ui_widget</span> <span class="o">*</span><span class="n">ui</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>widget.cpp</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;widget.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="n">widget</span><span class="o">::</span><span class="n">widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="c1">// 初始化列表也要记得修改类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui_widget</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">widget</span><span class="o">::~</span><span class="n">widget</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>widget.ui</p>
+<p><font color = red>在QT中信号的发出者是某个实例化的类对象，对象内部可以进行相关事件的检测。</font></p>
+<h3 id="12-槽的本质">1.2 槽的本质
+</h3><p>在Qt中 <font color = red>槽函数是一类特殊的功能的函数</font> ，在编码过程中 <font color = red>也可以作为类的普通成员函数来使用</font> 。之所以称之为槽函数是因为它们还有一个职责就是对Qt框架中产生的信号进行处理。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;widget</span> <span class="na">class=</span><span class="s">&#34;QWidget&#34;</span> <span class="na">name=</span><span class="s">&#34;newwindow&#34;</span><span class="nt">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">举个简单的例子：
+</span></span><span class="line"><span class="cl">    女朋友说：“我肚子饿了！”，于是我带她去吃饭。
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>要修改成 QWidget</p>
-<p>mainwindow.cpp</p>
+</div><p>上边例子中相当于女朋友发出了一个信号， 我收到了信号并其将其处理掉了。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>实例对象</th>
+          <th>角色</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>女朋友</td>
+          <td>信号发出者</td>
+          <td>信号携带的信息: 我饿了</td>
+      </tr>
+      <tr>
+          <td>我</td>
+          <td>信号接收者</td>
+          <td>处理女朋友发射的信号: 带他去吃饭</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><font color = red>在Qt中槽函数的所有者也是某个类的实例对象。</font></p>
+<h3 id="13-信号和槽的关系">1.3 信号和槽的关系
+</h3><p>在Qt中信号和槽函数都是独立的个体，本身没有任何联系，但是由于某种特性需求我们可以将二者连接到一起，好比牛郎和织女想要相会必须要有喜鹊为他们搭桥一样。在Qt中我们需要使用 <code>QOjbect</code> 类中的 <code>connect</code> 函数进二者的关联。</p>
+<p>连接信号和槽的 <code>connect()</code> 函数原型如下, 其中 <code>PointerToMemberFunction</code> 是一个指向函数地址的指针</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -634,92 +544,32 @@
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;mainwindow.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;src/newwindow.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="n">mainwindow</span><span class="o">::</span><span class="n">mainwindow</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">:</span> <span class="n">QMainWindow</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui_mainwindow</span><span class="p">)</span> <span class="c1">// 基于 mainwindow.ui 创建一个实例对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 将 mainwindow.ui 的示例对象和当前类的对象进行关联
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 一般在 qt 的构造函数中进行初始化操作（窗口，数据，...）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 显示当前窗口的时候，显示另外一个窗口 NewWindow
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#if 0</span><span class="c">
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 创建窗口对象，没有给 w 对象指定父对象
-</span></span></span><span class="line"><span class="cl"><span class="c">    newwindow *w = new newwindow;
-</span></span></span><span class="line"><span class="cl"><span class="c">    w-&gt;show();
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#else
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="c1">// 创建窗口对象，没有给 w 对象指定父对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// newwindow(QWidget* parent = nullptr);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">newwindow</span> <span class="o">*</span><span class="n">w</span> <span class="o">=</span> <span class="k">new</span> <span class="n">newwindow</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">mainwindow</span><span class="o">::~</span><span class="n">mainwindow</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">QMetaObject</span><span class="o">::</span><span class="n">Connection</span> <span class="n">QObject</span><span class="o">::</span><span class="n">connect</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    	<span class="k">const</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">sender</span><span class="p">,</span> <span class="n">PointerToMemberFunction</span> <span class="n">signal</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">receiver</span><span class="p">,</span> <span class="n">PointerToMemberFunction</span> <span class="n">method</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">		<span class="n">Qt</span><span class="o">::</span><span class="n">ConnectionType</span> <span class="n">type</span> <span class="o">=</span> <span class="n">Qt</span><span class="o">::</span><span class="n">AutoConnection</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="nl">sender</span><span class="p">:</span>   <span class="err">发出信号的对象</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="nl">signal</span><span class="p">:</span>   <span class="err">属于</span> <span class="n">sender</span> <span class="err">对象</span><span class="p">,</span> <span class="err">信号是一个函数</span><span class="p">,</span> <span class="err">这个参数的类型是函数</span>
+</span></span><span class="line"><span class="cl">              <span class="err">指针</span><span class="p">,</span> <span class="err">信号函数地址</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="nl">receiver</span><span class="p">:</span> <span class="err">信号接收者</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span> <span class="nl">method</span><span class="p">:</span>   <span class="err">属于</span> <span class="n">receiver</span> <span class="err">对象</span><span class="p">,</span> <span class="err">当检测到</span> <span class="n">sender</span> <span class="err">发出了</span><span class="n">signal</span> <span class="err">信号</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">              <span class="n">receiver</span> <span class="err">对象调用</span> <span class="n">method</span> <span class="err">方法，信号发出之后的处理动作</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1">//  参数 signal 和 method 都是函数地址, 因此简化之后的 connect() 如下:
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">connect</span><span class="p">(</span><span class="k">const</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">sender</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QObject</span><span class="o">::</span><span class="n">signal</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">const</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">receiver</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QObject</span><span class="o">::</span><span class="n">method</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="qdialog">QDialog
-</h2><p>对话框窗口类<br>
-有模态和非模态两种<br>
-不能内嵌</p>
-<h3 id="代码-1">代码
-</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 创建对话框窗口
-</span></span></span><span class="line"><span class="cl"><span class="c">    dialog *dlg = new dialog(this);
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 非模态
-</span></span></span><span class="line"><span class="cl"><span class="c">    dlg-&gt;show();
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#else
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="c1">// 创建对话框窗口
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dialog</span> <span class="o">*</span><span class="n">dlg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">dialog</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 模态,exec()
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 阻塞程序运行
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dlg</span><span class="o">-&gt;</span><span class="n">exec</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>使用模态时，启动程序发现只有两个子窗口，主窗口没显示，这是因为 <code>exec()</code> 函数阻塞程序运行，导致主窗口的构造函数没有运行完。<br>
-且这时候我们无法关闭 widget 窗口，只有当我们把dialog窗口关闭时，widget窗口才能被聚焦，且主窗口也会显示。</p>
-<h2 id="qmainwindow">QMainWindow
-</h2><p>具有菜单栏，工具栏，状态栏</p>
-<h2 id="工程结构调整">工程结构调整
-</h2><p>太多窗口类堆在src文件夹下可能难以维护，所以可以看这篇文章调整一下工程结构：
-<a class="link" href="https://serennan.github.io/post/qt-structure/"  target="_blank" rel="noopener"
-    >【Qt配置】工程结构调整</a></p>
+</div><p>使用connect()进行信号槽连接的注意事项:</p>
+<ul>
+<li>connect函数相对于做了信号处理动作的注册</li>
+<li>调用conenct函数的sender对象的信号并没有产生, 因此receiver对象的method也不会被调用</li>
+<li>method槽函数本质是一个回调函数, 调用的时机是信号产生之后, 调用是Qt框架来执行的</li>
+<li>connect中的sender和recever两个指针必须被实例化了, 否则conenct不会成功</li>
+</ul>
 
 </section>
 
@@ -742,30 +592,6 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/post/qt-base-5/">
-        
-        
-            <div class="article-image">
-                <img src="/post/qt-base-5/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【Qt 入门】5 信号槽"
-                        data-key="qt-base-5" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Qt 入门】5 信号槽</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="has-image">
@@ -834,6 +660,30 @@
 
         <div class="article-details">
             <h2 class="article-title">【Qt 配置】工程结构调整</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/qt-base-2/">
+        
+        
+            <div class="article-image">
+                <img src="/post/qt-base-2/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【Qt 入门】2 Qt 窗口类"
+                        data-key="qt-base-2" 
+                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Qt 入门】2 Qt 窗口类</h2>
         </div>
     </a>
 </article>

@@ -1366,11 +1366,11 @@ void func(const A &amp;amp;a)。&lt;/p&gt;&lt;/div&gt;
         </item>
         <item>
         <title>常用函数</title>
-        <link>https://serennan.github.io/post/function/</link>
+        <link>https://serennan.github.io/post/leetcode-function/</link>
         <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://serennan.github.io/post/function/</guid>
-        <description>&lt;img src="https://serennan.github.io/post/function/function.jpg" alt="Featured image of post 常用函数" /&gt;&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
+        <guid>https://serennan.github.io/post/leetcode-function/</guid>
+        <description>&lt;img src="https://serennan.github.io/post/leetcode-function/function.jpg" alt="Featured image of post 常用函数" /&gt;&lt;h2 id=&#34;哈希表&#34;&gt;哈希表
 &lt;/h2&gt;&lt;h3 id=&#34;map&#34;&gt;map
 &lt;/h3&gt;&lt;p&gt;&lt;code&gt;map&lt;/code&gt;是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的，且按键的升序排列。&lt;/p&gt;
 &lt;ol&gt;

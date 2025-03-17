@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Qt 基础介绍">
-<title>【Qt 入门】2 Qt 窗口类</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="记录一些C++力扣刷题的常用函数">
+<title>常用函数</title>
 
-<link rel='canonical' href='https://serennan.github.io/post/qt-base-2/'>
+<link rel='canonical' href='https://serennan.github.io/post/leetcode-function/'>
 
-<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 入门】2 Qt 窗口类">
-<meta property='og:description' content="Qt 基础介绍">
-<meta property='og:url' content='https://serennan.github.io/post/qt-base-2/'>
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="常用函数">
+<meta property='og:description' content="记录一些C++力扣刷题的常用函数">
+<meta property='og:url' content='https://serennan.github.io/post/leetcode-function/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-12T14:23:09&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-base-2/cover.png' />
-<meta name="twitter:title" content="【Qt 入门】2 Qt 窗口类">
-<meta name="twitter:description" content="Qt 基础介绍"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://serennan.github.io/post/qt-base-2/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-17T11:57:29&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/leetcode-function/function.jpg' />
+<meta name="twitter:title" content="常用函数">
+<meta name="twitter:description" content="记录一些C++力扣刷题的常用函数"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://serennan.github.io/post/leetcode-function/function.jpg' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -327,19 +327,17 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#基础窗口类">基础窗口类</a></li>
-    <li><a href="#qwidget">QWidget</a>
+    <li><a href="#哈希表">哈希表</a>
       <ol>
-        <li><a href="#代码">代码</a></li>
+        <li><a href="#map">map</a></li>
+        <li><a href="#unordered_map">unordered_map</a></li>
+        <li><a href="#set">set</a></li>
+        <li><a href="#emplace_back">emplace_back</a></li>
+        <li><a href="#queue">queue</a></li>
+        <li><a href="#priority_queue">priority_queue</a></li>
+        <li><a href="#stack">stack</a></li>
       </ol>
     </li>
-    <li><a href="#qdialog">QDialog</a>
-      <ol>
-        <li><a href="#代码-1">代码</a></li>
-      </ol>
-    </li>
-    <li><a href="#qmainwindow">QMainWindow</a></li>
-    <li><a href="#工程结构调整">工程结构调整</a></li>
   </ol>
 </nav>
     </div>
@@ -356,13 +354,13 @@
     
         <header class="article-header">
         <div class="article-image">
-            <a href="/post/qt-base-2/">
-                <img src="/post/qt-base-2/cover.png"
+            <a href="/post/leetcode-function/">
+                <img src="/post/leetcode-function/function.jpg"
                         
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 入门】2 Qt 窗口类" />
+                        alt="Featured image of post 常用函数" />
                 
             </a>
         </div>
@@ -372,8 +370,12 @@
     
     <header class="article-category">
         
-            <a href="/categories/qt/" style="background-color: #FF7043; color: #fff;">
-                Qt
+            <a href="/categories/leetcode/" style="background-color: #007E9C; color: #fff;">
+                Leetcode
+            </a>
+        
+            <a href="/categories/c&#43;&#43;/" style="background-color: #2a9d8f; color: #fff;">
+                C&#43;&#43;
             </a>
         
     </header>
@@ -381,12 +383,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/qt-base-2/">【Qt 入门】2 Qt 窗口类</a>
+            <a href="/post/leetcode-function/">常用函数</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            Qt 基础介绍
+            记录一些C&#43;&#43;力扣刷题的常用函数
         </h3>
         
     </div>
@@ -432,7 +434,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-03-11</time>
+                    <time>2025-01-10</time>
                 </div>
             
         
@@ -440,7 +442,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>966 字</span>
+                    <span>1215 字</span>
                 </div>
             
         
@@ -448,7 +450,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-12 14:23</time>
+                    <time>2025-03-17 11:57</time>
                 </div>
             
         
@@ -470,256 +472,99 @@
     <section class="article-content">
     
     
-    <h1 id="qt-窗口类">Qt 窗口类
-</h1><h2 id="基础窗口类">基础窗口类
-</h2><p><img src="/post/qt-base-2/%E5%9F%BA%E7%A1%80%E7%AA%97%E5%8F%A3%E7%B1%BB.png"
-	width="1773"
-	height="1602"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="110"
-		data-flex-basis="265px"
-	
-></p>
-<ul>
-<li>
-<p>常用的窗口类有3个<br></p>
-<ul>
-<li>在创建Qt窗口的时候, 需要让自己的窗口类继承上述三个窗口类的其中一个<br></li>
-</ul>
-</li>
-<li>
-<p>QWidget<br></p>
-<ul>
-<li>所有窗口类的基类<br></li>
-<li>Qt中的控件(按钮, 输入框, 单选框…)也属于窗口, 基类都是 QWidget<br></li>
-<li>可以内嵌到其他窗口中: 没有边框</li>
-<li>可以不内嵌单独显示: 独立的窗口, 有边框<br></li>
-</ul>
-</li>
-<li>
-<p>QDialog</p>
-<ul>
-<li>对话框类, 后边的章节会具体介绍这个窗口</li>
-<li>不能内嵌到其他窗口中<br></li>
-</ul>
-</li>
-<li>
-<p>QMainWindow</p>
-<ul>
-<li>有工具栏, 状态栏, 菜单栏, 后边的章节会具体介绍这个窗口不能内嵌到其他窗口中</li>
-</ul>
-</li>
-</ul>
-<h2 id="qwidget">QWidget
-</h2><p>所有窗口的基类</p>
-<ul>
-<li>
-<p>内嵌窗口</p>
-<ul>
-<li>依附于某一个大的窗口, 作为了大窗口的一部分</li>
-<li>大窗口就是这个内嵌窗口的父窗口</li>
-<li>父窗口显示的时候, 内嵌的窗口也就被显示出来了</li>
-</ul>
-</li>
-<li>
-<p>不内嵌窗口</p>
-<ul>
-<li>这类窗口有边框, 有标题栏</li>
-<li>需要<strong>调用函数</strong>才可以显示</li>
-</ul>
-</li>
-</ul>
-<h3 id="代码">代码
-</h3><p>由于我们使用的是 cmake 构建项目，即使使用的是Qtcreator，也没法跟视频一样直接添加一个新文件，所以我们只能手动添加。</p>
-<p>不过依然可以在 VScode使用Qtconfigure快速构建一个新的项目，命名为widget好了，但是需要做一些修改：</p>
-<p>widget.h</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#pragma once
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;ui_widget.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;QWidget&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">widget</span> <span class="o">:</span> <span class="k">public</span> <span class="n">QWidget</span> <span class="c1">// 继承 QWidget 而不是 QMainWindow
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">    <span class="n">Q_OBJECT</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">widget</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="k">private</span><span class="o">:</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Ui_widget</span> <span class="o">*</span><span class="n">ui</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>widget.cpp</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;widget.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="n">widget</span><span class="o">::</span><span class="n">widget</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">:</span> <span class="n">QWidget</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="c1">// 初始化列表也要记得修改类型
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui_widget</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">widget</span><span class="o">::~</span><span class="n">widget</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>widget.ui</p>
+    <h2 id="哈希表">哈希表
+</h2><h3 id="map">map
+</h3><p><code>map</code>是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的，且按键的升序排列。</p>
+<ol>
+<li><code>m[key] = value</code>：将键 <code>key</code> 对应的值设置为 <code>value</code>。</li>
+<li><code>m.insert({key, value})</code>：将键值对 <code>{key, value}</code> 插入到 <code>map</code> 中。</li>
+<li><code>m.erase(key)</code>：从 <code>map</code> 中删除键为 <code>key</code> 的元素。</li>
+<li><code>m.count(key)</code>：返回 <code>map</code> 中键为 <code>key</code> 的元素个数。</li>
+<li><code>m.find(key)</code>：返回指向 <code>map</code> 中键为 <code>key</code> 的元素的迭代器，如果 <code>key</code> 不存在则返回 <code>m.end()</code>。</li>
+<li><code>m.lower_bound(key)</code>：返回指向 <code>map</code> 中第一个不小于 <code>key</code> 的元素的迭代器。</li>
+<li><code>m.upper_bound(key)</code>：返回指向 <code>map</code> 中第一个大于 <code>key</code> 的元素的迭代器。</li>
+</ol>
+<h3 id="unordered_map">unordered_map
+</h3><p><code>unordered_map</code> 是 C++ 标准库中的一个关联容器，用于存储键值对，键是唯一的。</p>
+<ol>
+<li><code>umap[key] = value</code>：将键 <code>key</code> 对应的值设置为 <code>value</code>。</li>
+<li><code>umap.insert({key, value})</code>：将键值对 <code>{key, value}</code> 插入到 <code>unordered_map</code> 中。</li>
+<li><code>umap.erase(key)</code>：从 <code>unordered_map</code> 中删除键为 <code>key</code> 的元素。</li>
+<li><code>umap.count(key)</code>：返回 <code>unordered_map</code> 中键为 <code>key</code> 的元素个数。</li>
+<li><code>umap.find(key)</code>：返回指向 <code>unordered_map</code> 中键为 <code>key</code> 的元素的迭代器，如果 <code>key</code> 不存在则返回 <code>umap.end()</code>。</li>
+<li><code>umap.size()</code>：返回 <code>unordered_map</code> 中元素的个数。</li>
+</ol>
+<h3 id="set">set
+</h3><p><code>set</code> 是 C++ 标准库中的一个关联容器，用于存储唯一的元素。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;widget</span> <span class="na">class=</span><span class="s">&#34;QWidget&#34;</span> <span class="na">name=</span><span class="s">&#34;newwindow&#34;</span><span class="nt">&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">nums</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>要修改成 QWidget</p>
-<p>mainwindow.cpp</p>
+</div><ol>
+<li><code>nums.insert(x)</code>：将元素 x 插入到集合 nums 中。</li>
+<li><code>nums.erase(x)</code>：从集合 nums 中删除元素 x。</li>
+<li><code>nums.count(x)</code>：返回集合 nums 中元素 x 的个数。</li>
+<li><code>nums.find(x)</code>：返回指向集合 nums 中元素 x 的迭代器，如果 x 不存在则返回 <code>nums.end()</code>。</li>
+<li><code>nums.lower_bound(x)</code>：返回指向集合 nums 中第一个不小于 x 的元素的迭代器。</li>
+</ol>
+<h3 id="emplace_back">emplace_back
+</h3><p><code>emplace_back</code> 是 C++ 标准库中 <code>std::vector</code>、<code>std::deque</code>、<code>std::list</code> 等容器的一个成员函数，用于在容器的末尾直接构造一个元素，而不是先创建一个临时对象再插入。这样可以避免不必要的拷贝或移动操作，提高效率。</p>
+<h3 id="queue">queue
+</h3><p><code>queue</code> 是 C++ 标准库中的一个容器适配器，用于实现先进先出（FIFO）的队列。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;mainwindow.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;src/newwindow.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="n">mainwindow</span><span class="o">::</span><span class="n">mainwindow</span><span class="p">(</span><span class="n">QWidget</span> <span class="o">*</span><span class="n">parent</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="o">:</span> <span class="n">QMainWindow</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ui</span><span class="p">(</span><span class="k">new</span> <span class="n">Ui_mainwindow</span><span class="p">)</span> <span class="c1">// 基于 mainwindow.ui 创建一个实例对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 将 mainwindow.ui 的示例对象和当前类的对象进行关联
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">setupUi</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 一般在 qt 的构造函数中进行初始化操作（窗口，数据，...）
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 显示当前窗口的时候，显示另外一个窗口 NewWindow
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#if 0</span><span class="c">
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 创建窗口对象，没有给 w 对象指定父对象
-</span></span></span><span class="line"><span class="cl"><span class="c">    newwindow *w = new newwindow;
-</span></span></span><span class="line"><span class="cl"><span class="c">    w-&gt;show();
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#else
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="c1">// 创建窗口对象，没有给 w 对象指定父对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// newwindow(QWidget* parent = nullptr);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">newwindow</span> <span class="o">*</span><span class="n">w</span> <span class="o">=</span> <span class="k">new</span> <span class="n">newwindow</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">mainwindow</span><span class="o">::~</span><span class="n">mainwindow</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">ui</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">q</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="qdialog">QDialog
-</h2><p>对话框窗口类<br>
-有模态和非模态两种<br>
-不能内嵌</p>
-<h3 id="代码-1">代码
-</h3><div class="highlight"><div class="chroma">
+</div><ol>
+<li><code>q.push(x)</code>：将元素 x 入队。</li>
+<li><code>q.pop()</code>：将队首元素出队。</li>
+<li><code>q.front()</code>：返回队首元素的引用。</li>
+<li><code>q.back()</code>：返回队尾元素的引用。</li>
+<li><code>q.empty()</code>：检查队列是否为空，返回布尔值。</li>
+<li><code>q.size()</code>：返回队列中元素的个数。</li>
+</ol>
+<h3 id="priority_queue">priority_queue
+</h3><p><code>priority_queue</code> 是 C++ 标准库中的一个容器适配器，用于实现优先队列。</p>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 创建对话框窗口
-</span></span></span><span class="line"><span class="cl"><span class="c">    dialog *dlg = new dialog(this);
-</span></span></span><span class="line"><span class="cl"><span class="c">    // 非模态
-</span></span></span><span class="line"><span class="cl"><span class="c">    dlg-&gt;show();
-</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#else
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="c1">// 创建对话框窗口
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dialog</span> <span class="o">*</span><span class="n">dlg</span> <span class="o">=</span> <span class="k">new</span> <span class="n">dialog</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 模态,exec()
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 阻塞程序运行
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">dlg</span><span class="o">-&gt;</span><span class="n">exec</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">priority_queue</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">pq</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
-</div><p>使用模态时，启动程序发现只有两个子窗口，主窗口没显示，这是因为 <code>exec()</code> 函数阻塞程序运行，导致主窗口的构造函数没有运行完。<br>
-且这时候我们无法关闭 widget 窗口，只有当我们把dialog窗口关闭时，widget窗口才能被聚焦，且主窗口也会显示。</p>
-<h2 id="qmainwindow">QMainWindow
-</h2><p>具有菜单栏，工具栏，状态栏</p>
-<h2 id="工程结构调整">工程结构调整
-</h2><p>太多窗口类堆在src文件夹下可能难以维护，所以可以看这篇文章调整一下工程结构：
-<a class="link" href="https://serennan.github.io/post/qt-structure/"  target="_blank" rel="noopener"
-    >【Qt配置】工程结构调整</a></p>
+</div><ol>
+<li><code>pq.push(x)</code>：将元素 x 入队，并按优先级排序。</li>
+<li><code>pq.pop()</code>：将优先级最高的元素出队。</li>
+<li><code>pq.top()</code>：返回优先级最高的元素的引用。</li>
+<li><code>pq.empty()</code>：检查优先队列是否为空，返回布尔值。</li>
+<li><code>pq.size()</code>：返回优先队列中元素的个数。</li>
+</ol>
+<h3 id="stack">stack
+</h3><p><code>stack</code> 是 C++ 标准库中的一个容器适配器，用于实现后进先出（LIFO）的栈。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">    <span class="n">stack</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li><code>s.push(x)</code>：将元素 x 压入栈顶。</li>
+<li><code>s.pop()</code>：弹出栈顶元素。</li>
+<li><code>s.top()</code>：返回栈顶元素的引用。</li>
+<li><code>s.empty()</code>：检查栈是否为空，返回布尔值。</li>
+<li><code>s.size()</code>：返回栈中元素的个数。</li>
+</ol>
 
 </section>
 
@@ -744,24 +589,13 @@
         <div class="flex article-list--tile">
             
                 
-<article class="has-image">
-    <a href="/post/qt-base-5/">
+<article class="">
+    <a href="/post/leetcode-hashtable/">
         
-        
-            <div class="article-image">
-                <img src="/post/qt-base-5/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【Qt 入门】5 信号槽"
-                        data-key="qt-base-5" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
-                
-            </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">【Qt 入门】5 信号槽</h2>
+            <h2 class="article-title">哈希表</h2>
         </div>
     </a>
 </article>
@@ -769,23 +603,23 @@
             
                 
 <article class="has-image">
-    <a href="/post/qt-base-4/">
+    <a href="/post/leetcode-window/">
         
         
             <div class="article-image">
-                <img src="/post/qt-base-4/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
+                <img src="/post/leetcode-window/cover.cd3a19b662f2afc6d3e94ada8b7157df.png" 
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 入门】4 QVariant类"
-                        data-key="qt-base-4" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
+                        alt="Featured image of post 滑动窗口"
+                        data-key="leetcode-window" 
+                        data-hash="md5-zToZtmLyr8bT6Urai3FX3w==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">【Qt 入门】4 QVariant类</h2>
+            <h2 class="article-title">滑动窗口</h2>
         </div>
     </a>
 </article>
@@ -793,23 +627,23 @@
             
                 
 <article class="has-image">
-    <a href="/post/qt-base-3/">
+    <a href="/post/cpp_static/">
         
         
             <div class="article-image">
-                <img src="/post/qt-base-3/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
+                <img src="/post/cpp_static/cover.0d82fe059b6459e8d80ac404f2930a85.png" 
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 入门】3 字符串类型"
-                        data-key="qt-base-3" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
+                        alt="Featured image of post 【C&#43;&#43; 基础进阶】 Static"
+                        data-key="cpp_static" 
+                        data-hash="md5-DYL&#43;BZtkWejYCsQE8pMKhQ==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">【Qt 入门】3 字符串类型</h2>
+            <h2 class="article-title">【C&#43;&#43; 基础进阶】 Static</h2>
         </div>
     </a>
 </article>
@@ -817,23 +651,23 @@
             
                 
 <article class="has-image">
-    <a href="/post/qt-structure/">
+    <a href="/post/cpp_const/">
         
         
             <div class="article-image">
-                <img src="/post/qt-structure/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
+                <img src="/post/cpp_const/cover.a7bf723bf6f0ad48bb93d6884f4b80e7.png" 
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 配置】工程结构调整"
-                        data-key="qt-structure" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
+                        alt="Featured image of post 【C&#43;&#43; 基础进阶】 Const"
+                        data-key="cpp_const" 
+                        data-hash="md5-p79yO/bwrUi7k9aIT0uA5w==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">【Qt 配置】工程结构调整</h2>
+            <h2 class="article-title">【C&#43;&#43; 基础进阶】 Const</h2>
         </div>
     </a>
 </article>
@@ -841,23 +675,23 @@
             
                 
 <article class="has-image">
-    <a href="/post/qt-base-1/">
+    <a href="/post/algorithm/">
         
         
             <div class="article-image">
-                <img src="/post/qt-base-1/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
+                <img src="/post/algorithm/algorithm.8144f29db56d16a82baf099f9af3c378.jpg" 
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 入门】1 第一个 Qt 项目"
-                        data-key="qt-base-1" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
+                        alt="Featured image of post 算法思路"
+                        data-key="algorithm" 
+                        data-hash="md5-gUTynbVtFqgrrwmfmvPDeA==">
                 
             </div>
         
 
         <div class="article-details">
-            <h2 class="article-title">【Qt 入门】1 第一个 Qt 项目</h2>
+            <h2 class="article-title">算法思路</h2>
         </div>
     </a>
 </article>
