@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="使用vscode开发qt项目">
-<title>【Qt 配置】 VS &#43; Qt6</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Qt 基础介绍">
+<title>【Qt 入门】4 定时器</title>
 
-<link rel='canonical' href='https://serennan.github.io/post/qt-configure/'>
+<link rel='canonical' href='https://serennan.github.io/post/qt-base-4/'>
 
-<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 配置】 VS + Qt6">
-<meta property='og:description' content="使用vscode开发qt项目">
-<meta property='og:url' content='https://serennan.github.io/post/qt-configure/'>
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 入门】4 定时器">
+<meta property='og:description' content="Qt 基础介绍">
+<meta property='og:url' content='https://serennan.github.io/post/qt-base-4/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-12T14:23:09&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-configure/cover.png' />
-<meta name="twitter:title" content="【Qt 配置】 VS + Qt6">
-<meta name="twitter:description" content="使用vscode开发qt项目"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://serennan.github.io/post/qt-configure/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-18T15:08:10&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-base-4/cover.png' />
+<meta name="twitter:title" content="【Qt 入门】4 定时器">
+<meta name="twitter:description" content="Qt 基础介绍"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://serennan.github.io/post/qt-base-4/cover.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -327,11 +327,10 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#1-安装qt6">1. 安装qt6</a></li>
-    <li><a href="#2-安装插件">2. 安装插件</a></li>
-    <li><a href="#3-启动项目">3. 启动项目</a></li>
-    <li><a href="#4-单独修改ui界面">4. 单独修改ui界面</a></li>
-    <li><a href="#问题">问题</a></li>
+    <li><a href="#1-publicslot-function">1. public/slot function</a></li>
+    <li><a href="#2-signals">2. signals</a></li>
+    <li><a href="#3-static-public-function">3. static public function</a></li>
+    <li><a href="#4-定时器使用举例">4. 定时器使用举例</a></li>
   </ol>
 </nav>
     </div>
@@ -348,13 +347,13 @@
     
         <header class="article-header">
         <div class="article-image">
-            <a href="/post/qt-configure/">
-                <img src="/post/qt-configure/cover.png"
+            <a href="/post/qt-base-4/">
+                <img src="/post/qt-base-4/cover.png"
                         
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 配置】 VS &#43; Qt6" />
+                        alt="Featured image of post 【Qt 入门】4 定时器" />
                 
             </a>
         </div>
@@ -373,12 +372,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/qt-configure/">【Qt 配置】 VS &#43; Qt6</a>
+            <a href="/post/qt-base-4/">【Qt 入门】4 定时器</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            使用vscode开发qt项目
+            Qt 基础介绍
         </h3>
         
     </div>
@@ -424,7 +423,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-03-08</time>
+                    <time>2025-03-18</time>
                 </div>
             
         
@@ -432,7 +431,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>538 字</span>
+                    <span>1219 字</span>
                 </div>
             
         
@@ -440,7 +439,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-12 14:23</time>
+                    <time>2025-03-18 15:08</time>
                 </div>
             
         
@@ -462,175 +461,227 @@
     <section class="article-content">
     
     
-    <h1 id="vs-配置-qt6-教程">VS 配置 Qt6 教程
-</h1><p>雷神后面的视频是要开发一个图形界面，这里我使用vscode + qt + cmake来开发。</p>
-<hr>
-<h2 id="1-安装qt6">1. 安装qt6
-</h2><p>这里网上很多教程，推荐一个 CSDN 上的教程：<a class="link" href="https://blog.csdn.net/caoshangpa/article/details/135420524"  target="_blank" rel="noopener"
-    >Qt6入门教程 2：Qt6下载与安装</a></p>
-
-<div class="notice notice-warning" >
-    <div class="notice-title"></div><p>主要区别是我下载的是 linux版本<br>
-以及选择组件时，我使用的是6.5.3版本</p></div>
-
-<p><img src="/post/qt-configure/image-1.png"
-	width="1312"
-	height="598"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="219"
-		data-flex-basis="526px"
-	
-></p>
-<hr>
-<h2 id="2-安装插件">2. 安装插件
-</h2><p>vscode安装好 Qt Tools 和 Qt Configure 这两个插件，并配置一下Qt Configure。</p>
-<p><img src="/post/qt-configure/image-2.png"
-	width="1234"
-	height="714"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="172"
-		data-flex-basis="414px"
-	
-></p>
-
-<div class="notice notice-info" >
-    <div class="notice-title"></div><p>注意这里的Qt Dir 存放的是安装好的qt的根目录，我这里多一个 Qt文件夹是因为我下载了多个版本的qt</p></div>
-
-<hr>
-<h2 id="3-启动项目">3. 启动项目
-</h2><p>打开一个空文件夹，按下<code>shift + ctrl + p</code> 输入指令：</p>
+    <h1 id="qt-定时器类-qtimer">Qt 定时器类 QTimer
+</h1><p>在进行窗口程序的处理过程中, 经常要周期性的执行某些操作, 或者制作一些动画效果，看似比较复杂的问题使用定时器就可以完美的解决这些问题， Qt中提供了两种定时器方式一种是使用Qt中的事件处理函数这个在后续章节会给大家做细致的讲解，本节主要给大家介绍一下Qt中的定时器类 QTimer的使用方法。</p>
+<p>要使用它，只需创建一个QTimer类对象，然后调用其 start() 函数开启定时器，此后QTimer对象就会周期性的发出 timeout() 信号。我们先来了解一下这个类的相关API。</p>
+<h2 id="1-publicslot-function">1. public/slot function
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 如果指定了父对象, 创建的堆内存可以自动析构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QTimer</span><span class="o">::</span><span class="n">QTimer</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 设置定时器时间间隔为 msec 毫秒
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 默认值是0，一旦窗口系统事件队列中的所有事件都已经被处理完，一个时间间隔为0的QTimer就会触发
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">setInterval</span><span class="p">(</span><span class="kt">int</span> <span class="n">msec</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取定时器的时间间隔, 返回值单位: 毫秒
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">interval</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 根据指定的时间间隔启动或者重启定时器, 需要调用 setInterval() 设置时间间隔
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">start</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 启动或重新启动定时器，超时间隔为msec毫秒。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">start</span><span class="p">(</span><span class="kt">int</span> <span class="n">msec</span><span class="p">);</span> <span class="c1">// 推荐使用
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 停止定时器。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">stop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 设置定时器精度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">参数: 
+</span></span></span><span class="line"><span class="cl"><span class="cm">    - Qt::PreciseTimer -&gt; 精确的精度, 毫秒级
+</span></span></span><span class="line"><span class="cl"><span class="cm">    - Qt::CoarseTimer  -&gt; 粗糙的精度, 和1毫秒的误差在5%的范围内, 默认精度
+</span></span></span><span class="line"><span class="cl"><span class="cm">    - Qt::VeryCoarseTimer -&gt; 非常粗糙的精度, 精度在1秒左右
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">Qt</span><span class="o">::</span><span class="n">TimerType</span> <span class="n">atype</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">Qt</span><span class="o">::</span><span class="n">TimerType</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">timerType</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>	<span class="c1">// 获取当前定时器的精度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 如果定时器正在运行，返回true; 否则返回false。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">isActive</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断定时器是否只触发一次
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">isSingleShot</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 设置定时器是否只触发一次, 参数为true定时器只触发一次, 为false定时器重复触发, 默认为false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">setSingleShot</span><span class="p">(</span><span class="kt">bool</span> <span class="n">singleShot</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="2-signals">2. signals
+</h2><p>这个类的信号只有一个, 当定时器超时时，该信号就会被发射出来。给这个信号通过conect()关联一个槽函数, 就可以在槽函数中处理超时事件了。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">QtConfigure:New Project
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="p">[</span><span class="n">signal</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">timeout</span><span class="p">();</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后根据提示，项目名字 -&gt; qt 组件 -&gt; cmake -&gt; 是否生成 ui 文件</p>
-<p>然后会生成下面这些文件</p>
-<div class="highlight"><div class="chroma">
+</div><h2 id="3-static-public-function">3. static public function
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">├── CMakeLists.txt
-</span></span><span class="line"><span class="cl">└── src
-</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.cpp
-</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.h
-</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.ui
-</span></span><span class="line"><span class="cl">    └── main.cpp
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 其他同名重载函数可以自己查阅帮助文档
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">功能: 在msec毫秒后发射一次信号, 并且只发射一次
+</span></span></span><span class="line"><span class="cl"><span class="cm">参数:
+</span></span></span><span class="line"><span class="cl"><span class="cm">	- msec:     在msec毫秒后发射信号
+</span></span></span><span class="line"><span class="cl"><span class="cm">	- receiver: 接收信号的对象地址
+</span></span></span><span class="line"><span class="cl"><span class="cm">	- method:   槽函数地址
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QTimer</span><span class="o">::</span><span class="n">singleShot</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">msec</span><span class="p">,</span> <span class="k">const</span> <span class="n">QObject</span> <span class="o">*</span><span class="n">receiver</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">PointerToMemberFunction</span> <span class="n">method</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><br>
-
-<div class="notice notice-info" >
-    <div class="notice-title"></div><p>注意这里打开 CMakeLists.txt 文件会发现用的是 Qt5 的东西<br>
-但我下载的是 Qt6 ，所以这里得改成 Qt6</p></div>
-
-<p><img src="/post/qt-configure/image-3.png"
-	width="1217"
-	height="734"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="165"
-		data-flex-basis="397px"
-	
-></p>
-<p>接下来用 CMake 来配置项目，按下<code>shift + ctrl + p</code> 输入指令：</p>
+</div><h2 id="4-定时器使用举例">4. 定时器使用举例
+</h2><p>周期性定时器</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CMake：Configure with CMake Debugger
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 创建定时器对象
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QTimer</span><span class="o">*</span> <span class="n">timer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">QTimer</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1">// 修改定时器对象的精度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">timer</span><span class="o">-&gt;</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">Qt</span><span class="o">::</span><span class="n">PreciseTimer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1">// 按钮 loopBtn 的点击事件
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 点击按钮启动或者关闭定时器, 定时器启动, 周期性得到当前时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">connect</span><span class="p">(</span><span class="n">ui</span><span class="o">-&gt;</span><span class="n">loopBtn</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="o">::</span><span class="n">clicked</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="o">=</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 启动定时器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">timer</span><span class="o">-&gt;</span><span class="n">isActive</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">timer</span><span class="o">-&gt;</span><span class="n">stop</span><span class="p">();</span>  <span class="c1">// 关闭定时器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ui</span><span class="o">-&gt;</span><span class="n">loopBtn</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&#34;开始&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ui</span><span class="o">-&gt;</span><span class="n">loopBtn</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="s">&#34;关闭&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">timer</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span> <span class="c1">// 1000ms == 1s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="n">connect</span><span class="p">(</span><span class="n">timer</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QTimer</span><span class="o">::</span><span class="n">timeout</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="o">=</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QTime</span> <span class="n">tm</span> <span class="o">=</span> <span class="n">QTime</span><span class="o">::</span><span class="n">currentTime</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 格式化当前得到的系统时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">QString</span> <span class="n">tmstr</span> <span class="o">=</span> <span class="n">tm</span><span class="p">.</span><span class="n">toString</span><span class="p">(</span><span class="s">&#34;hh:mm:ss.zzz&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 设置要显示的时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ui</span><span class="o">-&gt;</span><span class="n">curTime</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tmstr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>配置完运行项目</p>
-<p><img src="/post/qt-configure/image-4.png"
-	width="1799"
-	height="1208"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="148"
-		data-flex-basis="357px"
-	
-></p>
-<p>出现窗口说明配置成功</p>
-<h2 id="4-单独修改ui界面">4. 单独修改ui界面
-</h2><p>右键 ui 文件选择 Edit in Qt Designer 可以修改 ui 文件</p>
-<p><img src="/post/qt-configure/image-5.png"
-	width="1756"
-	height="1139"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="154"
-		data-flex-basis="370px"
-	
-></p>
-<p>拖入一个按钮检验一下，保存并退出，再去查看ui文件会发现已经帮我们加上相应的代码，重新运行项目</p>
-<p><img src="/post/qt-configure/image-6.png"
-	width="1594"
-	height="1105"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="144"
-		data-flex-basis="346px"
-	
-></p>
-<h2 id="问题">问题
-</h2>
-<div class="notice notice-info" >
-    <div class="notice-title"></div><p>如果没有出现窗口，可能还需要安装一个 VcXsrv</p></div>
-
-<p>后续再找时间写一个安装教程，这里先放一个别人的视频教程：</p>
-
-
-
-
-
-
-    
-
-
-<div class="video-wrapper">
-    <iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;high_quality=1&amp;page=1&bvid=BV1RK411n79v"
-            scrolling="no"
-            frameborder="no"
-            framespacing="0"
-            allowfullscreen="true"
-    >
-    </iframe>
+</div><p>一次性定时器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 点击按钮 onceBtn 只发射一次信号
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 点击按钮一次, 发射一个信号, 得到某一个时间点的时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">connect</span><span class="p">(</span><span class="n">ui</span><span class="o">-&gt;</span><span class="n">onceBtn</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QPushButton</span><span class="o">::</span><span class="n">clicked</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="o">=</span><span class="p">]()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">// 获取2s以后的系统时间, 不创建定时器对象, 直接使用类的静态方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">QTimer</span><span class="o">::</span><span class="n">singleShot</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="o">=</span><span class="p">](){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">QTime</span> <span class="n">tm</span> <span class="o">=</span> <span class="n">QTime</span><span class="o">::</span><span class="n">currentTime</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 格式化当前得到的系统时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">QString</span> <span class="n">tmstr</span> <span class="o">=</span> <span class="n">tm</span><span class="p">.</span><span class="n">toString</span><span class="p">(</span><span class="s">&#34;hh:mm:ss.zzz&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 设置要显示的时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ui</span><span class="o">-&gt;</span><span class="n">onceTime</span><span class="o">-&gt;</span><span class="n">setText</span><span class="p">(</span><span class="n">tmstr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
 </div>
-
-
+</div>
 </section>
 
 
@@ -652,30 +703,6 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/post/qt-base-4/">
-        
-        
-            <div class="article-image">
-                <img src="/post/qt-base-4/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【Qt 入门】4 定时器"
-                        data-key="qt-base-4" 
-                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Qt 入门】4 定时器</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="has-image">
@@ -768,6 +795,30 @@
 
         <div class="article-details">
             <h2 class="article-title">【Qt 入门】1 入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/qt-configure/">
+        
+        
+            <div class="article-image">
+                <img src="/post/qt-configure/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【Qt 配置】 VS &#43; Qt6"
+                        data-key="qt-configure" 
+                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Qt 配置】 VS &#43; Qt6</h2>
         </div>
     </a>
 </article>
@@ -1073,195 +1124,7 @@ console.log('particles.js loaded - callback');
     showHideView();
 </script>
 
-        <link rel="stylesheet" href="/css/mermaid.css">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      flowchart: {
-        htmlLabels: false,
-        useMaxWidth: false,
-        nodeSpacing: 50,
-        rankSpacing: 50,
-        defaultRenderer: 'svg'
-      },
-      theme: 'default',
-      securityLevel: 'loose',
-      themeVariables: {
-        nodeBorder: '#000',
-        mainBkg: '#fff',
-        nodeTextColor: '#000',
-        fontSize: '14px'
-      }
-    });
-  </script>
-
-  
-  <div class="mermaid-overlay" id="mermaidOverlay"></div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      
-      const adjustNodeSize = () => {
-        document.querySelectorAll('.mermaid .node').forEach(node => {
-          const rect = node.querySelector('rect');
-          const text = node.querySelector('text');
-          if (rect && text) {
-            const bbox = text.getBBox();
-            const padding = 16;
-            const minWidth = parseFloat(rect.getAttribute('width')) || 160;
-            const newWidth = Math.max(bbox.width + padding, minWidth);
-            rect.setAttribute('width', newWidth);
-          }
-        });
-      };
-
-      
-      adjustNodeSize();
-      window.addEventListener('resize', adjustNodeSize);
-
-      
-      document.querySelectorAll('.mermaid-container').forEach(container => {
-        let currentScale = 1;
-        let initialClickX = null, initialClickY = null;
-        let dragOffsetX = 0, dragOffsetY = 0;
-        let isDragging = false;
-        let dragStartX = 0, dragStartY = 0;
-        let isZoomed = false;
-
-        const mermaidElement = container.querySelector('.mermaid');
-        const overlay = document.getElementById('mermaidOverlay');
-        const originalParent = container.parentElement;
-        const originalNextSibling = container.nextElementSibling;
-
-        
-        const applyScale = () => {
-          if (isZoomed && initialClickX !== null && initialClickY !== null) {
-            const containerRect = container.getBoundingClientRect();
-            const centerX = containerRect.width / 2;
-            const centerY = containerRect.height / 2;
-            const baseTranslateX = centerX - initialClickX * currentScale;
-            const baseTranslateY = centerY - initialClickY * currentScale;
-            const translateX = baseTranslateX + dragOffsetX;
-            const translateY = baseTranslateY + dragOffsetY;
-            mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
-          } else {
-            mermaidElement.style.transform = `scale(${currentScale})`;
-          }
-        };
-
-        
-        const handleContainerClick = (e) => {
-          if (!isZoomed) {
-            isZoomed = true;
-            container.classList.add('zoomed');
-            overlay.style.display = 'flex';
-            overlay.appendChild(container);
-
-            const containerRect = container.getBoundingClientRect();
-            initialClickX = e.clientX - containerRect.left;
-            initialClickY = e.clientY - containerRect.top;
-            dragOffsetX = 0;
-            dragOffsetY = 0;
-
-            const scaleX = window.innerWidth / containerRect.width;
-            const scaleY = window.innerHeight / containerRect.height;
-            currentScale = Math.min(scaleX, scaleY, 5);
-            applyScale();
-          }
-        };
-
-        
-        const exitZoom = () => {
-          if (isZoomed) {
-            isZoomed = false;
-            container.classList.remove('zoomed');
-            overlay.style.display = 'none';
-            if (originalNextSibling) {
-              originalParent.insertBefore(container, originalNextSibling);
-            } else {
-              originalParent.appendChild(container);
-            }
-            currentScale = 1;
-            initialClickX = null;
-            initialClickY = null;
-            dragOffsetX = 0;
-            dragOffsetY = 0;
-            applyScale();
-          }
-        };
-
-        
-        const handleWheel = (e) => {
-          if (isZoomed) {
-            e.preventDefault();
-            const sensitivity = 0.0006;
-            const delta = e.deltaY || e.wheelDelta;
-            const scaleDelta = 1 + (-delta * sensitivity);
-            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
-            applyScale();
-          } else if (e.ctrlKey) {
-            e.preventDefault();
-            const sensitivity = 0.0006;
-            const delta = e.deltaY || e.wheelDelta;
-            const scaleDelta = 1 + (-delta * sensitivity);
-            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
-            applyScale();
-          }
-        };
-
-        
-        container.addEventListener('click', (e) => {
-          if (!isZoomed) handleContainerClick(e);
-        });
-
-        container.addEventListener('dblclick', exitZoom);
-        container.addEventListener('wheel', handleWheel);
-
-        
-        container.addEventListener('mousedown', (e) => {
-          if (isZoomed) {
-            isDragging = true;
-            dragStartX = e.clientX;
-            dragStartY = e.clientY;
-            container.style.cursor = 'grabbing';
-          }
-        });
-
-        const handleMouseMove = (e) => {
-          if (isDragging) {
-            const deltaX = e.clientX - dragStartX;
-            const deltaY = e.clientY - dragStartY;
-            dragOffsetX += deltaX;
-            dragOffsetY += deltaY;
-            dragStartX = e.clientX;
-            dragStartY = e.clientY;
-            applyScale();
-          }
-        };
-
-        const handleMouseUp = () => {
-          isDragging = false;
-          container.style.cursor = 'grab';
-        };
-
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-      });
-
-      
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          document.querySelectorAll('.mermaid-container').forEach(container => {
-            if (container.classList.contains('zoomed')) {
-              container.dispatchEvent(new Event('dblclick'));
-            }
-          });
-        }
-      });
-    });
-  </script>  
+          
         <div id="toggle-buttons">
   <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
   <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
