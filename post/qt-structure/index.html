@@ -10,7 +10,7 @@
 <meta property='og:description' content="Qt 基础介绍">
 <meta property='og:url' content='https://serennan.github.io/post/qt-structure/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-21T20:28:11&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-structure/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-12T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-21T20:29:51&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-structure/cover.png' />
 <meta name="twitter:title" content="【Qt 配置】工程结构调整">
 <meta name="twitter:description" content="Qt 基础介绍"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://serennan.github.io/post/qt-structure/cover.png' />
@@ -437,7 +437,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-21 20:28</time>
+                    <time>2025-03-21 20:29</time>
                 </div>
             
         
@@ -550,53 +550,53 @@
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">cmake_minimum_required</span><span class="p">(</span><span class="n">VERSION</span> <span class="mf">3.20</span><span class="p">)</span> <span class="err">#</span> <span class="n">CMake</span> <span class="nl">install</span> <span class="p">:</span> <span class="nl">https</span><span class="p">:</span><span class="c1">//cmake.org/download/
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">project</span><span class="p">(</span><span class="n">mainwindow</span> <span class="n">LANGUAGES</span> <span class="n">CXX</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_INCLUDE_CURRENT_DIR</span> <span class="n">ON</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_PREFIX_PATH</span> <span class="s">&#34;/usr/local/Qt/Qt6.5.3/6.5.3/gcc_64&#34;</span><span class="p">)</span> <span class="err">#</span> <span class="n">Qt</span> <span class="n">Kit</span> <span class="n">Dir</span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_AUTOUIC</span> <span class="n">ON</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_AUTOMOC</span> <span class="n">ON</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_AUTORCC</span> <span class="n">ON</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_CXX_STANDARD</span> <span class="mi">17</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="n">ON</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">find_package</span><span class="p">(</span><span class="n">Qt6</span> <span class="n">COMPONENTS</span> <span class="n">Widgets</span> <span class="n">REQUIRED</span><span class="p">)</span> <span class="err">#</span> <span class="n">Qt</span> <span class="n">COMPONENTS</span>
-</span></span><span class="line"><span class="cl"><span class="cp"># aux_source_directory(./src srcs)
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">SOURCE</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">main</span><span class="p">.</span><span class="n">cpp</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">mainwindow</span><span class="p">.</span><span class="n">cpp</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">widget</span><span class="p">.</span><span class="n">cpp</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">dialog</span><span class="p">.</span><span class="n">cpp</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">INCLUDE</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">dialog</span><span class="p">.</span><span class="n">h</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">mainwindow</span><span class="p">.</span><span class="n">h</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">include</span><span class="o">/</span><span class="n">widget</span><span class="p">.</span><span class="n">h</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">CMAKE_AUTOUIC_SEARCH_PATHS</span> <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">ui</span><span class="p">)</span> <span class="err">#</span> <span class="err">需要添加这个</span>
-</span></span><span class="line"><span class="cl"><span class="n">set</span><span class="p">(</span><span class="n">UI_FILES</span>
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">ui</span><span class="o">/</span><span class="n">dialog</span><span class="p">.</span><span class="n">ui</span>
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">ui</span><span class="o">/</span><span class="n">mainwindow</span><span class="p">.</span><span class="n">ui</span>
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">ui</span><span class="o">/</span><span class="n">widget</span><span class="p">.</span><span class="n">ui</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">add_compile_options</span><span class="p">(</span><span class="s">&#34;$&lt;$&lt;C_COMPILER_ID:MSVC&gt;:/utf-8&gt;&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">add_compile_options</span><span class="p">(</span><span class="s">&#34;$&lt;$&lt;CXX_COMPILER_ID:MSVC&gt;:/utf-8&gt;&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">add_executable</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">PROJECT_NAME</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="n">WIN32</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">SOURCE</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">INCLUDE</span><span class="p">}</span> <span class="err">#</span> <span class="err">需要把包含了</span> <span class="n">ui</span> <span class="err">文件的头文件加进来</span>
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">UI_FILES</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">target_include_directories</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">PROJECT_NAME</span><span class="p">}</span> <span class="n">PRIVATE</span> 
-</span></span><span class="line"><span class="cl">    <span class="err">$</span><span class="p">{</span><span class="n">CMAKE_SOURCE_DIR</span><span class="p">}</span><span class="o">/</span><span class="n">include</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="n">target_link_libraries</span><span class="p">(</span><span class="err">$</span><span class="p">{</span><span class="n">PROJECT_NAME</span><span class="p">}</span> <span class="n">PRIVATE</span> <span class="n">Qt6</span><span class="o">::</span><span class="n">Widgets</span><span class="p">)</span> <span class="err">#</span> <span class="n">Qt5</span> <span class="n">Shared</span> <span class="n">Library</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-cmake" data-lang="cmake"><span class="line"><span class="cl"><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span> <span class="s">3.20</span><span class="p">)</span> <span class="c"># CMake install : https://cmake.org/download/
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">project</span><span class="p">(</span><span class="s">mainwindow</span> <span class="s">LANGUAGES</span> <span class="s">CXX</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_INCLUDE_CURRENT_DIR</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_PREFIX_PATH</span> <span class="s2">&#34;/usr/local/Qt/Qt6.5.3/6.5.3/gcc_64&#34;</span><span class="p">)</span> <span class="c"># Qt Kit Dir
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_AUTOUIC</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_AUTOMOC</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_AUTORCC</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span> <span class="s">17</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span> <span class="s">ON</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">find_package</span><span class="p">(</span><span class="s">Qt6</span> <span class="s">COMPONENTS</span> <span class="s">Widgets</span> <span class="s">REQUIRED</span><span class="p">)</span> <span class="c"># Qt COMPONENTS
+</span></span></span><span class="line"><span class="cl"><span class="c"># aux_source_directory(./src srcs)
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">SOURCE</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/main.cpp</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/mainwindow.cpp</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/widget.cpp</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/src/dialog.cpp</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">INCLUDE</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/include/dialog.h</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/include/mainwindow.h</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/include/widget.h</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_AUTOUIC_SEARCH_PATHS</span> <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/ui</span><span class="p">)</span> <span class="c"># 需要添加这个
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nb">set</span><span class="p">(</span><span class="s">UI_FILES</span>
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/ui/dialog.ui</span>
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/ui/mainwindow.ui</span>
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/ui/widget.ui</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">add_compile_options</span><span class="p">(</span><span class="s2">&#34;$&lt;$&lt;C_COMPILER_ID:MSVC&gt;:/utf-8&gt;&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">add_compile_options</span><span class="p">(</span><span class="s2">&#34;$&lt;$&lt;CXX_COMPILER_ID:MSVC&gt;:/utf-8&gt;&#34;</span><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">add_executable</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="s">WIN32</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">SOURCE</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">INCLUDE</span><span class="o">}</span> <span class="c"># 需要把包含了 ui 文件的头文件加进来
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>    <span class="o">${</span><span class="nv">UI_FILES</span><span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">target_include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span> <span class="s">PRIVATE</span> 
+</span></span><span class="line"><span class="cl">    <span class="o">${</span><span class="nv">CMAKE_SOURCE_DIR</span><span class="o">}</span><span class="s">/include</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span> <span class="s">PRIVATE</span> <span class="s">Qt6::Widgets</span><span class="p">)</span> <span class="c"># Qt5 Shared Library
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 </section>
