@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="使用vscode开发qt项目">
-<title>【Qt 配置】 VS &#43; Qt6</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Qt 线程">
+<title>【Qt 线程】1 Qt 多线程的使用</title>
 
-<link rel='canonical' href='https://serennan.github.io/post/qt-configure/'>
+<link rel='canonical' href='https://serennan.github.io/post/qt-thread-1/'>
 
-<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 配置】 VS + Qt6">
-<meta property='og:description' content="使用vscode开发qt项目">
-<meta property='og:url' content='https://serennan.github.io/post/qt-configure/'>
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Qt 线程】1 Qt 多线程的使用">
+<meta property='og:description' content="Qt 线程">
+<meta property='og:url' content='https://serennan.github.io/post/qt-thread-1/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-12T14:23:09&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-configure/cover.png' />
-<meta name="twitter:title" content="【Qt 配置】 VS + Qt6">
-<meta name="twitter:description" content="使用vscode开发qt项目"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://serennan.github.io/post/qt-configure/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-23T16:05:20&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/qt-thread-1/cover.png' />
+<meta name="twitter:title" content="【Qt 线程】1 Qt 多线程的使用">
+<meta name="twitter:description" content="Qt 线程"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://serennan.github.io/post/qt-thread-1/cover.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -327,11 +327,20 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#1-安装qt6">1. 安装qt6</a></li>
-    <li><a href="#2-安装插件">2. 安装插件</a></li>
-    <li><a href="#3-启动项目">3. 启动项目</a></li>
-    <li><a href="#4-单独修改ui界面">4. 单独修改ui界面</a></li>
-    <li><a href="#问题">问题</a></li>
+    <li><a href="#1-线程类-qthread">1. 线程类 QThread</a>
+      <ol>
+        <li><a href="#11-常用共用成员函数">1.1 常用共用成员函数</a></li>
+        <li><a href="#12-信号槽">1.2 信号槽</a></li>
+        <li><a href="#13-静态函数">1.3 静态函数</a></li>
+        <li><a href="#14-任务处理函数">1.4 任务处理函数</a></li>
+      </ol>
+    </li>
+    <li><a href="#2-使用方式-1">2. 使用方式 1</a>
+      <ol>
+        <li><a href="#21-操作步骤">2.1 操作步骤</a></li>
+        <li><a href="#22-示例代码">2.2 示例代码</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
     </div>
@@ -348,13 +357,13 @@
     
         <header class="article-header">
         <div class="article-image">
-            <a href="/post/qt-configure/">
-                <img src="/post/qt-configure/cover.png"
+            <a href="/post/qt-thread-1/">
+                <img src="/post/qt-thread-1/cover.png"
                         
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【Qt 配置】 VS &#43; Qt6" />
+                        alt="Featured image of post 【Qt 线程】1 Qt 多线程的使用" />
                 
             </a>
         </div>
@@ -373,12 +382,12 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/qt-configure/">【Qt 配置】 VS &#43; Qt6</a>
+            <a href="/post/qt-thread-1/">【Qt 线程】1 Qt 多线程的使用</a>
         </h2>
     
         
         <h3 class="article-subtitle">
-            使用vscode开发qt项目
+            Qt 线程
         </h3>
         
     </div>
@@ -424,7 +433,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-03-08</time>
+                    <time>2025-03-22</time>
                 </div>
             
         
@@ -432,7 +441,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>538 字</span>
+                    <span>1453 字</span>
                 </div>
             
         
@@ -440,7 +449,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-03-12 14:23</time>
+                    <time>2025-03-23 16:05</time>
                 </div>
             
         
@@ -462,61 +471,170 @@
     <section class="article-content">
     
     
-    <h1 id="vs-配置-qt6-教程">VS 配置 Qt6 教程
-</h1><p>雷神后面的视频是要开发一个图形界面，这里我使用vscode + qt + cmake来开发。</p>
+    <h1 id="qt-中多线程的使用">Qt 中多线程的使用
+</h1><p>在进行桌面应用程序开发的时候， 假设应用程序在某些情况下需要处理比较复杂的逻辑， 如果只有一个线程去处理，就会导致窗口卡顿，无法处理用户的相关操作。这种情况下就需要使用多线程，其中一个线程处理窗口事件，其他线程进行逻辑运算，多个线程各司其职，不仅可以提高用户体验还可以提升程序的执行效率。</p>
+<p>在qt中使用了多线程，有些事项是需要额外注意的：</p>
+<ul>
+<li>默认的线程在Qt中称之为窗口线程，也叫主线程，负责窗口事件处理或者窗口控件数据的更新<br></li>
+<li>子线程负责后台的业务逻辑处理，子线程中不能对窗口对象做任何操作，这些事情需要交给窗口线程处理<br></li>
+<li>主线程和子线程之间如果要进行数据的传递，需要使用Qt中的信号槽机制</li>
+</ul>
 <hr>
-<h2 id="1-安装qt6">1. 安装qt6
-</h2><p>这里网上很多教程，推荐一个 CSDN 上的教程：<a class="link" href="https://blog.csdn.net/caoshangpa/article/details/135420524"  target="_blank" rel="noopener"
-    >Qt6入门教程 2：Qt6下载与安装</a></p>
-
-<div class="notice notice-warning" >
-    <div class="notice-title"></div><p>主要区别是我下载的是 linux版本<br>
-以及选择组件时，我使用的是6.5.3版本</p></div>
-
-<p><img src="/post/qt-configure/image-1.png"
-	width="1312"
-	height="598"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="219"
-		data-flex-basis="526px"
-	
-></p>
+<h2 id="1-线程类-qthread">1. 线程类 QThread
+</h2><p>Qt中提供了一个线程类，通过这个类就可以创建子线程了，Qt中一共提供了两种创建子线程的方式，后边会依次介绍其使用方式。先来看一下这个类中提供的一些常用API函数：</p>
+<h3 id="11-常用共用成员函数">1.1 常用共用成员函数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// QThread 类常用 API
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">QThread</span><span class="o">::</span><span class="n">QThread</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="n">parent</span> <span class="o">=</span> <span class="n">Q_NULLPTR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断线程中的任务是不是处理完毕了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QThread</span><span class="o">::</span><span class="n">isFinished</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 判断子线程是不是在执行任务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QThread</span><span class="o">::</span><span class="n">isRunning</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Qt中的线程可以设置优先级
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 得到当前线程的优先级
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Priority</span> <span class="n">QThread</span><span class="o">::</span><span class="n">priority</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">setPriority</span><span class="p">(</span><span class="n">Priority</span> <span class="n">priority</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">优先级</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QThread</span><span class="o">::</span><span class="n">IdlePriority</span>         <span class="o">--&gt;</span> <span class="err">最低的优先级</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QThread</span><span class="o">::</span><span class="n">LowestPriority</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QThread</span><span class="o">::</span><span class="n">LowPriority</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QThread</span><span class="o">::</span><span class="n">NormalPriority</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QThread</span><span class="o">::</span><span class="n">HighPriority</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QThread</span><span class="o">::</span><span class="n">HighestPriority</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QThread</span><span class="o">::</span><span class="n">TimeCriticalPriority</span> <span class="o">--&gt;</span> <span class="err">最高的优先级</span>
+</span></span><span class="line"><span class="cl">    <span class="n">QThread</span><span class="o">::</span><span class="n">InheritPriority</span>      <span class="o">--&gt;</span> <span class="err">子线程和其父线程的优先级相同</span><span class="p">,</span> <span class="err">默认是这个</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 退出线程, 停止底层的事件循环
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 退出线程的工作函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">exit</span><span class="p">(</span><span class="kt">int</span> <span class="n">returnCode</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 调用线程退出函数之后, 线程不会马上退出因为当前任务有可能还没有完成, 调回用这个函数是
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 等待任务完成, 然后退出线程, 一般情况下会在 exit() 后边调用这个函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">QThread</span><span class="o">::</span><span class="n">wait</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">time</span> <span class="o">=</span> <span class="n">ULONG_MAX</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="12-信号槽">1.2 信号槽
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 和调用 exit() 效果是一样的
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 调用这个函数之后, 再调用 wait() 函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">quit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 启动子线程
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">start</span><span class="p">(</span><span class="n">Priority</span> <span class="n">priority</span> <span class="o">=</span> <span class="n">InheritPriority</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 线程退出, 可能是会马上终止线程, 一般情况下不使用这个函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">terminate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 线程中执行的任务完成了, 发出该信号
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 任务函数中的处理逻辑执行完毕了
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">signal</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">finished</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 开始工作之前发出这个信号, 一般不使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="n">signal</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">started</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="13-静态函数">1.3 静态函数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 返回一个指向管理当前执行线程的QThread的指针
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="n">QThread</span> <span class="o">*</span><span class="n">QThread</span><span class="o">::</span><span class="n">currentThread</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 返回可以在系统上运行的理想线程数 == 和当前电脑的 CPU 核心数相同
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="kt">int</span> <span class="n">QThread</span><span class="o">::</span><span class="n">idealThreadCount</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 线程休眠函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">msleep</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">msecs</span><span class="p">);</span>	<span class="c1">// 单位: 毫秒
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">sleep</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">secs</span><span class="p">);</span>	<span class="c1">// 单位: 秒
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">static</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">usleep</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">usecs</span><span class="p">);</span>	<span class="c1">// 单位: 微秒
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="14-任务处理函数">1.4 任务处理函数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 子线程要处理什么任务, 需要写到 run() 中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">[</span><span class="k">virtual</span> <span class="k">protected</span><span class="p">]</span> <span class="kt">void</span> <span class="n">QThread</span><span class="o">::</span><span class="n">run</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个 <code>run()</code> 是一个虚函数，如果想让创建的子线程执行某个任务，需要写一个子类让其继承 <code>QThread</code> ，并且在子类中重写父类的 <code>run()</code> 方法，函数体就是对应的任务处理流程。另外，这个函数是一个受保护的成员函数，不能够在类的外部调用，如果想要让线程执行这个函数中的业务流程，需要通过当前线程对象调用槽函数 <code>start()</code> 启动子线程，当子线程被启动，这个 <code>run()</code> 函数也就在线程内部被调用了。</p>
 <hr>
-<h2 id="2-安装插件">2. 安装插件
-</h2><p>vscode安装好 Qt Tools 和 Qt Configure 这两个插件，并配置一下Qt Configure。</p>
-<p><img src="/post/qt-configure/image-2.png"
-	width="1234"
-	height="714"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="172"
-		data-flex-basis="414px"
-	
-></p>
-
-<div class="notice notice-info" >
-    <div class="notice-title"></div><p>注意这里的Qt Dir 存放的是安装好的qt的根目录，我这里多一个 Qt文件夹是因为我下载了多个版本的qt</p></div>
-
-<hr>
-<h2 id="3-启动项目">3. 启动项目
-</h2><p>打开一个空文件夹，按下<code>shift + ctrl + p</code> 输入指令：</p>
+<h2 id="2-使用方式-1">2. 使用方式 1
+</h2><h3 id="21-操作步骤">2.1 操作步骤
+</h3><p>Qt中提供的多线程的第一种使用方式的特点是： 简单。操作步骤如下：</p>
+<ol>
+<li>需要创建一个线程类的子类，让其继承QT中的线程类 QThread，比如:</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">QtConfigure:New Project
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyThread</span><span class="o">:</span><span class="k">public</span> <span class="n">QThread</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">......</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>然后根据提示，项目名字 -&gt; qt 组件 -&gt; cmake -&gt; 是否生成 ui 文件</p>
-<p>然后会生成下面这些文件</p>
+</div><ol start="2">
+<li>重写父类的 run() 方法，在该函数内部编写子线程要处理的具体的业务流程</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -526,111 +644,51 @@
 </span><span class="lnt">5
 </span><span class="lnt">6
 </span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">├── CMakeLists.txt
-</span></span><span class="line"><span class="cl">└── src
-</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.cpp
-</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.h
-</span></span><span class="line"><span class="cl">    ├── ffmpeg_qt.ui
-</span></span><span class="line"><span class="cl">    └── main.cpp
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MyThread</span><span class="o">:</span><span class="k">public</span> <span class="n">QThread</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">......</span>
+</span></span><span class="line"><span class="cl"> <span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="n">run</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">........</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><br>
-
-<div class="notice notice-info" >
-    <div class="notice-title"></div><p>注意这里打开 CMakeLists.txt 文件会发现用的是 Qt5 的东西<br>
-但我下载的是 Qt6 ，所以这里得改成 Qt6</p></div>
-
-<p><img src="/post/qt-configure/image-3.png"
-	width="1217"
-	height="734"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="165"
-		data-flex-basis="397px"
-	
-></p>
-<p>接下来用 CMake 来配置项目，按下<code>shift + ctrl + p</code> 输入指令：</p>
+</div><ol start="3">
+<li>在主线程中创建子线程对象，new 一个就可以了</li>
+</ol>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CMake：Configure with CMake Debugger
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">MyThread</span> <span class="o">*</span> <span class="n">subThread</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyThread</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>配置完运行项目</p>
-<p><img src="/post/qt-configure/image-4.png"
-	width="1799"
-	height="1208"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="148"
-		data-flex-basis="357px"
-	
-></p>
-<p>出现窗口说明配置成功</p>
-<h2 id="4-单独修改ui界面">4. 单独修改ui界面
-</h2><p>右键 ui 文件选择 Edit in Qt Designer 可以修改 ui 文件</p>
-<p><img src="/post/qt-configure/image-5.png"
-	width="1756"
-	height="1139"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="154"
-		data-flex-basis="370px"
-	
-></p>
-<p>拖入一个按钮检验一下，保存并退出，再去查看ui文件会发现已经帮我们加上相应的代码，重新运行项目</p>
-<p><img src="/post/qt-configure/image-6.png"
-	width="1594"
-	height="1105"
-	
-	loading="lazy"
-	
-	
-		class="gallery-image" 
-		data-flex-grow="144"
-		data-flex-basis="346px"
-	
-></p>
-<h2 id="问题">问题
-</h2>
-<div class="notice notice-info" >
-    <div class="notice-title"></div><p>如果没有出现窗口，可能还需要安装一个 VcXsrv</p></div>
-
-<p>后续再找时间写一个安装教程，这里先放一个别人的视频教程：</p>
-
-
-
-
-
-
-    
-
-
-<div class="video-wrapper">
-    <iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;high_quality=1&amp;page=1&bvid=BV1RK411n79v"
-            scrolling="no"
-            frameborder="no"
-            framespacing="0"
-            allowfullscreen="true"
-    >
-    </iframe>
+</div><ol start="4">
+<li>启动子线程, 调用 start() 方法</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">subThread</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
 </div>
-
-
+</div><p>不能在类的外部调用 run() 方法启动子线程，在外部调用 start() 相当于让 run() 开始运行</p>
+<p>当子线程别创建出来之后，父子线程之间的通信可以通过信号槽的方式，注意事项:</p>
+<ul>
+<li>在Qt中在子线程中不要操作程序中的窗口类型对象, 不允许, 如果操作了程序就挂了</li>
+<li>只有主线程才能操作程序中的窗口对象, 默认的线程就是主线程, 自己创建的就是子线程</li>
+</ul>
+<h3 id="22-示例代码">2.2 示例代码
+</h3>
 </section>
 
 
@@ -652,30 +710,6 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
-            
-                
-<article class="has-image">
-    <a href="/post/qt-thread-1/">
-        
-        
-            <div class="article-image">
-                <img src="/post/qt-thread-1/cover.100dc74e91c23f696e63596b49c44bff.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【Qt 线程】1 Qt 多线程的使用"
-                        data-key="qt-thread-1" 
-                        data-hash="md5-EA3HTpHCP2luY1lrScRL/w==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【Qt 线程】1 Qt 多线程的使用</h2>
-        </div>
-    </a>
-</article>
-
             
                 
 <article class="has-image">
@@ -768,6 +802,30 @@
 
         <div class="article-details">
             <h2 class="article-title">【Qt 入门】2 基础数据类型</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/qt-structure/">
+        
+        
+            <div class="article-image">
+                <img src="/post/qt-structure/cover.2da468b056dfad3ed6fecdbcccc419cd.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【Qt 配置】工程结构调整"
+                        data-key="qt-structure" 
+                        data-hash="md5-LaRosFbfrT7W/s28zMQZzQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Qt 配置】工程结构调整</h2>
         </div>
     </a>
 </article>
@@ -1073,195 +1131,7 @@ console.log('particles.js loaded - callback');
     showHideView();
 </script>
 
-        <link rel="stylesheet" href="/css/mermaid.css">
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
-
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      flowchart: {
-        htmlLabels: false,
-        useMaxWidth: false,
-        nodeSpacing: 50,
-        rankSpacing: 50,
-        defaultRenderer: 'svg'
-      },
-      theme: 'default',
-      securityLevel: 'loose',
-      themeVariables: {
-        nodeBorder: '#000',
-        mainBkg: '#fff',
-        nodeTextColor: '#000',
-        fontSize: '14px'
-      }
-    });
-  </script>
-
-  
-  <div class="mermaid-overlay" id="mermaidOverlay"></div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      
-      const adjustNodeSize = () => {
-        document.querySelectorAll('.mermaid .node').forEach(node => {
-          const rect = node.querySelector('rect');
-          const text = node.querySelector('text');
-          if (rect && text) {
-            const bbox = text.getBBox();
-            const padding = 16;
-            const minWidth = parseFloat(rect.getAttribute('width')) || 160;
-            const newWidth = Math.max(bbox.width + padding, minWidth);
-            rect.setAttribute('width', newWidth);
-          }
-        });
-      };
-
-      
-      adjustNodeSize();
-      window.addEventListener('resize', adjustNodeSize);
-
-      
-      document.querySelectorAll('.mermaid-container').forEach(container => {
-        let currentScale = 1;
-        let initialClickX = null, initialClickY = null;
-        let dragOffsetX = 0, dragOffsetY = 0;
-        let isDragging = false;
-        let dragStartX = 0, dragStartY = 0;
-        let isZoomed = false;
-
-        const mermaidElement = container.querySelector('.mermaid');
-        const overlay = document.getElementById('mermaidOverlay');
-        const originalParent = container.parentElement;
-        const originalNextSibling = container.nextElementSibling;
-
-        
-        const applyScale = () => {
-          if (isZoomed && initialClickX !== null && initialClickY !== null) {
-            const containerRect = container.getBoundingClientRect();
-            const centerX = containerRect.width / 2;
-            const centerY = containerRect.height / 2;
-            const baseTranslateX = centerX - initialClickX * currentScale;
-            const baseTranslateY = centerY - initialClickY * currentScale;
-            const translateX = baseTranslateX + dragOffsetX;
-            const translateY = baseTranslateY + dragOffsetY;
-            mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
-          } else {
-            mermaidElement.style.transform = `scale(${currentScale})`;
-          }
-        };
-
-        
-        const handleContainerClick = (e) => {
-          if (!isZoomed) {
-            isZoomed = true;
-            container.classList.add('zoomed');
-            overlay.style.display = 'flex';
-            overlay.appendChild(container);
-
-            const containerRect = container.getBoundingClientRect();
-            initialClickX = e.clientX - containerRect.left;
-            initialClickY = e.clientY - containerRect.top;
-            dragOffsetX = 0;
-            dragOffsetY = 0;
-
-            const scaleX = window.innerWidth / containerRect.width;
-            const scaleY = window.innerHeight / containerRect.height;
-            currentScale = Math.min(scaleX, scaleY, 5);
-            applyScale();
-          }
-        };
-
-        
-        const exitZoom = () => {
-          if (isZoomed) {
-            isZoomed = false;
-            container.classList.remove('zoomed');
-            overlay.style.display = 'none';
-            if (originalNextSibling) {
-              originalParent.insertBefore(container, originalNextSibling);
-            } else {
-              originalParent.appendChild(container);
-            }
-            currentScale = 1;
-            initialClickX = null;
-            initialClickY = null;
-            dragOffsetX = 0;
-            dragOffsetY = 0;
-            applyScale();
-          }
-        };
-
-        
-        const handleWheel = (e) => {
-          if (isZoomed) {
-            e.preventDefault();
-            const sensitivity = 0.0006;
-            const delta = e.deltaY || e.wheelDelta;
-            const scaleDelta = 1 + (-delta * sensitivity);
-            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
-            applyScale();
-          } else if (e.ctrlKey) {
-            e.preventDefault();
-            const sensitivity = 0.0006;
-            const delta = e.deltaY || e.wheelDelta;
-            const scaleDelta = 1 + (-delta * sensitivity);
-            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
-            applyScale();
-          }
-        };
-
-        
-        container.addEventListener('click', (e) => {
-          if (!isZoomed) handleContainerClick(e);
-        });
-
-        container.addEventListener('dblclick', exitZoom);
-        container.addEventListener('wheel', handleWheel);
-
-        
-        container.addEventListener('mousedown', (e) => {
-          if (isZoomed) {
-            isDragging = true;
-            dragStartX = e.clientX;
-            dragStartY = e.clientY;
-            container.style.cursor = 'grabbing';
-          }
-        });
-
-        const handleMouseMove = (e) => {
-          if (isDragging) {
-            const deltaX = e.clientX - dragStartX;
-            const deltaY = e.clientY - dragStartY;
-            dragOffsetX += deltaX;
-            dragOffsetY += deltaY;
-            dragStartX = e.clientX;
-            dragStartY = e.clientY;
-            applyScale();
-          }
-        };
-
-        const handleMouseUp = () => {
-          isDragging = false;
-          container.style.cursor = 'grab';
-        };
-
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-      });
-
-      
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-          document.querySelectorAll('.mermaid-container').forEach(container => {
-            if (container.classList.contains('zoomed')) {
-              container.dispatchEvent(new Event('dblclick'));
-            }
-          });
-        }
-      });
-    });
-  </script>  
+          
         <div id="toggle-buttons">
   <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
   <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
