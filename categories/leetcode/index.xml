@@ -12,7 +12,7 @@
         <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/leetcode-hashtable/</guid>
-        <description>&lt;h2 id=&#34;1-两数之和&#34;&gt;1. 两数之和
+        <description>&lt;img src="https://serennan.github.io/post/leetcode-hashtable/cover.png" alt="Featured image of post 哈希表" /&gt;&lt;h2 id=&#34;1-两数之和&#34;&gt;1. 两数之和
 &lt;/h2&gt;&lt;p&gt;Leetcode 1 题，&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/two-sum/description/?envType=study-plan-v2&amp;amp;envId=top-100-liked&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;两数之和&lt;/a&gt;,难度 Easy&lt;/p&gt;
 &lt;p&gt;给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。&lt;br&gt;
