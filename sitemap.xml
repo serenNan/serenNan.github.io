@@ -2,14 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://serennan.github.io/post/qt-thread-1/</loc>
-    <lastmod>2025-03-23T19:50:27+08:00</lastmod>
+    <loc>https://serennan.github.io/post/cpp_chrono/</loc>
+    <lastmod>2025-03-28T20:57:24+08:00</lastmod>
   </url><url>
     <loc>https://serennan.github.io/categories/</loc>
-    <lastmod>2025-03-23T20:42:06+08:00</lastmod>
+    <lastmod>2025-03-28T20:57:24+08:00</lastmod>
   </url><url>
     <loc>https://serennan.github.io/post/</loc>
-    <lastmod>2025-03-23T20:42:06+08:00</lastmod>
+    <lastmod>2025-03-28T20:57:24+08:00</lastmod>
+  </url><url>
+    <loc>https://serennan.github.io/post/qt-thread-1/</loc>
+    <lastmod>2025-03-23T19:50:27+08:00</lastmod>
   </url><url>
     <loc>https://serennan.github.io/post/qt-base-5/</loc>
     <lastmod>2025-03-21T13:46:18+08:00</lastmod>
@@ -126,6 +129,9 @@
     <lastmod>2025-03-09T21:27:13+08:00</lastmod>
   </url><url>
     <loc>https://serennan.github.io/tags/</loc>
+  </url><url>
+    <loc>https://serennan.github.io/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
+    <lastmod>2025-03-28T20:57:24+08:00</lastmod>
   </url><url>
     <loc>https://serennan.github.io/links/</loc>
     <lastmod>2025-03-12T14:23:09+08:00</lastmod>
