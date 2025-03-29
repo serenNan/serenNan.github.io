@@ -12,7 +12,7 @@
         <pubDate>Wed, 26 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/cpp_chrono/</guid>
-        <description>&lt;h1 id=&#34;c-线程&#34;&gt;C++ 线程
+        <description>&lt;img src="https://serennan.github.io/post/cpp_chrono/cover.png" alt="Featured image of post 【C&#43;&#43;11】处理日期和时间的 chrono 库" /&gt;&lt;h1 id=&#34;c-线程&#34;&gt;C++ 线程
 &lt;/h1&gt;&lt;p&gt;个人学习笔记，参照大丙老师的博客：&lt;a class=&#34;link&#34; href=&#34;https://subingwen.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;爱编程的大丙&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;C++11中提供了日期和时间相关的库chrono，通过chrono库可以很方便地处理日期和时间，为程序的开发提供了便利。chrono库主要包含三种类型的类：时间间隔duration、时钟clocks、时间点time point。&lt;/p&gt;
