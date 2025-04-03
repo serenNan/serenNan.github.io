@@ -2,18 +2,18 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="C++ 11 特性学习">
-<title>【C&#43;&#43;11】C&#43;&#43;线程同步之互斥锁</title>
+<title>【C&#43;&#43;11】C&#43;&#43;线程同步之原子变量</title>
 
-<link rel='canonical' href='https://serennan.github.io/post/cpp-mutex/'>
+<link rel='canonical' href='https://serennan.github.io/post/cpp-atomic/'>
 
-<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【C++11】C++线程同步之互斥锁">
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【C++11】C++线程同步之原子变量">
 <meta property='og:description' content="C++ 11 特性学习">
-<meta property='og:url' content='https://serennan.github.io/post/cpp-mutex/'>
+<meta property='og:url' content='https://serennan.github.io/post/cpp-atomic/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-02T15:26:48&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp-mutex/cover.png' />
-<meta name="twitter:title" content="【C++11】C++线程同步之互斥锁">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-03T22:36:20&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp-atomic/cover.png' />
+<meta name="twitter:title" content="【C++11】C++线程同步之原子变量">
 <meta name="twitter:description" content="C++ 11 特性学习"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://serennan.github.io/post/cpp-mutex/cover.png' />
+    <meta name="twitter:image" content='https://serennan.github.io/post/cpp-atomic/cover.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -327,15 +327,15 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#1-stdmutex">1. std::mutex</a>
-      <ol>
-        <li><a href="#11-成员函数">1.1 成员函数</a></li>
-        <li><a href="#12-线程同步">1.2 线程同步</a></li>
-      </ol>
-    </li>
-    <li><a href="#2-stdlock_guard">2. std::lock_guard</a></li>
-    <li><a href="#3-stdrecursive_mutex">3. std::recursive_mutex</a></li>
-    <li><a href="#4-stdtimed_mutex">4. std::timed_mutex</a></li>
+    <li><a href="#1-atomic-类成员">1. atomic 类成员</a></li>
+    <li><a href="#构造函数">构造函数</a></li>
+    <li><a href="#公共成员函数">公共成员函数</a></li>
+    <li><a href="#特化成员函数">特化成员函数</a></li>
+    <li><a href="#内存顺序约束">内存顺序约束</a></li>
+    <li><a href="#c20新增成员">C++20新增成员</a></li>
+    <li><a href="#2-原子变量的使用">2. 原子变量的使用</a></li>
+    <li><a href="#21-互斥锁版本">2.1 互斥锁版本</a></li>
+    <li><a href="#22-原子变量版本">2.2 原子变量版本</a></li>
   </ol>
 </nav>
     </div>
@@ -352,13 +352,13 @@
     
         <header class="article-header">
         <div class="article-image">
-            <a href="/post/cpp-mutex/">
-                <img src="/post/cpp-mutex/cover.png"
+            <a href="/post/cpp-atomic/">
+                <img src="/post/cpp-atomic/cover.png"
                         
                         width="1024" 
                         height="576" 
                         loading="lazy"
-                        alt="Featured image of post 【C&#43;&#43;11】C&#43;&#43;线程同步之互斥锁" />
+                        alt="Featured image of post 【C&#43;&#43;11】C&#43;&#43;线程同步之原子变量" />
                 
             </a>
         </div>
@@ -381,7 +381,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/post/cpp-mutex/">【C&#43;&#43;11】C&#43;&#43;线程同步之互斥锁</a>
+            <a href="/post/cpp-atomic/">【C&#43;&#43;11】C&#43;&#43;线程同步之原子变量</a>
         </h2>
     
         
@@ -432,7 +432,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-04-02</time>
+                    <time>2025-04-04</time>
                 </div>
             
         
@@ -440,7 +440,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>3939 字</span>
+                    <span>2976 字</span>
                 </div>
             
         
@@ -448,7 +448,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-04-02 15:26</time>
+                    <time>2025-04-03 22:36</time>
                 </div>
             
         
@@ -470,78 +470,97 @@
     <section class="article-content">
     
     
-    <h1 id="c线程同步之互斥锁">C++线程同步之互斥锁
-</h1><p>进行多线程编程，如果多个线程需要对同一块内存进行操作，比如：<code>同时读</code>、<code>同时写</code>、<code>同时读写</code>对于后两种情况来说，如果不做任何的人为干涉就会出现各种各样的错误数据。这是因为线程在运行的时候需要先得到CPU时间片，时间片用完之后需要放弃已获得的CPU资源，就这样线程频繁地在就绪态和运行态之间切换，更复杂一点还可以在就绪态、运行态、挂起态之间切换，这样就会导致线程的执行顺序并不是有序的，而是随机的混乱的。</p>
-<p>解决多线程数据混乱的方案就是进行线程同步，最常用的就是互斥锁，在C++11中一共提供了四种互斥锁：</p>
-<ul>
-<li><code>std::mutex</code>：独占的互斥锁，不能递归使用</li>
-<li><code>std::timed_mutex</code>：带超时的独占互斥锁，不能递归使用</li>
-<li><code>std::recursive_mutex</code>：递归互斥锁，不带超时功能</li>
-<li><code>std::recursive_timed_mutex</code>：带超时的递归互斥锁</li>
-</ul>
+    <h1 id="原子变量">原子变量
+</h1><p>C++11提供了一个原子类型<code>std::atomic&lt;T&gt;</code>，通过这个原子类型管理的内部变量就可以称之为原子变量，我们可以给原子类型指定<code>bool、char、int、long、指针</code>等类型作为模板参数（<code>不支持浮点类型和复合类型</code>）。</p>
+<p>原子指的是一系列不可被CPU上下文交换的机器指令，这些指令组合在一起就形成了原子操作。在多核CPU下，当某个CPU核心开始运行原子操作时，会先暂停其它CPU内核对内存的操作，以保证原子操作不会被其它CPU内核所干扰。</p>
+<p>由于原子操作是通过指令提供的支持，因此它的性能相比锁和消息传递会好很多。相比较于锁而言，原子类型不需要开发者处理加锁和释放锁的问题，同时支持修改，读取等操作，还具备较高的并发性能，几乎所有的语言都支持原子类型。</p>
+<p>可以看出原子类型是无锁类型，但是无锁不代表无需等待，因为原子类型内部使用了<code>CAS</code>循环，当大量的冲突发生时，该等待还是得等待！但是总归比锁要好。</p>
+<p>C++11内置了整形的原子变量，这样就可以更方便的使用原子变量了。在多线程操作中，使用原子变量之后就不需要再使用互斥量来保护该变量了，用起来更简洁。因为对原子变量进行的操作只能是一个原子操作（<code>atomic operation</code>），<code>原子操作指的是不会被线程调度机制打断的操作，这种操作一旦开始，就一直运行到结束，中间不会有任何的上下文切换。</code>多线程同时访问共享资源造成数据混乱的原因就是因为CPU的上下文切换导致的，使用原子变量解决了这个问题，因此互斥锁的使用也就不再需要了。</p>
+<p><code>CAS</code>全称是<code>Compare and swap</code>, 它通过一条指令读取指定的内存地址，然后判断其中的值是否等于给定的前置值，如果相等，则将其修改为新的值</p>
 <hr>
-<h2 id="1-stdmutex">1. std::mutex
-</h2><p>不论是在C还是C++中，进行线程同步的处理流程基本上是一致的，C++的<code>mutex</code>类提供了相关的API函数：</p>
-<h3 id="11-成员函数">1.1 成员函数
-</h3><p><code>lock()</code>函数用于给临界区加锁，并且只能有一个线程获得锁的所有权，它有阻塞线程的作用，函数原型如下：</p>
+<h2 id="1-atomic-类成员">1. atomic 类成员
+</h2><p><strong>类定义</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">lock</span><span class="p">();</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">template&lt; class T &gt;
+</span></span><span class="line"><span class="cl">struct atomic;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>独占互斥锁对象有两种状态：<code>锁定</code>和<code>未锁定</code>。如果互斥锁是打开的，调用<code>lock()</code>函数的线程会得到互斥锁的所有权，并将其上锁，其它线程再调用该函数的时候由于得不到互斥锁的所有权，就会被<code>lock()</code>函数阻塞。当拥有互斥锁所有权的线程将互斥锁解锁，此时被<code>lock()</code>阻塞的线程解除阻塞，抢到互斥锁所有权的线程加锁并继续运行，没抢到互斥锁所有权的线程继续阻塞。</p>
-<p>除了使用<code>lock()</code>还可以使用<code>try_lock()</code>获取互斥锁的所有权并对互斥锁加锁，函数原型如下：</p>
-<div class="highlight"><div class="chroma">
+</div><p>通过定义可得知：<code>在使用这个模板类的时候，一定要指定模板类型。</code></p>
+<h2 id="构造函数">构造函数
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">try_lock</span><span class="p">();</span>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">atomic</span><span class="p">()</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">constexpr</span> <span class="n">atomic</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="n">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="o">=</span> <span class="n">delete</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>二者的区别在于<code>try_lock()</code>不会阻塞线程，<code>lock()</code>会阻塞线程：</p>
-<ul>
-<li>如果互斥锁是未锁定状态，得到了互斥锁所有权并加锁成功，函数返回true</li>
-<li>如果互斥锁是锁定状态，无法得到互斥锁所有权加锁失败，函数返回false</li>
+</div><ul>
+<li>构造函数①：默认无参构造函数。</li>
+<li>构造函数②：使用 <code>desired</code> 初始化原子变量的值。</li>
+<li>构造函数③：使用<code>=delete</code>显示删除拷贝构造函数, 不允许进行对象之间的拷贝</li>
 </ul>
-<p>当互斥锁被锁定之后可以通过<code>unlock()</code>进行解锁，但是需要注意的是只有拥有互斥锁所有权的线程也就是对互斥锁上锁的线程才能将其解锁，其它线程是没有权限做这件事情的。该函数的函数原型如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">unlock</span><span class="p">();</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>通过介绍以上三个函数，使用互斥锁进行线程同步的大致思路差不多就能搞清楚了，主要分为以下几步：</p>
-<ol>
-<li>找到多个线程操作的共享资源（全局变量、堆内存、类成员变量等），也可以称之为临界资源</li>
-<li>找到和共享资源有关的上下文代码，也就是临界区</li>
-<li>在临界区的上边调用互斥锁类的<code>lock()</code>方法</li>
-<li>在临界区的下边调用互斥锁的<code>unlock()</code>方法</li>
-</ol>
+<h2 id="公共成员函数">公共成员函数
+</h2><p>原子类型在类内部重载了<code>=</code>操作符，并且不允许在类的外部使用 <code>=</code>进行对象的拷贝。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl">     <span class="n">g_num_mutex</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">     <span class="o">++</span><span class="n">g_num</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">id</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; =&gt; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">g_num</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">     <span class="n">g_num_mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">T</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="n">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">T</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="n">volatile</span> <span class="n">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="o">=</span> <span class="n">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="n">volatile</span> <span class="o">=</span> <span class="n">delete</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>比如这段代码，共享资源是<code>g_num</code>，那么临界区主要就是和<code>g_num</code>有关的代码。</p>
-<p>线程同步的目的是让多线程按照顺序依次执行临界区代码，这样做线程对共享资源的访问就从并行访问变为了线性访问，访问效率降低了，但是保证了数据的正确性。</p>
-<p>当线程对互斥锁对象加锁，并且执行完临界区代码之后，一定要使用这个线程对互斥锁解锁，否则最终会造成线程的死锁。死锁之后当前应用程序中的所有线程都会被阻塞，并且阻塞无法解除，应用程序也无法继续运行。</p>
-<h3 id="12-线程同步">1.2 线程同步
-</h3><p>举个栗子，我们让两个线程共同操作同一个全局变量，二者交替数数，将数值存储到这个全局变量里边并打印出来。</p>
+</div><p>原子地以 <code>desired</code> 替换当前值。按照 <code>order</code> 的值影响内存。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void store( T desired, std::memory_order order = std::memory_order_seq_cst ) noexcept;
+</span></span><span class="line"><span class="cl">void store( T desired, std::memory_order order = std::memory_order_seq_cst ) volatile noexcept;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>desired</strong>：存储到原子变量中的值</li>
+<li><strong>order</strong>：强制的内存顺序</li>
+</ul>
+<p>原子地加载并返回原子变量的当前值。按照 <code>order</code> 的值影响内存。直接访问原子对象也可以得到原子变量的当前值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">T</span> <span class="nb">load</span><span class="p">(</span> <span class="n">std</span><span class="p">::</span><span class="n">memory_order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">memory_order_seq_cst</span> <span class="p">)</span> <span class="k">const</span> <span class="n">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">T</span> <span class="nb">load</span><span class="p">(</span> <span class="n">std</span><span class="p">::</span><span class="n">memory_order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">memory_order_seq_cst</span> <span class="p">)</span> <span class="k">const</span> <span class="n">volatile</span> <span class="n">noexcept</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="特化成员函数">特化成员函数
+</h2><ul>
+<li>复合赋值运算符重载，主要包含以下形式：</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -561,285 +580,51 @@
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">模板类型T为整形：
+</span></span><span class="line"><span class="cl">T operator+= (T val) volatile noexcept;
+</span></span><span class="line"><span class="cl">T operator+= (T val) noexcept;
+</span></span><span class="line"><span class="cl">T operator-= (T val) volatile noexcept;
+</span></span><span class="line"><span class="cl">T operator-= (T val) noexcept;
+</span></span><span class="line"><span class="cl">T operator&amp;= (T val) volatile noexcept;
+</span></span><span class="line"><span class="cl">T operator&amp;= (T val) noexcept;
+</span></span><span class="line"><span class="cl">T operator|= (T val) volatile noexcept;
+</span></span><span class="line"><span class="cl">T operator|= (T val) noexcept;
+</span></span><span class="line"><span class="cl">T operator^= (T val) volatile noexcept;
+</span></span><span class="line"><span class="cl">T operator^= (T val) noexcept;
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">g_num</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">mutex</span> <span class="n">g_num_mutex</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">slow_increment</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">g_num_mutex</span><span class="p">.</span><span class="n">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="o">++</span><span class="n">g_num</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">id</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; =&gt; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">g_num</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">g_num_mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t1</span><span class="p">(</span><span class="n">slow_increment</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t2</span><span class="p">(</span><span class="n">slow_increment</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">模板类型T为指针：
+</span></span><span class="line"><span class="cl">T operator+= (ptrdiff_t val) volatile noexcept;
+</span></span><span class="line"><span class="cl">T operator+= (ptrdiff_t val) noexcept;
+</span></span><span class="line"><span class="cl">T operator-= (ptrdiff_t val) volatile noexcept;
+</span></span><span class="line"><span class="cl">T operator-= (ptrdiff_t val) noexcept;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>在上面的示例程序中，两个子线程执行的任务的一样的（其实也可以不一样，不同的任务中也可以对共享资源进行读写操作），在任务函数中把与全局变量相关的代码加了锁，两个线程只能顺序访问这部分代码（如果不进行线程同步打印出的数据是混乱且无序的）。另外需要强调一点：</p>
-<ol>
-<li><font color = red>在所有线程的任务函数执行完毕之前，互斥锁对象是不能被析构的，一定要在程序中保证这个对象的可用性。</li>
-<li>互斥锁的个数和共享资源的个数相等，也就是说每一个共享资源都应该对应一个互斥锁对象。互斥锁对象的个数和线程的个数没有关系。</font></li>
-</ol>
-<hr>
-<h2 id="2-stdlock_guard">2. std::lock_guard
-</h2><p><code>lock_guard</code>是C++11新增的一个模板类，使用这个类，可以简化互斥锁<code>lock()</code>和<code>unlock()</code>的写法，同时也更安全。这个模板类的定义和常用的构造函数原型如下：</p>
+</div><ul>
+<li>以上各个 operator 都会有对应的 <strong>fetch_</strong>* 操作：</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span> <span class="k">class</span> <span class="nc">Mutex</span> <span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">lock_guard</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">explicit</span> <span class="nf">lock_guard</span><span class="p">(</span> <span class="n">mutex_type</span><span class="o">&amp;</span> <span class="n">m</span> <span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">操作符         操作符重载函数         等级的成员函数         整形         指针         其他
+</span></span><span class="line"><span class="cl">+             atomic::operator+=     atomic::fetch_add      是           是           否
+</span></span><span class="line"><span class="cl">-             atomic::operator-=     atomic::fetch_sub      是           是           否
+</span></span><span class="line"><span class="cl">&amp;             atomic::operator&amp;=     atomic::fetch_and      是           否           否
+</span></span><span class="line"><span class="cl">|             atomic::operator|=     atomic::fetch_or       是           否           否
+</span></span><span class="line"><span class="cl">^             atomic::operator^=     atomic::fetch_xor      是           否           否
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><code>lock_guard</code>在使用上面提供的这个构造函数构造对象时，会自动锁定互斥量，而在退出作用域后进行析构时就会自动解锁，从而保证了互斥量的正确操作，避免忘记<code>unlock()</code>操作而导致线程死锁。<code>lock_guard</code>使用了RAII技术，就是在类构造函数中分配资源，在析构函数中释放资源，保证资源出了作用域就释放。</p>
-<p>使用<code>lock_guard</code>对上面的例子进行修改，代码如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">slow_increment</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">g_num_mutex</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">            <span class="o">++</span><span class="n">g_num</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">id</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; =&gt; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">g_num</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>通过修改发现代码被精简了，而且不用担心因为忘记解锁而造成程序的死锁，但是这种方式也要注意，在上面的示例程序中如果不加大括号，整个for循环的体都会被当做临界区，导致程序效率低，所以这里可以加一个大括号来指定临界区。</p>
-<hr>
-<h2 id="3-stdrecursive_mutex">3. std::recursive_mutex
-</h2><p>递归互斥锁<code>std::recursive_mutex</code>允许同一线程多次获得互斥锁，可以用来解决同一线程需要多次获取互斥量时死锁的问题，在下面的例子中使用独占非递归互斥量会发生死锁：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Calculate</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Calculate</span><span class="p">()</span> <span class="o">:</span> <span class="n">m_i</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">mul</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">m_i</span> <span class="o">*=</span> <span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">div</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">m_i</span> <span class="o">/=</span> <span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">both</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">mul</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">div</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m_i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">mutex</span> <span class="n">m_mutex</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Calculate</span> <span class="n">cal</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cal</span><span class="p">.</span><span class="n">both</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>上面的程序中执行了<code>cal.both(6, 3);</code>调用之后，程序就会发生死锁，在<code>both()</code>中已经对互斥锁加锁了，继续调用<code>mul()</code>函数，已经得到互斥锁所有权的线程再次获取这个互斥锁的所有权就会造成死锁（在C++中程序会异常退出，使用C库函数会导致这个互斥锁永远无法被解锁，最终阻塞所有的线程）。要解决这个死锁的问题，一个简单的办法就是使用递归互斥锁<code>std::recursive_mutex</code>，它允许一个线程多次获得互斥锁的所有权。修改之后的代码如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Calculate</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Calculate</span><span class="p">()</span> <span class="o">:</span> <span class="n">m_i</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="p">{}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">mul</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">recursive_mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">m_i</span> <span class="o">*=</span> <span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">div</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">recursive_mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">m_i</span> <span class="o">/=</span> <span class="n">x</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">both</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">recursive_mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">mul</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">div</span><span class="p">(</span><span class="n">y</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m_i</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">recursive_mutex</span> <span class="n">m_mutex</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">};</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">Calculate</span> <span class="n">cal</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cal</span><span class="p">.</span><span class="n">both</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;cal.m_i = &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">cal</span><span class="p">.</span><span class="n">m_i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>虽然递归互斥锁可以解决同一个互斥锁频繁获取互斥锁资源的问题，但是还是建议少用，主要原因如下：</p>
-<ol>
-<li>使用递归互斥锁的场景往往都是可以简化的，使用递归互斥锁很容易放纵复杂逻辑的产生，从而导致bug的产生</li>
-<li>递归互斥锁比非递归互斥锁效率要低一些。</li>
-<li>递归互斥锁虽然允许同一个线程多次获得同一个互斥锁的所有权，但最大次数并未具体说明，一旦超过一定的次数，就会抛出std::system错误。</li>
-</ol>
-<h2 id="4-stdtimed_mutex">4. std::timed_mutex
-</h2><p><code>std::timed_mutex</code>是超时独占互斥锁，主要是在获取互斥锁资源时增加了超时等待功能，因为不知道获取锁资源需要等待多长时间，为了保证不一直等待下去，设置了一个超时时长，超时后线程就可以解除阻塞去做其他事情了。</p>
-<p><code>std::timed_mutex</code>比<code>std::_mutex</code>多了两个成员函数：<code>try_lock_for()</code>和<code>try_lock_until()</code>：</p>
+</div><h2 id="内存顺序约束">内存顺序约束
+</h2><p>通过上面的 API 函数我们可以看出，在调用 <code>atomic</code>类提供的 API 函数的时候，需要指定原子顺序，在C++11给我们提供的 API 中使用枚举用作执行原子操作的函数的实参，以指定如何同步不同线程上的其他操作。</p>
+<p>定义如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -850,26 +635,29 @@
 </span><span class="lnt">6
 </span><span class="lnt">7
 </span><span class="lnt">8
-</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">try_lock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Rep</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Period</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">try_lock_for</span> <span class="p">(</span><span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="n">Rep</span><span class="p">,</span><span class="n">Period</span><span class="o">&gt;&amp;</span> <span class="n">rel_time</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Clock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Duration</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">try_lock_until</span> <span class="p">(</span><span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">time_point</span><span class="o">&lt;</span><span class="n">Clock</span><span class="p">,</span><span class="n">Duration</span><span class="o">&gt;&amp;</span> <span class="n">abs_time</span><span class="p">);</span>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">typedef</span> <span class="k">enum</span> <span class="n">memory_order</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">memory_order_relaxed</span><span class="p">,</span>    
+</span></span><span class="line"><span class="cl">    <span class="n">memory_order_consume</span><span class="p">,</span>    
+</span></span><span class="line"><span class="cl">    <span class="n">memory_order_acquire</span><span class="p">,</span>    
+</span></span><span class="line"><span class="cl">    <span class="n">memory_order_release</span><span class="p">,</span>    
+</span></span><span class="line"><span class="cl">    <span class="n">memory_order_acq_rel</span><span class="p">,</span>    
+</span></span><span class="line"><span class="cl">    <span class="n">memory_order_seq_cst</span>     
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">memory_order</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
-<li><code>try_lock_for</code>函数是当线程获取不到互斥锁资源的时候，让线程阻塞一定的时间长度</li>
-<li><code>try_lock_until</code>函数是当线程获取不到互斥锁资源的时候，让线程阻塞到某一个指定的时间点</li>
-<li>关于两个函数的返回值：当得到互斥锁的所有权之后，函数会马上解除阻塞，返回true，如果阻塞的时长用完或者到达指定的时间点之后，函数也会解除阻塞，返回false</li>
+<li><code>memory_order_relaxed</code>， 这是最宽松的规则，它对编译器和CPU不做任何限制，可以乱序</li>
+<li><code>memory_order_release</code> <strong>释放</strong>，设定内存屏障(Memory barrier)，保证它之前的操作永远在它之前，但是它后面的操作可能被重排到它前面</li>
+<li><code>memory_order_acquire</code> <strong>获取</strong>, 设定内存屏障，保证在它之后的访问永远在它之后，但是它之前的操作却有可能被重排到它后面，往往和<code>Release</code>在不同线程中联合使用</li>
+<li><code>memory_order_consume</code>：改进版的<code>memory_order_acquire</code> ，开销更小</li>
+<li><code>memory_order_acq_rel</code>，它是<code>Acquire</code> 和 <code>Release</code> 的结合，同时拥有它们俩提供的保证。比如你要对一个 <code>atomic</code> 自增 1，同时希望该操作之前和之后的读取或写入操作不会被重新排序</li>
+<li><code>memory_order_seq_cst</code> <strong>顺序一致性</strong>， <code>memory_order_seq_cst</code> 就像是<code>memory_order_acq_rel</code>的加强版，它不管原子操作是属于读取还是写入的操作，只要某个线程有用到<code>memory_order_seq_cst</code> 的原子操作，线程中该<code>memory_order_seq_cst</code> 操作前的数据操作绝对不会被重新排在该<code>memory_order_seq_cst</code> 操作之后，且该<code>memory_order_seq_cst</code> 操作后的数据操作也绝对不会被重新排在<code>memory_order_seq_cst</code> 操作前。</li>
 </ul>
-<p>下面的示例程序中为大家演示了<code>std::timed_mutex</code>的使用：</p>
+<h2 id="c20新增成员">C++20新增成员
+</h2><p>在C++20版本中添加了新的功能函数，可以通过原子类型来阻塞线程，和条件变量中的等待/通知函数是一样的。</p>
+<p><strong>类型别名</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -914,54 +702,66 @@
 </span><span class="lnt">40
 </span><span class="lnt">41
 </span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">timed_mutex</span> <span class="n">g_mutex</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">work</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span> <span class="n">timeout</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">g_mutex</span><span class="p">.</span><span class="n">try_lock_for</span><span class="p">(</span><span class="n">timeout</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;当前线程ID: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">this_thread</span><span class="o">::</span><span class="n">get_id</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">                 <span class="o">&lt;&lt;</span> <span class="s">&#34;, 得到互斥锁所有权...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="p">(</span><span class="mi">10</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">g_mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;当前线程ID: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">this_thread</span><span class="o">::</span><span class="n">get_id</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">                 <span class="o">&lt;&lt;</span> <span class="s">&#34;, 没有得到互斥锁所有权...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">50</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t1</span><span class="p">(</span><span class="n">work</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t2</span><span class="p">(</span><span class="n">work</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">别名                        原始类型定义
+</span></span><span class="line"><span class="cl">atomic_bool(C++11)          std::atomic&lt;bool&gt;
+</span></span><span class="line"><span class="cl">atomic_char(C++11)          std::atomic&lt;char&gt;
+</span></span><span class="line"><span class="cl">atomic_schar(C++11)         std::atomic&lt;signed char&gt;
+</span></span><span class="line"><span class="cl">atomic_uchar(C++11)         std::atomic&lt;unsigned char&gt;
+</span></span><span class="line"><span class="cl">atomic_short(C++11)         std::atomic&lt;short&gt;
+</span></span><span class="line"><span class="cl">atomic_ushort(C++11)        std::atomic&lt;unsigned short&gt;
+</span></span><span class="line"><span class="cl">atomic_int(C++11)           std::atomic&lt;int&gt;
+</span></span><span class="line"><span class="cl">atomic_uint(C++11)          std::atomic&lt;unsigned int&gt;
+</span></span><span class="line"><span class="cl">atomic_long(C++11)          std::atomic&lt;long&gt;
+</span></span><span class="line"><span class="cl">atomic_ulong(C++11)         std::atomic&lt;unsigned long&gt;
+</span></span><span class="line"><span class="cl">atomic_llong(C++11)         std::atomic&lt;long long&gt;
+</span></span><span class="line"><span class="cl">atomic_ullong(C++11)        std::atomic&lt;unsigned long long&gt;
+</span></span><span class="line"><span class="cl">atomic_char8_t(C++20)       std::atomic&lt;char8_t&gt;
+</span></span><span class="line"><span class="cl">atomic_char16_t(C++11)      std::atomic&lt;char16_t&gt;
+</span></span><span class="line"><span class="cl">atomic_char32_t(C++11)      std::atomic&lt;char32_t&gt;
+</span></span><span class="line"><span class="cl">atomic_wchar_t(C++11)       std::atomic&lt;wchar_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int8_t(C++11)(可选)   std::atomic&lt;std::int8_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint8_t(C++11)(可选)  std::atomic&lt;std::uint8_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int16_t(C++11)(可选)  std::atomic&lt;std::int16_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint16_t(C++11)(可选) std::atomic&lt;std::uint16_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int32_t(C++11)(可选)  std::atomic&lt;std::int32_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint32_t(C++11)(可选) std::atomic&lt;std::uint32_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int64_t(C++11)(可选)  std::atomic&lt;std::int64_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint64_t(C++11)(可选) std::atomic&lt;std::uint64_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int_least8_t(C++11)  std::atomic&lt;std::int_least8_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint_least8_t(C++11) std::atomic&lt;std::uint_least8_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int_least16_t(C++11) std::atomic&lt;std::int_least16_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint_least16_t(C++11) std::atomic&lt;std::uint_least16_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int_least32_t(C++11) std::atomic&lt;std::int_least32_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint_least32_t(C++11) std::atomic&lt;std::uint_least32_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int_least64_t(C++11) std::atomic&lt;std::int_least64_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint_least64_t(C++11) std::atomic&lt;std::uint_least64_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int_fast8_t(C++11)   std::atomic&lt;std::int_fast8_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint_fast8_t(C++11)  std::atomic&lt;std::uint_fast8_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int_fast16_t(C++11)  std::atomic&lt;std::int_fast16_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint_fast16_t(C++11) std::atomic&lt;std::uint_fast16_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int_fast32_t(C++11)  std::atomic&lt;std::int_fast32_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint_fast32_t(C++11) std::atomic&lt;std::uint_fast32_t&gt;
+</span></span><span class="line"><span class="cl">atomic_int_fast64_t(C++11)  std::atomic&lt;std::int_fast64_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uint_fast64_t(C++11) std::atomic&lt;std::uint_fast64_t&gt;
+</span></span><span class="line"><span class="cl">atomic_intptr_t(C++11)(可选) std::atomic&lt;std::intptr_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uintptr_t(C++11)(可选) std::atomic&lt;std::uintptr_t&gt;
+</span></span><span class="line"><span class="cl">atomic_size_t(C++11)        std::atomic&lt;std::size_t&gt;
+</span></span><span class="line"><span class="cl">atomic_ptrdiff_t(C++11)     std::atomic&lt;std::ptrdiff_t&gt;
+</span></span><span class="line"><span class="cl">atomic_intmax_t(C++11)      std::atomic&lt;std::intmax_t&gt;
+</span></span><span class="line"><span class="cl">atomic_uintmax_t(C++11)     std::atomic&lt;std::uintmax_t&gt;
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>示例代码输出的结果：</p>
-<div class="highlight"><div class="chroma">
+</div><h2 id="2-原子变量的使用">2. 原子变量的使用
+</h2><p>假设我们要制作一个多线程交替数数的计数器，我们使用互斥锁和原子变量的方式分别进行实现，对比一下二者的差异：</p>
+<h2 id="21-互斥锁版本">2.1 互斥锁版本
+</h2><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -974,23 +774,200 @@
 </span><span class="lnt"> 9
 </span><span class="lnt">10
 </span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">当前线程ID: 125776, 得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 没有得到互斥锁所有权...
-</span></span><span class="line"><span class="cl">当前线程ID: 112324, 得到互斥锁所有权...
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;atomic&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Counter</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">increment</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m_value</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;increment number: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">m_value</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;&lt;</span> <span class="s">&#34;, theadID: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">this_thread</span><span class="o">::</span><span class="n">get_id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">decrement</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m_value</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;decrement number: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">m_value</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;&lt;</span> <span class="s">&#34;, theadID: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">this_thread</span><span class="o">::</span><span class="n">get_id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mutex</span> <span class="n">m_mutex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Counter</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">increment</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Counter</span><span class="o">::</span><span class="n">increment</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">decrement</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Counter</span><span class="o">::</span><span class="n">decrement</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t1</span><span class="p">(</span><span class="n">increment</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t2</span><span class="p">(</span><span class="n">decrement</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>在上面的例子中，通过一个<code>while</code>循环不停的去获取超时互斥锁的所有权，如果得不到就阻塞1秒钟，1秒之后如果还是得不到阻塞50毫秒，然后再次继续尝试，直到获得互斥锁的所有权，跳出循环体。</p>
-<p>关于递归超时互斥锁<code>std::recursive_timed_mutex</code>的使用方式和<code>std::timed_mutex</code>是一样的，只不过它可以允许一个线程多次获得互斥锁所有权，而<code>std::timed_mutex</code>只允许线程获取一次互斥锁所有权。另外，递归超时互斥锁<code>std::recursive_timed_mutex</code>也拥有和<code>std::recursive_mutex</code>一样的弊端，不建议频繁使用。</p>
+</div><h2 id="22-原子变量版本">2.2 原子变量版本
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;atomic&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Counter</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">increment</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m_value</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;increment number: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">m_value</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;&lt;</span> <span class="s">&#34;, theadID: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">this_thread</span><span class="o">::</span><span class="n">get_id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">decrement</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m_value</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;decrement number: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">m_value</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&lt;&lt;</span> <span class="s">&#34;, theadID: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">this_thread</span><span class="o">::</span><span class="n">get_id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="p">(</span><span class="mi">500</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">atomic_int</span> <span class="n">m_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Counter</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">increment</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Counter</span><span class="o">::</span><span class="n">increment</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">decrement</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">Counter</span><span class="o">::</span><span class="n">decrement</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t1</span><span class="p">(</span><span class="n">increment</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t2</span><span class="p">(</span><span class="n">decrement</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">t1</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t2</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过代码的对比可以看出，使用了原子变量之后，就不需要再定义互斥量了，在使用上更加简便，并且这两种方式都能保证在多线程操作过程中数据的正确性，不会出现数据的混乱。</p>
+<p>原子类型<code>atomic&lt;T&gt;</code> 可以封装原始数据最终得到一个原子变量对象，操作原子对象能够得到和操作原始数据一样的效果，当然也可以通过<code>store()</code>和<code>load()</code>来读写原子对象内部的原始数据。</p>
 
 </section>
 
@@ -1016,30 +993,6 @@
             
                 
 <article class="has-image">
-    <a href="/post/cpp-atomic/">
-        
-        
-            <div class="article-image">
-                <img src="/post/cpp-atomic/cover.4aea9c63459734a904dbf02d4156cb3d.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【C&#43;&#43;11】C&#43;&#43;线程同步之原子变量"
-                        data-key="cpp-atomic" 
-                        data-hash="md5-SuqcY0WXNKkE2/AtQVbLPQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【C&#43;&#43;11】C&#43;&#43;线程同步之原子变量</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
     <a href="/post/cpp-condition_variable/">
         
         
@@ -1057,6 +1010,30 @@
 
         <div class="article-details">
             <h2 class="article-title">【C&#43;&#43;11】C&#43;&#43;线程同步之条件变量</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/cpp-mutex/">
+        
+        
+            <div class="article-image">
+                <img src="/post/cpp-mutex/cover.14c725dfff073986711e0e3fe3a99303.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】C&#43;&#43;线程同步之互斥锁"
+                        data-key="cpp-mutex" 
+                        data-hash="md5-FMcl3/8HOYZxHg4/46mTAw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】C&#43;&#43;线程同步之互斥锁</h2>
         </div>
     </a>
 </article>

@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="C++ 11 特性学习">
+<title>【C&#43;&#43;11】C&#43;&#43;线程同步之条件变量</title>
+
+<link rel='canonical' href='https://serennan.github.io/post/cpp-condition_variable/'>
+
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【C++11】C++线程同步之条件变量">
+<meta property='og:description' content="C++ 11 特性学习">
+<meta property='og:url' content='https://serennan.github.io/post/cpp-condition_variable/'>
+<meta property='og:site_name' content='serenNan'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-03T22:36:20&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp-condition_variable/cover.png' />
+<meta name="twitter:title" content="【C++11】C++线程同步之条件变量">
+<meta name="twitter:description" content="C++ 11 特性学习"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://serennan.github.io/post/cpp-condition_variable/cover.png' />
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_47dcc2efc37d0778.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🐈‍⬛</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">serenNan</a></h1>
+            <h2 class="site-description">个人博客</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/450940909'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M488.6 104.1C505.3 122.2 513 143.8 511.9 169.8V372.2C511.5 398.6 502.7 420.3 485.4 437.3C468.2 454.3 446.3 463.2 419.9 464H92.02C65.57 463.2 43.81 454.2 26.74 436.8C9.682 419.4 .7667 396.5 0 368.2V169.8C.7667 143.8 9.682 122.2 26.74 104.1C43.81 87.75 65.57 78.77 92.02 78H121.4L96.05 52.19C90.3 46.46 87.42 39.19 87.42 30.4C87.42 21.6 90.3 14.34 96.05 8.603C101.8 2.868 109.1 0 117.9 0C126.7 0 134 2.868 139.8 8.603L213.1 78H301.1L375.6 8.603C381.7 2.868 389.2 0 398 0C406.8 0 414.1 2.868 419.9 8.603C425.6 14.34 428.5 21.6 428.5 30.4C428.5 39.19 425.6 46.46 419.9 52.19L394.6 78L423.9 78C450.3 78.77 471.9 87.75 488.6 104.1H488.6zM449.8 173.8C449.4 164.2 446.1 156.4 439.1 150.3C433.9 144.2 425.1 140.9 416.4 140.5H96.05C86.46 140.9 78.6 144.2 72.47 150.3C66.33 156.4 63.07 164.2 62.69 173.8V368.2C62.69 377.4 65.95 385.2 72.47 391.7C78.99 398.2 86.85 401.5 96.05 401.5H416.4C425.6 401.5 433.4 398.2 439.7 391.7C446 385.2 449.4 377.4 449.8 368.2L449.8 173.8zM185.5 216.5C191.8 222.8 195.2 230.6 195.6 239.7V273C195.2 282.2 191.9 289.9 185.8 296.2C179.6 302.5 171.8 305.7 162.2 305.7C152.6 305.7 144.7 302.5 138.6 296.2C132.5 289.9 129.2 282.2 128.8 273V239.7C129.2 230.6 132.6 222.8 138.9 216.5C145.2 210.2 152.1 206.9 162.2 206.5C171.4 206.9 179.2 210.2 185.5 216.5H185.5zM377 216.5C383.3 222.8 386.7 230.6 387.1 239.7V273C386.7 282.2 383.4 289.9 377.3 296.2C371.2 302.5 363.3 305.7 353.7 305.7C344.1 305.7 336.3 302.5 330.1 296.2C323.1 289.9 320.7 282.2 320.4 273V239.7C320.7 230.6 324.1 222.8 330.4 216.5C336.7 210.2 344.5 206.9 353.7 206.5C362.9 206.9 370.7 210.2 377 216.5H377z"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/serenNan'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549" style="enable-background:new 0 0 438.549 438.549;"
+	 xml:space="preserve">
+<g>
+	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
+		c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
+		c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
+		c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
+		c-4.187,0.767-9.469,1.092-15.846,1c-6.374-0.089-12.991-0.757-19.842-1.999c-6.854-1.231-13.229-4.086-19.13-8.559
+		c-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559
+		c-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-0.951-2.568-2.098-3.711-3.429c-1.142-1.331-1.997-2.663-2.568-3.997
+		c-0.572-1.335-0.098-2.43,1.427-3.289c1.525-0.859,4.281-1.276,8.28-1.276l5.708,0.853c3.807,0.763,8.516,3.042,14.133,6.851
+		c5.614,3.806,10.229,8.754,13.846,14.842c4.38,7.806,9.657,13.754,15.846,17.847c6.184,4.093,12.419,6.136,18.699,6.136
+		c6.28,0,11.704-0.476,16.274-1.423c4.565-0.952,8.848-2.383,12.847-4.285c1.713-12.758,6.377-22.559,13.988-29.41
+		c-10.848-1.14-20.601-2.857-29.264-5.14c-8.658-2.286-17.605-5.996-26.835-11.14c-9.235-5.137-16.896-11.516-22.985-19.126
+		c-6.09-7.614-11.088-17.61-14.987-29.979c-3.901-12.374-5.852-26.648-5.852-42.826c0-23.035,7.52-42.637,22.557-58.817
+		c-7.044-17.318-6.379-36.732,1.997-58.24c5.52-1.715,13.706-0.428,24.554,3.853c10.85,4.283,18.794,7.952,23.84,10.994
+		c5.046,3.041,9.089,5.618,12.135,7.708c17.705-4.947,35.976-7.421,54.818-7.421s37.117,2.474,54.823,7.421l10.849-6.849
+		c7.419-4.57,16.18-8.758,26.262-12.565c10.088-3.805,17.802-4.853,23.134-3.138c8.562,21.509,9.325,40.922,2.279,58.24
+		c15.036,16.18,22.559,35.787,22.559,58.817c0,16.178-1.958,30.497-5.853,42.966c-3.9,12.471-8.941,22.457-15.125,29.979
+		c-6.191,7.521-13.901,13.85-23.131,18.986c-9.232,5.14-18.182,8.85-26.84,11.136c-8.662,2.286-18.415,4.004-29.263,5.146
+		c9.894,8.562,14.842,22.077,14.842,40.539v60.237c0,3.422,1.19,6.279,3.572,8.562c2.379,2.279,6.136,2.95,11.276,1.995
+		c44.163-14.653,80.185-41.062,108.068-79.226c27.88-38.161,41.825-81.126,41.825-128.906
+		C438.536,184.851,428.728,148.168,409.132,114.573z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/category/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M9 4h3l2 2h5a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"></path> <path d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h2"></path> </svg> 
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+<section class="widget archives">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">目录</h2>
+    <div class="widget--toc">
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-condition_variable">1. condition_variable</a>
+      <ol>
+        <li><a href="#11-成员函数">1.1 成员函数</a></li>
+        <li><a href="#12-生产者和消费者模型">1.2 生产者和消费者模型</a></li>
+      </ol>
+    </li>
+    <li><a href="#2-condition_variable_any">2. condition_variable_any</a>
+      <ol>
+        <li><a href="#21-成员函数">2.1 成员函数</a></li>
+        <li><a href="#22-生产者和消费者模型">2.2 生产者和消费者模型</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+    </div>
+</section>
+
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article ">
+    
+        <header class="article-header">
+        <div class="article-image">
+            <a href="/post/cpp-condition_variable/">
+                <img src="/post/cpp-condition_variable/cover.png"
+                        
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】C&#43;&#43;线程同步之条件变量" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/c&#43;&#43;/" style="background-color: #2a9d8f; color: #fff;">
+                C&#43;&#43;
+            </a>
+        
+            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="background-color: #B72727; color: #fff;">
+                多线程
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/cpp-condition_variable/">【C&#43;&#43;11】C&#43;&#43;线程同步之条件变量</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            C&#43;&#43; 11 特性学习
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+
+    
+    <footer class="article-time">
+        
+        
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time>2025-04-03</time>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                    <span>3393 字</span>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
+                    <time>2025-04-03 22:36</time>
+                </div>
+            
+        
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv"> </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+    
+    <section class="article-content">
+    
+    
+    <p>条件变量是C++11提供的另外一种用于等待的同步机制，它能阻塞一个或多个线程，直到收到另外一个线程发出的通知或者超时时，才会唤醒当前阻塞的线程。条件变量需要和互斥量配合起来使用，C++11提供了两种条件变量：</p>
+<ul>
+<li>
+<p><code>condition_variable</code>：需要配合<code>std::unique_lock&lt;std::mutex&gt;</code>进行wait操作，也就是阻塞线程的操作。</p>
+</li>
+<li>
+<p><code>condition_variable_any</code>：可以和任意带有<code>lock()、unlock()</code>语义的mutex搭配使用，也就是说有四种：</p>
+<ul>
+<li><code>std::mutex</code>：独占的非递归互斥锁</li>
+<li><code>std::timed_mutex</code>：带超时的独占非递归互斥锁</li>
+<li><code>std::recursive_mutex</code>：不带超时功能的递归互斥锁</li>
+<li><code>std::recursive_timed_mutex</code>：带超时的递归互斥锁</li>
+</ul>
+</li>
+</ul>
+<p>条件变量通常用于生产者和消费者模型，大致使用过程如下：</p>
+<ol>
+<li>
+<p>拥有条件变量的线程获取互斥量</p>
+</li>
+<li>
+<p>循环检查某个条件，如果条件不满足阻塞当前线程，否则线程继续向下执行</p>
+<ul>
+<li>产品的数量达到上限，生产者阻塞，否则生产者一直生产。。。</li>
+<li>产品的数量为零，消费者阻塞，否则消费者一直消费。。。</li>
+</ul>
+</li>
+<li>
+<p>条件满足之后，可以调用<code>notify_one()</code>或者<code>notify_all()</code>唤醒一个或者所有被阻塞的线程</p>
+<ul>
+<li>由消费者唤醒被阻塞的生产者，生产者解除阻塞继续生产。。。</li>
+<li>由生产者唤醒被阻塞的消费者，消费者解除阻塞继续消费。。。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="1-condition_variable">1. condition_variable
+</h2><h3 id="11-成员函数">1.1 成员函数
+</h3><p><code>condition_variable</code>的成员函数主要分为两部分：<code>线程等待（阻塞）函数</code> 和 <code>线程通知（唤醒）函数</code>，这些函数被定义于头文件 <code>&lt;condition_variable&gt;</code>。</p>
+<p><strong>等待函数</strong></p>
+<p>调用<code>wait()</code>函数的线程会被阻塞</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">wait</span> <span class="p">(</span><span class="n">unique_lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">template</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">wait</span> <span class="p">(</span><span class="n">unique_lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="n">Predicate</span> <span class="n">pred</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>函数①：调用该函数的线程直接被阻塞</li>
+<li>函数②：该函数的第二个参数是一个判断条件，是一个返回值为布尔类型的函数
+<ul>
+<li>该参数可以传递一个有名函数的地址，也可以直接指定一个匿名函数</li>
+<li>表达式返回<strong>false当前线程被阻塞</strong>，表达式返回<strong>true当前线程不会被阻塞</strong>，继续向下执行</li>
+</ul>
+</li>
+<li>独占的互斥锁对象不能直接传递给<code>wait()</code>函数，需要通过模板类<code>unique_lock</code>进行二次处理。</li>
+<li>如果线程被该函数阻塞，这个线程会释放占有的互斥锁的所有权，当阻塞解除之后这个线程会重新得到互斥锁的所有权，继续向下执行。</li>
+</ul>
+<p><code>wait_for()</code>函数和<code>wait()</code>的功能是一样的，只不过多了一个阻塞时长，假设阻塞的线程没有被其他线程唤醒，当阻塞时长用完之后，线程就会自动解除阻塞，继续向下执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Rep</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Period</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cv_status</span> <span class="n">wait_for</span> <span class="p">(</span><span class="n">unique_lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="n">Rep</span><span class="p">,</span><span class="n">Period</span><span class="o">&gt;&amp;</span> <span class="n">rel_time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Rep</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Period</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Predicate</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">wait_for</span><span class="p">(</span><span class="n">unique_lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="n">Rep</span><span class="p">,</span><span class="n">Period</span><span class="o">&gt;&amp;</span> <span class="n">rel_time</span><span class="p">,</span> <span class="n">Predicate</span> <span class="n">pred</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>wait_until()</code>函数和<code>wait_for()</code>的功能是一样的，它是指定让线程阻塞到某一个时间点，假设阻塞的线程没有被其他线程唤醒，当到达指定的时间点之后，线程就会自动解除阻塞，继续向下执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Clock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Duration</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cv_status</span> <span class="n">wait_until</span> <span class="p">(</span><span class="n">unique_lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">time_point</span><span class="o">&lt;</span><span class="n">Clock</span><span class="p">,</span><span class="n">Duration</span><span class="o">&gt;&amp;</span> <span class="n">abs_time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Clock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Duration</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Predicate</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">wait_until</span> <span class="p">(</span><span class="n">unique_lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">time_point</span><span class="o">&lt;</span><span class="n">Clock</span><span class="p">,</span><span class="n">Duration</span><span class="o">&gt;&amp;</span> <span class="n">abs_time</span><span class="p">,</span> <span class="n">Predicate</span> <span class="n">pred</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>通知函数</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">notify_one</span><span class="p">()</span> <span class="k">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">notify_all</span><span class="p">()</span> <span class="k">noexcept</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>notify_one()</code>：唤醒一个被当前条件变量阻塞的线程</li>
+<li><code>notify_all()</code>：唤醒全部被当前条件变量阻塞的线程</li>
+</ul>
+<h3 id="12-生产者和消费者模型">1.2 生产者和消费者模型
+</h3><p>我们可以使用条件变量来实现一个同步队列，这个队列作为生产者线程和消费者线程的共享资源，示例代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;list&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;condition_variable&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SyncQueue</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">SyncQueue</span><span class="p">(</span><span class="kt">int</span> <span class="n">maxSize</span><span class="p">)</span> <span class="o">:</span> <span class="n">m_maxSize</span><span class="p">(</span><span class="n">maxSize</span><span class="p">)</span> <span class="p">{}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">put</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">m_queue</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">m_maxSize</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;任务队列已满, 请耐心等待...&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">m_notFull</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">locker</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">m_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 被生产&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">m_notEmpty</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">take</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">m_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>  
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;任务队列已空，请耐心等待。。。&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">m_notEmpty</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">locker</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">m_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">m_notFull</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 被消费&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">x</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">empty</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">full</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">m_maxSize</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">m_queue</span><span class="p">;</span>      <span class="c1">// 存储队列数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">mutex</span> <span class="n">m_mutex</span><span class="p">;</span>          <span class="c1">// 互斥锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">condition_variable</span> <span class="n">m_notEmpty</span><span class="p">;</span>      <span class="c1">// 不为空的条件变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">condition_variable</span> <span class="n">m_notFull</span><span class="p">;</span>       <span class="c1">// 没有满的条件变量
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">m_maxSize</span><span class="p">;</span>          <span class="c1">// 任务队列的最大任务个数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">SyncQueue</span> <span class="n">taskQ</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">produce</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SyncQueue</span><span class="o">::</span><span class="n">put</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">taskQ</span><span class="p">,</span> <span class="n">placeholders</span><span class="o">::</span><span class="n">_1</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">consume</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SyncQueue</span><span class="o">::</span><span class="n">take</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">taskQ</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t1</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t2</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">t1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kr">thread</span><span class="p">(</span><span class="n">produce</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">100</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">t2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kr">thread</span><span class="p">(</span><span class="n">consume</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">t1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">join</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">t2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">join</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>条件变量<code>condition_variable</code>类的<code>wait()</code>还有一个重载的方法，可以接受一个条件，这个条件也可以是一个返回值为布尔类型的函数，条件变量会先检查判断这个条件是否满足，如果满足条件（布尔值为true），则当前线程重新获得互斥锁的所有权，结束阻塞，继续向下执行；如果不满足条件（布尔值为false），当前线程会释放互斥锁（解锁）同时被阻塞，等待被唤醒。</p>
+<p>上面示例程序中的<code>put()</code>、<code>take()</code>函数可以做如下修改：</p>
+<ul>
+<li><strong>put()函数</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">put</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="n">m_notFull</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">locker</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">m_maxSize</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="n">m_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 被生产&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="n">m_notEmpty</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>take()函数</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">take</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">m_notEmpty</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">locker</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">!</span><span class="n">m_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">m_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="n">m_notFull</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 被消费&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>修改之后可以发现，程序变得更加精简了，而且执行效率更高了，因为在这两个函数中的<code>while</code>循环被删掉了，但是最终的效果是一样的，推荐使用这种方式的<code>wait()</code>进行线程的阻塞。</p>
+<hr>
+<h2 id="2-condition_variable_any">2. condition_variable_any
+</h2><h3 id="21-成员函数">2.1 成员函数
+</h3><p><code>condition_variable_any</code>的成员函数也是分为两部分：线程等待（阻塞）函数和线程通知（唤醒）函数，这些函数被定义于头文件 <code>&lt;condition_variable&gt;</code>。</p>
+<ul>
+<li><strong>等待函数</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Lock</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">wait</span> <span class="p">(</span><span class="n">Lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Lock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Predicate</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">wait</span> <span class="p">(</span><span class="n">Lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="n">Predicate</span> <span class="n">pred</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>函数①：调用该函数的线程直接被阻塞</li>
+<li>函数②：该函数的第二个参数是一个判断条件，是一个返回值为布尔类型的函数
+<ul>
+<li>该参数可以传递一个有名函数的地址，也可以直接指定一个匿名函数</li>
+<li>表达式返回false当前线程被阻塞，表达式返回true当前线程不会被阻塞，继续向下执行</li>
+</ul>
+</li>
+<li>可以直接传递给<code>wait()</code>函数的互斥锁类型有四种，分别是：
+<ul>
+<li><code>std::mutex</code>、<code>std::timed_mutex</code>、<code>std::recursive_mutex</code>、<code>std::recursive_timed_mutex</code></li>
+</ul>
+</li>
+<li>如果线程被该函数阻塞，这个线程会释放占有的互斥锁的所有权，当阻塞解除之后这个线程会重新得到互斥锁的所有权，继续向下执行。</li>
+</ul>
+<p><code>wait_for()</code>函数和<code>wait()</code>的功能是一样的，只不过多了一个阻塞时长，假设阻塞的线程没有被其他线程唤醒，当阻塞时长用完之后，线程就会自动解除阻塞，继续向下执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Lock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Rep</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Period</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cv_status</span> <span class="n">wait_for</span> <span class="p">(</span><span class="n">Lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="n">Rep</span><span class="p">,</span><span class="n">Period</span><span class="o">&gt;&amp;</span> <span class="n">rel_time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Lock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Rep</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Period</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Predicate</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">wait_for</span> <span class="p">(</span><span class="n">Lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="n">Rep</span><span class="p">,</span><span class="n">Period</span><span class="o">&gt;&amp;</span> <span class="n">rel_time</span><span class="p">,</span> <span class="n">Predicate</span> <span class="n">pred</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>wait_until()</code>函数和<code>wait_for()</code>的功能是一样的，它是指定让线程阻塞到某一个时间点，假设阻塞的线程没有被其他线程唤醒，当到达指定的时间点之后，线程就会自动解除阻塞，继续向下执行。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Lock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Clock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Duration</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">cv_status</span> <span class="n">wait_until</span> <span class="p">(</span><span class="n">Lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">time_point</span><span class="o">&lt;</span><span class="n">Clock</span><span class="p">,</span><span class="n">Duration</span><span class="o">&gt;&amp;</span> <span class="n">abs_time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Lock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Clock</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Duration</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Predicate</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">wait_until</span> <span class="p">(</span><span class="n">Lock</span><span class="o">&amp;</span> <span class="n">lck</span><span class="p">,</span> <span class="k">const</span> <span class="n">chrono</span><span class="o">::</span><span class="n">time_point</span><span class="o">&lt;</span><span class="n">Clock</span><span class="p">,</span><span class="n">Duration</span><span class="o">&gt;&amp;</span> <span class="n">abs_time</span><span class="p">,</span> <span class="n">Predicate</span> <span class="n">pred</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>通知函数</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">notify_one</span><span class="p">()</span> <span class="k">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">notify_all</span><span class="p">()</span> <span class="k">noexcept</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>notify_one()</code>：唤醒一个被当前条件变量阻塞的线程</li>
+<li><code>notify_all()</code>：唤醒全部被当前条件变量阻塞的线程</li>
+</ul>
+<h3 id="22-生产者和消费者模型">2.2 生产者和消费者模型
+</h3><p>使用条件变量<code>condition_variable_any</code>同样可以实现上面的生产者和消费者的例子，代码只有个别细节上有所不同：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;list&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;condition_variable&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SyncQueue</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">SyncQueue</span><span class="p">(</span><span class="kt">int</span> <span class="n">maxSize</span><span class="p">)</span> <span class="o">:</span> <span class="n">m_maxSize</span><span class="p">(</span><span class="n">maxSize</span><span class="p">)</span> <span class="p">{}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">put</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">m_notFull</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">m_maxSize</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">m_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 被生产&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">m_notEmpty</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">take</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">m_notEmpty</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="o">!</span><span class="n">m_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">m_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="n">m_notFull</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 被消费&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">x</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">empty</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">full</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">m_maxSize</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">size</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">locker</span><span class="p">(</span><span class="n">m_mutex</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m_queue</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">m_queue</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">mutex</span> <span class="n">m_mutex</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">condition_variable_any</span> <span class="n">m_notEmpty</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">condition_variable_any</span> <span class="n">m_notFull</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">m_maxSize</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl"><span class="p">};</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl"><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">    <span class="n">SyncQueue</span> <span class="n">taskQ</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">produce</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SyncQueue</span><span class="o">::</span><span class="n">put</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">taskQ</span><span class="p">,</span> <span class="n">placeholders</span><span class="o">::</span><span class="n">_1</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="n">consume</span> <span class="o">=</span> <span class="n">bind</span><span class="p">(</span><span class="o">&amp;</span><span class="n">SyncQueue</span><span class="o">::</span><span class="n">take</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">taskQ</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t1</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl">    <span class="kr">thread</span> <span class="n">t2</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">t1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kr">thread</span><span class="p">(</span><span class="n">produce</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">100</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">t2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kr">thread</span><span class="p">(</span><span class="n">consume</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">t1</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">join</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">        <span class="n">t2</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">join</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br>
+
+<div class="notice notice-note" >
+    <div class="notice-title"></div><p>总结：<br>
+以上介绍的两种条件变量各自有各自的特点，<code>condition_variable</code> 配合 <code>unique_lock</code> 使用更灵活一些，可以在任何时候自由地释放互斥锁，而 <code>condition_variable_any</code> 如果和 <code>lock_guard</code> 一起使用必须要等到其生命周期结束才能将互斥锁释放。但是，<code>condition_variable_any</code> 可以和多种互斥锁配合使用，应用场景也更广，而 <code>condition_variable</code> 只能和独占的非递归互斥锁（mutex）配合使用，有一定的局限性。</p></div>
+
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+
+
+    
+</footer>
+
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/cpp-atomic/">
+        
+        
+            <div class="article-image">
+                <img src="/post/cpp-atomic/cover.4aea9c63459734a904dbf02d4156cb3d.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】C&#43;&#43;线程同步之原子变量"
+                        data-key="cpp-atomic" 
+                        data-hash="md5-SuqcY0WXNKkE2/AtQVbLPQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】C&#43;&#43;线程同步之原子变量</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/cpp-mutex/">
+        
+        
+            <div class="article-image">
+                <img src="/post/cpp-mutex/cover.14c725dfff073986711e0e3fe3a99303.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】C&#43;&#43;线程同步之互斥锁"
+                        data-key="cpp-mutex" 
+                        data-hash="md5-FMcl3/8HOYZxHg4/46mTAw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】C&#43;&#43;线程同步之互斥锁</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/cpp-callonce/">
+        
+        
+            <div class="article-image">
+                <img src="/post/cpp-callonce/cover.7992f54e80e8e767673e3522bf2a4178.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】call_once"
+                        data-key="cpp-callonce" 
+                        data-hash="md5-eZL1ToDo52dnPjUivypBeA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】call_once</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/cpp-thread/">
+        
+        
+            <div class="article-image">
+                <img src="/post/cpp-thread/cover.2c01997f37859db29999783b591afa26.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】线程的使用"
+                        data-key="cpp-thread" 
+                        data-hash="md5-LAGZfzeFnbKZmXg7WRr6Jg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】线程的使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/cpp-this_thread/">
+        
+        
+            <div class="article-image">
+                <img src="/post/cpp-this_thread/cover.1ee3bfac113c9d3e43cda0d1c3e0f409.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】命名空间-this_thread"
+                        data-key="cpp-this_thread" 
+                        data-hash="md5-HuO/rBE8nT5DzaDRw&#43;D0CQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】命名空间-this_thread</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="serenNan/serenNan.github.io"
+    data-repo-id="R_kgDONieGHg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONieGHs4ClphA"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 serenNan
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+<script>
+    (function(u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function(e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js', function() {
+      pangu.spacingPage();
+    });
+</script>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+  @font-face {
+    font-family: 'MapleMono2';
+    src: url('/font/MapleMono2.ttf') format('truetype');
+  }
+
+  :root {
+    --base-font-family: 'MapleMono2';
+    --code-font-family: 'MapleMono2';
+  }
+</style>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+<div id="particles-js"></div>
+<script src="/background/particles.min.js"></script>
+<script>
+particlesJS.load('particles-js', '\/background\/particlesjs-config.json', function() {
+console.log('particles.js loaded - callback');
+});
+</script>
+
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
+
+
+
+
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 5%;
+        right: 24%;  
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url('/icons/backTop.svg');  
+        background-size: cover;  
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop;
+        rightSideBar.appendChild(btn);
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    initScrollTop();
+</script>
+
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+          
+        <div id="toggle-buttons">
+  <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
+  <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
+</div>
+<script>
+  
+  document.getElementById('toggle-left-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('left-sidebar-hidden');
+    this.textContent = document.body.classList.contains('left-sidebar-hidden') ? '->' : '<-';
+  });
+
+  
+  document.getElementById('toggle-right-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('right-sidebar-hidden');
+    this.textContent = document.body.classList.contains('right-sidebar-hidden') ? '<-' : '->';
+  });
+</script>
+
+
+<script>
+
+let lastClientX = 0;
+document.addEventListener('mousemove', e => {
+  const edgeThreshold = 50;
+  const btnLeft = document.getElementById('toggle-left-sidebar');
+  const btnRight = document.getElementById('toggle-right-sidebar');
+  
+  
+  lastClientX = e.clientX;
+
+  
+  if (e.clientX < edgeThreshold) {
+    btnLeft.style.opacity = '1';
+    btnLeft.style.pointerEvents = 'auto';
+  } else {
+    btnLeft.style.opacity = '0';
+    btnLeft.style.pointerEvents = 'none';
+  }
+
+  
+  if (window.innerWidth - e.clientX < edgeThreshold) {
+    btnRight.style.opacity = '1';
+    btnRight.style.pointerEvents = 'auto';
+  } else {
+    btnRight.style.opacity = '0';
+    btnRight.style.pointerEvents = 'none';
+  }
+});
+</script>
+       
+    </body>
+</html>
