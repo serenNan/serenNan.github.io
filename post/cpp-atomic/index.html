@@ -10,7 +10,7 @@
 <meta property='og:description' content="C++ 11 特性学习">
 <meta property='og:url' content='https://serennan.github.io/post/cpp-atomic/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-03T22:36:20&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp-atomic/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-04T16:25:45&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp-atomic/cover.png' />
 <meta name="twitter:title" content="【C++11】C++线程同步之原子变量">
 <meta name="twitter:description" content="C++ 11 特性学习"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://serennan.github.io/post/cpp-atomic/cover.png' />
@@ -327,14 +327,18 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#1-atomic-类成员">1. atomic 类成员</a></li>
-    <li><a href="#构造函数">构造函数</a></li>
-    <li><a href="#公共成员函数">公共成员函数</a></li>
-    <li><a href="#特化成员函数">特化成员函数</a></li>
-    <li><a href="#内存顺序约束">内存顺序约束</a></li>
-    <li><a href="#c20新增成员">C++20新增成员</a></li>
-    <li><a href="#2-原子变量的使用">2. 原子变量的使用</a></li>
-    <li><a href="#21-互斥锁版本">2.1 互斥锁版本</a></li>
+    <li><a href="#1-atomic-类成员">1. atomic 类成员</a>
+      <ol>
+        <li><a href="#构造函数">构造函数</a></li>
+        <li><a href="#公共成员函数">公共成员函数</a></li>
+        <li><a href="#内存顺序约束">内存顺序约束</a></li>
+      </ol>
+    </li>
+    <li><a href="#2-原子变量的使用">2. 原子变量的使用</a>
+      <ol>
+        <li><a href="#21-互斥锁版本">2.1 互斥锁版本</a></li>
+      </ol>
+    </li>
     <li><a href="#22-原子变量版本">2.2 原子变量版本</a></li>
   </ol>
 </nav>
@@ -440,7 +444,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>2976 字</span>
+                    <span>2323 字</span>
                 </div>
             
         
@@ -448,7 +452,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-04-03 22:36</time>
+                    <time>2025-04-04 16:25</time>
                 </div>
             
         
@@ -471,11 +475,13 @@
     
     
     <h1 id="原子变量">原子变量
-</h1><p>C++11提供了一个原子类型<code>std::atomic&lt;T&gt;</code>，通过这个原子类型管理的内部变量就可以称之为原子变量，我们可以给原子类型指定<code>bool、char、int、long、指针</code>等类型作为模板参数（<code>不支持浮点类型和复合类型</code>）。</p>
+</h1><p>个人学习笔记，参照大丙老师的博客：<a class="link" href="https://subingwen.cn/"  target="_blank" rel="noopener"
+    >爱编程的大丙</a></p>
+<p>C++11提供了一个原子类型<code>std::atomic&lt;T&gt;</code>，通过这个原子类型管理的内部变量就可以称之为原子变量，我们可以给原子类型指定<code>bool</code>、<code>char</code>、<code>int</code>、<code>long</code>、指针等类型作为模板参数（不支持浮点类型和复合类型）。</p>
 <p>原子指的是一系列不可被CPU上下文交换的机器指令，这些指令组合在一起就形成了原子操作。在多核CPU下，当某个CPU核心开始运行原子操作时，会先暂停其它CPU内核对内存的操作，以保证原子操作不会被其它CPU内核所干扰。</p>
 <p>由于原子操作是通过指令提供的支持，因此它的性能相比锁和消息传递会好很多。相比较于锁而言，原子类型不需要开发者处理加锁和释放锁的问题，同时支持修改，读取等操作，还具备较高的并发性能，几乎所有的语言都支持原子类型。</p>
-<p>可以看出原子类型是无锁类型，但是无锁不代表无需等待，因为原子类型内部使用了<code>CAS</code>循环，当大量的冲突发生时，该等待还是得等待！但是总归比锁要好。</p>
-<p>C++11内置了整形的原子变量，这样就可以更方便的使用原子变量了。在多线程操作中，使用原子变量之后就不需要再使用互斥量来保护该变量了，用起来更简洁。因为对原子变量进行的操作只能是一个原子操作（<code>atomic operation</code>），<code>原子操作指的是不会被线程调度机制打断的操作，这种操作一旦开始，就一直运行到结束，中间不会有任何的上下文切换。</code>多线程同时访问共享资源造成数据混乱的原因就是因为CPU的上下文切换导致的，使用原子变量解决了这个问题，因此互斥锁的使用也就不再需要了。</p>
+<p>可以看出原子类型是无锁类型，但是无锁不代表无需等待，因为原子类型内部使用了<code>CAS</code>循环，当大量的冲突发生时，该等待还是得等待，但是总归比锁要好。</p>
+<p>C++11内置了整形的原子变量，这样就可以更方便的使用原子变量了。在多线程操作中，使用原子变量之后就不需要再使用互斥量来保护该变量了，用起来更简洁。因为对原子变量进行的操作只能是一个原子操作（<code>atomic operation</code>），原子操作指的是不会被线程调度机制打断的操作，这种操作一旦开始，就一直运行到结束，中间不会有任何的上下文切换。多线程同时访问共享资源造成数据混乱的原因就是因为CPU的上下文切换导致的，使用原子变量解决了这个问题，因此互斥锁的使用也就不再需要了。</p>
 <p><code>CAS</code>全称是<code>Compare and swap</code>, 它通过一条指令读取指定的内存地址，然后判断其中的值是否等于给定的前置值，如果相等，则将其修改为新的值</p>
 <hr>
 <h2 id="1-atomic-类成员">1. atomic 类成员
@@ -486,13 +492,13 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">template&lt; class T &gt;
-</span></span><span class="line"><span class="cl">struct atomic;
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span><span class="o">&lt;</span> <span class="k">class</span> <span class="nc">T</span> <span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">atomic</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>通过定义可得知：<code>在使用这个模板类的时候，一定要指定模板类型。</code></p>
-<h2 id="构造函数">构造函数
-</h2><div class="highlight"><div class="chroma">
+</div><p>通过定义可得知：在使用这个模板类的时候，一定要指定模板类型。</p>
+<h3 id="构造函数">构造函数
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -501,11 +507,11 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">atomic</span><span class="p">()</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">atomic</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">constexpr</span> <span class="n">atomic</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="n">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">constexpr</span> <span class="nf">atomic</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="o">=</span> <span class="n">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -513,8 +519,8 @@
 <li>构造函数②：使用 <code>desired</code> 初始化原子变量的值。</li>
 <li>构造函数③：使用<code>=delete</code>显示删除拷贝构造函数, 不允许进行对象之间的拷贝</li>
 </ul>
-<h2 id="公共成员函数">公共成员函数
-</h2><p>原子类型在类内部重载了<code>=</code>操作符，并且不允许在类的外部使用 <code>=</code>进行对象的拷贝。</p>
+<h3 id="公共成员函数">公共成员函数
+</h3><p>原子类型在类内部重载了<code>=</code>操作符，并且不允许在类的外部使用 <code>=</code>进行对象的拷贝。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -524,11 +530,11 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">T</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="n">noexcept</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">T</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="n">volatile</span> <span class="n">noexcept</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">T</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">T</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span> <span class="p">)</span> <span class="k">volatile</span> <span class="k">noexcept</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="o">=</span> <span class="n">delete</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="n">volatile</span> <span class="o">=</span> <span class="n">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">atomic</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span> <span class="k">const</span> <span class="n">atomic</span><span class="o">&amp;</span> <span class="p">)</span> <span class="k">volatile</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>原子地以 <code>desired</code> 替换当前值。按照 <code>order</code> 的值影响内存。</p>
@@ -538,8 +544,8 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">void store( T desired, std::memory_order order = std::memory_order_seq_cst ) noexcept;
-</span></span><span class="line"><span class="cl">void store( T desired, std::memory_order order = std::memory_order_seq_cst ) volatile noexcept;
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">store</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span> <span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">store</span><span class="p">(</span> <span class="n">T</span> <span class="n">desired</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span> <span class="p">)</span> <span class="k">volatile</span> <span class="k">noexcept</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -553,77 +559,12 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">T</span> <span class="nb">load</span><span class="p">(</span> <span class="n">std</span><span class="p">::</span><span class="n">memory_order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">memory_order_seq_cst</span> <span class="p">)</span> <span class="k">const</span> <span class="n">noexcept</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="n">T</span> <span class="nb">load</span><span class="p">(</span> <span class="n">std</span><span class="p">::</span><span class="n">memory_order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">memory_order_seq_cst</span> <span class="p">)</span> <span class="k">const</span> <span class="n">volatile</span> <span class="n">noexcept</span><span class="p">;</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">T</span> <span class="nf">load</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span> <span class="p">)</span> <span class="k">const</span> <span class="k">noexcept</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">T</span> <span class="nf">load</span><span class="p">(</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order</span> <span class="n">order</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span> <span class="p">)</span> <span class="k">const</span> <span class="k">volatile</span> <span class="k">noexcept</span><span class="p">;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="特化成员函数">特化成员函数
-</h2><ul>
-<li>复合赋值运算符重载，主要包含以下形式：</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">模板类型T为整形：
-</span></span><span class="line"><span class="cl">T operator+= (T val) volatile noexcept;
-</span></span><span class="line"><span class="cl">T operator+= (T val) noexcept;
-</span></span><span class="line"><span class="cl">T operator-= (T val) volatile noexcept;
-</span></span><span class="line"><span class="cl">T operator-= (T val) noexcept;
-</span></span><span class="line"><span class="cl">T operator&amp;= (T val) volatile noexcept;
-</span></span><span class="line"><span class="cl">T operator&amp;= (T val) noexcept;
-</span></span><span class="line"><span class="cl">T operator|= (T val) volatile noexcept;
-</span></span><span class="line"><span class="cl">T operator|= (T val) noexcept;
-</span></span><span class="line"><span class="cl">T operator^= (T val) volatile noexcept;
-</span></span><span class="line"><span class="cl">T operator^= (T val) noexcept;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">模板类型T为指针：
-</span></span><span class="line"><span class="cl">T operator+= (ptrdiff_t val) volatile noexcept;
-</span></span><span class="line"><span class="cl">T operator+= (ptrdiff_t val) noexcept;
-</span></span><span class="line"><span class="cl">T operator-= (ptrdiff_t val) volatile noexcept;
-</span></span><span class="line"><span class="cl">T operator-= (ptrdiff_t val) noexcept;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><ul>
-<li>以上各个 operator 都会有对应的 <strong>fetch_</strong>* 操作：</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">操作符         操作符重载函数         等级的成员函数         整形         指针         其他
-</span></span><span class="line"><span class="cl">+             atomic::operator+=     atomic::fetch_add      是           是           否
-</span></span><span class="line"><span class="cl">-             atomic::operator-=     atomic::fetch_sub      是           是           否
-</span></span><span class="line"><span class="cl">&amp;             atomic::operator&amp;=     atomic::fetch_and      是           否           否
-</span></span><span class="line"><span class="cl">|             atomic::operator|=     atomic::fetch_or       是           否           否
-</span></span><span class="line"><span class="cl">^             atomic::operator^=     atomic::fetch_xor      是           否           否
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="内存顺序约束">内存顺序约束
-</h2><p>通过上面的 API 函数我们可以看出，在调用 <code>atomic</code>类提供的 API 函数的时候，需要指定原子顺序，在C++11给我们提供的 API 中使用枚举用作执行原子操作的函数的实参，以指定如何同步不同线程上的其他操作。</p>
+</div><h3 id="内存顺序约束">内存顺序约束
+</h3><p>通过上面的 API 函数我们可以看出，在调用 <code>atomic</code>类提供的 API 函数的时候，需要指定原子顺序，在C++11给我们提供的 API 中使用枚举用作执行原子操作的函数的实参，以指定如何同步不同线程上的其他操作。</p>
 <p>定义如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -637,7 +578,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">typedef</span> <span class="k">enum</span> <span class="n">memory_order</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">enum</span> <span class="nc">memory_order</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">memory_order_relaxed</span><span class="p">,</span>    
 </span></span><span class="line"><span class="cl">    <span class="n">memory_order_consume</span><span class="p">,</span>    
 </span></span><span class="line"><span class="cl">    <span class="n">memory_order_acquire</span><span class="p">,</span>    
@@ -655,113 +596,11 @@
 <li><code>memory_order_acq_rel</code>，它是<code>Acquire</code> 和 <code>Release</code> 的结合，同时拥有它们俩提供的保证。比如你要对一个 <code>atomic</code> 自增 1，同时希望该操作之前和之后的读取或写入操作不会被重新排序</li>
 <li><code>memory_order_seq_cst</code> <strong>顺序一致性</strong>， <code>memory_order_seq_cst</code> 就像是<code>memory_order_acq_rel</code>的加强版，它不管原子操作是属于读取还是写入的操作，只要某个线程有用到<code>memory_order_seq_cst</code> 的原子操作，线程中该<code>memory_order_seq_cst</code> 操作前的数据操作绝对不会被重新排在该<code>memory_order_seq_cst</code> 操作之后，且该<code>memory_order_seq_cst</code> 操作后的数据操作也绝对不会被重新排在<code>memory_order_seq_cst</code> 操作前。</li>
 </ul>
-<h2 id="c20新增成员">C++20新增成员
-</h2><p>在C++20版本中添加了新的功能函数，可以通过原子类型来阻塞线程，和条件变量中的等待/通知函数是一样的。</p>
-<p><strong>类型别名</strong></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span><span class="lnt">46
-</span><span class="lnt">47
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">别名                        原始类型定义
-</span></span><span class="line"><span class="cl">atomic_bool(C++11)          std::atomic&lt;bool&gt;
-</span></span><span class="line"><span class="cl">atomic_char(C++11)          std::atomic&lt;char&gt;
-</span></span><span class="line"><span class="cl">atomic_schar(C++11)         std::atomic&lt;signed char&gt;
-</span></span><span class="line"><span class="cl">atomic_uchar(C++11)         std::atomic&lt;unsigned char&gt;
-</span></span><span class="line"><span class="cl">atomic_short(C++11)         std::atomic&lt;short&gt;
-</span></span><span class="line"><span class="cl">atomic_ushort(C++11)        std::atomic&lt;unsigned short&gt;
-</span></span><span class="line"><span class="cl">atomic_int(C++11)           std::atomic&lt;int&gt;
-</span></span><span class="line"><span class="cl">atomic_uint(C++11)          std::atomic&lt;unsigned int&gt;
-</span></span><span class="line"><span class="cl">atomic_long(C++11)          std::atomic&lt;long&gt;
-</span></span><span class="line"><span class="cl">atomic_ulong(C++11)         std::atomic&lt;unsigned long&gt;
-</span></span><span class="line"><span class="cl">atomic_llong(C++11)         std::atomic&lt;long long&gt;
-</span></span><span class="line"><span class="cl">atomic_ullong(C++11)        std::atomic&lt;unsigned long long&gt;
-</span></span><span class="line"><span class="cl">atomic_char8_t(C++20)       std::atomic&lt;char8_t&gt;
-</span></span><span class="line"><span class="cl">atomic_char16_t(C++11)      std::atomic&lt;char16_t&gt;
-</span></span><span class="line"><span class="cl">atomic_char32_t(C++11)      std::atomic&lt;char32_t&gt;
-</span></span><span class="line"><span class="cl">atomic_wchar_t(C++11)       std::atomic&lt;wchar_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int8_t(C++11)(可选)   std::atomic&lt;std::int8_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint8_t(C++11)(可选)  std::atomic&lt;std::uint8_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int16_t(C++11)(可选)  std::atomic&lt;std::int16_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint16_t(C++11)(可选) std::atomic&lt;std::uint16_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int32_t(C++11)(可选)  std::atomic&lt;std::int32_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint32_t(C++11)(可选) std::atomic&lt;std::uint32_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int64_t(C++11)(可选)  std::atomic&lt;std::int64_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint64_t(C++11)(可选) std::atomic&lt;std::uint64_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int_least8_t(C++11)  std::atomic&lt;std::int_least8_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint_least8_t(C++11) std::atomic&lt;std::uint_least8_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int_least16_t(C++11) std::atomic&lt;std::int_least16_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint_least16_t(C++11) std::atomic&lt;std::uint_least16_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int_least32_t(C++11) std::atomic&lt;std::int_least32_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint_least32_t(C++11) std::atomic&lt;std::uint_least32_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int_least64_t(C++11) std::atomic&lt;std::int_least64_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint_least64_t(C++11) std::atomic&lt;std::uint_least64_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int_fast8_t(C++11)   std::atomic&lt;std::int_fast8_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint_fast8_t(C++11)  std::atomic&lt;std::uint_fast8_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int_fast16_t(C++11)  std::atomic&lt;std::int_fast16_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint_fast16_t(C++11) std::atomic&lt;std::uint_fast16_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int_fast32_t(C++11)  std::atomic&lt;std::int_fast32_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint_fast32_t(C++11) std::atomic&lt;std::uint_fast32_t&gt;
-</span></span><span class="line"><span class="cl">atomic_int_fast64_t(C++11)  std::atomic&lt;std::int_fast64_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uint_fast64_t(C++11) std::atomic&lt;std::uint_fast64_t&gt;
-</span></span><span class="line"><span class="cl">atomic_intptr_t(C++11)(可选) std::atomic&lt;std::intptr_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uintptr_t(C++11)(可选) std::atomic&lt;std::uintptr_t&gt;
-</span></span><span class="line"><span class="cl">atomic_size_t(C++11)        std::atomic&lt;std::size_t&gt;
-</span></span><span class="line"><span class="cl">atomic_ptrdiff_t(C++11)     std::atomic&lt;std::ptrdiff_t&gt;
-</span></span><span class="line"><span class="cl">atomic_intmax_t(C++11)      std::atomic&lt;std::intmax_t&gt;
-</span></span><span class="line"><span class="cl">atomic_uintmax_t(C++11)     std::atomic&lt;std::uintmax_t&gt;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="2-原子变量的使用">2. 原子变量的使用
+<hr>
+<h2 id="2-原子变量的使用">2. 原子变量的使用
 </h2><p>假设我们要制作一个多线程交替数数的计数器，我们使用互斥锁和原子变量的方式分别进行实现，对比一下二者的差异：</p>
-<h2 id="21-互斥锁版本">2.1 互斥锁版本
-</h2><div class="highlight"><div class="chroma">
+<h3 id="21-互斥锁版本">2.1 互斥锁版本
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -815,7 +654,7 @@
 </span><span class="lnt">50
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mutex&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;atomic&gt;</span><span class="cp">
@@ -918,7 +757,7 @@
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;atomic&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp">
