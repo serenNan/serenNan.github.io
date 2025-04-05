@@ -10,7 +10,7 @@
 <meta property='og:description' content="面试经典高频题型解题思路">
 <meta property='og:url' content='https://serennan.github.io/post/169.majority-element/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-05T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-05T14:46:35&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-05T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-05T21:53:00&#43;08:00'/>
 <meta name="twitter:title" content="【面试高频】 169.多数元素">
 <meta name="twitter:description" content="面试经典高频题型解题思路">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -330,6 +330,7 @@
     <li><a href="#方法一哈希表">方法一：哈希表</a></li>
     <li><a href="#方法二排序">方法二：排序</a></li>
     <li><a href="#方法三随机化">方法三：随机化</a></li>
+    <li><a href="#方法四boyer-moore-投票算法">方法四：Boyer-Moore 投票算法</a></li>
   </ol>
 </nav>
     </div>
@@ -418,7 +419,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>746 字</span>
+                    <span>1607 字</span>
                 </div>
             
         
@@ -426,7 +427,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-04-05 14:46</time>
+                    <time>2025-04-05 21:53</time>
                 </div>
             
         
@@ -450,6 +451,8 @@
     
     <h1 id="多数元素">多数元素
 </h1><p>这题虽然是个简单题，但是官方给出的题解很丰富，我觉得可以通过这道题来拓展一下我们的解题思路</p>
+<p>官方：<a class="link" href="https://leetcode.cn/problems/majority-element/solutions/146074/duo-shu-yuan-su-by-leetcode-solution/?envType=study-plan-v2&amp;envId=top-interview-150"  target="_blank" rel="noopener"
+    >169.多数元素 Leetcode官方题解</a></p>
 <h2 id="题目描述">题目描述
 </h2><p>给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n/2 ⌋ 的元素。</p>
 <p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
@@ -570,7 +573,222 @@
 </ul>
 <hr>
 <h2 id="方法三随机化">方法三：随机化
-</h2><p>TODO</p>
+</h2><p><strong>思路</strong><br>
+这个思路挺新颖的，因为众数占据超过一半的下标，所以有超过 50% 的概率能找到众数。</p>
+<p><strong>算法</strong><br>
+由于一个给定的下标对应的数字很有可能是众数，我们随机挑选一个下标，检查它是否是众数，如果是就返回，否则继续随机挑选。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">majorityElement</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">candidate</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()];</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="n">candidate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">++</span><span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="n">candidate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>复杂度分析</strong><br>
+时间复杂度：理论上最坏时间复杂度是O(∞)，运气很差的情况下一直得不到众数。但是众数占比超过 50% ，随机取数的概率还是非常大的。（这里我就没详细计算了，官方题解上有详细的计算）</p>
+<p>空间复杂度：O(1)。随机方法只需要常数级别的额外空间</p>
+<hr>
+<h2 id="方法四boyer-moore-投票算法">方法四：Boyer-Moore 投票算法
+</h2><p><strong>思路</strong><br>
+如果使用一个变量count，初始化是0，遇到众数加1，反之减1，那么得到的count至少大于0。（因为众数最少都是n/2 + 1）</p>
+<p><strong>算法</strong><br>
+维护一个候选众数 candidate 和出现次数count。初始时，candidate可以是任意数，count为0;<br>
+遍历整个nums，每次都判断当前数 num 是否等于candidate，相等则count增加，反之减少，每当count减小到负数，就更换candidate的值，count重置为0;<br>
+在遍历完成之后，candidate即为众数。</p>
+<p><strong>例子</strong><br>
+简单的举一个例子：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>nums</th>
+          <th>2</th>
+          <th>2</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+          <th>2</th>
+          <th>2</th>
+          <th>3</th>
+          <th>2</th>
+          <th>2</th>
+          <th>2</th>
+          <th>2</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>candidate</td>
+          <td>2</td>
+          <td>2</td>
+          <td>2</td>
+          <td>2</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>1</td>
+          <td>3</td>
+          <td>3</td>
+          <td>2</td>
+          <td>2</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>count</td>
+          <td>1</td>
+          <td>2</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>2</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>第一个数就是众数，假如我们使用value只记录众数 2 ，记录方法和count一样：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>nums</th>
+          <th>2</th>
+          <th>2</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+          <th>1</th>
+          <th>2</th>
+          <th>2</th>
+          <th>3</th>
+          <th>2</th>
+          <th>2</th>
+          <th>2</th>
+          <th>2</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>value</td>
+          <td>1</td>
+          <td>2</td>
+          <td>1</td>
+          <td>0</td>
+          <td>-1</td>
+          <td>-2</td>
+          <td>-1</td>
+          <td>0</td>
+          <td>-1</td>
+          <td>0</td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>你会惊讶的发现，此时的count和value要么相等，要么互为相反数，candidate是2时，就相等，candidate是其他数时，就互为相反数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">majorityElement</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">candidate</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">num</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="n">candidate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">count</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">candidate</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">candidate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>复杂度分析</strong></p>
+<ul>
+<li>时间复杂度：O(n)。值对数组进行一次扫描。</li>
+<li>空间复杂度：O(n)。不需要额外的空间。</li>
+</ul>
 
 </section>
 
@@ -990,7 +1208,195 @@ console.log('particles.js loaded - callback');
     showHideView();
 </script>
 
-          
+        <link rel="stylesheet" href="/css/mermaid.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      flowchart: {
+        htmlLabels: false,
+        useMaxWidth: false,
+        nodeSpacing: 50,
+        rankSpacing: 50,
+        defaultRenderer: 'svg'
+      },
+      theme: 'default',
+      securityLevel: 'loose',
+      themeVariables: {
+        nodeBorder: '#000',
+        mainBkg: '#fff',
+        nodeTextColor: '#000',
+        fontSize: '14px'
+      }
+    });
+  </script>
+
+  
+  <div class="mermaid-overlay" id="mermaidOverlay"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const adjustNodeSize = () => {
+        document.querySelectorAll('.mermaid .node').forEach(node => {
+          const rect = node.querySelector('rect');
+          const text = node.querySelector('text');
+          if (rect && text) {
+            const bbox = text.getBBox();
+            const padding = 16;
+            const minWidth = parseFloat(rect.getAttribute('width')) || 160;
+            const newWidth = Math.max(bbox.width + padding, minWidth);
+            rect.setAttribute('width', newWidth);
+          }
+        });
+      };
+
+      
+      adjustNodeSize();
+      window.addEventListener('resize', adjustNodeSize);
+
+      
+      document.querySelectorAll('.mermaid-container').forEach(container => {
+        let currentScale = 1;
+        let initialClickX = null, initialClickY = null;
+        let dragOffsetX = 0, dragOffsetY = 0;
+        let isDragging = false;
+        let dragStartX = 0, dragStartY = 0;
+        let isZoomed = false;
+
+        const mermaidElement = container.querySelector('.mermaid');
+        const overlay = document.getElementById('mermaidOverlay');
+        const originalParent = container.parentElement;
+        const originalNextSibling = container.nextElementSibling;
+
+        
+        const applyScale = () => {
+          if (isZoomed && initialClickX !== null && initialClickY !== null) {
+            const containerRect = container.getBoundingClientRect();
+            const centerX = containerRect.width / 2;
+            const centerY = containerRect.height / 2;
+            const baseTranslateX = centerX - initialClickX * currentScale;
+            const baseTranslateY = centerY - initialClickY * currentScale;
+            const translateX = baseTranslateX + dragOffsetX;
+            const translateY = baseTranslateY + dragOffsetY;
+            mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+          } else {
+            mermaidElement.style.transform = `scale(${currentScale})`;
+          }
+        };
+
+        
+        const handleContainerClick = (e) => {
+          if (!isZoomed) {
+            isZoomed = true;
+            container.classList.add('zoomed');
+            overlay.style.display = 'flex';
+            overlay.appendChild(container);
+
+            const containerRect = container.getBoundingClientRect();
+            initialClickX = e.clientX - containerRect.left;
+            initialClickY = e.clientY - containerRect.top;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+
+            const scaleX = window.innerWidth / containerRect.width;
+            const scaleY = window.innerHeight / containerRect.height;
+            currentScale = Math.min(scaleX, scaleY, 5);
+            applyScale();
+          }
+        };
+
+        
+        const exitZoom = () => {
+          if (isZoomed) {
+            isZoomed = false;
+            container.classList.remove('zoomed');
+            overlay.style.display = 'none';
+            if (originalNextSibling) {
+              originalParent.insertBefore(container, originalNextSibling);
+            } else {
+              originalParent.appendChild(container);
+            }
+            currentScale = 1;
+            initialClickX = null;
+            initialClickY = null;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+            applyScale();
+          }
+        };
+
+        
+        const handleWheel = (e) => {
+          if (isZoomed) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          } else if (e.ctrlKey) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          }
+        };
+
+        
+        container.addEventListener('click', (e) => {
+          if (!isZoomed) handleContainerClick(e);
+        });
+
+        container.addEventListener('dblclick', exitZoom);
+        container.addEventListener('wheel', handleWheel);
+
+        
+        container.addEventListener('mousedown', (e) => {
+          if (isZoomed) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            container.style.cursor = 'grabbing';
+          }
+        });
+
+        const handleMouseMove = (e) => {
+          if (isDragging) {
+            const deltaX = e.clientX - dragStartX;
+            const deltaY = e.clientY - dragStartY;
+            dragOffsetX += deltaX;
+            dragOffsetY += deltaY;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            applyScale();
+          }
+        };
+
+        const handleMouseUp = () => {
+          isDragging = false;
+          container.style.cursor = 'grab';
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+      });
+
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.mermaid-container').forEach(container => {
+            if (container.classList.contains('zoomed')) {
+              container.dispatchEvent(new Event('dblclick'));
+            }
+          });
+        }
+      });
+    });
+  </script>  
         <div id="toggle-buttons">
   <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
   <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
