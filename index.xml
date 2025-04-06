@@ -12,7 +12,7 @@
         <pubDate>Sat, 05 Apr 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/169.majority-element/</guid>
-        <description>&lt;h1 id=&#34;多数元素&#34;&gt;多数元素
+        <description>&lt;img src="https://serennan.github.io/post/169.majority-element/cover.png" alt="Featured image of post 【面试高频】 169.多数元素" /&gt;&lt;h1 id=&#34;多数元素&#34;&gt;多数元素
 &lt;/h1&gt;&lt;p&gt;这题虽然是个简单题，但是官方给出的题解很丰富，我觉得可以通过这道题来拓展一下我们的解题思路&lt;/p&gt;
 &lt;p&gt;官方：&lt;a class=&#34;link&#34; href=&#34;https://leetcode.cn/problems/majority-element/solutions/146074/duo-shu-yuan-su-by-leetcode-solution/?envType=study-plan-v2&amp;amp;envId=top-interview-150&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;169.多数元素 Leetcode官方题解&lt;/a&gt;&lt;/p&gt;
