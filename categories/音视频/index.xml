@@ -7,6 +7,18 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>serenNan</copyright><atom:link href="https://serennan.github.io/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【项目实践】1 基础函数库</title>
+        <link>https://serennan.github.io/post/livestreaming-base/</link>
+        <pubDate>Fri, 10 Oct 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://serennan.github.io/post/livestreaming-base/</guid>
+        <description>&lt;h1 id=&#34;基础函数库&#34;&gt;基础函数库
+&lt;/h1&gt;&lt;p&gt;这一章主要实现一些基础的函数，比如时间操作，文件操作，日记记录，定时任务等。&lt;br&gt;
+这些函数比较通用，很多模块都可能使用。&lt;/p&gt;
+&lt;h2 id=&#34;1-时间常用函数&#34;&gt;1. 时间常用函数
+&lt;/h2&gt;</description>
+        </item>
+        <item>
         <title>【雷霄骅课程笔记】5 FFmpeg &#43; SDL 视频播放器进阶</title>
         <link>https://serennan.github.io/post/leixiaohua-note-5/</link>
         <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
