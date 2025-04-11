@@ -362,7 +362,7 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/categories/c&#43;&#43;/" class="font_size_14">
+            <a href="/categories/c&#43;&#43;/" class="font_size_15">
                 C&#43;&#43;
             </a>
         
@@ -487,7 +487,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>1550 字</span>
+                    <span>1545 字</span>
                 </div>
             
         
@@ -580,14 +580,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0 1 2 3 4 
-</span></span></code></pre></td></tr></table>
-</div>
+<div class="mermaid-container">
+  <div class="mermaid">
+    0 1 2 3 4 
+  </div>
 </div><p>可以在上面的程序中看到变量count被声明为static。因此，它的值通过函数调用来传递。每次调用函数时，都不会对变量计数进行初始化。</p>
 <hr>
 <h2 id="类中的静态变量">类中的静态变量
@@ -654,14 +650,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">3 3
-</span></span></code></pre></td></tr></table>
-</div>
+<div class="mermaid-container">
+  <div class="mermaid">
+    3 3
+  </div>
 </div><h3 id="静态对象">静态对象
 </h3><p>就像变量一样，对象也在声明为static时具有范围，直到程序的生命周期。</p>
 <p>对象是<strong>非静态</strong>的：</p>
@@ -806,18 +798,12 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Inside Constructor
-</span></span><span class="line"><span class="cl">End of main
-</span></span><span class="line"><span class="cl">Inside Destructor
-</span></span></code></pre></td></tr></table>
-</div>
+<div class="mermaid-container">
+  <div class="mermaid">
+    Inside Constructor
+End of main
+Inside Destructor
+  </div>
 </div><p>可以清楚地看到输出的变化。现在，在main结束后调用析构函数。这是因为静态对象的范围是贯穿程序的生命周期。</p>
 <h3 id="静态函数">静态函数
 </h3><p>就像类中的静态数据成员或静态变量一样，静态成员函数也不依赖于类的对象。允许使用对象和 <code>.</code> 来调用静态成员函数。但建议使用<strong>类名和范围解析运算符</strong>调用静态成员。</p>
@@ -1005,6 +991,19 @@
             
                 
 <article class="">
+    <a href="/post/cpp-using/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】uisng的使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/post/livestreaming-base/">
         
         
@@ -1072,30 +1071,6 @@
 
         <div class="article-details">
             <h2 class="article-title">【C&#43;&#43;11】线程同步之原子变量</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/post/cpp-condition_variable/">
-        
-        
-            <div class="article-image">
-                <img src="/post/cpp-condition_variable/cover.e5bed8f20899d96f71075f933e54b329.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【C&#43;&#43;11】线程同步之条件变量"
-                        data-key="cpp-condition_variable" 
-                        data-hash="md5-5b7Y8giZ2W9xB1&#43;TPlSzKQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【C&#43;&#43;11】线程同步之条件变量</h2>
         </div>
     </a>
 </article>

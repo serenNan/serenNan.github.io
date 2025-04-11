@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
+    <head>
+	<meta name="generator" content="Hugo 0.146.1"><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="个人博客">
-<title>404 Page not found</title>
+<title>Pager 5 - serenNan</title>
 
-<link rel='canonical' href='https://serennan.github.io/404.html'>
+<link rel='canonical' href='https://serennan.github.io/'>
 
-<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="404 Page not found">
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="serenNan">
 <meta property='og:description' content="个人博客">
-<meta property='og:url' content='https://serennan.github.io/404.html'>
+<meta property='og:url' content='https://serennan.github.io/'>
 <meta property='og:site_name' content='serenNan'>
 <meta property='og:type' content='website'><meta property='og:updated_time' content=' 2025-04-11T20:44:29&#43;08:00 '/>
-<meta name="twitter:title" content="404 Page not found">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="serenNan">
+<meta name="twitter:description" content="个人博客"><link rel="alternate" type="application/rss&#43;xml" href="https://serennan.github.io/index.xml">
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -165,7 +166,7 @@
         
         
         
-        <li >
+        <li  class='current' >
             <a href='/' >
                 
                 
@@ -303,17 +304,118 @@
 </aside>
 
 
-            <main class="main full-width">
-    <div class="not-found-card">
-        <h1 class="article-title">404 错误</h1>
-        <h2 class="article-subtitle">页面不存在</h2>
-    </div><form action="/page/search/" class="search-form widget" data-json="https://serennan.github.io/page/search/index.json">
-            <p>
-                <label>搜索</label>
-                <input id="searchInput" name="keyword" required placeholder="输入关键词..." />
+    <aside class="sidebar right-sidebar sticky">
+        
             
-                <button title="搜索">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>时钟表盘</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section class="widget clock">
+    <div class="widget--clock">
+      <div class="clock-face">
+        <div class="digital-clock"></div>
+        <div class="hand hour-hand"></div>
+        <div class="hand minute-hand"></div>
+        <div class="hand second-hand"></div>
+        <div class="center-dot"></div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const clockFace = document.querySelector('.clock-face');
+    const radius = 83;
+    const center = 88;
+
+    for (let i = 0; i < 60; i++) {
+      const angle = i * 6;
+      const radians = (angle * Math.PI) / 180;
+      const x = center + radius * Math.sin(radians);
+      const y = center - radius * Math.cos(radians);
+
+      const mark = document.createElement('div');
+      mark.className = 'mark';
+      mark.style.left = `${x}px`;
+      mark.style.top = `${y}px`;
+      mark.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+
+      if (i % 5 === 0) {
+        mark.classList.add('long-mark');
+        const numberRadius = radius - 15;
+        const numberX = center + numberRadius * Math.sin(radians);
+        const numberY = center - numberRadius * Math.cos(radians);
+
+        const number = document.createElement('div');
+        number.textContent = (i / 5) || 12;
+        number.className = 'clock-number';
+        number.style.left = `${numberX}px`;
+        number.style.top = `${numberY}px`;
+        number.style.transform = `translate(-50%, -50%)`;
+        clockFace.appendChild(number);
+      } else if (i % 5 === 0) {
+        mark.classList.add('middle-mark');
+      } else {
+        mark.classList.add('short-mark');
+      }
+
+      clockFace.appendChild(mark);
+    }
+
+    let previousSecondDeg = 0; 
+
+function updateClock() {
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+  const millisecond = now.getMilliseconds();
+
+  const hourHand = document.querySelector('.hour-hand');
+  const minuteHand = document.querySelector('.minute-hand');
+  const secondHand = document.querySelector('.second-hand');
+
+  const hourDeg = (hour % 12) * 30 + (minute / 60) * 30;
+  const minuteDeg = minute * 6 + (second / 60) * 6;
+  let secondDeg = second * 6 + (millisecond / 1000) * 6;
+
+  
+  if (secondDeg < previousSecondDeg) {
+    secondDeg += 360; 
+  }
+  previousSecondDeg = secondDeg % 360; 
+
+  hourHand.style.transform = `rotate(${hourDeg}deg)`;
+  minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+  secondHand.style.transform = `rotate(${secondDeg}deg)`;
+
+  const digitalClock = document.querySelector('.digital-clock');
+  const timeString = `${hour}:${minute.toString().padStart(2, '0')}:${second.toString().padStart(2, '0')}`;
+  digitalClock.textContent = timeString;
+
+  requestAnimationFrame(updateClock);
+}
+
+updateClock();
+
+  </script>
+</body>
+</html>
+
+            
+        
+            
+                <form action="/page/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <circle cx="10" cy="10" r="7" />
   <line x1="21" y1="21" x2="15" y2="15" />
@@ -321,27 +423,272 @@
 
 
 
-                </button>
-            </p>
-        </form>
-
-        <div class="search-result">
-            <h3 class="search-result--title section-title"></h3>
-            <div class="search-result--list article-list--compact"></div>
-        </div>
+            </button>
+        </p>
+    </form>
+            
         
-        <script>
-            window.searchResultTitleTemplate = "#PAGES_COUNT 个结果 （用时 #TIME_SECONDS 秒）"
-        </script><script type="text/javascript" src="/ts/search.js" defer></script>
+            
+                <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
 
-        <script>
-            const wrongUrl = new URL(window.location.href);
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2025">
+                        
+                            <span class="year">2025</span>
+                            <span class="count">38</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2024">
+                        
+                            <span class="year">2024</span>
+                            <span class="count">3</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/c&#43;&#43;/" class="font_size_15">
+                C&#43;&#43;
+            </a>
+        
+            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="font_size_9">
+                多线程
+            </a>
+        
+            <a href="/categories/qt/" class="font_size_8">
+                Qt
+            </a>
+        
+            <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/" class="font_size_8">
+                音视频
+            </a>
+        
+            <a href="/categories/hugo/" class="font_size_6">
+                Hugo
+            </a>
+        
+            <a href="/categories/leetcode/" class="font_size_5">
+                Leetcode
+            </a>
+        
+            <a href="/categories/%E5%85%B6%E4%BB%96/" class="font_size_1">
+                其他
+            </a>
+        
+    </div>
+</section>
 
             
-            const searchKeyword = wrongUrl.pathname.split(/[/|-]/).join(' ').trim();
+        
+    </aside>
 
-            document.getElementById('searchInput').setAttribute('value', searchKeyword);
-        </script><footer class="site-footer">
+
+            <main class="main full-width">
+    
+    
+    
+    
+    
+<div class="welcome">
+  <p style="font-size: 2rem; text-align: center; font-weight: bold">
+    <span class="shake">👋</span>
+    <span class="jump-text1" > Welcome</span>
+    <span class="jump-text2"> To </span>
+    <span class="jump-text3" style="color:#e99312">s</span><span class="jump-text4" style="color:#e99312">e</span><span class="jump-text5" style="color:#e99312">r</span><span class="jump-text6" style="color:#e99312">e</span><span class="jump-text7" style="color:#e99312">n</span><span class="jump-text8" style="color:#e99312">Nan</span></span><span class="jump-text9" style="color:#e99312">'s</span>
+    <span class="jump-text10" style="color:#e99312">Blog</span>
+  </p>
+</div>
+
+
+    <section class="article-list">
+        
+            
+<article class="has-image">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/post/video_base/">
+                <img src="/post/video_base/player1.jpg"
+                        
+                        width="3200" 
+                        height="2400" 
+                        loading="lazy"
+                        alt="Featured image of post 音视频基础" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="background-color: #8464C6; color: #fff;">
+                音视频
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/video_base/">音视频基础</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            一些音视频的知识点
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+
+    
+    <footer class="article-time">
+        
+        
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time>2024-12-29</time>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                    <span>15151 字</span>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
+                    <time>2025-03-09 14:12</time>
+                </div>
+            
+        
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv"> </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+</article>
+        
+    </section>
+    <nav class='pagination'>
+        
+        
+
+        
+            
+                    <a class='page-link' href='/'>1</a>
+                
+            
+            
+                    
+                        
+                        <span class='page-link dots'>&hellip;</span>
+                    
+                
+            
+            
+                    
+                
+            
+            
+                    <a class='page-link' href='/page/4/'>4</a>
+                
+            
+            
+                <span class='page-link current'>5</span>
+                
+            
+    </nav>
+
+<footer class="site-footer">
     <section class="copyright">
         &copy; 
         
@@ -367,7 +714,6 @@
       pangu.spacingPage();
     });
 </script>
-
             </main>
         </div>
         <script 

@@ -10,7 +10,7 @@
 <meta property='og:description' content="实现一些常用库">
 <meta property='og:url' content='https://serennan.github.io/post/livestreaming-base/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-10-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-10T11:00:45&#43;08:00'/>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-11T20:44:29&#43;08:00'/>
 <meta name="twitter:title" content="【项目实践】1 基础函数库">
 <meta name="twitter:description" content="实现一些常用库">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -326,7 +326,23 @@
     <div class="widget--toc">
         <nav id="TableOfContents">
   <ol>
-    <li><a href="#1-时间常用函数">1. 时间常用函数</a></li>
+    <li><a href="#命名空间设计">命名空间设计</a></li>
+    <li><a href="#1-时间工具类ttime">1. 时间工具类(TTime)</a></li>
+    <li><a href="#2-字符串与文件工具类stringutils">2. 字符串与文件工具类(StringUtils)</a></li>
+    <li><a href="#3-单例模式实现">3. 单例模式实现</a>
+      <ol>
+        <li><a href="#单例介绍">单例介绍</a></li>
+        <li><a href="#pthread_once-介绍">pthread_once 介绍</a></li>
+        <li><a href="#noncopyable-类介绍">NonCopyable 类介绍</a></li>
+        <li><a href="#单例模式设计">单例模式设计</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-定时任务">4. 定时任务</a>
+      <ol>
+        <li><a href="#定时任务-task">定时任务 Task</a></li>
+        <li><a href="#定时任务管理器-taskmanager">定时任务管理器 TaskManager</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
     </div>
@@ -353,7 +369,7 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/categories/c&#43;&#43;/" class="font_size_14">
+            <a href="/categories/c&#43;&#43;/" class="font_size_15">
                 C&#43;&#43;
             </a>
         
@@ -462,7 +478,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                    <time>2025-10-10</time>
+                    <time>2025-04-10</time>
                 </div>
             
         
@@ -470,7 +486,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>69 字</span>
+                    <span>1645 字</span>
                 </div>
             
         
@@ -478,7 +494,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-04-10 11:00</time>
+                    <time>2025-04-11 20:44</time>
                 </div>
             
         
@@ -503,8 +519,384 @@
     <h1 id="基础函数库">基础函数库
 </h1><p>这一章主要实现一些基础的函数，比如时间操作，文件操作，日记记录，定时任务等。<br>
 这些函数比较通用，很多模块都可能使用。</p>
-<h2 id="1-时间常用函数">1. 时间常用函数
-</h2>
+<hr>
+<h2 id="命名空间设计">命名空间设计
+</h2><p>为确保代码的模块化和避免符号冲突，采用两级命名空间结构：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;NonCopyable.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 项目根命名空间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">namespace</span> <span class="n">tmms</span> <span class="p">{</span>  <span class="c1">// Transmedia Media Streaming 的缩写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 基础模块命名空间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">namespace</span> <span class="n">base</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 基础功能实现...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span> <span class="c1">// namespace base
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="c1">// namespace tmms
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>tmms</code>是&quot;Transmedia Media Streaming（跨媒体流处理）&ldquo;的缩写，这个标识着整个项目。</p>
+<p><code>base</code>是本章要写的一些基本模板类。</p>
+<h2 id="1-时间工具类ttime">1. 时间工具类(TTime)
+</h2><p>一些时间类</p>
+<ul>
+<li><code>NowMS()</code> 获取当前UTC时间戳(毫秒)</li>
+<li><code>Now()</code> 获取当前UTC时间戳(秒)</li>
+<li><code>Now(int year, int mouth, int day, int hour, int minte, int second)</code> 获取时间戳并分解为年月日时分秒</li>
+<li><code>ISOTime()</code> 获取ISO 8601格式时间字符串`</li>
+</ul>
+<hr>
+<h2 id="2-字符串与文件工具类stringutils">2. 字符串与文件工具类(StringUtils)
+</h2><ul>
+<li><code>StartsWith()</code> 检查字符串是否以指定子串开头</li>
+<li><code>EndsWith()</code> 检查字符串是否以指定子串结尾</li>
+<li><code>FilePath()</code> 获取文件路径中的目录部分</li>
+<li><code>FileNameExt()</code> 获取带扩展名的文件名</li>
+<li><code>FileName()</code> 获取不带扩展名的文件名</li>
+<li><code>Extension()</code> 获取文件扩展名</li>
+<li><code>SplitString()</code> 按分隔符分割字符串</li>
+</ul>
+<hr>
+<h2 id="3-单例模式实现">3. 单例模式实现
+</h2><h3 id="单例介绍">单例介绍
+</h3><p>保证一个类仅有一个实例</p>
+<ul>
+<li>只能自行创建实例</li>
+<li>多线程初始化竞争</li>
+<li>不可复制和移动</li>
+</ul>
+<p>提供一个访问实例的全局访问点</p>
+<h3 id="pthread_once-介绍">pthread_once 介绍
+</h3><ul>
+<li>一次性初始化
+函数原型</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">pthread</span> <span class="nf">once</span><span class="p">(</span><span class="n">pthread</span> <span class="n">once</span> <span class="n">t</span><span class="o">*</span><span class="n">once</span> <span class="n">control</span><span class="p">,</span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="n">init</span> <span class="n">routine</span><span class="p">)(</span><span class="kt">void</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数：</p>
+<ul>
+<li><code>once control</code>控制变量</li>
+<li><code>init routine</code>初始化函数返回值
+返回值：</li>
+<li>若成功返回0，若失败返回错误编号</li>
+</ul>
+<h3 id="noncopyable-类介绍">NonCopyable 类介绍
+</h3><p>C++的三/五法则：</p>
+<ul>
+<li>c++98
+<ul>
+<li>拷贝构造函数</li>
+<li>拷贝赋值函数</li>
+<li>析构函数</li>
+</ul>
+</li>
+<li>c++11
+<ul>
+<li>移动构造函数</li>
+<li>移动赋值运算符</li>
+</ul>
+</li>
+</ul>
+<p>这五个相当于一个整体，定义了其中一个，系统编译器会认为其他几个也是需要的，系统会默认合成。</p>
+<p>我们可以阻止默认合成</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NonCopyable</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 这个类是作为基类，所以定义成保护属性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">NonCopyable</span><span class="p">(){};</span>
+</span></span><span class="line"><span class="cl">    <span class="o">~</span><span class="n">NonCopyable</span><span class="p">(){};</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 删除拷贝构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">NonCopyable</span><span class="p">(</span><span class="k">const</span> <span class="n">NonCopyable</span> <span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">NonCopyable</span> <span class="o">&amp;</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">NonCopyable</span><span class="p">)</span> <span class="o">=</span><span class="k">delete</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样就能阻止拷贝</p>
+<h3 id="单例模式设计">单例模式设计
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> 
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Singleton</span> <span class="o">:</span> <span class="k">public</span> <span class="n">NonCopyable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ... 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>继承 <code>NonCopyable</code> 确保不可赋值</li>
+<li>模板类设计可复用于任意类型</li>
+</ul>
+<p><strong>关键点实现</strong></p>
+<ol>
+<li>线程安全初始化</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="n">T</span> <span class="o">*&amp;</span><span class="n">Instance</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pthread_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ponce_</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">Singleton</span><span class="o">::</span><span class="n">init</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">value_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用<code>pthread_once</code>保证多线程环境下只初始化一次</li>
+<li>返回引用避免指针被意外释放</li>
+</ul>
+<ol start="2">
+<li>资源管理</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">init</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">value_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">value_</span> <span class="o">=</span> <span class="k">new</span> <span class="n">T</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>延迟初始化（首次访问时创建）</li>
+</ul>
+<ol start="3">
+<li>静态成员定义</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">pthread_once_t</span> <span class="n">Singleton</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">ponce_</span> <span class="o">=</span> <span class="n">PTHREAD_ONCE_INIT</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>作用 ：初始化POSIX线程的&quot;一次性控制变量&rdquo;</li>
+<li>关键点 ：
+<ul>
+<li><code>PTHREAD_ONCE_INIT</code> 是<code>POSIX</code>标准定义的宏，确保 <code>ponce_</code> 处于初始未触发状态</li>
+<li>每个模板实例（每个单例类型）都有自己独立的 <code>ponce_</code> 变量</li>
+<li>保证首次调用 <code>pthread_once()</code> 时会执行初始化函数</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">*</span><span class="n">Singleton</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value_</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>作用 ：初始化单例实例指针为空</li>
+<li>关键点 ：
+<ul>
+<li>使用 <code>nullptr</code> 明确表示初始状态</li>
+<li>延迟初始化设计：直到首次调用 <code>Instance()</code> 时才创建对象</li>
+<li>每个模板实例有自己独立的 <code>value_</code> 指针</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-定时任务">4. 定时任务
+</h2><h3 id="定时任务-task">定时任务 Task
+</h3><p><strong>定时任务的特性</strong></p>
+<ul>
+<li>在规定的时间执行</li>
+<li>可以单次执行，也可以循环执行</li>
+<li>通过回调函数执行任务</li>
+</ul>
+<p><strong>定时任务的设计</strong></p>
+<ul>
+<li>封装定时任务，包含任务回调函数和执行间隔时间</li>
+<li>成员变量
+<ul>
+<li><code>when</code> 时间点</li>
+<li><code>interval</code>间隔时间</li>
+<li><code>callback</code> 回调函数</li>
+</ul>
+</li>
+<li>成员函数
+<ul>
+<li><code>Run()</code>: 执行任务</li>
+<li><code>Restart()</code>: 重新启动任务</li>
+<li><code>When()</code>: 获取下次执行时间</li>
+</ul>
+</li>
+</ul>
+<p>使用实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 单次任务（5秒后执行）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">auto</span> <span class="n">task1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="p">([](){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;执行一次&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="n">TTime</span><span class="o">::</span><span class="n">NowMS</span><span class="p">()</span> <span class="o">+</span> <span class="mi">5000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 循环任务（立即开始，每秒执行）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">auto</span> <span class="n">task2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">Task</span><span class="o">&gt;</span><span class="p">([](){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;每秒执行&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="p">},</span> <span class="n">TTime</span><span class="o">::</span><span class="n">NowMS</span><span class="p">(),</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="定时任务管理器-taskmanager">定时任务管理器 TaskManager
+</h3><p><strong>定时任务管理器的功能点</strong></p>
+<ul>
+<li>管理所有定时任务，使用单例模式实现</li>
+<li>成员变量
+<ul>
+<li><code>tasks</code> 存放所有的定时任务，使用的是一个<code>unordered_set</code>集合</li>
+<li><code>lock</code> 互斥锁</li>
+</ul>
+</li>
+<li>成员函数：
+<ul>
+<li><code>OnWork()</code>: 执行所有到期任务</li>
+<li><code>Add()</code>: 添加任务</li>
+<li><code>Del()</code>: 删除任务</li>
+</ul>
+</li>
+</ul>
+<p><strong>定时任务器的算法</strong></p>
+<ul>
+<li>直接遍历</li>
+<li>最小时间堆</li>
+<li>时间轮<br>
+选择直接遍历，因为整个直播系统的全局定时任务数很少，而且每个任务的执行时间都比较短，所以直接遍历也可以。</li>
+</ul>
+<p>解释一下 <code>OnWork</code>:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">TaskManager</span><span class="o">::</span><span class="n">OnWork</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 加锁保证线程安全
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">lock_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 获取当前时间戳(毫秒)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int64_t</span> <span class="n">now</span> <span class="o">=</span> <span class="n">TTime</span><span class="o">::</span><span class="n">NowMS</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 3. 遍历所有任务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">tasks_</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span> <span class="n">iter</span> <span class="o">!=</span> <span class="n">tasks_</span><span class="p">.</span><span class="n">end</span><span class="p">();)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 4. 检查任务是否到期(执行时间 &lt;= 当前时间)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">((</span><span class="o">*</span><span class="n">iter</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">When</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">now</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 5. 执行任务回调函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">(</span><span class="o">*</span><span class="n">iter</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">Run</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1">// 6. 再次检查任务时间(判断是否是单次任务)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">((</span><span class="o">*</span><span class="n">iter</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">When</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">now</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 7. 如果是单次任务，从列表中移除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">iter</span> <span class="o">=</span> <span class="n">tasks_</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">iter</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 8. 移动到下一个任务
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">iter</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 
@@ -526,6 +918,19 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/cpp-using/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】uisng的使用</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="">
@@ -607,30 +1012,6 @@
 
         <div class="article-details">
             <h2 class="article-title">【C&#43;&#43;11】线程同步之条件变量</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/post/cpp-mutex/">
-        
-        
-            <div class="article-image">
-                <img src="/post/cpp-mutex/cover.14c725dfff073986711e0e3fe3a99303.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【C&#43;&#43;11】线程同步之互斥锁"
-                        data-key="cpp-mutex" 
-                        data-hash="md5-FMcl3/8HOYZxHg4/46mTAw==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【C&#43;&#43;11】线程同步之互斥锁</h2>
         </div>
     </a>
 </article>
@@ -933,7 +1314,195 @@ console.log('particles.js loaded - callback');
     showHideView();
 </script>
 
-          
+        <link rel="stylesheet" href="/css/mermaid.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      flowchart: {
+        htmlLabels: false,
+        useMaxWidth: false,
+        nodeSpacing: 50,
+        rankSpacing: 50,
+        defaultRenderer: 'svg'
+      },
+      theme: 'default',
+      securityLevel: 'loose',
+      themeVariables: {
+        nodeBorder: '#000',
+        mainBkg: '#fff',
+        nodeTextColor: '#000',
+        fontSize: '14px'
+      }
+    });
+  </script>
+
+  
+  <div class="mermaid-overlay" id="mermaidOverlay"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      const adjustNodeSize = () => {
+        document.querySelectorAll('.mermaid .node').forEach(node => {
+          const rect = node.querySelector('rect');
+          const text = node.querySelector('text');
+          if (rect && text) {
+            const bbox = text.getBBox();
+            const padding = 16;
+            const minWidth = parseFloat(rect.getAttribute('width')) || 160;
+            const newWidth = Math.max(bbox.width + padding, minWidth);
+            rect.setAttribute('width', newWidth);
+          }
+        });
+      };
+
+      
+      adjustNodeSize();
+      window.addEventListener('resize', adjustNodeSize);
+
+      
+      document.querySelectorAll('.mermaid-container').forEach(container => {
+        let currentScale = 1;
+        let initialClickX = null, initialClickY = null;
+        let dragOffsetX = 0, dragOffsetY = 0;
+        let isDragging = false;
+        let dragStartX = 0, dragStartY = 0;
+        let isZoomed = false;
+
+        const mermaidElement = container.querySelector('.mermaid');
+        const overlay = document.getElementById('mermaidOverlay');
+        const originalParent = container.parentElement;
+        const originalNextSibling = container.nextElementSibling;
+
+        
+        const applyScale = () => {
+          if (isZoomed && initialClickX !== null && initialClickY !== null) {
+            const containerRect = container.getBoundingClientRect();
+            const centerX = containerRect.width / 2;
+            const centerY = containerRect.height / 2;
+            const baseTranslateX = centerX - initialClickX * currentScale;
+            const baseTranslateY = centerY - initialClickY * currentScale;
+            const translateX = baseTranslateX + dragOffsetX;
+            const translateY = baseTranslateY + dragOffsetY;
+            mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentScale})`;
+          } else {
+            mermaidElement.style.transform = `scale(${currentScale})`;
+          }
+        };
+
+        
+        const handleContainerClick = (e) => {
+          if (!isZoomed) {
+            isZoomed = true;
+            container.classList.add('zoomed');
+            overlay.style.display = 'flex';
+            overlay.appendChild(container);
+
+            const containerRect = container.getBoundingClientRect();
+            initialClickX = e.clientX - containerRect.left;
+            initialClickY = e.clientY - containerRect.top;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+
+            const scaleX = window.innerWidth / containerRect.width;
+            const scaleY = window.innerHeight / containerRect.height;
+            currentScale = Math.min(scaleX, scaleY, 5);
+            applyScale();
+          }
+        };
+
+        
+        const exitZoom = () => {
+          if (isZoomed) {
+            isZoomed = false;
+            container.classList.remove('zoomed');
+            overlay.style.display = 'none';
+            if (originalNextSibling) {
+              originalParent.insertBefore(container, originalNextSibling);
+            } else {
+              originalParent.appendChild(container);
+            }
+            currentScale = 1;
+            initialClickX = null;
+            initialClickY = null;
+            dragOffsetX = 0;
+            dragOffsetY = 0;
+            applyScale();
+          }
+        };
+
+        
+        const handleWheel = (e) => {
+          if (isZoomed) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          } else if (e.ctrlKey) {
+            e.preventDefault();
+            const sensitivity = 0.0006;
+            const delta = e.deltaY || e.wheelDelta;
+            const scaleDelta = 1 + (-delta * sensitivity);
+            currentScale = Math.min(Math.max(0.3, currentScale * scaleDelta), 5);
+            applyScale();
+          }
+        };
+
+        
+        container.addEventListener('click', (e) => {
+          if (!isZoomed) handleContainerClick(e);
+        });
+
+        container.addEventListener('dblclick', exitZoom);
+        container.addEventListener('wheel', handleWheel);
+
+        
+        container.addEventListener('mousedown', (e) => {
+          if (isZoomed) {
+            isDragging = true;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            container.style.cursor = 'grabbing';
+          }
+        });
+
+        const handleMouseMove = (e) => {
+          if (isDragging) {
+            const deltaX = e.clientX - dragStartX;
+            const deltaY = e.clientY - dragStartY;
+            dragOffsetX += deltaX;
+            dragOffsetY += deltaY;
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            applyScale();
+          }
+        };
+
+        const handleMouseUp = () => {
+          isDragging = false;
+          container.style.cursor = 'grab';
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+      });
+
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.mermaid-container').forEach(container => {
+            if (container.classList.contains('zoomed')) {
+              container.dispatchEvent(new Event('dblclick'));
+            }
+          });
+        }
+      });
+    });
+  </script>  
         <div id="toggle-buttons">
   <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
   <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>

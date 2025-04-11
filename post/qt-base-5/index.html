@@ -425,7 +425,7 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/categories/c&#43;&#43;/" class="font_size_14">
+            <a href="/categories/c&#43;&#43;/" class="font_size_15">
                 C&#43;&#43;
             </a>
         
@@ -550,7 +550,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>10932 字</span>
+                    <span>10925 字</span>
                 </div>
             
         
@@ -2586,26 +2586,16 @@
 接下来，你需要在 CMakeLists.txt 文件中添加资源文件，以便CMake可以处理它。</li>
 </ol>
 <p>假设你的项目结构如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">my_project/
-</span></span><span class="line"><span class="cl">├── CMakeLists.txt
-</span></span><span class="line"><span class="cl">├── main.cpp
-</span></span><span class="line"><span class="cl">├── resources.qrc
-</span></span><span class="line"><span class="cl">└── images/
-</span></span><span class="line"><span class="cl">    ├── icon.png
-</span></span><span class="line"><span class="cl">    └── background.jpg
-</span></span></code></pre></td></tr></table>
-</div>
+<div class="mermaid-container">
+  <div class="mermaid">
+    my_project/
+├── CMakeLists.txt
+├── main.cpp
+├── resources.qrc
+└── images/
+    ├── icon.png
+    └── background.jpg
+  </div>
 </div><p>在 CMakeLists.txt 中添加以下内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
