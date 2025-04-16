@@ -10,10 +10,10 @@
 <meta property='og:description' content="IO多路复用epoll">
 <meta property='og:url' content='https://serennan.github.io/post/epoll/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-15T22:45:02&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/cover' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-16T08:29:59&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/epoll/cover.png' />
 <meta name="twitter:title" content="【Linux】IO多路复用 epoll">
 <meta name="twitter:description" content="IO多路复用epoll"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='https://serennan.github.io/cover' />
+    <meta name="twitter:image" content='https://serennan.github.io/post/epoll/cover.png' />
     <link rel="shortcut icon" href="/favicon.ico" />
 
     </head>
@@ -429,8 +429,12 @@
         <header class="article-header">
         <div class="article-image">
             <a href="/post/epoll/">
-                
-                    <img src="/cover" loading="lazy" alt="Featured image of post 【Linux】IO多路复用 epoll" />
+                <img src="/post/epoll/cover.png"
+                        
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【Linux】IO多路复用 epoll" />
                 
             </a>
         </div>
@@ -512,7 +516,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>5511 字</span>
+                    <span>5504 字</span>
                 </div>
             
         
@@ -520,7 +524,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-04-15 22:45</time>
+                    <time>2025-04-16 08:29</time>
                 </div>
             
         
@@ -543,7 +547,8 @@
     
     
     <h1 id="io多路复用-epoll">IO多路复用 epoll
-</h1><p>个人学习笔记，参照大丙老师的博客：[爱编程的大丙]</p>
+</h1><p>个人学习笔记，参照大丙老师的博客：<a class="link" href="https://subingwen.cn/"  target="_blank" rel="noopener"
+    >爱编程的大丙</a></p>
 <h2 id="1-概述">1. 概述
 </h2><p>epoll 全称 eventpoll，是 linux 内核实现IO多路转接/复用（IO multiplexing）的一个实现。IO多路转接的意思是在一个操作里同时监听多个输入输出源，在其中一个或多个输入输出源可用的时候返回，然后对其的进行读写操作。epoll是select和poll的升级版，相较于这两个前辈，epoll改进了工作方式，因此它更加高效。</p>
 <ul>
@@ -576,7 +581,7 @@
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">epoll_wait</span><span class="p">(</span><span class="kt">int</span> <span class="n">epfd</span><span class="p">,</span> <span class="k">struct</span> <span class="nc">epoll_event_</span> <span class="n">events</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxevents</span><span class="p">,</span> <span class="kt">int</span> <span class="n">timeout</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>select/poll低效的原因之一是将“添加/维护待检测任务”和“阻塞进程/线程”两个步骤合二为一。每次调用select都需要这两步操作，然而大多数应用场景中，需要监视的socket个数相对固定，并不需要每次都修改。epoll将这两个操作分开，先用<code>epoll_ctl()</code>维护等待队列，再调用<code>epoll_wait()</code>阻塞进程（解耦）。</p>
+</div><p>select/poll低效的原因之一是将“添加/维护待检测任务”和“阻塞进程/线程”两个步骤合二为一。每次调用select都需要这两步操作，然而大多数应用场景中，需要监视的socket个数相对固定，并不需要每次都修改。epoll将这两个操作分开，先用 <code>epoll_ctl()</code>维护等待队列，再调用 <code>epoll_wait()</code>阻塞进程（解耦）。</p>
 <h3 id="21-epoll_create函数">2.1 <code>epoll_create()</code>函数
 </h3><p><code>epoll_create()</code>函数的作用是创建一个红黑树模型的实例，用于管理待检测的文件描述符的集合。</p>
 <div class="highlight"><div class="chroma">
@@ -651,7 +656,7 @@
 <li><code>EPOLLERR</code>：异常事件</li>
 </ul>
 </li>
-<li><code>data</code>：用户数据变量，这是一个联合体类型，通常情况下使用里边的<code>fd</code>成员，用于存储待检测的文件描述符的值，在调用<code>epoll_wait()</code>函数的时候这个值会被传出。</li>
+<li><code>data</code>：用户数据变量，这是一个联合体类型，通常情况下使用里边的 <code>fd</code>成员，用于存储待检测的文件描述符的值，在调用 <code>epoll_wait()</code>函数的时候这个值会被传出。</li>
 </ul>
 </li>
 </ul>
@@ -1155,7 +1160,7 @@
 </li>
 </ul>
 <h4 id="421-et模式的设置">4.2.1 ET模式的设置
-</h4><p>边沿模式不是默认的epoll模式，需要额外进行设置。epoll设置边沿模式是非常简单的，epoll管理的红黑树示例中每个节点都是<code>struct epoll_event</code>类型，只需要将<code>EPOLLET</code>添加到结构体的<code>events</code>成员中即可：</p>
+</h4><p>边沿模式不是默认的epoll模式，需要额外进行设置。epoll设置边沿模式是非常简单的，epoll管理的红黑树示例中每个节点都是 <code>struct epoll_event</code>类型，只需要将 <code>EPOLLET</code>添加到结构体的 <code>events</code>成员中即可：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1238,8 +1243,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>这样做也是有弊端的，因为套接字操作默认是阻塞的，当读缓冲区数据被读完之后，读操作就阻塞了也就是调用的<code>read()/recv()</code>函数被阻塞了，当前进程/线程被阻塞之后就无法处理其他操作了。
-要解决阻塞问题，就需要将套接字默认的阻塞行为修改为非阻塞，需要使用<code>fcntl()</code>函数进行处理：</p>
+</div><p>这样做也是有弊端的，因为套接字操作默认是阻塞的，当读缓冲区数据被读完之后，读操作就阻塞了也就是调用的 <code>read()/recv()</code>函数被阻塞了，当前进程/线程被阻塞之后就无法处理其他操作了。
+要解决阻塞问题，就需要将套接字默认的阻塞行为修改为非阻塞，需要使用 <code>fcntl()</code>函数进行处理：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1248,14 +1253,14 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">flag</span> <span class="o">=</span> <span class="n">fcntl</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span> <span class="n">F_GETFL</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">|=</span> <span class="n">O_NONBLOCK</span><span class="p">;</span>                                                         
+</span></span><span class="line"><span class="cl"><span class="n">flag</span> <span class="o">|=</span> <span class="n">O_NONBLOCK</span><span class="p">;</span>                                                       
 </span></span><span class="line"><span class="cl"><span class="n">fcntl</span><span class="p">(</span><span class="n">cfd</span><span class="p">,</span> <span class="n">F_SETFL</span><span class="p">,</span> <span class="n">flag</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><a class="link" href="https://subingwen.cn/linux/fcntl-dup2/#3-fcntl"  title="fcntl函数的使用详解"
      target="_blank" rel="noopener"
     >fcntl函数的使用详解</a>
-通过上述分析就可以得出一个结论：epoll在边沿模式下，必须要将套接字设置为非阻塞模式，但是，这样就会引发另外的一个bug，在非阻塞模式下，循环地将读缓冲区数据读到本地内存中，当缓冲区数据被读完了，调用的<code>read()/recv()</code>函数还会继续从缓冲区中读数据，此时函数调用就失败了，返回-1，对应的全局变量 errno 值为 <code>EAGAIN</code> 或者 <code>EWOULDBLOCK</code>如果打印错误信息会得到如下的信息：<code>Resource temporarily unavailable</code></p>
+通过上述分析就可以得出一个结论：epoll在边沿模式下，必须要将套接字设置为非阻塞模式，但是，这样就会引发另外的一个bug，在非阻塞模式下，循环地将读缓冲区数据读到本地内存中，当缓冲区数据被读完了，调用的 <code>read()/recv()</code>函数还会继续从缓冲区中读数据，此时函数调用就失败了，返回-1，对应的全局变量 errno 值为 <code>EAGAIN</code> 或者 <code>EWOULDBLOCK</code>如果打印错误信息会得到如下的信息：<code>Resource temporarily unavailable</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
