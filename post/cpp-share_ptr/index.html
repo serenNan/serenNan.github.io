@@ -10,7 +10,7 @@
 <meta property='og:description' content="C++ 11 特性学习">
 <meta property='og:url' content='https://serennan.github.io/post/cpp-share_ptr/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-15T09:40:30&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp-share_ptr/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-23T10:24:41&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/cpp-share_ptr/cover.png' />
 <meta name="twitter:title" content="【C++11】共享智能指针">
 <meta name="twitter:description" content="C++ 11 特性学习"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://serennan.github.io/post/cpp-share_ptr/cover.png' />
@@ -330,7 +330,7 @@
     <li><a href="#1-通过构造函数初始化">1. 通过构造函数初始化</a></li>
     <li><a href="#2-通过拷贝和移动构造函数初始化">2. 通过拷贝和移动构造函数初始化</a></li>
     <li><a href="#3-通过-make_shared--初始化">3. 通过 <code>make_shared ()</code> 初始化</a></li>
-    <li><a href="#4-通过-reset方法初始化">4. 通过 reset方法初始化</a></li>
+    <li><a href="#4-通过-reset-方法初始化">4. 通过 <code>reset</code> 方法初始化</a></li>
     <li><a href="#5-获取原始指针">5. 获取原始指针</a></li>
     <li><a href="#6-指定删除器">6. 指定删除器</a></li>
   </ol>
@@ -359,11 +359,11 @@
 
     <div class="tagCloud-tags">
         
-            <a href="/categories/c&#43;&#43;/" class="font_size_15">
+            <a href="/categories/c&#43;&#43;/" class="font_size_17">
                 C&#43;&#43;
             </a>
         
-            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="font_size_9">
+            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="font_size_10">
                 多线程
             </a>
         
@@ -383,16 +383,16 @@
                 Leetcode
             </a>
         
-            <a href="/categories/linux/" class="font_size_1">
+            <a href="/categories/linux/" class="font_size_2">
                 Linux
+            </a>
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="font_size_2">
+                网络编程
             </a>
         
             <a href="/categories/%E5%85%B6%E4%BB%96/" class="font_size_1">
                 其他
-            </a>
-        
-            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="font_size_1">
-                网络编程
             </a>
         
     </div>
@@ -492,7 +492,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>3886 字</span>
+                    <span>3950 字</span>
                 </div>
             
         
@@ -500,7 +500,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-04-15 09:40</time>
+                    <time>2025-04-23 10:24</time>
                 </div>
             
         
@@ -836,7 +836,7 @@ ptr4管理的内存引用计数: 0
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用<code>std::make_shared()</code>模板函数可以完成内存地址的创建，并将最终得到的内存地址传递给共享智能指针对象管理。如果申请的内存是普通类型，通过函数的()可完成地址的初始化，如果要创建一个类对象，函数的()内部需要指定构造对象需要的参数，也就是类构造函数的参数。</p>
-<h2 id="4-通过-reset方法初始化">4. 通过 reset方法初始化
+<h2 id="4-通过-reset-方法初始化">4. 通过 <code>reset</code> 方法初始化
 </h2><p>共享智能指针类提供的<code>std::shared_ptr::reset</code>方法函数原型如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -961,7 +961,8 @@ ptr4管理的内存引用计数: 0
 </span></span><span class="line"><span class="cl"><span class="nl">ptr5管理的内存引用计数</span><span class="p">:</span> <span class="mi">1</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>对于一个未初始化的共享智能指针，可以通过<code>reset</code>方法来初始化，当智能指针中有值的时候，调用<code>reset</code>会使引用计数减1。</p>
+</div><p>如果使用<code>reset</code>方法，就可以将智能指针重新指向一块新的内存，同时这块新的内存的引用计数也会+1。如果<code>reset</code>方法不带参数，那么智能指针就会指向空指针，同时原来指向的内存的引用计数也会-1。<br>
+对于一个未初始化的共享智能指针，可以通过<code>reset</code>方法来初始化，</p>
 <h2 id="5-获取原始指针">5. 获取原始指针
 </h2><p>通过智能指针可以管理一个普通变量或者对象的地址，此时原始地址就不可见了。当我们想要修改变量或者对象中的值的时候，就需要从智能指针对象中先取出数据的原始内存的地址再操作，解决方案是调用共享智能指针类提供的 <code>get()</code>方法，其函数原型如下：</p>
 <div class="highlight"><div class="chroma">
@@ -1217,6 +1218,54 @@ ptr4管理的内存引用计数: 0
             
                 
 <article class="has-image">
+    <a href="/post/cpp-move-forward/">
+        
+        
+            <div class="article-image">
+                <img src="/post/cpp-move-forward/cover.4f3541bc3a276f67a00ed8da138c6221.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】移动语义和完美转发"
+                        data-key="cpp-move-forward" 
+                        data-hash="md5-TzVBvDonb2egDtjaE4xiIQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】移动语义和完美转发</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/cpp-threapool/">
+        
+        
+            <div class="article-image">
+                <img src="/post/cpp-threapool/cover.ba41f976d5431b386a2d4840d3830eed.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【C&#43;&#43;11】线程池"
+                        data-key="cpp-threapool" 
+                        data-hash="md5-ukH5dtVDGzhqLUhA04MO7Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【C&#43;&#43;11】线程池</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
     <a href="/post/cpp-using/">
         
         
@@ -1282,54 +1331,6 @@ ptr4管理的内存引用计数: 0
 
         <div class="article-details">
             <h2 class="article-title">【C&#43;&#43;11】多线程异步操作</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/post/cpp-atomic/">
-        
-        
-            <div class="article-image">
-                <img src="/post/cpp-atomic/cover.4aea9c63459734a904dbf02d4156cb3d.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【C&#43;&#43;11】线程同步之原子变量"
-                        data-key="cpp-atomic" 
-                        data-hash="md5-SuqcY0WXNKkE2/AtQVbLPQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【C&#43;&#43;11】线程同步之原子变量</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="has-image">
-    <a href="/post/cpp-condition_variable/">
-        
-        
-            <div class="article-image">
-                <img src="/post/cpp-condition_variable/cover.e5bed8f20899d96f71075f933e54b329.png" 
-                        width="1024" 
-                        height="576" 
-                        loading="lazy"
-                        alt="Featured image of post 【C&#43;&#43;11】线程同步之条件变量"
-                        data-key="cpp-condition_variable" 
-                        data-hash="md5-5b7Y8giZ2W9xB1&#43;TPlSzKQ==">
-                
-            </div>
-        
-
-        <div class="article-details">
-            <h2 class="article-title">【C&#43;&#43;11】线程同步之条件变量</h2>
         </div>
     </a>
 </article>
