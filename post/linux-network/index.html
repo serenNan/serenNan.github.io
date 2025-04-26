@@ -10,7 +10,7 @@
 <meta property='og:description' content="网络编程基础知识">
 <meta property='og:url' content='https://serennan.github.io/post/linux-network/'>
 <meta property='og:site_name' content='serenNan'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-25T19:38:41&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/linux-network/cover.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-26T21:56:06&#43;08:00'/><meta property='og:image' content='https://serennan.github.io/post/linux-network/cover.png' />
 <meta name="twitter:title" content="【Linux】网络编程入门">
 <meta name="twitter:description" content="网络编程基础知识"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://serennan.github.io/post/linux-network/cover.png' />
@@ -333,7 +333,7 @@
       <ol>
         <li><a href="#地址簿ip地址和mac地址">地址簿：IP地址和MAC地址</a></li>
         <li><a href="#导航路线子网掩码和网关">导航路线：子网掩码和网关</a></li>
-        <li><a href="#端口-确保数据到达正确的应用程序门牌号">端口 ：确保数据到达正确的“应用程序门牌号”</a></li>
+        <li><a href="#端口-确保数据到达正确的应用程序门牌号">端口 ：确保数据到达正确的&quot;应用程序门牌号&quot;</a></li>
       </ol>
     </li>
     <li><a href="#linux-套接字编程">Linux 套接字编程</a>
@@ -361,9 +361,13 @@
         <li><a href="#多进程服务器">多进程服务器</a></li>
         <li><a href="#多线程服务器">多线程服务器</a></li>
         <li><a href="#线程池模型">线程池模型</a></li>
-        <li><a href="#io多路复用服务器">I/O多路复用服务器</a></li>
-        <li><a href="#场景一持续有空间">场景一：持续有空间</a></li>
-        <li><a href="#场景二缓冲区满后又有空间">场景二：缓冲区满后又有空间</a></li>
+        <li><a href="#io多路复用服务器">I/O多路复用服务器</a>
+          <ol>
+            <li><a href="#io-复用之-select">IO 复用之 Select</a></li>
+            <li><a href="#io-复用之-poll">IO 复用之 Poll</a></li>
+            <li><a href="#io-复用之-epoll">IO 复用之 Epoll</a></li>
+          </ol>
+        </li>
         <li><a href="#异步io服务器模型">异步I/O服务器模型</a></li>
       </ol>
     </li>
@@ -428,11 +432,11 @@
                 Leetcode
             </a>
         
-            <a href="/categories/linux/" class="font_size_2">
+            <a href="/categories/linux/" class="font_size_3">
                 Linux
             </a>
         
-            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="font_size_2">
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="font_size_3">
                 网络编程
             </a>
         
@@ -541,7 +545,7 @@
             
                 <div class="time-element">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
-                    <span>25937 字</span>
+                    <span>21985 字</span>
                 </div>
             
         
@@ -549,7 +553,7 @@
             
                 <div class="time-element">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
-                    <time>2025-04-25 19:38</time>
+                    <time>2025-04-26 21:56</time>
                 </div>
             
         
@@ -576,7 +580,7 @@
     >江小康</a></p>
 <hr>
 <h2 id="网络通信基础">网络通信基础
-</h2><p>思考一下，如果计算机想要“交朋友”，它们需要怎样互相沟通？正如人们交流需要使用语言一样，计算机通信也必须遵守一套规则 — 这就是<strong>网络协议</strong>。</p>
+</h2><p>思考一下，如果计算机想要&quot;交朋友&quot;，它们需要怎样互相沟通？正如人们交流需要使用语言一样，计算机通信也必须遵守一套规则 — 这就是<strong>网络协议</strong>。</p>
 <p>协议确保信息可以在不同的设备和平台之间清晰、准确地传递。要深入理解协议，我们首先要熟悉两个基础的通信模型：OSI 和 TCP/IP 模型。</p>
 <h2 id="osi-模型和-tcpip-模型">OSI 模型和 TCP/IP 模型
 </h2><p>在网络通信的世界里，OSI（开放式系统互联通信参考模型）和 TCP/IP（传输控制协议/网际协议）模型扮演着基础框架的角色。它们各自描述了网络通信的多个层次和阶段，但以不同的方式来分类和处理数据传输的细节。</p>
@@ -607,25 +611,25 @@
 <h2 id="基本概念">基本概念
 </h2><h3 id="地址簿ip地址和mac地址">地址簿：IP地址和MAC地址
 </h3><p>想象一下，互联网是一个巨大的数字城市，而每台计算机或网络设备就像是住在这个城市里的居民。</p>
-<p><strong>IP地址：数字世界的“家庭住址”</strong></p>
+<p><strong>IP地址：数字世界的&quot;家庭住址&quot;</strong></p>
 <p>每台设备的 IP 地址就像是它在这个数字城市里的家庭住址。当计算机需要发送信息或访问网络资源时，它会使用目的地设备的 IP 地址来确保信息正确地送达。这个地址有点像是我们现实世界中的邮寄地址，可以根据网络环境的变化而变化（例如，当设备从家庭网络移动到办公室网络时）。</p>
-<p><strong>MAC地址：网络中的“身份证”</strong></p>
+<p><strong>MAC地址：网络中的&quot;身份证&quot;</strong></p>
 <p>然后，我们有 MAC 地址，这是网络设备的另一个关键标识。每台设备的 MAC 地址都是独一无二的，类似于每个人的身份证号码。它是在设备制造时就被分配的，并且在大多数情况下，这个地址是固定不变的。MAC 地址在本地网络（如家庭或办公室网络）内起着重要作用，它帮助确保信息被准确地送达到特定设备，就像邮递员需要知道收件人的详细身份信息才能将包裹准确递交。</p>
 <p><strong>总结一下</strong>：ip 地址可以让数据包找到目的主机所在的网络，而 MAC 地址确保数据包能准确送到目的主机上。</p>
 <h3 id="导航路线子网掩码和网关">导航路线：子网掩码和网关
-</h3><p><strong>子网掩码：定位网络的“区域地图”</strong></p>
-<p>子网掩码可以被视为定位网络内部和外部地址的“区域地图”。就像在一个大城市中，你需要知道哪些街道属于你的社区，哪些通往城市的其他部分。子网掩码帮助计算机确定一个 IP 地址是属于本地网络（即同一个子网）还是位于外部网络。</p>
+</h3><p><strong>子网掩码：定位网络的&quot;区域地图&quot;</strong></p>
+<p>子网掩码可以被视为定位网络内部和外部地址的&quot;区域地图&quot;。就像在一个大城市中，你需要知道哪些街道属于你的社区，哪些通往城市的其他部分。子网掩码帮助计算机确定一个 IP 地址是属于本地网络（即同一个子网）还是位于外部网络。</p>
 <ul>
 <li><strong>内部导航</strong>：如果目的地IP地址与计算机所在的子网相匹配（根据子网掩码判断），则数据包在本地网络内传送。</li>
 <li><strong>外部导航</strong>：如果目的地不在本地子网内，计算机知道它需要将数据发送到更远的目的地。</li>
 </ul>
-<p><strong>网关：网络间的“中转站”</strong></p>
+<p><strong>网关：网络间的&quot;中转站&quot;</strong></p>
 <p>网关在网络通信中扮演中转站的角色。当你的数据包需要从一个网络（比如你的家庭网络）发送到另一个网络（比如你的工作地点的网络）时，网关是这个旅程的第一站。</p>
 <ul>
 <li><strong>路由决策</strong>：网关检查数据包的目的 IP 地址，然后使用它的路由表来决定最佳的路径将数据包发送到目标网络。</li>
 </ul>
 <p><strong>总结：</strong> 子网掩码和网关共同协作，帮助数据包在复杂的网络结构中找到最有效的路径。子网掩码确定数据包是否在本地网络内，而网关指导跨网络的数据传输。</p>
-<h3 id="端口-确保数据到达正确的应用程序门牌号">端口 ：确保数据到达正确的“应用程序门牌号”
+<h3 id="端口-确保数据到达正确的应用程序门牌号">端口 ：确保数据到达正确的&quot;应用程序门牌号&quot;
 </h3><p>好了，现在我们的数据包已经知道了去哪里，但它如何确保被正确的程序接收呢？这就是端口登场的时候了。端口号就像是收件人的门牌号，确保数据不只是送到了正确的地址，而且被正确的应用程序接收。</p>
 <hr>
 <h2 id="linux-套接字编程">Linux 套接字编程
@@ -800,7 +804,7 @@ l 代表 long(四字节：代表ip)，s 代表 short（两字节：代表端口�
 </h2><p>前面我们已经学习了 Linux 基础的 socket API，这样我们便可以编写简单的网络服务程序。但现在，我们面临一个新挑战：如何利用有限的服务器资源，来同时高效处理大量的并发请求呢？</p>
 <p>传统的单线程处理方式在现代网络服务中已不合时宜，因为它无法同时处理多个请求，导致效率低下。为了突破这一限制，我们需探究 Linux 提供的各种 I/O 模型。这些模型提供了从阻塞到非阻塞，从多路复用到完全异步的不同解决方案，以适应各种网络应用场景，确保服务器在面对大量请求时也能保持高效运行。</p>
 <p><strong>在讨论这些 IO 模型之前，我们先简单回顾一下 I/O 是什么</strong>：</p>
-<p>在计算机中，“I/O”就是输入和输出的简称，它描述了数据在计算机系统和外部世界之间的流动。具体来说：</p>
+<p>在计算机中，&ldquo;I/O&quot;就是输入和输出的简称，它描述了数据在计算机系统和外部世界之间的流动。具体来说：</p>
 <ul>
 <li>
 <p><strong>输入</strong>：数据进入计算机，比如你在键盘上敲击字母时，字母被读入计算机。</p>
@@ -809,7 +813,7 @@ l 代表 long(四字节：代表ip)，s 代表 short（两字节：代表端口�
 <p><strong>输出</strong>：数据离开计算机，例如屏幕上显示信息。</p>
 </li>
 </ul>
-<p>当提到网络时，“I/O”扩展了含义：</p>
+<p>当提到网络时，&ldquo;I/O&quot;扩展了含义：</p>
 <ul>
 <li>
 <p><strong>网络输入</strong>：从外部网络接收数据到你的本地计算机，如通过网络下载文件到你的计算机。</p>
@@ -873,7 +877,7 @@ l 代表 long(四字节：代表ip)，s 代表 short（两字节：代表端口�
 ></p>
 <p>在非阻塞 I/O 模型中，当进程尝试从 socket 读取数据时，如果数据尚未到达，read调用不会阻塞进程。相反，它会立即返回一个 EWOULDBLOCK 或 EAGAIN 错误。也就是说，进程不需要等待网络数据到达 socket 接收缓冲区就可以返回继续执行其他任务。</p>
 <p>一旦数据到达并存储在内核缓冲区中，而当进程尝试再次读取，这次 read 操作将成功，并将数据从内核空间复制到用户空间，但这里的数据复制过程是需要等待的。</p>
-<p><strong>总结一下</strong>：<strong>在非阻塞 I/O 模型中，进程需要等待 socket 数据从内核空间复制到用户空间。</strong> 而在等待网络数据到达 socket 接收缓冲区这个时间点是不需要等待的。但是进程需要不断地“轮询”文件描述符，检查 socket 接收缓冲区是否有数据，频繁的轮询可能会导致 CPU 资源的浪费。</p>
+<p><strong>总结一下</strong>：<strong>在非阻塞 I/O 模型中，进程需要等待 socket 数据从内核空间复制到用户空间。</strong> 而在等待网络数据到达 socket 接收缓冲区这个时间点是不需要等待的。但是进程需要不断地&quot;轮询&quot;文件描述符，检查 socket 接收缓冲区是否有数据，频繁的轮询可能会导致 CPU 资源的浪费。</p>
 <h3 id="io多路复用io-multiplexing">I/O多路复用（I/O Multiplexing）
 </h3><p><strong>简单图示</strong>：</p>
 <p><img src="/post/linux-network/5.png"
@@ -1016,15 +1020,20 @@ Linux 信号处理机制通常不会为同一类型的信号排队。这意味�
 <p><strong>d:性能优化 :</strong> 这些参数用于提升网络性能，减少延迟。</p>
 <p><strong>tcp_nodelay</strong> : 禁用 Nagle 算法，减少发送小块数据的延迟。（Nagle 算法是一种为了减少网络上小数据包数量而设计的 TCP 特性。它通过累积较小的数据包并将它们组合成更大的数据块来发送，从而减少了网络上的总数据包数量）。</p>
 <p><strong>tcp_max_syn_backlog</strong> : 设置 SYN 接收队列的最大长度，优化高并发连接的接收。</p>
-<p>除了 SYN 接收队列，TCP 连接还涉及到一个“已连接队列”（也称为 accept 队列），该队列用于存储已经完成三次握手、等待应用程序 accept 的连接。</p>
+<p>除了 SYN 接收队列，TCP 连接还涉及到一个&quot;已连接队列&rdquo;（也称为 accept 队列），该队列用于存储已经完成三次握手、等待应用程序 accept 的连接。</p>
 <p><strong>/proc/sys/net/core/somaxconn</strong>： 该参数控制着已连接队列的最大长度。</p>
 <p><strong>调整方法:</strong><br>
 这些参数通常通过修改 /etc/sysctl.conf 文件或使用 sysctl 命令进行调整。例如：</p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    sysctl -w net.ipv4.tcp_rmem='4096 87380 6291456'
-sysctl -w net.ipv4.tcp_wmem='4096 16384 4194304'
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sysctl -w net.ipv4.tcp_rmem=&#39;4096 87380 6291456&#39;
+</span></span><span class="line"><span class="cl">sysctl -w net.ipv4.tcp_wmem=&#39;4096 16384 4194304&#39;
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p><strong>注意：</strong> 调整这些参数时，应谨慎考虑系统的整体资源和应用的具体需求。不恰当的设置可能导致性能下降或系统资源耗尽。在生产环境中应用更改前，最好在测试环境中进行充分的测试。</p>
 </li>
 </ul>
@@ -1326,8 +1335,8 @@ sysctl -w net.ipv4.tcp_wmem='4096 16384 4194304'
 <p><strong>简单来说，I/O 模型是关于&quot;如何执行 I/O&quot;的，而服务器模型是基于某种 I/O 模型来构建服务的，以及如何组织服务器程序以响应客户端请求。</strong></p>
 <p><strong>常见的 I/O 多路复用技术</strong>：</p>
 <p>Linux 提供了多种 I/O 多路复用的机制，如 select, poll, 和 epoll。这些技术的主要区别在于它们处理大量文件描述符的方式和效率。</p>
-<p><strong>IO 复用之 Select</strong>：</p>
-<p><strong>基本概念</strong>：<br>
+<h4 id="io-复用之-select">IO 复用之 Select
+</h4><p><strong>基本概念</strong>：<br>
 Linux 中的 select 函数是一种常用的 I/O 复用技术。它允许程序监视多个文件描述符（FDs），以检测是否有任何一个或多个 FD 准备好进行读取、写入或是否有异常发生。这种技术特别适用于同时处理多个网络连接或其他类型的 I/O 操作（如：文件I/O）。</p>
 <p><strong>函数声明</strong></p>
 <p>select 函数的基本声明如下：</p>
@@ -1361,8 +1370,7 @@ Linux 中的 select 函数是一种常用的 I/O 复用技术。它允许程序�
 </span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><strong>fd_set 结构图解展示</strong>：</p>
-<p>fd_set 是一个文件描述符数组，用于指示 select 函数应该监视的 FDs。</p>
+</div><p>fd_set 是一个文件描述符数组，用于指示 select 函数应该监视的 FDs。</p>
 <p><strong>fd_set 结构图解展示</strong>：</p>
 <p><img src="/post/linux-network/12.png"
 	width="622"
@@ -1563,37 +1571,62 @@ Linux 中的 select 函数是一种常用的 I/O 复用技术。它允许程序�
 <p><strong>响应时间变长</strong>：在 select 返回的文件描述符列表集合中，如果有多个文件描述符同时变为活跃状态，服务器通常会按顺序处理它们。这可能导致对列表前面的连接有偏见，使得后面的连接等待时间较长。</p>
 </li>
 </ul>
-<p><strong>IO 复用之 Poll</strong>：</p>
-<p><strong>基本概念</strong>：<br>
+<h4 id="io-复用之-poll">IO 复用之 Poll
+</h4><p><strong>基本概念</strong>：<br>
 poll 也是一种 IO 复用技术，用于监视多个文件描述符（通常是网络套接字）的可读性、可写性和异常状态。与 select 类似，poll 允许您的程序监视多个文件描述符，直到一个或多个文件描述符准备好进行 IO 操作。这使得您可以同时管理多个网络连接，而不是逐个阻塞地处理它们。</p>
 <p><strong>函数声明</strong></p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    #include <poll.h>
-
-int poll(struct pollfd *fds, nfds_t nfds, int timeout);
-
-参数说明：
-/*
-fds：指向一个 pollfd 结构数组的指针，该数组包含要监视的文件描述符及其请求的事件（如 POLLIN 表示可读，POLLOUT 表示可写）。
-nfds：指定数组 fds 中的元素数量。
-timeout：指定等待时间（毫秒）。特殊值有：0 立即返回（非阻塞），-1 无限等待直到某个事件发生。
-*/
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;poll.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">poll</span><span class="p">(</span><span class="k">struct</span> <span class="nc">pollfd</span> <span class="o">*</span><span class="n">fds</span><span class="p">,</span> <span class="n">nfds_t</span> <span class="n">nfds</span><span class="p">,</span> <span class="kt">int</span> <span class="n">timeout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">参数说明：</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">fds：指向一个 pollfd 结构数组的指针，该数组包含要监视的文件描述符及其请求的事件（如 POLLIN 表示可读，POLLOUT 表示可写）。
+</span></span></span><span class="line"><span class="cl"><span class="cm">nfds：指定数组 fds 中的元素数量。
+</span></span></span><span class="line"><span class="cl"><span class="cm">timeout：指定等待时间（毫秒）。特殊值有：0 立即返回（非阻塞），-1 无限等待直到某个事件发生。
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p><strong>pollfd 结构</strong></p>
 <p>poll 函数使用 pollfd 结构来指定要监视的文件描述符和事件类型：</p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    struct pollfd {
-    int fd;         // 文件描述符
-    short events;   // 请求的事件
-    short revents;  // 实际发生的事件
-};
-
-fd：文件描述符
-events：要监视的事件，如 POLLIN、POLLOUT
-revents：由 poll 函数设置，表明哪些事件实际发生了
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">pollfd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>         <span class="c1">// 文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">short</span> <span class="n">events</span><span class="p">;</span>   <span class="c1">// 请求的事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">short</span> <span class="n">revents</span><span class="p">;</span>  <span class="c1">// 实际发生的事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">fd</span><span class="err">：文件描述符</span>
+</span></span><span class="line"><span class="cl"><span class="n">events</span><span class="err">：要监视的事件，如</span> <span class="n">POLLIN</span><span class="err">、</span><span class="n">POLLOUT</span>
+</span></span><span class="line"><span class="cl"><span class="n">revents</span><span class="err">：由</span> <span class="n">poll</span> <span class="err">函数设置，表明哪些事件实际发生了</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p><strong>Poll 底层采用的数据结构图解</strong></p>
 <p><img src="/post/linux-network/13.png"
 	width="691"
@@ -1625,328 +1658,150 @@ revents：由 poll 函数设置，表明哪些事件实际发生了
 <p><strong>线性扫描开销</strong>：poll 在处理文件描述符时，需要对整个数组进行线性扫描。当监视的文件描述符数量非常大时，这可能导致性能下降。</p>
 <p>总的来说，poll 是 select 的一种改进，特别是在可处理的文件描述符数量上没有限制，但在高性能和大规模并发处理方面，epoll 在现代 Linux 系统上通常是更佳的选择。</p>
 <p><strong>poll 并发回射服务器程序示例</strong>：</p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    #define PORT 8080
-#define MAX_CLIENTS 30
-#define BUFFER_SIZE 1024
-
-int main() {
-    int listen_fd, new_socket, valread;
-    struct sockaddr_in address;
-    int opt = 1;
-    int addrlen = sizeof(address);
-    char buffer[BUFFER_SIZE];
-    struct pollfd client_fds[MAX_CLIENTS];
-
-    // 创建监听套接字
-   listen_fd = socket(AF_INET, SOCK_STREAM, 0)；
-    // 绑定套接字
-    address.sin_family = AF_INET;
-    address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(PORT);
-
-    bind(listen_fd, (struct sockaddr *)&address, sizeof(address)
-    listen(listen_fd, 3); // 开始监听
-    // 初始化 pollfd 结构
-    for (int i = 0; i < MAX_CLIENTS; i++) {
-        client_fds[i].fd = -1;
-    }
-    client_fds[0].fd = listen_fd;
-    client_fds[0].events = POLLIN;
-
-    // 主循环
-    while (1) {
-        int activity = poll(client_fds, MAX_CLIENTS, -1);
-        if (activity < 0) {
-           //出错处理并退出
-        }
-        // 检查是否有新的连接
-        if (client_fds[0].revents & POLLIN) {
-            if ((new_socket = accept(listen_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-               //出错处理并退出
-            }
-
-            // 添加新的套接字到数组
-            for (int i = 1; i < MAX_CLIENTS; i++) {
-                if (client_fds[i].fd == -1) {
-                    client_fds[i].fd = new_socket;
-                    client_fds[i].events = POLLIN;
-                    break;
-                }
-            }
-
-        }
-
-        // 检查客户端活动
-        for (int i = 1; i < MAX_CLIENTS; i++) {
-            if (client_fds[i].fd > 0 && (client_fds[i].revents & POLLIN)) {
-                if ((valread = read(client_fds[i].fd, buffer, BUFFER_SIZE)) > 0) {
-                    buffer[valread] = '\0';
-                    send(client_fds[i].fd, buffer, valread, 0);
-                } else {
-                    close(client_fds[i].fd);
-                    client_fds[i].fd = -1; // 标记为可用
-                }
-            }
-        }
-    }
-
-    return 0;
-}
-  </div>
-</div><p><strong>IO 复用之 Epoll</strong></p>
-<p><strong>基本概念</strong>：<br>
-epoll 是 Linux 系统中一种高效的 I/O 事件通知机制，特别适用于处理大量并发网络连接。与传统的 select 或 poll 方法相比，epoll 的独特之处在于其对活跃连接的高效处理能力。它通过维护一个活跃事件集合，避免了对所有文件描述符的遍历，显著提升了性能。这使得 epoll 成为构建高性能网络应用程序的理想选择。</p>
-<p><strong>函数声明</strong></p>
-<p>epoll 主要涉及三个系统调用：epoll_create、epoll_ctl 和 epoll_wait。</p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    // epoll_create：创建一个 epoll 实例。
-int epoll_create(int size);
-// poll_ctl：管理（添加、修改或删除）监视的文件描述符。
-int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
-/*
-epfd：由 epoll_create 返回的 epoll 实例文件描述符。
-op：要执行的操作，如 EPOLL_CTL_ADD（添加）、EPOLL_CTL_MOD（修改）、EPOLL_CTL_DEL（删除）。
-fd：关联的文件描述符。
-event：指向 epoll_event 结构的指针，指定感兴趣的事件和任何关联的用户数据。
-*/
-
-// 待在 epoll 文件描述符上注册的事件发生
-int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout);
-/*
-epfd：epoll 实例的文件描述符。
-events：用于从内核获取事件的 epoll_event 结构数组。
-maxevents：指示数组中可以返回的最大事件数。
-timeout：等待事件的最大时间（毫秒），-1 表示无限等待。
-*/
-  </div>
-</div><p><strong>epoll_event 结构</strong></p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    struct epoll_event {
-    uint32_t     events;    /* Epoll events */
-    epoll_data_t data;      /* User data variable */
-};
-
-/*
-events 字段用于指定感兴趣的事件类型，例如 EPOLLIN（可读）、EPOLLOUT（可写）等。
-data 字段通常用于存储用户定义的数据，如文件描述符、指向对象的指针等。
-*/
-
-//epoll_data_t 是一个联合（union），它用于存储用户定义的数据，可以是文件描述符、指针或任何其他用户需要的数据类型。
-
-typedef union epoll_data {
-    void *ptr;
-    int fd;
-    uint32_t u32;
-    uint64_t u64;
-} epoll_data_t;
-
-/*
-例如，您可以在 epoll_ctl 调用时，使用 epoll_data_t 的 fd 字段来存储正在监视的文件描述符，
-或者使用 ptr 字段来存储指向某个对象或结构的指针。这样，在事件发生时，您可以快速访问与该事件相关联的数据。
-*/
-  </div>
-</div><p><strong>Epoll 的两种触发模式</strong>：</p>
-<p>在 Linux 中，epoll 提供了两种触发模式：<strong>水平触发（Level-Triggered, LT）和边缘触发（Edge-Triggered, ET）</strong>。理解这两种模式对于使用 epoll 来说非常关键，因为它们决定了在文件描述符（FD）上发生事件时，epoll 如何通知应用程序。</p>
-<p><strong>水平触发（Level-Triggered, LT）</strong></p>
-<p><strong>触发条件</strong>：只要文件描述符关联的 socket 缓冲区上有数据可读或有空间可写，epoll_wait 就会返回该文件描述符。这意味着，只要有未处理的数据（如缓冲区中还有数据未读），epoll_wait 会不断地通知应用程序去读数据至用户空间缓存，从而进行处理。</p>
-<p><strong>处理方式</strong>：这种模式更加容易处理，因为即使应用程序没有一次性处理所有的可用数据，epoll_wait 会再次通知你该文件描述符上仍有待处理的数据。</p>
-<p><strong>水平触发的优点</strong>：</p>
-<ul>
-<li>
-<p><strong>简单易懂</strong>：水平触发的行为更直观，容易理解和实现，尤其是对于那些不太熟悉非阻塞 I/O 编程的开发者。</p>
-</li>
-<li>
-<p><strong>容错性高</strong>：在水平触发模式下，只要文件描述符的状态仍满足条件（如有数据可读），epoll_wait 会持续通知应用程序，减少了因遗漏事件处理导致的错误。</p>
-</li>
-</ul>
-<p><strong>水平触发的缺点</strong>：</p>
-<ul>
-<li>
-<p><strong>可能的性能开销</strong>：在高负载或大量并发连接的情况下，水平触发可能导致频繁的 epoll_wait 响应。因为只要文件描述符仍然处于活跃状态（例如，仍有数据可读），它就会不断地触发事件。</p>
-</li>
-<li>
-<p><strong>资源使用效率</strong>：由于频繁的事件触发，水平触发模式可能导致更高的CPU使用率，尤其是当有大量活跃的文件描述符时。</p>
-</li>
-</ul>
-<p><strong>水平触发示例代码：</strong></p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    struct epoll_event event;
-int epoll_fd, fd;
-
-event.events = EPOLLIN; // LT 是默认模式
-event.data.fd = fd;
-epoll_ctl(epoll_fd, EPOLL_CTL_ADD, fd, &event);
-
-// 事件循环
-while (true) {
-    struct epoll_event events[MAX_EVENTS];
-    int n = epoll_wait(epoll_fd, events, MAX_EVENTS, -1);
-    for (int i = 0; i < n; i++) {
-        if (events[i].data.fd == fd) {
-            // 可以读取部分数据，即使不全部读取完，该 FD 仍然会再次报告
-        }
-    }
-}
-  </div>
-</div><p><strong>边缘触发（Edge-Triggered, ET）</strong></p>
-<p><strong>触发条件</strong>：只有文件描述符的状态发生改变时，epoll_wait 才会通知应用进程来读写数据（只通知一次），直到文件描述符的状态再次发生变化。</p>
-<p><strong>那什么才是文件描述符的状态发生改变呢？</strong></p>
-<p>文件描述符的状态发生改变指的是 <strong>fd 从不可读的状态改变成可读的状态或者fd 从不可写的状态改变成可写的状态。</strong></p>
-<p><strong>对于 socket 可读事件来说</strong>：</p>
-<p>fd 从不可读的状态改变成可读的状态，简单理解就是：<strong>fd 对应的 socket 接收缓冲区从无数据到有数据。</strong></p>
-<p><strong>具体点</strong>：就是当数据首次到达一个空的 socket 接收缓冲区时，epoll_wait 会通知应用程序一次。此时，缓冲区状态从“无数据可读”变为“有数据可读”。又或者应用程序开始读取数据，并将缓冲区中的数据读完（读操作返回 EAGAIN），然后又有新数据到达。这两种情况都是属于 socket 接收缓冲区从无数据到有数据的例子。</p>
-<p><strong>再来看个特殊情况：</strong></p>
-<p>在 ET 模式下，一旦应用程序开始读取数据，如果没有一次性将缓冲区中的所有数据都读取完（即仍有未读取的数据留在缓冲区中），此时不会触发新的 epoll_wait 通知。但是如果此时接收缓冲区又来了新数据，即使文件描述符的状态并没有发生改变，但也会触发新的 epoll_wait 通知的。</p>
-<p><strong>对于 socket 可写事件来说</strong>：</p>
-<p>文件描述符的状态发生改变指的是：fd 从不可写的状态改变成可写的状态。简单理解就是：<strong>fd 对应的 socket 发送缓冲区从满到不满。</strong> 对于可写事件，存在以下两个场景：</p>
-<h3 id="场景一持续有空间">场景一：持续有空间
-</h3><p>假设你有一个socket连接，你正在向它发送数据。在边缘触发（ET）模式下：</p>
-<ul>
-<li><strong>初始状态</strong>：连接建立后，发送缓冲区为空，所以你可以开始发送数据。</li>
-<li><strong>持续发送</strong>：只要发送缓冲区有空间，你可以继续发送数据。在这个过程中，如果缓冲区从未真正变满过（即，你的发送速度不超过网络层处理和发送数据的速度），epoll_wait不会因为缓冲区有空间而特别通知你，因为从epoll的角度看，这不是一个“状态变化”。</li>
-</ul>
-<h3 id="场景二缓冲区满后又有空间">场景二：缓冲区满后又有空间
-</h3><p>现在，让我们看一个缓冲区实际变满的情况：</p>
-<p><strong>1.发送直至满</strong>：你继续发送数据，直到达到一个点，发送缓冲区满了，这时，尝试再发送数据会失败（通常返回EAGAIN或EWOULDBLOCK）。</p>
-<p><strong>2.等待可写</strong>：这时，你应该停止发送数据，等待 epoll_wait 通知你 socket 再次可写。</p>
-<p><strong>3.缓冲区部分清空</strong>：随着时间的推移，网络层将缓冲区中的数据发送出去，缓冲区从“满”变为“有空间”（即，部分数据被发送出去，为新数据腾出了空间）。</p>
-<p><strong>4.收到通知</strong>：因为缓冲区的状态从“满”变为“有空间”，这是一个状态变化，epoll_wait 会通知你 socket 现在可写。</p>
-<p><strong>处理方式</strong>：ET 模式要求你必须一次性处理所有可用的数据。如果处理不完全，epoll_wait 不会再次通知你该文件描述符上的事件，除非新的数据到达或再次变为可写。</p>
-<p><strong>边缘触发示例代码：</strong></p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    struct epoll_event event;
-int epoll_fd, fd;
-
-event.events = EPOLLIN | EPOLLET; // 启用 ET 模式
-event.data.fd = fd;
-epoll_ctl(epoll_fd, EPOLL_CTL_ADD, fd, &event);
-
-// 事件循环
-while (true) {
-    struct epoll_event events[MAX_EVENTS];
-    int n = epoll_wait(epoll_fd, events, MAX_EVENTS, -1);
-    for (int i = 0; i < n; i++) {
-        if (events[i].data.fd == fd) {
-            while (true) {
-                ssize_t count = read(fd, buf, sizeof(buf));
-                if (count == -1) {
-                    if (errno != EAGAIN) {
-                        // 处理非 EAGAIN 错误
-                    }
-                    break; // 没有更多数据可读
-                }
-                // 处理读取的数据
-            }
-        }
-    }
-}
-  </div>
-</div><p><strong>边缘触发的优缺点：</strong></p>
-<p><strong>优点：</strong></p>
-<p><strong>减少通知频率：</strong></p>
-<p>在 ET 模式中，epoll_wait 只在文件描述符（如套接字）的状态发生变化时通知一次（例如，从不可读变为可读）。这减少了系统不断检查状态的需要，尤其在管理大量连接时非常有效。</p>
-<p><strong>提高事件处理效率：</strong></p>
-<p>由于减少了频繁的事件通知，应用程序可以更集中地处理每次通知的事件。这在同时处理许多连接时提升了效率。每次事件都得到了充分的处理，而不是浪费资源在重复或不必要的检查上，从而整体提高了处理大量并发连接的效率。</p>
-<p><strong>降低资源占用：</strong></p>
-<p>ET 模式通过减少频繁的事件检查和处理，有助于减少 CPU 和内存的使用，尤其在高负载下。</p>
-<p><strong>更好的扩展性：</strong></p>
-<p>对于需要处理大量并发连接的高性能服务器，ET 模式能够更高效地利用资源，使服务器能够承载更多的连接，从而提升整体的扩展能力。</p>
-<p><strong>缺点：</strong></p>
-<p><strong>处理逻辑更加复杂：</strong></p>
-<p>在 ET 模式下，必须在每次通知时尽可能完整地处理 I/O 事件（读取或写入所有数据），因为相同条件下不会再次收到通知。这要求程序能够有效地一次性处理大量数据。</p>
-<p><strong>可能会错过一些数据：</strong></p>
-<p>如果在处理通知时没有完全读取或写入所有数据，剩余的数据可能不会触发新的通知，导致程序错过一些重要数据。</p>
-<p><strong>依赖于非阻塞 I/O：</strong></p>
-<p>ET 模式通常和非阻塞 I/O 结合使用。在这种模式下，编程变得更复杂，因为需要处理非阻塞调用可能遇到的特殊情况，如 EAGAIN 或 EWOULDBLOCK。</p>
-<p><strong>总结：</strong></p>
-<p><strong>水平触发</strong>：更易于使用和理解，但可能会导致更多的 epoll_wait 调用，尤其是在高负载下。</p>
-<p><strong>边缘触发</strong>：更高的性能潜力，减少了 epoll_wait 调用的次数，但需要更谨慎的缓冲区管理和错误处理。</p>
-<p><strong>Epoll 优缺点</strong></p>
-<p><strong>优点：</strong></p>
-<p><strong>1.高效的文件描述符管理</strong></p>
-<p>在 epoll 中，高效的文件描述符管理首先依赖于高效的数据结构（红黑树和链表）以及回调函数。epoll 使用红黑树来组织所有监控的文件描述符，提供快速的查找、插入和删除操作。链表则用于存储准备就绪的事件，使得 epoll_wait 能迅速返回这些事件。每当监控的文件描述符发生状态变化（例如，socket 上有数据到来）时，与之关联的回调函数被内核自动触发。这些回调函数直接将就绪的文件描述符事件添加到 epoll 的就绪链表中。使得 epoll_wait 快速返回，这种集成了回调机制和高效数据结构的方法，使 epoll 在处理大量并发连接时比传统的 select 和 poll 方法更高效。</p>
-<p>相比之下，select 和 poll 每次调用时都需要遍历整个文件描述符集合，以检查每个描述符的状态。当文件描述符数量很大时，这种方法的效率显著降低。</p>
-<p><strong>2.更好的可扩展性</strong></p>
-<p>epoll 能够处理的文件描述符数量远超过 select 的 FD_SETSIZE 限制（通常为1024），使其能够更有效地处理成千上万的并发连接。这使 epoll 成为高并发网络应用的理想选择，例如大型网站的服务器。</p>
-<p><strong>3.减少复制操作</strong></p>
-<p>在传统的 select 和 poll 方法中，应用程序需要在每次调用时将整个文件描述符集合从用户空间复制到内核空间，内核处理完后再将结果复制回用户空间。这种来回复制操作效率比较低。</p>
-<p>而在 epoll 中，只需要将就绪事件从内核空间的就绪链表复制到用户空间，而非整个被监控的文件描述符集合。这种机制大大减少了数据在用户空间和内核空间之间频繁来回复制的需求，特别是在只有少数文件描述符就绪的大规模并发连接场景中，显著降低了上下文切换和数据复制的开销，从而提高了整体的效率和性能。</p>
-<p><strong>4.支持边缘触发（ET）和水平触发（LT）</strong></p>
-<ul>
-<li><strong>两种触发模式</strong>：epoll 提供了边缘触发（ET）和水平触发（LT）两种模式。边缘触发仅在文件描述符状态发生变化时通知一次，而水平触发则在描述符保持某状态时持续通知。</li>
-<li><strong>适应不同的使用场景</strong>：<br>
-这种灵活性使得开发者可以根据具体的应用需求和行为特点选择最合适的模式，以优化性能。</li>
-</ul>
-<p><strong>缺点：</strong></p>
-<p><strong>平台依赖性：</strong> epoll 是 Linux 特有的，不具备 select 和 poll 那样的跨平台特性。这意味着基于 epoll 的应用程序不能在非 Linux 系统上直接运行，限制了其可移植性。</p>
-<p><strong>边缘触发模式的挑战</strong></p>
-<p>在边缘触发（ET）模式下，epoll 只在状态变化时通知一次。这意味着应用程序必须正确处理所有的数据，否则可能会丢失未处理的事件。</p>
-<p><strong>Epoll 并发回射服务器程序示例</strong>：</p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    #define MAX_EVENTS 10
-#define READ_BUF_SIZE 1024
-#define PORT 8080
-int main() {
-    int listen_fd, conn_fd, epoll_fd;
-    struct sockaddr_in server_addr;
-    struct epoll_event event, events[MAX_EVENTS];
-    int event_count, i;
-    char read_buf[READ_BUF_SIZE];
-
-    socket(AF_INET, SOCK_STREAM, 0);
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(PORT);
-    bind(listen_fd, (struct sockaddr *)&server_addr, sizeof(server_addr))
-    listen(listen_fd, SOMAXCONN)
-
-    epoll_fd = epoll_create1(0);
-    event.events = EPOLLIN;
-    event.data.fd = listen_fd;
-
-    epoll_ctl(epoll_fd, EPOLL_CTL_ADD, listen_fd, &event)
-
-    while (1) {
-        event_count = epoll_wait(epoll_fd, events, MAX_EVENTS, -1);
-
-        for (i = 0; i < event_count; i++) {
-            if (events[i].data.fd == listen_fd) {
-                conn_fd = accept(listen_fd, NULL, NULL);
-                if (conn_fd == -1) {
-                    perror("accept");
-                    continue;
-                }
-                event.events = EPOLLIN | EPOLLET;
-                event.data.fd = conn_fd;
-                if (epoll_ctl(epoll_fd, EPOLL_CTL_ADD, conn_fd, &event) == -1) {
-                    perror("epoll_ctl");
-                    close(conn_fd);
-                    continue;
-                }
-            } else {
-                int nbytes = read(events[i].data.fd, read_buf, READ_BUF_SIZE);
-                if (nbytes <= 0) {
-                    close(events[i].data.fd);
-                } else {
-                    write(events[i].data.fd, read_buf, nbytes);
-                }
-            }
-        }
-    }
-    close(listen_fd);
-    close(epoll_fd);
-    return 0;
-}
-  </div>
-</div><h3 id="异步io服务器模型">异步I/O服务器模型
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define PORT 8080
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define MAX_CLIENTS 30
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define BUFFER_SIZE 1024
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">listen_fd</span><span class="p">,</span> <span class="n">new_socket</span><span class="p">,</span> <span class="n">valread</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">sockaddr_in</span> <span class="n">address</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">opt</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">addrlen</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFFER_SIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">pollfd</span> <span class="n">client_fds</span><span class="p">[</span><span class="n">MAX_CLIENTS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建监听套接字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">listen_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="err">；</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 绑定套接字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">address</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">address</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">INADDR_ANY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">address</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">bind</span><span class="p">(</span><span class="n">listen_fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="nc">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">address</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">listen</span><span class="p">(</span><span class="n">listen_fd</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">// 开始监听
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 初始化 pollfd 结构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_CLIENTS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client_fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="n">listen_fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client_fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 主循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">activity</span> <span class="o">=</span> <span class="n">poll</span><span class="p">(</span><span class="n">client_fds</span><span class="p">,</span> <span class="n">MAX_CLIENTS</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">activity</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">           <span class="c1">//出错处理并退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 检查是否有新的连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">client_fds</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">revents</span> <span class="o">&amp;</span> <span class="n">POLLIN</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">((</span><span class="n">new_socket</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">listen_fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="nc">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">address</span><span class="p">,</span> <span class="p">(</span><span class="n">socklen_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addrlen</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">               <span class="c1">//出错处理并退出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 添加新的套接字到数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_CLIENTS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="n">new_socket</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">events</span> <span class="o">=</span> <span class="n">POLLIN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 检查客户端活动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_CLIENTS</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fd</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">revents</span> <span class="o">&amp;</span> <span class="n">POLLIN</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">((</span><span class="n">valread</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">BUFFER_SIZE</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">buffer</span><span class="p">[</span><span class="n">valread</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">send</span><span class="p">(</span><span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">valread</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">close</span><span class="p">(</span><span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">client_fds</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">fd</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// 标记为可用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="io-复用之-epoll">IO 复用之 Epoll
+</h4><p><a class="link" href="https://serennan.github.io/post/linux-epoll/"  target="_blank" rel="noopener"
+    >【Linux】IO 多路复用 epoll</a></p>
+<h3 id="异步io服务器模型">异步I/O服务器模型
 </h3><p>在讲述了 I/O 多路复用服务器模型后，我们看到它如何使单个进程能够有效地管理多个网络连接。通过 select、poll 或 epoll，进程可以在多个连接上同时等待数据，而无需为每个连接阻塞等待。这种方法提升了并发处理的效率，<strong>但它有一个局限性：一旦某个连接的 I/O 操作开始，该进程必须等待该操作完成才能继续处理下一个连接。</strong> 简单理解就是：处理各个连接的 IO 读写是同步的，是串行的。</p>
 <p>为了解决这一问题，引入了异步I/O服务器模型。这种模型极大提升了服务器的任务处理能力，它允许进程在发起I/O操作后立即转而执行其他工作，而无需等待I/O操作的完成。这一过程由操作系统在后台管理，一旦I/O操作完成，进程便会收到通知。进程只需要去处理已被拷贝至应用层缓冲区的数据。</p>
 <p><strong>Linux中的异步I/O实现</strong>：</p>
@@ -1954,57 +1809,106 @@ int main() {
 <p><strong>Linux aio(libaio)</strong></p>
 <p>Linux aio 是 Linux 系统中较早支持的异步I/O机制。它通过 libaio 库提供了一系列的API，允许应用程序非阻塞地启动和管理I/O操作。当一个I/O请求被提交后，libaio负责将其发送到操作系统，应用程序可以继续执行而无需等待。一旦I/O操作完成，应用程序将通过回调函数或其他机制得到通知。</p>
 <p><strong>libaio提供的 API</strong> :</p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    io_setup       ：创建一个异步I/O上下文。
-io_submit      ：向异步I/O上下文提交一个或多个I/O请求。
-io_getevents   ：从异步I/O上下文中获取已完成的事件。
-io_destroy     ：销毁一个异步I/O上下文。
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">io_setup</span>       <span class="err">：创建一个异步</span><span class="n">I</span><span class="o">/</span><span class="n">O上下文</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="n">io_submit</span>      <span class="err">：向异步</span><span class="n">I</span><span class="o">/</span><span class="n">O上下文提交一个或多个I</span><span class="o">/</span><span class="n">O请求</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="n">io_getevents</span>   <span class="err">：从异步</span><span class="n">I</span><span class="o">/</span><span class="n">O上下文中获取已完成的事件</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="n">io_destroy</span>     <span class="err">：销毁一个异步</span><span class="n">I</span><span class="o">/</span><span class="n">O上下文</span><span class="err">。</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p>尽管 libaio 为异步 I/O 提供了基础支持，但它有一定的局限性，<strong>比如：它只适用于文件 I/O，并不适合用于网络 I/O。</strong></p>
 <p>以下是一个简洁的 libaio 使用示例，演示了如何在 Linux 系统中以异步方式进行文件读取。</p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    #include <libaio.h>
-#include <sys/eventfd.h>
-
-#define FILE_PATH "example_file.txt"
-#define BUFFER_SIZE 1024
-int main() {
-    io_context_t ctx;
-    struct iocb cb;
-    struct iocb *cbs[1];
-    char buffer[BUFFER_SIZE];
-    int file_fd, efd, ret;
-    struct io_event events[1];
-    uint64_t u;
-    memset(&ctx, 0, sizeof(ctx));
-    io_setup(10, &ctx);
-    file_fd = open(FILE_PATH, O_RDWR | O_CREAT, 0644);
-    // 创建eventfd用于通知
-    efd = eventfd(0, 0);
-    // 准备异步读请求
-    memset(&cb, 0, sizeof(struct iocb));
-    io_prep_pread(&cb, file_fd, buffer, BUFFER_SIZE, 0);
-    // 设置eventfd作为完成事件的通知
-    cb.data = (void *)(uintptr_t)efd;
-    cbs[0] = &cb;
-    // 提交异步I/O请求
-    io_submit(ctx, 1, cbs)
-    // 在这里，主线程可以执行其他业务逻辑
-    // ...
-    read(efd, &u, sizeof(uint64_t));  // 在主线程中等待通知
-    io_getevents(ctx, 1, 1, events, NULL);  // 读取异步I/O事件
-    // 处理完成的I/O事件
-    if(events[0].data == (void *)(uintptr_t)efd) {
-        printf("Read %zd bytes: %.*s\n", events[0].res, (int)events[0].res, buffer);
-    }
-    close(file_fd);
-    io_destroy(ctx);
-    close(efd);
-    return 0;
-}
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;libaio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/eventfd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define FILE_PATH &#34;example_file.txt&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define BUFFER_SIZE 1024
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">io_context_t</span> <span class="n">ctx</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">iocb</span> <span class="n">cb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">iocb</span> <span class="o">*</span><span class="n">cbs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFFER_SIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">file_fd</span><span class="p">,</span> <span class="n">efd</span><span class="p">,</span> <span class="n">ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">io_event</span> <span class="n">events</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">u</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">ctx</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">io_setup</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ctx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">file_fd</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="n">FILE_PATH</span><span class="p">,</span> <span class="n">O_RDWR</span> <span class="o">|</span> <span class="n">O_CREAT</span><span class="p">,</span> <span class="mo">0644</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建eventfd用于通知
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">efd</span> <span class="o">=</span> <span class="n">eventfd</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 准备异步读请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cb</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="nc">iocb</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">io_prep_pread</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cb</span><span class="p">,</span> <span class="n">file_fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">BUFFER_SIZE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 设置eventfd作为完成事件的通知
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cb</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)(</span><span class="n">uintptr_t</span><span class="p">)</span><span class="n">efd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cbs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">cb</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 提交异步I/O请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">io_submit</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cbs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 在这里，主线程可以执行其他业务逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">read</span><span class="p">(</span><span class="n">efd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">u</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">uint64_t</span><span class="p">));</span>  <span class="c1">// 在主线程中等待通知
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">io_getevents</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">events</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>  <span class="c1">// 读取异步I/O事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 处理完成的I/O事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">data</span> <span class="o">==</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)(</span><span class="n">uintptr_t</span><span class="p">)</span><span class="n">efd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Read %zd bytes: %.*s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">res</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">res</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">close</span><span class="p">(</span><span class="n">file_fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">io_destroy</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">close</span><span class="p">(</span><span class="n">efd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p><strong>io_uring</strong>：</p>
 <p>io_uring 是 Linux 内核 5.1 版本引入的全新异步 I/O 框架，io_uring 旨在提供一种高效、灵活且功能丰富的方式来执行异步 I/O 操作。与 libaio 相比，io_uring 提供了更低的系统调用开销，更简单的接口，以及更好的性能。</p>
 <p><strong>如何工作</strong>：</p>
@@ -2056,113 +1960,220 @@ int main() {
 <p><strong>事件循环</strong>：在整个应用程序的生命周期内，初始化分发器运行一个循环，等待和分发事件。</p>
 <p><strong>select 实现的 Reactor 网络服务器程序</strong></p>
 <p>这里只是提供一个简单示例，但以上的5个组件都包含。</p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    #define PORT 8080
-#define BUFFER_SIZE 1024
-#define MAX_CLIENTS 1024
-
-handler_t handlers[MAX_CLIENTS];
-int num_clients = 0;
-
-typedef struct handler_t {
-    int handle; //句柄：在我们的上下文中就是套接字描述符。
-    void (*handle_func)(int handle, void *arg);  //事件处理器
-} handler_t;
-
-// 具体事件处理器 ： 处理客户端的连接请求
-void acceptor_handler_func(int handle, void *arg) {
-    struct sockaddr_in client_addr;
-    socklen_t client_len = sizeof(client_addr);
-    int client_fd = accept(handle, (struct sockaddr*)&client_addr, &client_len);
-    if (client_fd < 0) {
-    }
-    printf("Accepted connection from %s\n", inet_ntoa(client_addr.sin_addr));
-    // 将新客户端加入到 handlers 中
-    handlers[num_clients].handle = client_fd;
-    handlers[num_clients].handle_func = client_handler_func;
-    num_clients++;
-}
-
-// 具体事件处理器：处理客户端的数据处理请求
-void client_handler_func(int handle, void *arg) {
-    char buffer[BUFFER_SIZE];
-    int nbytes = recv(handle, buffer, sizeof(buffer), 0);
-
-    if (nbytes <= 0) {
-        close(handle);
-        // 将handle从handlers数组中移除
-        for (int i = 0; i < num_clients; i++) {
-            if (handlers[i].handle == handle) {
-                handlers[i] = handlers[num_clients - 1];
-                num_clients--;
-                break;
-            }
-        }
-    } else {
-        send(handle, buffer, nbytes, 0);
-    }
-}
-
-void event_demultiplexer() {
-    fd_set read_fds;
-    int fd_max = 0;
-
-    FD_ZERO(&read_fds);
-    for (int i = 0; i < num_clients; i++) {
-        FD_SET(handlers[i].handle, &read_fds);
-        if (handlers[i].handle > fd_max) {
-            fd_max = handlers[i].handle;
-        }
-    }
-    // 等待 socket 上的可读事件
-    if (select(fd_max + 1, &read_fds, NULL, NULL, NULL) == -1) {
-        perror("select");
-        exit(1);
-    }
-
-    // 分发事件
-    for (int i = 0; i < num_clients; i++) {
-        if (FD_ISSET(handlers[i].handle, &read_fds)) {
-            handlers[i].handle_func(handlers[i].handle, NULL);
-        }
-    }
-}
-
-/*
-Initiation Dispatcher (初始化分发器)
-Initiation Dispatcher 是 Reactor 模式的核心，允许应用程序注册事件、注销事件。并且它负责启动事件循环，等待事件并分发事件。
-*/
-
-void run_reactor(int listen_fd) {
-    // 注册事件
-    handlers[num_clients].handle = listen_fd;
-    handlers[num_clients].handle_func = acceptor_handler_func;
-    num_clients++;
-    
-    // 启动事件循环
-    while (1) {
-        event_demultiplexer();
-    }
-}
-
-int main() {
-    int listen_fd;
-    struct sockaddr_in server_addr;
-    listen_fd = socket(AF_INET, SOCK_STREAM, 0)
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(PORT);
-    server_addr.sin_addr.s_addr = INADDR_ANY;
-
-    bind(listen_fd, (struct sockaddr*)&server_addr, sizeof(server_addr);
-    listen(listen_fd, 10);
-  
-    run_reactor(listen_fd);
-    close(listen_fd);
-    return 0;
-}
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define PORT 8080
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define BUFFER_SIZE 1024
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define MAX_CLIENTS 1024
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">handler_t</span> <span class="n">handlers</span><span class="p">[</span><span class="n">MAX_CLIENTS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">num_clients</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="nc">handler_t</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">handle</span><span class="p">;</span> <span class="c1">//句柄：在我们的上下文中就是套接字描述符。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">handle_func</span><span class="p">)(</span><span class="kt">int</span> <span class="n">handle</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">);</span>  <span class="c1">//事件处理器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="n">handler_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 具体事件处理器 ： 处理客户端的连接请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">acceptor_handler_func</span><span class="p">(</span><span class="kt">int</span> <span class="n">handle</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">sockaddr_in</span> <span class="n">client_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">socklen_t</span> <span class="n">client_len</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">client_addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">client_fd</span> <span class="o">=</span> <span class="n">accept</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="nc">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">client_addr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">client_len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">client_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Accepted connection from %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">inet_ntoa</span><span class="p">(</span><span class="n">client_addr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将新客户端加入到 handlers 中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">handlers</span><span class="p">[</span><span class="n">num_clients</span><span class="p">].</span><span class="n">handle</span> <span class="o">=</span> <span class="n">client_fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">handlers</span><span class="p">[</span><span class="n">num_clients</span><span class="p">].</span><span class="n">handle_func</span> <span class="o">=</span> <span class="n">client_handler_func</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">num_clients</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 具体事件处理器：处理客户端的数据处理请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">client_handler_func</span><span class="p">(</span><span class="kt">int</span> <span class="n">handle</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFFER_SIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">nbytes</span> <span class="o">=</span> <span class="n">recv</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">nbytes</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">close</span><span class="p">(</span><span class="n">handle</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 将handle从handlers数组中移除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_clients</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">handle</span> <span class="o">==</span> <span class="n">handle</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">handlers</span><span class="p">[</span><span class="n">num_clients</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="n">num_clients</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">send</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">event_demultiplexer</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fd_set</span> <span class="n">read_fds</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fd_max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">FD_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">read_fds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_clients</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">FD_SET</span><span class="p">(</span><span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">handle</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">read_fds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">handle</span> <span class="o">&gt;</span> <span class="n">fd_max</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fd_max</span> <span class="o">=</span> <span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">handle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 等待 socket 上的可读事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">select</span><span class="p">(</span><span class="n">fd_max</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">read_fds</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">perror</span><span class="p">(</span><span class="s">&#34;select&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 分发事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">num_clients</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">FD_ISSET</span><span class="p">(</span><span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">handle</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">read_fds</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">handle_func</span><span class="p">(</span><span class="n">handlers</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">handle</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">Initiation Dispatcher (初始化分发器)
+</span></span></span><span class="line"><span class="cl"><span class="cm">Initiation Dispatcher 是 Reactor 模式的核心，允许应用程序注册事件、注销事件。并且它负责启动事件循环，等待事件并分发事件。
+</span></span></span><span class="line"><span class="cl"><span class="cm">*/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">run_reactor</span><span class="p">(</span><span class="kt">int</span> <span class="n">listen_fd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 注册事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">handlers</span><span class="p">[</span><span class="n">num_clients</span><span class="p">].</span><span class="n">handle</span> <span class="o">=</span> <span class="n">listen_fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">handlers</span><span class="p">[</span><span class="n">num_clients</span><span class="p">].</span><span class="n">handle_func</span> <span class="o">=</span> <span class="n">acceptor_handler_func</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">num_clients</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 启动事件循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">event_demultiplexer</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">listen_fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">sockaddr_in</span> <span class="n">server_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">listen_fd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">memset</span><span class="p">(</span><span class="o">&amp;</span><span class="n">server_addr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server_addr</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_family</span> <span class="o">=</span> <span class="n">AF_INET</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_port</span> <span class="o">=</span> <span class="n">htons</span><span class="p">(</span><span class="n">PORT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server_addr</span><span class="p">.</span><span class="n">sin_addr</span><span class="p">.</span><span class="n">s_addr</span> <span class="o">=</span> <span class="n">INADDR_ANY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">bind</span><span class="p">(</span><span class="n">listen_fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="nc">sockaddr</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">server_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">server_addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">listen</span><span class="p">(</span><span class="n">listen_fd</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="n">run_reactor</span><span class="p">(</span><span class="n">listen_fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">close</span><span class="p">(</span><span class="n">listen_fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p>基于 <strong>epoll</strong> 的高效性，我们一般会基于 epoll 去实现 reactor。<strong>具体实现可参考这篇文章：</strong><br>
 <a class="link" href="https://zhuanlan.zhihu.com/p/539556726"  target="_blank" rel="noopener"
     >https://zhuanlan.zhihu.com/p/539556726</a></p>
@@ -2202,41 +2213,72 @@ Reactor 模式是现代高性能网络编程的基石之一。它通过事件驱
 <p><strong>核心组件</strong></p>
 <p><strong>异步操作对象：</strong> 该对象代表了单个的异步 I/O 操作，如异步读取或写入。它 们通常封装了操作的细节，如操作类型、目标资源(文件描述符)、缓冲区地址等。</p>
 <p><strong>异步操作对象的定义</strong></p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    enum {
-    ADD_TYPE_ACCEPT,
-    ADD_TYPE_READ,
-    ADD_TYPE_WRITE
-};
-
-struct io_data {
-    int type; // ADD_TYPE_ACCEPT, ADD_TYPE_READ, ADD_TYPE_WRITE 等
-    int fd;
-    size_t bytes_read;
-    char buffer[BUFFER_SIZE];
-}; 
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">enum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ADD_TYPE_ACCEPT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ADD_TYPE_READ</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ADD_TYPE_WRITE</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">io_data</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">type</span><span class="p">;</span> <span class="c1">// ADD_TYPE_ACCEPT, ADD_TYPE_READ, ADD_TYPE_WRITE 等
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">bytes_read</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="n">BUFFER_SIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span> 
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p><strong>Proactor 初始器（Proactor Initiator）</strong> ：<br>
 Proactor 初始器是负责启动和配置异步 I/O 操作流程的组件。它通常由用户空间的代码执行，负责准备和提交异步 I/O 请求到内核。</p>
 <p>在 io_uring 中，Proactor 初始器 对应的是用户空间代码，特别是负责初始化 io_uring 实例、以及提交异步 I/O 请求到内核的逻辑。</p>
 <p><strong>来看下在 io_uring 中， Proactor Initiator 的代码示例：</strong></p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    // 初始化 io_uring实例
-int ret = io_uring_queue_init(256, &ring, 0);
-
-// 提交一个异步读取请求
-static void submit_async_read(struct io_uring *ring, int fd) {
-    struct io_data *data = malloc(sizeof(struct  io_data));
-   struct io_uring_sqe *sqe  = io_uring_get_sqe(ring); 
-    data->fd = fd;
-    data->type = ADD_TYPE_READ;
-    io_uring_prep_read(sqe, fd, data->buffer, BUFFER_SIZE, 0);      // 准备读取请求
-    io_uring_sqe_set_data(sqe, data); // 设置用户数据
-    io_uring_submit(ring);  // 提交请求
-}
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 初始化 io_uring实例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">io_uring_queue_init</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ring</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 提交一个异步读取请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">submit_async_read</span><span class="p">(</span><span class="k">struct</span> <span class="nc">io_uring</span> <span class="o">*</span><span class="n">ring</span><span class="p">,</span> <span class="kt">int</span> <span class="n">fd</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">io_data</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span>  <span class="nc">io_data</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">   <span class="k">struct</span> <span class="nc">io_uring_sqe</span> <span class="o">*</span><span class="n">sqe</span>  <span class="o">=</span> <span class="n">io_uring_get_sqe</span><span class="p">(</span><span class="n">ring</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">data</span><span class="o">-&gt;</span><span class="n">fd</span> <span class="o">=</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="n">ADD_TYPE_READ</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">io_uring_prep_read</span><span class="p">(</span><span class="n">sqe</span><span class="p">,</span> <span class="n">fd</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">,</span> <span class="n">BUFFER_SIZE</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>      <span class="c1">// 准备读取请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">io_uring_sqe_set_data</span><span class="p">(</span><span class="n">sqe</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span> <span class="c1">// 设置用户数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">io_uring_submit</span><span class="p">(</span><span class="n">ring</span><span class="p">);</span>  <span class="c1">// 提交请求
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p><strong>异步操作处理器（Asynchronous Operation Processor）</strong>：<br>
 异步操作处理器是 Proactor 模式的核心，在内核中执行，负责启动异步 I/O 操作并在操作完成时通知用户空间的 Proactor 实例。</p>
 <p>在 io_uring 中，异步操作处理器 实际上是 io_uring 的内核组件。这包括提交队列（SQ）和完成队列（CQ），以及内核中负责处理这些队列的逻辑。</p>
@@ -2244,55 +2286,100 @@ static void submit_async_read(struct io_uring *ring, int fd) {
 <p>完成处理器是由应用程序定义的回调函数，它们在异步 I/O 操作完成时被调用以处理 I/O 操作的结果。</p>
 <p>在 io_uring 中，完成处理器 对应于那些被提交到 io_uring 并在 I/O 操作完成后执行的回调函数。这些回调函数处理 io_uring 从完成队列中获取的 CQEs(多个完成队列条目)。</p>
 <p><strong>异步读取回调函数代码示例：</strong></p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    void handle_read(struct io_uring *ring, struct io_uring_cqe *cqe) {
-    struct io_data *data = io_uring_cqe_get_data(cqe);
-    if (!data) {
-        return;  // 数据为空则直接返回
-    }
-
-    if (cqe->res <= 0) {
-        // 客户端断开连接或读取错误
-        close(data->fd);
-    } else {
-        // 读取数据，准备回写(data->buffer缓冲区已经有数据了)
-        data->bytes_read = cqe->res;
-        printf("Received: %.*s\n", (int)data->bytes_read, data->buffer);
-        // 可以在这里添加写回逻辑
-    }
-    free(data);  // 释放内存
-}
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">handle_read</span><span class="p">(</span><span class="k">struct</span> <span class="nc">io_uring</span> <span class="o">*</span><span class="n">ring</span><span class="p">,</span> <span class="k">struct</span> <span class="nc">io_uring_cqe</span> <span class="o">*</span><span class="n">cqe</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">io_data</span> <span class="o">*</span><span class="n">data</span> <span class="o">=</span> <span class="n">io_uring_cqe_get_data</span><span class="p">(</span><span class="n">cqe</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>  <span class="c1">// 数据为空则直接返回
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">cqe</span><span class="o">-&gt;</span><span class="n">res</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 客户端断开连接或读取错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">close</span><span class="p">(</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 读取数据，准备回写(data-&gt;buffer缓冲区已经有数据了)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">data</span><span class="o">-&gt;</span><span class="n">bytes_read</span> <span class="o">=</span> <span class="n">cqe</span><span class="o">-&gt;</span><span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Received: %.*s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">data</span><span class="o">-&gt;</span><span class="n">bytes_read</span><span class="p">,</span> <span class="n">data</span><span class="o">-&gt;</span><span class="n">buffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 可以在这里添加写回逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">free</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>  <span class="c1">// 释放内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p><strong>Proactor 实例</strong>：<br>
 Proactor 实例是负责管理整个异步 I/O 流程的组件，它管理着异步操作处理器和完成处理器，调度完成处理器，并处理所有的异步事件。</p>
 <p>在 io_uring 中，Proactor 实例 对应的是用户空间中维护 io_uring 接口和逻辑的部分，<strong>其实就是一个事件循环</strong>，它负责监控完成队列（CQ），确定哪些 I/O 操作已经完成，并触发相应的完成处理器。</p>
 <p><strong>Proactor 实例代码示例：</strong></p>
-<div class="mermaid-container">
-  <div class="mermaid">
-    // 运行事件循环以处理异步 I/O 操作
-void run_io_uring_loop(struct io_uring *ring) {
-    struct io_uring_cqe *cqe;
-    unsigned head;
-
-    while (1) {
-        // 提交所有挂起的请求并等待至少一个请求完成
-        io_uring_submit_and_wait(ring, 1);
-
-        // 处理所有已完成的事件
-        io_uring_for_each_cqe(ring, head, cqe) {
-            if (cqe->res < 0) {
-                fprintf(stderr, "IO operation failed: %s\n", strerror(-cqe->res));
-            } else {
-                handle_read(ring, cqe); // 调用完成处理器
-            }
-
-            // 标记该事件已处理
-            io_uring_cqe_seen(ring, cqe);
-        }
-    }
-}
-  </div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 运行事件循环以处理异步 I/O 操作
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">run_io_uring_loop</span><span class="p">(</span><span class="k">struct</span> <span class="nc">io_uring</span> <span class="o">*</span><span class="n">ring</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">io_uring_cqe</span> <span class="o">*</span><span class="n">cqe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 提交所有挂起的请求并等待至少一个请求完成
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">io_uring_submit_and_wait</span><span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 处理所有已完成的事件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">io_uring_for_each_cqe</span><span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">cqe</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">cqe</span><span class="o">-&gt;</span><span class="n">res</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;IO operation failed: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">strerror</span><span class="p">(</span><span class="o">-</span><span class="n">cqe</span><span class="o">-&gt;</span><span class="n">res</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">handle_read</span><span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="n">cqe</span><span class="p">);</span> <span class="c1">// 调用完成处理器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 标记该事件已处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">io_uring_cqe_seen</span><span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="n">cqe</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><p><strong>Proactor 事件处理流程</strong></p>
 <p><strong>启动异步操作（Proactor 初始器）</strong>：</p>
 <p>你的程序（通过 Proactor 初始器）准备一个异步 I/O 操作，比如说读取文件或接收网络数据。这个准备过程涉及指定要进行的操作类型（例如读取或写入）、哪个文件或网络连接，以及数据存放的位置。</p>
@@ -2344,6 +2431,12 @@ Reactor 模式虽然减少了直接的 I/O 等待（例如等待数据到达）�
 <p>最后，我们探讨了 Linux 环境下常见的服务器模型，包括单进程、多进程、多线程、线程池和I/O多路复用模型以及异步I/O服务器模型，每种模型都有其应用场景和优缺点。</p>
 <p><strong>架构模式</strong></p>
 <p>服务器架构模式，如 <strong>Reactor</strong> 和 <strong>Proactor</strong>，提供了高效处理并发网络事件的方法，是构建高性能网络应用的关键。</p>
+<p><strong>总结：</strong></p>
+
+<div class="notice notice-note" >
+    <div class="notice-title"></div><p><strong>水平触发</strong>：更易于使用和理解，但可能会导致更多的 epoll_wait 调用，尤其是在高负载下。</p>
+<p><strong>边缘触发</strong>：更高的性能潜力，减少了 epoll_wait 调用的次数，但需要更谨慎的缓冲区管理和错误处理。</p></div>
+
 
 </section>
 
@@ -2366,6 +2459,19 @@ Reactor 模式虽然减少了直接的 I/O 等待（例如等待数据到达）�
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/linux-socket/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Linux】socket 套接字</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">

@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Linux网络编程知识">
+<title>【Linux】socket 套接字</title>
+
+<link rel='canonical' href='https://serennan.github.io/post/linux-socket/'>
+
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="【Linux】socket 套接字">
+<meta property='og:description' content="Linux网络编程知识">
+<meta property='og:url' content='https://serennan.github.io/post/linux-socket/'>
+<meta property='og:site_name' content='serenNan'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-26T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-26T21:56:06&#43;08:00'/>
+<meta name="twitter:title" content="【Linux】socket 套接字">
+<meta name="twitter:description" content="Linux网络编程知识">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_47dcc2efc37d0778.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🐈‍⬛</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">serenNan</a></h1>
+            <h2 class="site-description">个人博客</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/450940909'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M488.6 104.1C505.3 122.2 513 143.8 511.9 169.8V372.2C511.5 398.6 502.7 420.3 485.4 437.3C468.2 454.3 446.3 463.2 419.9 464H92.02C65.57 463.2 43.81 454.2 26.74 436.8C9.682 419.4 .7667 396.5 0 368.2V169.8C.7667 143.8 9.682 122.2 26.74 104.1C43.81 87.75 65.57 78.77 92.02 78H121.4L96.05 52.19C90.3 46.46 87.42 39.19 87.42 30.4C87.42 21.6 90.3 14.34 96.05 8.603C101.8 2.868 109.1 0 117.9 0C126.7 0 134 2.868 139.8 8.603L213.1 78H301.1L375.6 8.603C381.7 2.868 389.2 0 398 0C406.8 0 414.1 2.868 419.9 8.603C425.6 14.34 428.5 21.6 428.5 30.4C428.5 39.19 425.6 46.46 419.9 52.19L394.6 78L423.9 78C450.3 78.77 471.9 87.75 488.6 104.1H488.6zM449.8 173.8C449.4 164.2 446.1 156.4 439.1 150.3C433.9 144.2 425.1 140.9 416.4 140.5H96.05C86.46 140.9 78.6 144.2 72.47 150.3C66.33 156.4 63.07 164.2 62.69 173.8V368.2C62.69 377.4 65.95 385.2 72.47 391.7C78.99 398.2 86.85 401.5 96.05 401.5H416.4C425.6 401.5 433.4 398.2 439.7 391.7C446 385.2 449.4 377.4 449.8 368.2L449.8 173.8zM185.5 216.5C191.8 222.8 195.2 230.6 195.6 239.7V273C195.2 282.2 191.9 289.9 185.8 296.2C179.6 302.5 171.8 305.7 162.2 305.7C152.6 305.7 144.7 302.5 138.6 296.2C132.5 289.9 129.2 282.2 128.8 273V239.7C129.2 230.6 132.6 222.8 138.9 216.5C145.2 210.2 152.1 206.9 162.2 206.5C171.4 206.9 179.2 210.2 185.5 216.5H185.5zM377 216.5C383.3 222.8 386.7 230.6 387.1 239.7V273C386.7 282.2 383.4 289.9 377.3 296.2C371.2 302.5 363.3 305.7 353.7 305.7C344.1 305.7 336.3 302.5 330.1 296.2C323.1 289.9 320.7 282.2 320.4 273V239.7C320.7 230.6 324.1 222.8 330.4 216.5C336.7 210.2 344.5 206.9 353.7 206.5C362.9 206.9 370.7 210.2 377 216.5H377z"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/serenNan'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549" style="enable-background:new 0 0 438.549 438.549;"
+	 xml:space="preserve">
+<g>
+	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
+		c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
+		c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
+		c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
+		c-4.187,0.767-9.469,1.092-15.846,1c-6.374-0.089-12.991-0.757-19.842-1.999c-6.854-1.231-13.229-4.086-19.13-8.559
+		c-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559
+		c-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-0.951-2.568-2.098-3.711-3.429c-1.142-1.331-1.997-2.663-2.568-3.997
+		c-0.572-1.335-0.098-2.43,1.427-3.289c1.525-0.859,4.281-1.276,8.28-1.276l5.708,0.853c3.807,0.763,8.516,3.042,14.133,6.851
+		c5.614,3.806,10.229,8.754,13.846,14.842c4.38,7.806,9.657,13.754,15.846,17.847c6.184,4.093,12.419,6.136,18.699,6.136
+		c6.28,0,11.704-0.476,16.274-1.423c4.565-0.952,8.848-2.383,12.847-4.285c1.713-12.758,6.377-22.559,13.988-29.41
+		c-10.848-1.14-20.601-2.857-29.264-5.14c-8.658-2.286-17.605-5.996-26.835-11.14c-9.235-5.137-16.896-11.516-22.985-19.126
+		c-6.09-7.614-11.088-17.61-14.987-29.979c-3.901-12.374-5.852-26.648-5.852-42.826c0-23.035,7.52-42.637,22.557-58.817
+		c-7.044-17.318-6.379-36.732,1.997-58.24c5.52-1.715,13.706-0.428,24.554,3.853c10.85,4.283,18.794,7.952,23.84,10.994
+		c5.046,3.041,9.089,5.618,12.135,7.708c17.705-4.947,35.976-7.421,54.818-7.421s37.117,2.474,54.823,7.421l10.849-6.849
+		c7.419-4.57,16.18-8.758,26.262-12.565c10.088-3.805,17.802-4.853,23.134-3.138c8.562,21.509,9.325,40.922,2.279,58.24
+		c15.036,16.18,22.559,35.787,22.559,58.817c0,16.178-1.958,30.497-5.853,42.966c-3.9,12.471-8.941,22.457-15.125,29.979
+		c-6.191,7.521-13.901,13.85-23.131,18.986c-9.232,5.14-18.182,8.85-26.84,11.136c-8.662,2.286-18.415,4.004-29.263,5.146
+		c9.894,8.562,14.842,22.077,14.842,40.539v60.237c0,3.422,1.19,6.279,3.572,8.562c2.379,2.279,6.136,2.95,11.276,1.995
+		c44.163-14.653,80.185-41.062,108.068-79.226c27.88-38.161,41.825-81.126,41.825-128.906
+		C438.536,184.851,428.728,148.168,409.132,114.573z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/category/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M9 4h3l2 2h5a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"></path> <path d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h2"></path> </svg> 
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+<section class="widget archives">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">目录</h2>
+    <div class="widget--toc">
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1-概念">1. 概念</a></li>
+    <li><a href="#2-网络协议">2. 网络协议</a></li>
+    <li><a href="#3-socket编程">3. socket编程</a>
+      <ol>
+        <li><a href="#31-字节序">3.1 字节序</a></li>
+        <li><a href="#32-ip地址转换">3.2 IP地址转换</a></li>
+        <li><a href="#33-sockaddr-数据结构">3.3 sockaddr 数据结构</a></li>
+        <li><a href="#34-套接字函数">3.4 套接字函数</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-tcp通信流程">4. TCP通信流程</a>
+      <ol>
+        <li><a href="#41-服务器端通信流程">4.1 服务器端通信流程</a></li>
+        <li><a href="#42-客户端的通信流程">4.2 客户端的通信流程</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+    </div>
+</section>
+
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/c&#43;&#43;/" class="font_size_17">
+                C&#43;&#43;
+            </a>
+        
+            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="font_size_10">
+                多线程
+            </a>
+        
+            <a href="/categories/qt/" class="font_size_8">
+                Qt
+            </a>
+        
+            <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/" class="font_size_7">
+                音视频
+            </a>
+        
+            <a href="/categories/hugo/" class="font_size_6">
+                Hugo
+            </a>
+        
+            <a href="/categories/leetcode/" class="font_size_5">
+                Leetcode
+            </a>
+        
+            <a href="/categories/linux/" class="font_size_3">
+                Linux
+            </a>
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="font_size_3">
+                网络编程
+            </a>
+        
+            <a href="/categories/%E5%85%B6%E4%BB%96/" class="font_size_1">
+                其他
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article ">
+    
+        <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/linux/" style="background-color: #F9A825; color: #fff;">
+                Linux
+            </a>
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="background-color: #3E93DA; color: #fff;">
+                网络编程
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/linux-socket/">【Linux】socket 套接字</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Linux网络编程知识
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+
+    
+    <footer class="article-time">
+        
+        
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time>2025-04-26</time>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                    <span>5778 字</span>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
+                    <time>2025-04-26 21:56</time>
+                </div>
+            
+        
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv"> </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+    
+    <section class="article-content">
+    
+    
+    <h1 id="socket-套接字">socket 套接字
+</h1><p>个人学习笔记，参照大丙老师的博客：<a class="link" href="https://subingwen.cn/"  target="_blank" rel="noopener"
+    >爱编程的大丙</a></p>
+<h2 id="1-概念">1. 概念
+</h2><ul>
+<li>
+<p>局域网和广域网</p>
+<ul>
+<li>局域网：局域网将一定区域内的各种计算机、外部设备和数据库连接起来形成计算机通信的私有网络。</li>
+<li>广域网：又称<strong>广域网</strong>、<strong>外网</strong>、<strong>公网</strong>。是连接不同地区局域网或城域网计算机通信的远程公共网络。</li>
+</ul>
+</li>
+<li>
+<p>IP（Internet Protocol）：本质是一个整形数，用于表示计算机在网络中的地址。IP协议版本有两个：IPv4和IPv6</p>
+<ul>
+<li>IPv4（Internet Protocol version4）：
+<ul>
+<li>使用一个32位的整形数描述一个IP地址，4个字节，int型</li>
+<li>也可以使用一个点分十进制字符串描述这个IP地址： <code>192.168.247.135</code></li>
+<li>分成了4份，每份1字节，8bit（char），最大值为 255
+<ul>
+<li><code>0.0.0.0</code> 是最小的IP地址</li>
+<li><code>255.255.255.255</code>是最大的IP地址</li>
+</ul>
+</li>
+<li>按照IPv4协议计算，可以使用的IP地址共有 2^32 个</li>
+</ul>
+</li>
+<li>IPv6（Internet Protocol version6）：
+<ul>
+<li>使用一个128位的整形数描述一个IP地址，16个字节</li>
+<li>也可以使用一个字符串描述这个IP地址：<code>2001:0db8:3c4d:0015:0000:0000:1a2f:1a2b</code></li>
+<li>分成了8份，每份2字节，每一部分以16进制的方式表示</li>
+<li>按照IPv6协议计算，可以使用的IP地址共有 2^128 个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>查看IP地址</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># linux</span>
+</span></span><span class="line"><span class="cl">$ ifconfig
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># windows</span>
+</span></span><span class="line"><span class="cl">$ ipconfig
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 测试网络是否畅通</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 主机a: 192.168.1.11</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 当前主机: 192.168.1.12</span>
+</span></span><span class="line"><span class="cl">$ ping 192.168.1.11       
+</span></span><span class="line"><span class="cl">$ ping www.baidu.com      
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 特殊的IP地址: 127.0.0.1  ==&gt; 和本地的IP地址是等价的</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 假设当前电脑没有联网, 就没有IP地址, 又要做网络测试, 可用使用 127.0.0.1 进行本地测试</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>端口</li>
+</ul>
+<p>端口的作用是定位到主机上的某一个进程，通过这个端口进程就可以接受到对应的网络数据了。</p>
+
+<div class="notice notice-tip" >
+    <div class="notice-title"></div><p>比如: 在电脑上运行了微信和QQ, 小明通过客户端给我的的微信发消息, 电脑上的微信就收到了消息, 为什么?</p>
+<ul>
+<li>运行在电脑上的微信和QQ都绑定了不同的端口</li>
+<li>通过IP地址可以定位到某一台主机，通过端口就可以定位到主机上的某一个进程</li>
+<li>通过指定的IP和端口，发送数据的时候对端就能接受到数据了</li>
+</ul></div>
+
+<p>端口也是一个整形数 <code>unsigned short</code> ，一个16位整形数，有效端口的取值范围是：<code>0 ~ 65535</code>(0 ~ 2^16-1)</p>
+
+<div class="notice notice-tip" >
+    <div class="notice-title"></div><p>提问：计算机中所有的进程都需要关联一个端口吗，一个端口可以被重复使用吗?<br>
+不需要，如果这个进程不需要网络通信，那么这个进程就不需要绑定端口的<br>
+一个端口只能给某一个进程使用，多个进程不能同时使用同一个端口</p></div>
+
+<ul>
+<li>OSI/ISO 网络分层模型</li>
+</ul>
+<p>OSI（Open System Interconnect），即开放式系统互联。 一般都叫OSI参考模型，是ISO（国际标准化组织组织）在1985年研究的网络互联模型。</p>
+<p><img src="/post/linux-socket/1.png"
+	width="1440"
+	height="700"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="205"
+		data-flex-basis="493px"
+	
+></p>
+<ul>
+<li>物理层：负责最后将信息编码成电流脉冲或其它信号用于网上传输</li>
+<li>数据链路层:
+<ul>
+<li>数据链路层通过物理网络链路供数据传输</li>
+<li>规定了0和1的分包形式，确定了网络数据包的形式</li>
+</ul>
+</li>
+<li>网络层:
+<ul>
+<li>网络层负责在源和终点之间建立连接</li>
+<li>此处需要确定计算机的位置，通过IPv4，IPv6格式的IP地址来找到对应的主机</li>
+</ul>
+</li>
+<li>传输层:
+<ul>
+<li>传输层向高层提供可靠的端到端的网络数据流服务</li>
+<li>每一个应用程序都会在网卡注册一个端口号，该层就是端口与端口的通信</li>
+</ul>
+</li>
+<li>会话层:
+<ul>
+<li>会话层建立、管理和终止表示层与实体之间的通信会话</li>
+<li>建立一个连接（自动的手机信息、自动的网络寻址）</li>
+</ul>
+</li>
+<li>表示层:
+<ul>
+<li>对应用层数据编码和转化</li>
+<li>确保以一个系统应用层发送的信息可以被另一个系统应用层识别</li>
+</ul>
+</li>
+<li>应用层:
+<ul>
+<li>为应用程序提供网络服务</li>
+<li>定义了应用程序之间交互的协议和方法</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-网络协议">2. 网络协议
+</h2><p>网络协议指的是计算机网络中互相通信的对等实体之间交换信息时所必须遵守的规则的集合。一般系统网络协议包括五个部分：通信环境，传输服务，词汇表，信息的编码格式，时序、规则和过程。先来通过下面几幅图了解一下常用的网络协议的格式：</p>
+<ul>
+<li>TCP协议 -&gt; 传输层协议</li>
+</ul>
+<p><img src="/post/linux-socket/2.png"
+	width="797"
+	height="373"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="213"
+		data-flex-basis="512px"
+	
+></p>
+<ul>
+<li>UDP协议 -&gt; 传输层协议</li>
+</ul>
+<p><img src="/post/linux-socket/3.png"
+	width="600"
+	height="256"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="234"
+		data-flex-basis="562px"
+	
+></p>
+<ul>
+<li>IP协议 -&gt; 网络层协议</li>
+</ul>
+<p><img src="/post/linux-socket/4.png"
+	width="1205"
+	height="520"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="231"
+		data-flex-basis="556px"
+	
+></p>
+<ul>
+<li>以太网帧协议 -&gt; 网络接口层协议</li>
+</ul>
+<p><img src="/post/linux-socket/5.png"
+	width="966"
+	height="535"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="180"
+		data-flex-basis="433px"
+	
+></p>
+<ul>
+<li>数据的封装</li>
+</ul>
+<p><img src="/post/linux-socket/6.png"
+	width="701"
+	height="245"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="286"
+		data-flex-basis="686px"
+	
+></p>
+<p>在网络通信的时候, 程序猿需要负责的应用层数据的处理(最上层)</p>
+<ul>
+<li>应用层的数据可以使用某些协议进行封装, 也可以不封装</li>
+<li>程序猿需要调用发送数据的接口函数，将数据发送出去</li>
+<li>程序猿调用的API做底层数据处理
+<ul>
+<li>传输层使用传输层协议打包数据</li>
+<li>网络层使用网络层协议打包数据</li>
+<li>网络接口层使用网络接口层协议打包数据</li>
+<li>数据被发送到internet</li>
+</ul>
+</li>
+<li>接收端接收到发送端的数据
+<ul>
+<li>程序猿调用接收数据的函数接收数据</li>
+<li>调用的API做相关的底层处理:
+<ul>
+<li>网络接口层拆包 ==&gt; 网络层的包</li>
+<li>网络层拆包 ==&gt; 网络层的包</li>
+<li>传输层拆包 ==&gt; 传输层数据</li>
+</ul>
+</li>
+<li>如果应用层也使用了协议对数据进行了封装，数据的包的解析需要程序猿做</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-socket编程">3. socket编程
+</h2><p>Socket套接字由远景研究规划局（Advanced Research Projects Agency, ARPA）资助加里福尼亚大学伯克利分校的一个研究组研发。其目的是将TCP/IP协议相关软件移植到UNIX类系统中。设计者开发了一个接口，以便应用程序能简单地调用该接口通信。这个接口不断完善，最终形成了Socket套接字。Linux系统采用了Socket套接字，因此，Socket接口就被广泛使用，到现在已经成为事实上的标准。与套接字相关的函数被包含在头文件sys/socket.h中。</p>
+<p><img src="/post/linux-socket/7.png"
+	width="500"
+	height="271"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="442px"
+	
+></p>
+<p>通过上面的描述可以得知，套接字对应程序猿来说就是一套网络通信的接口，使用这套接口就可以完成网络通信。网络通信的主体主要分为两部分：<code>客户端</code>和<code>服务器端</code>。在客户端和服务器通信的时候需要频繁提到三个概念：<code>IP</code>、<code>端口</code>、<code>通信数据</code>，下面介绍一下需要注意的一些细节问题。</p>
+<h3 id="31-字节序">3.1 字节序
+</h3><p>在各种计算机体系结构中，对于字节、字等的存储机制有所不同，因而引发了计算机通信领域中一个很重要的问题，即通信双方交流的信息单元（比特、字节、字、双字等等）应该以什么样的顺序进行传送。如果不达成一致的规则，通信双方将无法进行正确的编/译码从而导致通信失败。</p>
+<p><strong>字节序，顾名思义字节的顺序，就是大于一个字节类型的数据在内存中的存放顺序，也就是说对于单字符来说是没有字节序问题的，字符串是单字符的集合，因此字符串也没有字节序问题。</strong></p>
+<p>目前在各种体系的计算机中通常采用的字节存储机制主要有两种：Big-Endian 和 Little-Endian，下面先从字节序说起。</p>
+<p><img src="/post/linux-socket/8.png"
+	width="500"
+	height="261"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="191"
+		data-flex-basis="459px"
+	
+></p>
+<blockquote>
+<p>大小端的这个名词最早出现在《格列佛游记》中，里边记载了两个征战的强国，你不会想到的是，他们打仗竟然和剥鸡蛋的顺序有关。很多人认为，剥鸡蛋时应该打破鸡蛋较大的一端，这群人被称作&quot;大端（Big endian）派&quot;。可是那时皇帝儿子小时候吃鸡蛋的时候碰巧将一个手指弄破了。所以，当时的皇帝就下令剥鸡蛋必须打破鸡蛋较小的一端，违令者重罚，由此产生了&quot;小端（Little endian）派&quot;。</p>
+<p>老百姓们对这项命令极其反感，由此引发了6次叛乱，其中一个皇帝送了命，另一个丢了王位。据估计，先后几次有11000人情愿受死也不肯去打破鸡蛋较小的一端！</p></blockquote>
+<ul>
+<li>
+<p>Little-Endian -&gt; 主机字节序 (小端)</p>
+<ul>
+<li>数据的<code>低位字节</code>存储到内存的<code>低地址位</code>, 数据的<code>高位字节</code>存储到内存的<code>高地址位</code></li>
+<li>我们使用的PC机，数据的存储默认使用的是小端</li>
+</ul>
+</li>
+<li>
+<p>Big-Endian -&gt; 网络字节序 (大端)</p>
+<ul>
+<li>据的<code>低位字节</code>存储到内存的<code>高地址位</code>, 数据的<code>高位字节</code>存储到内存的<code>低地址位</code></li>
+<li><code>套接字通信过程中操作的数据都是大端存储的，包括：接收/发送的数据、IP地址、端口。</code></li>
+</ul>
+</li>
+<li>
+<p>字节序举例</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="err">内存低地址位</span>                <span class="err">内存的高地址位</span>
+</span></span><span class="line"><span class="cl"><span class="o">---------------------------------------------------------------------------&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="err">小端</span><span class="o">:</span>         <span class="mh">0xff</span>        <span class="mh">0x01</span>        <span class="mh">0x5c</span>        <span class="mh">0xab</span>
+</span></span><span class="line"><span class="cl"><span class="err">大端</span><span class="o">:</span>         <span class="mh">0xab</span>        <span class="mh">0x5c</span>        <span class="mh">0x01</span>        <span class="mh">0xff</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>函数</li>
+</ul>
+<p>BSD Socket提供了封装好的转换接口，方便程序员使用。包括从主机字节序到网络字节序的转换函数：htons、htonl；从网络字节序到主机字节序的转换函数：ntohs、ntohl。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;arpa/inet.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 主机字节序 -&gt; 网络字节序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint16_t</span> <span class="nf">htons</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">hostshort</span><span class="p">);</span>   <span class="c1">// 转换端口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint32_t</span> <span class="nf">htonl</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">hostlong</span><span class="p">);</span>    <span class="c1">// 转换IP
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 网络字节序 -&gt; 主机字节序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint16_t</span> <span class="nf">ntohs</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">netshort</span><span class="p">);</span>    <span class="c1">// 转换端口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">uint32_t</span> <span class="nf">ntohl</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">netlong</span><span class="p">);</span>     <span class="c1">// 转换IP
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="32-ip地址转换">3.2 IP地址转换
+</h3><p>虽然IP地址本质是一个整形数，但是在使用的过程中都是通过一个字符串来描述，下面的函数描述了如何将一个字符串类型的IP地址进行大小端转换：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">inet_pton</span><span class="p">(</span><span class="kt">int</span> <span class="n">af</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">dst</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>af: 地址族(IP地址的家族包括ipv4和ipv6)协议
+<ul>
+<li>AF_INET: ipv4格式的ip地址</li>
+<li>AF_INET6: ipv6格式的ip地址</li>
+</ul>
+</li>
+<li>src: 传入参数, 对应要转换的点分十进制的ip地址: 192.168.1.100</li>
+<li>dst: 传出参数, 函数调用完成, 转换得到的大端整形IP被写入到这块内存中</li>
+</ul>
+</li>
+<li>返回值：成功返回1，失败返回0或者-1</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="nf">inet_ntop</span><span class="p">(</span><span class="kt">int</span> <span class="n">af</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">dst</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">size</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>af: 地址族协议
+<ul>
+<li>AF_INET: ipv4格式的ip地址</li>
+<li>AF_INET6: ipv6格式的ip地址</li>
+</ul>
+</li>
+<li>src: 传入参数, 这个指针指向的内存中存储了大端的整形IP地址</li>
+<li>dst: 传出参数, 存储转换得到的小端的点分十进制的IP地址</li>
+<li>size: 修饰dst参数的, 标记dst指向的内存中最多可以存储多少个字节</li>
+</ul>
+</li>
+<li>返回值:
+<ul>
+<li>成功: 指针指向第三个参数对应的内存地址, 通过返回值也可以直接取出转换得到的IP字符串</li>
+<li>失败: NULL</li>
+</ul>
+</li>
+</ul>
+<p>还有一组函数也能进程IP地址大小端的转换，但是只能处理ipv4的ip地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">in_addr_t</span> <span class="nf">inet_addr</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">cp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span><span class="o">*</span> <span class="nf">inet_ntoa</span><span class="p">(</span><span class="k">struct</span> <span class="nc">in_addr</span> <span class="n">in</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="33-sockaddr-数据结构">3.3 sockaddr 数据结构
+</h3><p><img src="/post/linux-socket/9.png"
+	width="415"
+	height="376"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="110"
+		data-flex-basis="264px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">sockaddr</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sa_family_t</span> <span class="n">sa_family</span><span class="p">;</span>         
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span>        <span class="n">sa_data</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span>       
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span>  <span class="kt">uint16_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">int</span>    <span class="kt">uint32_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">uint16_t</span> <span class="n">in_port_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">uint32_t</span> <span class="n">in_addr_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">short</span> <span class="kt">int</span> <span class="n">sa_family_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define __SOCKADDR_COMMON_SIZE (sizeof (unsigned short int))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">in_addr</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">in_addr_t</span> <span class="n">s_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>    
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">sockaddr_in</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sa_family_t</span> <span class="n">sin_family</span><span class="p">;</span>       
+</span></span><span class="line"><span class="cl">    <span class="n">in_port_t</span> <span class="n">sin_port</span><span class="p">;</span>           
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="nc">in_addr</span> <span class="n">sin_addr</span><span class="p">;</span>      
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">sin_zero</span><span class="p">[</span><span class="k">sizeof</span> <span class="p">(</span><span class="k">struct</span> <span class="nc">sockaddr</span><span class="p">)</span> <span class="o">-</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sin_family</span><span class="p">)</span> <span class="o">-</span>
+</span></span><span class="line"><span class="cl">                      <span class="k">sizeof</span> <span class="p">(</span><span class="n">in_port_t</span><span class="p">)</span> <span class="o">-</span> <span class="k">sizeof</span> <span class="p">(</span><span class="k">struct</span> <span class="nc">in_addr</span><span class="p">)];</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="34-套接字函数">3.4 套接字函数
+</h3><p>使用套接字通信函数需要包含头文件<code>&lt;arpa/inet.h&gt;</code>，包含了这个头文件<code>&lt;sys/socket.h&gt;</code>就不用在包含了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">socket</span><span class="p">(</span><span class="kt">int</span> <span class="n">domain</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">,</span> <span class="kt">int</span> <span class="n">protocol</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>domain: 使用的地址族协议
+<ul>
+<li>AF_INET: 使用IPv4格式的ip地址</li>
+<li>AF_INET6: 使用IPv6格式的ip地址</li>
+</ul>
+</li>
+<li>type:
+<ul>
+<li>SOCK_STREAM: 使用流式的传输协议</li>
+<li>SOCK_DGRAM: 使用报式(报文)的传输协议</li>
+</ul>
+</li>
+<li>protocol: 一般写0即可, 使用默认的协议
+<ul>
+<li>SOCK_STREAM: 流式传输默认使用的是tcp</li>
+<li>SOCK_DGRAM: 报式传输默认使用的udp</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>返回值:
+<ul>
+<li>成功: 可用于套接字通信的文件描述符</li>
+<li>失败: -1</li>
+</ul>
+</li>
+</ul>
+<p>函数的返回值是一个文件描述符，通过这个文件描述符可以操作内核中的某一块内存，网络通信是基于这个文件描述符来完成的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">bind</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="nc">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">addrlen</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>sockfd: 监听的文件描述符, 通过socket()调用得到的返回值</li>
+<li>addr: 传入参数, 要绑定的IP和端口信息需要初始化到这个结构体中，<code>IP和端口要转换为网络字节序</code></li>
+<li>addrlen: 参数addr指向的内存大小, sizeof(struct sockaddr)</li>
+</ul>
+</li>
+<li>返回值：成功返回0，失败返回-1</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">listen</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">int</span> <span class="n">backlog</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>sockfd: 文件描述符, 可以通过调用socket()得到，在监听之前必须要绑定 bind()</li>
+<li>backlog: 同时能处理的最大连接要求，最大值为128</li>
+</ul>
+</li>
+<li>返回值：函数调用成功返回0，调用失败返回 -1</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">accept</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">struct</span> <span class="nc">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="o">*</span><span class="n">addrlen</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>sockfd: 监听的文件描述符</li>
+<li>addr: 传出参数, 里边存储了建立连接的客户端的地址信息</li>
+<li>addrlen: 传入传出参数，用于存储addr指向的内存大小</li>
+</ul>
+</li>
+<li>返回值：函数调用成功，得到一个文件描述符, 用于和建立连接的这个客户端通信，调用失败返回 -1</li>
+</ul>
+
+<div class="notice notice-warning" >
+    <div class="notice-title"></div><p>这个函数是一个阻塞函数，当没有新的客户端连接请求的时候，该函数阻塞；当检测到有新的客户端连接请求时，阻塞解除，新连接就建立了，得到的返回值也是一个文件描述符，基于这个文件描述符就可以和客户端通信了。</p></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ssize_t</span> <span class="nf">read</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">ssize_t</span> <span class="nf">recv</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>sockfd: 用于通信的文件描述符, accept() 函数的返回值</li>
+<li>buf: 指向一块有效内存, 用于存储接收是数据</li>
+<li>size: 参数buf指向的内存的容量</li>
+<li>flags: 特殊的属性, 一般不使用, 指定为 0</li>
+</ul>
+</li>
+<li>返回值:
+<ul>
+<li>大于0：实际接收的字节数</li>
+<li>等于0：对方断开了连接</li>
+<li>-1：接收数据失败了</li>
+</ul>
+</li>
+</ul>
+
+<div class="notice notice-warning" >
+    <div class="notice-title"></div><p>如果连接没有断开，接收端接收不到数据，接收数据的函数会阻塞等待数据到达，数据到达后函数解除阻塞，开始接收数据，当发送端断开连接，接收端无法接收到任何数据，但是这时候就不会阻塞了，函数直接返回0。</p></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">ssize_t</span> <span class="nf">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">ssize_t</span> <span class="nf">send</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">len</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>fd: 通信的文件描述符, accept() 函数的返回值</li>
+<li>buf: 传入参数, 要发送的字符串</li>
+<li>len: 要发送的字符串的长度</li>
+<li>flags: 特殊的属性, 一般不使用, 指定为 0</li>
+</ul>
+</li>
+<li>返回值：
+<ul>
+<li>大于0：实际发送的字节数，和参数len是相等的</li>
+<li>-1：发送数据失败了</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">connect</span><span class="p">(</span><span class="kt">int</span> <span class="n">sockfd</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="nc">sockaddr</span> <span class="o">*</span><span class="n">addr</span><span class="p">,</span> <span class="n">socklen_t</span> <span class="n">addrlen</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>参数:
+<ul>
+<li>sockfd: 通信的文件描述符, 通过调用socket()函数就得到了</li>
+<li>addr: 存储了要连接的服务器端的地址信息: iP 和 端口，这个IP和端口也需要转换为大端然后再赋值</li>
+<li>addrlen: addr指针指向的内存的大小 sizeof(struct sockaddr)</li>
+</ul>
+</li>
+<li>返回值：连接成功返回0，连接失败返回-1</li>
+</ul>
+<h2 id="4-tcp通信流程">4. TCP通信流程
+</h2><p>TCP是一个面向连接的，安全的，流式传输协议，这个协议是一个传输层协议。</p>
+<ul>
+<li>面向连接：是一个双向连接，通过三次握手完成，断开连接需要通过四次挥手完成。</li>
+<li>安全：tcp通信过程中，会对发送的每一数据包都会进行校验, 如果发现数据丢失, 会自动重传</li>
+<li>流式传输：发送端和接收端处理数据的速度，数据的量都可以不一致</li>
+</ul>
+<p><img src="/post/linux-socket/10.png"
+	width="408"
+	height="560"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="72"
+		data-flex-basis="174px"
+	
+></p>
+<h3 id="41-服务器端通信流程">4.1 服务器端通信流程
+</h3><ol>
+<li>创建用于监听的套接字, 这个套接字是一个文件描述符</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">lfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>将得到的监听的文件描述符和本地的IP 端口进行绑定</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">bind</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>设置监听(成功之后开始监听, 监听的是客户端的连接)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">listen</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>等待并接受客户端的连接请求, 建立新的连接, 会得到一个新的文件描述符(通信的)</li>
+</ol>
+
+<div class="notice notice-warning" >
+    <div class="notice-title"></div><p>没有新连接请求就阻塞</p></div>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cfd</span> <span class="o">=</span> <span class="n">accept</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li>通信，读写操作默认都是阻塞的</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">read</span><span class="p">();</span> <span class="o">/</span> <span class="n">recv</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span><span class="p">();</span> <span class="o">/</span> <span class="n">send</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li>断开连接, 关闭套接字</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">close</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在tcp的服务器端, 有两类文件描述符:</p>
+<ul>
+<li>监听的文件描述符
+<ul>
+<li>只需要有一个</li>
+<li>不负责和客户端通信, 负责检测客户端的连接请求, 检测到之后调用accept就可以建立新的连接</li>
+</ul>
+</li>
+<li>通信的文件描述符
+<ul>
+<li>负责和建立连接的客户端通信</li>
+<li>如果有N个客户端和服务器建立了新的连接, 通信的文件描述符就有N个，每个客户端和服务器都对应一个通信的文件描述符</li>
+</ul>
+</li>
+</ul>
+<p><img src="/post/linux-socket/11.png"
+	width="635"
+	height="465"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="136"
+		data-flex-basis="327px"
+	
+></p>
+<p>文件描述符对应的内存结构：</p>
+<ul>
+<li>一个文件文件描述符对应两块内存, 一块内存是读缓冲区, 一块内存是写缓冲区</li>
+<li>读数据: 通过文件描述符将内存中的数据读出, 这块内存称之为读缓冲区</li>
+<li>写数据: 通过文件描述符将数据写入到某块内存中, 这块内存称之为写缓冲区</li>
+</ul>
+<p>监听的文件描述符:</p>
+<ul>
+<li>客户端的连接请求会发送到服务器端监听的文件描述符的读缓冲区中</li>
+<li>读缓冲区中有数据, 说明有新的客户端连接</li>
+<li>调用accept()函数, 这个函数会检测监听文件描述符的读缓冲区
+<ul>
+<li>检测不到数据, 该函数阻塞</li>
+<li>如果检测到数据, 解除阻塞, 新的连接建立</li>
+</ul>
+</li>
+</ul>
+<p>通信的文件描述符:</p>
+<ul>
+<li>客户端和服务器端都有通信的文件描述符</li>
+<li>发送数据：调用函数 write() / send()，数据进入到内核中
+<ul>
+<li>数据并没有被发送出去, 而是将数据写入到了通信的文件描述符对应的写缓冲区中</li>
+<li>内核检测到通信的文件描述符写缓冲区中有数据, 内核会将数据发送到网络中</li>
+</ul>
+</li>
+<li>接收数据: 调用的函数 read() / recv(), 从内核读数据
+<ul>
+<li>数据如何进入到内核程序猿不需要处理, 数据进入到通信的文件描述符的读缓冲区中</li>
+<li>数据进入到内核, 必须使用通信的文件描述符, 将数据从读缓冲区中读出即可</li>
+</ul>
+</li>
+</ul>
+<h3 id="42-客户端的通信流程">4.2 客户端的通信流程
+</h3>
+<div class="notice notice-info" >
+    <div class="notice-title"></div><p>在单线程的情况下客户端通信的文件描述符有一个, 没有监听的文件描述符</p></div>
+
+<ol>
+<li>创建一个通信的套接字</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">cfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>连接服务器, 需要知道服务器绑定的IP和端口</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">connect</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li>通信</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">read</span><span class="p">();</span> <span class="o">/</span> <span class="n">recv</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span><span class="p">();</span> <span class="o">/</span> <span class="n">send</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>断开连接, 关闭文件描述符(套接字)</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="n">close</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+
+
+    
+</footer>
+
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/post/linux-network/">
+        
+        
+            <div class="article-image">
+                <img src="/post/linux-network/cover.10db9edfd2ec13627d412bc44716ecb7.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【Linux】网络编程入门"
+                        data-key="linux-network" 
+                        data-hash="md5-ENue39LsE2J9QSvERxbstw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Linux】网络编程入门</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/post/linux-epoll/">
+        
+        
+            <div class="article-image">
+                <img src="/post/linux-epoll/cover.e6fa79041434c31cf9910eabaaa9c099.png" 
+                        width="1024" 
+                        height="576" 
+                        loading="lazy"
+                        alt="Featured image of post 【Linux】IO多路复用 epoll"
+                        data-key="linux-epoll" 
+                        data-hash="md5-5vp5BBQ0wxz5kQ6rqqnAmQ==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Linux】IO多路复用 epoll</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="serenNan/serenNan.github.io"
+    data-repo-id="R_kgDONieGHg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONieGHs4ClphA"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 serenNan
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+<script>
+    (function(u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function(e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js', function() {
+      pangu.spacingPage();
+    });
+</script>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+  @font-face {
+    font-family: 'MapleMono2';
+    src: url('/font/MapleMono2.ttf') format('truetype');
+  }
+
+  :root {
+    --base-font-family: 'MapleMono2';
+    --code-font-family: 'MapleMono2';
+  }
+</style>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+<div id="particles-js"></div>
+<script src="/background/particles.min.js"></script>
+<script>
+particlesJS.load('particles-js', '\/background\/particlesjs-config.json', function() {
+console.log('particles.js loaded - callback');
+});
+</script>
+
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
+
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 5%;
+        right: 24%;  
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url('/icons/backTop.svg');  
+        background-size: cover;  
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop;
+        rightSideBar.appendChild(btn);
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    initScrollTop();
+</script>
+
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+          
+        <div id="toggle-buttons">
+  <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
+  <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
+</div>
+<script>
+  
+  document.getElementById('toggle-left-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('left-sidebar-hidden');
+    this.textContent = document.body.classList.contains('left-sidebar-hidden') ? '->' : '<-';
+  });
+
+  
+  document.getElementById('toggle-right-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('right-sidebar-hidden');
+    this.textContent = document.body.classList.contains('right-sidebar-hidden') ? '<-' : '->';
+  });
+</script>
+
+
+<script>
+
+let lastClientX = 0;
+document.addEventListener('mousemove', e => {
+  const edgeThreshold = 50;
+  const btnLeft = document.getElementById('toggle-left-sidebar');
+  const btnRight = document.getElementById('toggle-right-sidebar');
+  
+  
+  lastClientX = e.clientX;
+
+  
+  if (e.clientX < edgeThreshold) {
+    btnLeft.style.opacity = '1';
+    btnLeft.style.pointerEvents = 'auto';
+  } else {
+    btnLeft.style.opacity = '0';
+    btnLeft.style.pointerEvents = 'none';
+  }
+
+  
+  if (window.innerWidth - e.clientX < edgeThreshold) {
+    btnRight.style.opacity = '1';
+    btnRight.style.pointerEvents = 'auto';
+  } else {
+    btnRight.style.opacity = '0';
+    btnRight.style.pointerEvents = 'none';
+  }
+});
+</script>
+       
+    </body>
+</html>
