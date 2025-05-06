@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一些关于操作系统的知识点">
+<title>操作系统知识点</title>
+
+<link rel='canonical' href='https://serennan.github.io/post/operating_system/'>
+
+<link rel="stylesheet" href="/scss/style.min.a21e163e497b39cf2586bb0eca6f65b4f23566d6c48764f3b5d1174dfe44d0a7.css"><meta property='og:title' content="操作系统知识点">
+<meta property='og:description' content="一些关于操作系统的知识点">
+<meta property='og:url' content='https://serennan.github.io/post/operating_system/'>
+<meta property='og:site_name' content='serenNan'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-05-05T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-05-06T23:54:01&#43;08:00'/>
+<meta name="twitter:title" content="操作系统知识点">
+<meta name="twitter:description" content="一些关于操作系统的知识点">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_47dcc2efc37d0778.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🐈‍⬛</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">serenNan</a></h1>
+            <h2 class="site-description">个人博客</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/450940909'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.0.0-beta2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M488.6 104.1C505.3 122.2 513 143.8 511.9 169.8V372.2C511.5 398.6 502.7 420.3 485.4 437.3C468.2 454.3 446.3 463.2 419.9 464H92.02C65.57 463.2 43.81 454.2 26.74 436.8C9.682 419.4 .7667 396.5 0 368.2V169.8C.7667 143.8 9.682 122.2 26.74 104.1C43.81 87.75 65.57 78.77 92.02 78H121.4L96.05 52.19C90.3 46.46 87.42 39.19 87.42 30.4C87.42 21.6 90.3 14.34 96.05 8.603C101.8 2.868 109.1 0 117.9 0C126.7 0 134 2.868 139.8 8.603L213.1 78H301.1L375.6 8.603C381.7 2.868 389.2 0 398 0C406.8 0 414.1 2.868 419.9 8.603C425.6 14.34 428.5 21.6 428.5 30.4C428.5 39.19 425.6 46.46 419.9 52.19L394.6 78L423.9 78C450.3 78.77 471.9 87.75 488.6 104.1H488.6zM449.8 173.8C449.4 164.2 446.1 156.4 439.1 150.3C433.9 144.2 425.1 140.9 416.4 140.5H96.05C86.46 140.9 78.6 144.2 72.47 150.3C66.33 156.4 63.07 164.2 62.69 173.8V368.2C62.69 377.4 65.95 385.2 72.47 391.7C78.99 398.2 86.85 401.5 96.05 401.5H416.4C425.6 401.5 433.4 398.2 439.7 391.7C446 385.2 449.4 377.4 449.8 368.2L449.8 173.8zM185.5 216.5C191.8 222.8 195.2 230.6 195.6 239.7V273C195.2 282.2 191.9 289.9 185.8 296.2C179.6 302.5 171.8 305.7 162.2 305.7C152.6 305.7 144.7 302.5 138.6 296.2C132.5 289.9 129.2 282.2 128.8 273V239.7C129.2 230.6 132.6 222.8 138.9 216.5C145.2 210.2 152.1 206.9 162.2 206.5C171.4 206.9 179.2 210.2 185.5 216.5H185.5zM377 216.5C383.3 222.8 386.7 230.6 387.1 239.7V273C386.7 282.2 383.4 289.9 377.3 296.2C371.2 302.5 363.3 305.7 353.7 305.7C344.1 305.7 336.3 302.5 330.1 296.2C323.1 289.9 320.7 282.2 320.4 273V239.7C320.7 230.6 324.1 222.8 330.4 216.5C336.7 210.2 344.5 206.9 353.7 206.5C362.9 206.9 370.7 210.2 377 216.5H377z"/></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/serenNan'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="438.549px" height="438.549px" viewBox="0 0 438.549 438.549" style="enable-background:new 0 0 438.549 438.549;"
+	 xml:space="preserve">
+<g>
+	<path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
+		c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
+		c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
+		c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
+		c-4.187,0.767-9.469,1.092-15.846,1c-6.374-0.089-12.991-0.757-19.842-1.999c-6.854-1.231-13.229-4.086-19.13-8.559
+		c-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559
+		c-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-0.951-2.568-2.098-3.711-3.429c-1.142-1.331-1.997-2.663-2.568-3.997
+		c-0.572-1.335-0.098-2.43,1.427-3.289c1.525-0.859,4.281-1.276,8.28-1.276l5.708,0.853c3.807,0.763,8.516,3.042,14.133,6.851
+		c5.614,3.806,10.229,8.754,13.846,14.842c4.38,7.806,9.657,13.754,15.846,17.847c6.184,4.093,12.419,6.136,18.699,6.136
+		c6.28,0,11.704-0.476,16.274-1.423c4.565-0.952,8.848-2.383,12.847-4.285c1.713-12.758,6.377-22.559,13.988-29.41
+		c-10.848-1.14-20.601-2.857-29.264-5.14c-8.658-2.286-17.605-5.996-26.835-11.14c-9.235-5.137-16.896-11.516-22.985-19.126
+		c-6.09-7.614-11.088-17.61-14.987-29.979c-3.901-12.374-5.852-26.648-5.852-42.826c0-23.035,7.52-42.637,22.557-58.817
+		c-7.044-17.318-6.379-36.732,1.997-58.24c5.52-1.715,13.706-0.428,24.554,3.853c10.85,4.283,18.794,7.952,23.84,10.994
+		c5.046,3.041,9.089,5.618,12.135,7.708c17.705-4.947,35.976-7.421,54.818-7.421s37.117,2.474,54.823,7.421l10.849-6.849
+		c7.419-4.57,16.18-8.758,26.262-12.565c10.088-3.805,17.802-4.853,23.134-3.138c8.562,21.509,9.325,40.922,2.279,58.24
+		c15.036,16.18,22.559,35.787,22.559,58.817c0,16.178-1.958,30.497-5.853,42.966c-3.9,12.471-8.941,22.457-15.125,29.979
+		c-6.191,7.521-13.901,13.85-23.131,18.986c-9.232,5.14-18.182,8.85-26.84,11.136c-8.662,2.286-18.415,4.004-29.263,5.146
+		c9.894,8.562,14.842,22.077,14.842,40.539v60.237c0,3.422,1.19,6.279,3.572,8.562c2.379,2.279,6.136,2.95,11.276,1.995
+		c44.163-14.653,80.185-41.062,108.068-79.226c27.88-38.161,41.825-81.126,41.825-128.906
+		C438.536,184.851,428.728,148.168,409.132,114.573z"/>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/category/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M9 4h3l2 2h5a2 2 0 0 1 2 2v7a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"></path> <path d="M17 17v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h2"></path> </svg> 
+                
+                <span>分类</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+<section class="widget archives">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">目录</h2>
+    <div class="widget--toc">
+        <nav id="TableOfContents">
+  <ol>
+    <li><a href="#线程">线程</a>
+      <ol>
+        <li><a href="#线程上下文">线程上下文</a></li>
+        <li><a href="#tcb线程控制块">TCB（线程控制块）</a></li>
+      </ol>
+    </li>
+    <li><a href="#管道">管道</a>
+      <ol>
+        <li><a href="#管道定义">管道定义</a></li>
+      </ol>
+    </li>
+    <li><a href="#进程">进程</a>
+      <ol>
+        <li><a href="#进程的状态">进程的状态</a></li>
+        <li><a href="#进程状态转换的流程">进程状态转换的流程</a></li>
+        <li><a href="#僵尸进程与孤儿进程">僵尸进程与孤儿进程</a></li>
+      </ol>
+    </li>
+    <li><a href="#面试题">面试题</a>
+      <ol>
+        <li><a href="#线程切换">线程切换</a></li>
+      </ol>
+    </li>
+    <li><a href="#进程间的通信">进程间的通信</a></li>
+  </ol>
+</nav>
+    </div>
+</section>
+
+
+            
+        
+            
+                <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/categories/c&#43;&#43;/" class="font_size_17">
+                C&#43;&#43;
+            </a>
+        
+            <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="font_size_10">
+                多线程
+            </a>
+        
+            <a href="/categories/qt/" class="font_size_8">
+                Qt
+            </a>
+        
+            <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/" class="font_size_7">
+                音视频
+            </a>
+        
+            <a href="/categories/hugo/" class="font_size_6">
+                Hugo
+            </a>
+        
+            <a href="/categories/leetcode/" class="font_size_5">
+                Leetcode
+            </a>
+        
+            <a href="/categories/linux/" class="font_size_3">
+                Linux
+            </a>
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="font_size_3">
+                网络编程
+            </a>
+        
+            <a href="/categories/%E5%85%B6%E4%BB%96/" class="font_size_1">
+                其他
+            </a>
+        
+    </div>
+</section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article ">
+    
+        <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/operating_system/">操作系统知识点</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            一些关于操作系统的知识点
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+
+    
+    <footer class="article-time">
+        
+        
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+        
+
+        
+        
+            
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                    <time>2025-05-05</time>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                    <span>2623 字</span>
+                </div>
+            
+        
+            <span class="divider">|</span>
+            
+                <div class="time-element">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2"> <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"></path> <path d="M18 14v4h4"></path> <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2"></path> <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"></path> <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path> <path d="M8 11h4"></path> <path d="M8 15h3"></path> </svg> 
+                    <time>2025-05-06 23:54</time>
+                </div>
+            
+        
+        
+        <div id="viewCount">
+            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-eye"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv"> </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+</header>
+    
+    <section class="article-content">
+    
+    
+    <h1 id="操作系统知识点">操作系统知识点
+</h1><h2 id="线程">线程
+</h2><h3 id="线程上下文">线程上下文
+</h3><p>线程上下文涉及下面三个部分：</p>
+<ul>
+<li>CPU寄存器：如程序计数器（PC）、栈指针（SP）、通用寄存器等，这些值被保存，以便下次切换回当前线程时能够恢复。</li>
+<li>程序状态字（PSW）：包括CPU的状态信息，比如中断使能、优先级等。</li>
+<li>线程的内核栈和用户栈：这两个栈分别用于存储内核和用户空间的函数调用信息。</li>
+</ul>
+<h3 id="tcb线程控制块">TCB（线程控制块）
+</h3><p>TCB（Thread Control Block）是操作系统用来管理线程的一个数据结构，它包含了与线程执行相关的所有必要信息，确保线程能够在系统中被正确调度和执行。每个线程都有一个对应的TCB，操作系统通过TCB来管理和调度线程的执行。</p>
+<p>TCB中的关键内容：</p>
+<ol>
+<li><strong>线程状态</strong>：就绪、运行、阻塞、终止等。操作系统通过线程状态来判断是否可以被执行或需要被挂起。</li>
+<li><strong>程序计数器</strong>：程序计数器保留线程当前执行指令的地址，标识线程的执行位置。线程切换时，程序计数器的值需要被保存和恢复。</li>
+<li><strong>寄存器内容</strong>：线程的寄存器值（如通用寄存器、栈指针等）需要在上下文切换时保存和恢复。它们包含了线程执行期间的局部变量、函数调用的返回地址等信息。</li>
+<li><strong>线程栈指针（Stack Pointer，SP）</strong>：每个线程都有一个栈，用于存储函数调用信息（如局部变量、返回地址等）。栈指针指向当前栈顶，线程切换时，栈指针需要被保存和恢复</li>
+<li><strong>线程优先级</strong>：操作系统通常根据线程的优先级来决定哪个线程应该被调度执行。</li>
+<li><strong>线程标识符</strong>：每个线程都有一个唯一的标识符（线程ID），操作系统通过它来区分不同的线程。</li>
+<li><strong>线程的调度信息</strong>：包括线程的调度策略、时间片（如果采用时间片轮转调度）、期望的调度器等。这个信息帮助操作系统决定何时将线程调度到CPU上执行。</li>
+</ol>
+<h2 id="管道">管道
+</h2><p>什么是进程间通信？<br>
+每个进程各自有不同的地址空间，任何一个进程的全局变量在另一个进程中都看不到，所以进程之间要交换数据必须通过内核，在内核中开辟一块缓冲区，进程A把数据从用户空间拷到内核缓冲区，进程B再从内核缓冲区把数据读走，内核提供的这种机制称为进程间通信。</p>
+<h3 id="管道定义">管道定义
+</h3><ul>
+<li>管道是一种最基本的进程间的通信机制。把一个进程连接到另一个进程的一个数据流称为一个&quot;管道&quot;，通常是用作<strong>把一个进程的输出通过管道连接到另一个进程的输入</strong>。</li>
+<li><strong>管道本质上是内核的一块缓存</strong>，内核维护了一块缓冲区与管道文件相关联，对管道文件的操作，被内核转换成对这块缓冲区内存的操作。</li>
+</ul>
+<p>举例：<br>
+在<code>shell</code>中执行命令，经常会将<strong>上一个命令的输出</strong>组为<strong>下一个命令的输入</strong>，由多个命令配合完成一件事情。而这就是通过管道来实现。<code>|</code>这个竖线就是管道符号</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls -l <span class="p">|</span> grep string
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>ls</code>命令（其实也是一个进程）会把当前目录中的文件都列出来</li>
+<li>但它不会直接输出，而是把<strong>要输出到屏幕上的数据</strong>通过管道<strong>输出到<code>grep</code>这个进程</strong>中，作为**<code>grep</code>这个进程的输入**</li>
+<li>然后这个进程对输入的信息进行筛选（grep的作用），把存在string的信息的字符串（以行为单位）打印在屏幕上。</li>
+</ul>
+<p><img src="/post/operating_system/1.png"
+	width="1371"
+	height="136"
+	
+	loading="lazy"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1008"
+		data-flex-basis="2419px"
+	
+></p>
+<p>参考：<a class="link" href="https://blog.csdn.net/JMW1407/article/details/107700451"  target="_blank" rel="noopener"
+    >一文让你明白，什么是管道</a></p>
+<h2 id="进程">进程
+</h2><h3 id="进程的状态">进程的状态
+</h3><ul>
+<li>就绪状态：进程已经分配到必要的资源，具备执行条件，等待CPU调度程序分配处理器时间。一旦CPU空闲并选择该进程，就会从就绪状态进入运行状态。</li>
+<li>运行状态：进程正在使用CPU执行指令。</li>
+<li>阻塞状态：进程因为等待某种事件（如I/O操作完成、等待某个信号等）而暂时停止运行。处于阻塞状态的进程不能被CPU调度，必须等到所需事件发生后，才能转为就绪状态。</li>
+<li>新建状态：进程正在创建但尚未进入就绪队列。操作系统为新进程分配资源（如内存），当装备就绪后，进程会进入就绪状态。</li>
+<li>终止状态：进程执行完毕或因某种原因被终止，进入终止状态。操作系统会回收该进程所占用的资源。</li>
+</ul>
+<h3 id="进程状态转换的流程">进程状态转换的流程
+</h3><p>进程在其生命周期中可能经历多次状态转换，常见的状态转换包括：</p>
+<ul>
+<li><strong>就绪-&gt;运行</strong>：当CPU调度到某个就绪进程时，该进程从就绪状态转变为运行状态。</li>
+<li><strong>运行-&gt;阻塞</strong>：如果进程需要等待I/O操作或某个事件（如等待文件输入），会从运行状态转为阻塞状态，放弃CPU的使用。</li>
+<li><strong>运行-&gt;就绪</strong>：操作系统采用时间片轮转调度时，如果进程的时间片用完但未完成任务，会回到就绪状态，等待下次调度。</li>
+<li><strong>阻塞-&gt;就绪</strong>：当阻塞进程等待的事件（如I/O完成）发生后，会从阻塞状态回到就绪状态。</li>
+</ul>
+<h3 id="僵尸进程与孤儿进程">僵尸进程与孤儿进程
+</h3><ul>
+<li><strong>僵尸进程(Zombie Process)</strong>：进程已经终止，但其父进程未对其进行回收（调用wait函数）。僵尸进程占用系统的进程表项，但不再消耗其他资源。操作系统会等待其父进程来获取它的终止状态信息，清除僵尸进程。</li>
+<li><strong>孤儿进程(Orphan Process)</strong>：父进程提前终止，子进程继续运行，成为孤儿进程。操作系统会将孤儿进程托管给<code>init</code>进程(Linux系统中的PID为1的进程)，由<code>init</code>进程来收养并清理这些孤儿进程。</li>
+</ul>
+<h2 id="面试题">面试题
+</h2><h3 id="线程切换">线程切换
+</h3><p>操作系统在进行线程切换时需要进行哪些动作？</p>
+<p>主要动作如下：</p>
+<ol>
+<li>保存当前线程的上下文（如CPU寄存器、栈指针）到线程控制块（TCB）中。</li>
+<li>更新当前线程的状态（如就绪、阻塞等）。</li>
+<li>选择下一个要执行的线程，更新调度信息。</li>
+<li>恢复下一个线程的上下文，恢复CPU寄存器、栈指针、程序计数器等信息，确保线程能够从上次中断的地方继续执行，开始执行其任务。</li>
+</ol>
+
+<div class="notice notice-note" >
+    <div class="notice-title"></div><p>在操作系统中，线程切换是指将CPU的控制权从一个线程转移到另一个线程的过程。与进程切换相比，线程切换开销较小，因为同一个进程内的线程共享相同的地址空间和资源。</p></div>
+
+<h2 id="进程间的通信">进程间的通信
+</h2><p>进程之间的通信方式有哪些？</p>
+<ol>
+<li>管道：管道是一种单向通信方式，用于在父进程和子进程之间或者同一主机上的不同进程之间传递数据。它可以是匿名的，也可以是命名的。</li>
+<li>命名管道：与匿名管道类似，但具有一个在文件系统中有名的路径，运行不相关的进程之间进行通信。</li>
+<li>消息队列：消息队列允许一个进程向另一个进程发送信息，消息在队列中按顺序存储，并且接收方可以按需接收。</li>
+<li>共享内存：共享内存允许多个进程访问同一块内存区域，从而实现快速的数据交换。但需要注意同步问题，以避免竞态条件和数据一致性问题。</li>
+<li>信号量：信号量是一种同步原语，用于管理对共享资源的访问。它可以用于实现进程间的互斥访问和同步操作。</li>
+<li>信号：信号是一种异步的通信方式，用于通知目标进程发生了某个事件。信号常用于进程之间发送终端或终止命令。</li>
+<li>套接字：套接字允许在网络上的不同主机上的进程进行通信，是实现网络通信的基础。</li>
+<li>文件：进程可以通过读写文件来进行通信，这种方式常用于进程之间的间接通信，例如使用临时文件或者共享文件。</li>
+</ol>
+<p>参考：<a class="link" href="[%28https://www.mianshiya.com/bank/1790684063773007874/question/1891363220414386177%29]%28https://www.mianshiya.com/banks%29" >面试鸭</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+
+
+    
+</footer>
+
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="serenNan/serenNan.github.io"
+    data-repo-id="R_kgDONieGHg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONieGHs4ClphA"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="zh-CN"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 serenNan
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.29.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+<script>
+    (function(u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function(e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('https://cdn.jsdelivr.net/npm/pangu@4.0.7/dist/browser/pangu.min.js', function() {
+      pangu.spacingPage();
+    });
+</script>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<style>
+  @font-face {
+    font-family: 'MapleMono2';
+    src: url('/font/MapleMono2.ttf') format('truetype');
+  }
+
+  :root {
+    --base-font-family: 'MapleMono2';
+    --code-font-family: 'MapleMono2';
+  }
+</style>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+<div id="particles-js"></div>
+<script src="/background/particles.min.js"></script>
+<script>
+particlesJS.load('particles-js', '\/background\/particlesjs-config.json', function() {
+console.log('particles.js loaded - callback');
+});
+</script>
+
+
+<style>
+  #particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+</style>
+
+
+<style>
+    #backTopBtn {
+        display: none;
+        position: fixed;
+        bottom: 5%;
+        right: 24%;  
+        z-index: 99;
+        cursor: pointer;
+        width: 30px;
+        height: 30px;
+        background-image: url('/icons/backTop.svg');  
+        background-size: cover;  
+    }
+</style>
+
+<script>
+    
+
+    function initScrollTop() {
+        let rightSideBar = document.querySelector(".right-sidebar");
+        if (!rightSideBar) {
+            return;
+        }
+        
+        let btn = document.createElement("div");
+        btn.id = "backTopBtn";
+        btn.onclick = backToTop;
+        rightSideBar.appendChild(btn);
+        
+        window.onscroll = function() {
+            
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    }
+
+    
+
+    function backToTop(){
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    initScrollTop();
+</script>
+
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+
+          
+        <div id="toggle-buttons">
+  <button id="toggle-left-sidebar" aria-label="Toggle Left Sidebar"> &lt;- </button>
+  <button id="toggle-right-sidebar" aria-label="Toggle Right Sidebar"> -> </button>
+</div>
+<script>
+  
+  document.getElementById('toggle-left-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('left-sidebar-hidden');
+    this.textContent = document.body.classList.contains('left-sidebar-hidden') ? '->' : '<-';
+  });
+
+  
+  document.getElementById('toggle-right-sidebar').addEventListener('click', function() {
+    document.body.classList.toggle('right-sidebar-hidden');
+    this.textContent = document.body.classList.contains('right-sidebar-hidden') ? '<-' : '->';
+  });
+</script>
+
+
+<script>
+
+let lastClientX = 0;
+document.addEventListener('mousemove', e => {
+  const edgeThreshold = 50;
+  const btnLeft = document.getElementById('toggle-left-sidebar');
+  const btnRight = document.getElementById('toggle-right-sidebar');
+  
+  
+  lastClientX = e.clientX;
+
+  
+  if (e.clientX < edgeThreshold) {
+    btnLeft.style.opacity = '1';
+    btnLeft.style.pointerEvents = 'auto';
+  } else {
+    btnLeft.style.opacity = '0';
+    btnLeft.style.pointerEvents = 'none';
+  }
+
+  
+  if (window.innerWidth - e.clientX < edgeThreshold) {
+    btnRight.style.opacity = '1';
+    btnRight.style.pointerEvents = 'auto';
+  } else {
+    btnRight.style.opacity = '0';
+    btnRight.style.pointerEvents = 'none';
+  }
+});
+</script>
+       
+    </body>
+</html>

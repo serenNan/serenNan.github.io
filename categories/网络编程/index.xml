@@ -12,7 +12,7 @@
         <pubDate>Sat, 26 Apr 2025 00:00:00 +0000</pubDate>
         
         <guid>https://serennan.github.io/post/linux-socket/</guid>
-        <description>&lt;h1 id=&#34;socket-套接字&#34;&gt;socket 套接字
+        <description>&lt;img src="https://serennan.github.io/post/linux-socket/cover.png" alt="Featured image of post 【Linux】socket 套接字" /&gt;&lt;h1 id=&#34;socket-套接字&#34;&gt;socket 套接字
 &lt;/h1&gt;&lt;p&gt;个人学习笔记，参照大丙老师的博客：&lt;a class=&#34;link&#34; href=&#34;https://subingwen.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;爱编程的大丙&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;1-概念&#34;&gt;1. 概念
