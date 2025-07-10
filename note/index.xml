@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Notes on serenNan</title>
+        <link>https://serennan.github.io/note/</link>
+        <description>Recent content in Notes on serenNan</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>serenNan</copyright><atom:link href="https://serennan.github.io/note/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title></title>
+        <link>https://serennan.github.io/note/c&#43;&#43;%E9%9D%A2%E8%AF%95/c&#43;&#43;-qt-%E9%9D%A2%E7%BB%8F/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://serennan.github.io/note/c&#43;&#43;%E9%9D%A2%E8%AF%95/c&#43;&#43;-qt-%E9%9D%A2%E7%BB%8F/</guid>
+        <description>&lt;p&gt;记录一波自己的面试经历，也给准备找工作和实习的兄弟一些面试问题经验，希望我和大家都能能快快找到工作，呜呜┭┮﹏┭┮&lt;/p&gt;
+&lt;p&gt;注：题主答得很烂，各位看看题目就行，答主的答案仅供参考。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;C++的&lt;code&gt;private&lt;/code&gt;在继承的时候，子类可以获取吗，在实际项目中有什么用：
+&lt;code&gt;private&lt;/code&gt;子类不能继承，&lt;code&gt;protect&lt;/code&gt;可以继承。实际项目例如要实现单例，需要将拷贝构造和拷贝赋值函数删除，可以将这两个函数声明为一个&lt;code&gt;private&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C++都＋在什么地方，你认为C++的特色是什么：
+C++面向对象，而&lt;code&gt;c&lt;/code&gt;面向过程，C++的三大特性有&lt;code&gt;封装&lt;/code&gt;、&lt;code&gt;继承&lt;/code&gt;和&lt;code&gt;多态&lt;/code&gt;，C++有非常完善的&lt;code&gt;STL&lt;/code&gt;库，在内存管理方面还有&lt;code&gt;智能指针&lt;/code&gt;，C++17还引入&lt;code&gt;lamda&lt;/code&gt;表达式简化代码，等等&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如果自己实现以下字符串拷贝的函数（&lt;code&gt;strcpy&lt;/code&gt;），需要考虑到什么：
+长度，确保目标缓冲区足够大，防止缓冲区溢出，还有终止符也得考虑进去，还要考虑内存重叠问题，&lt;code&gt;strcpy&lt;/code&gt;不能用于非字符串&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚函数是什么，虚函数表在程序中有几份：
+虚函数是C++实现多态的关键，父类使用&lt;code&gt;virtual&lt;/code&gt;声明函数，子类对函数进行重写。
+通过使用虚函数，C++可以根据对象的实际类型调用派生类的函数实现。实现虚函数的关键在于虚函数表和虚函数表指针。
+每个含有虚函数的类都有一张虚函数表，表中存有该类的虚函数地址。每个对象都有一个虚函数表指针，指向这个类的虚函数表，当调用虚函数时，程序会通过对象的虚函数指针找到对应的虚函数地址，然后进行函数调用。
+&lt;strong&gt;每个类有且只有一个虚函数表&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;new&lt;/code&gt;的对象能&lt;code&gt;free&lt;/code&gt;吗
+不能。
+&lt;code&gt;new&lt;/code&gt; vs &lt;code&gt;malloc&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;new&lt;/code&gt;是C++的操作符，而&lt;code&gt;malloc&lt;/code&gt;是C标准库的函数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new&lt;/code&gt;分配内存并调用构造函数，而&lt;code&gt;malloc&lt;/code&gt;仅仅分配内存，不调用构造函数&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new&lt;/code&gt;返回一个类型安全的指针，而&lt;code&gt;malloc&lt;/code&gt;返回&lt;code&gt;void*&lt;/code&gt;，需要显示类型转换&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;new&lt;/code&gt;在分配失败时抛出&lt;code&gt;std::bad_alloc&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;不能&lt;/p&gt;
+&lt;p&gt;Vector和list有什么区别：&lt;/p&gt;
+&lt;p&gt;vector底层是数组，list底层是双向链表，vector随机读取速度块，增删速度慢，list增删速度块，首位元素获取速度快&lt;/p&gt;
+&lt;p&gt;vector和list实际工作中的使用场景：&lt;/p&gt;
+&lt;p&gt;一般大量读的时候选择vector，一般修改多，顺序获取数据的地方用list&lt;/p&gt;
+&lt;p&gt;vector和list在什么情况下迭代器会失效：&lt;/p&gt;
+&lt;p&gt;vector有可能会失效，因为添加数据可能会进行扩容，导致迭代器失效，list底层是数组，删除增加不会影响迭代器&lt;/p&gt;
+&lt;p&gt;map和unordered_map有什么区别：&lt;/p&gt;
+&lt;p&gt;map底层是红黑树，unordered_map底层是哈希表。&lt;/p&gt;
+&lt;p&gt;多线程用的多吗？都要那些方式：&lt;/p&gt;
+&lt;p&gt;消息队列，信号，信号量，我用的信号比较多。&lt;/p&gt;
+&lt;p&gt;智能指针都有那些，区别是什么：&lt;/p&gt;
+&lt;p&gt;有三个，unique，share，wrek，unique最安全，且占用内存小，share可以被多个指针指向，占用内存大，但是不线程安全，wreak是share的升级版，解决了线程安全&lt;/p&gt;
+&lt;p&gt;引用和指针的区别，常值引用是什么？&lt;/p&gt;
+&lt;p&gt;引用是一种特殊的指针，指向一个地址，只能读不能改，类似const修饰过的变量，常值引用是指向一个常值的引用（废话，这个其实我现在也没整明白）&lt;/p&gt;
+&lt;p&gt;Qt4和Qt5的槽函数有什么区别&lt;/p&gt;
+&lt;p&gt;Qt4类似宏定义，不会检查传入参数对错，并且不会指定具体发出者是谁，存在安全问题（这块自我发挥的）&lt;/p&gt;
+&lt;p&gt;如果用QPainter绘图，想放大缩小怎么办&lt;/p&gt;
+&lt;p&gt;重定义鼠标事件（我觉得应该就是这么答，但是听面试官的语气感觉不是很完善）&lt;/p&gt;
+&lt;p&gt;Qt的自定义库和Stl的有什么区别，比如Qlist和list的区别&lt;/p&gt;
+&lt;p&gt;Qt会用Qvariant进行封装，并且进行了线程安全的定义（这块完全是我瞎编的，我也不知道答案）&lt;/p&gt;
+&lt;p&gt;结语：其实知识点就是这么几个，剩下的基本上都是绕着自己的项目来，加油各位&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nowcoder.com/creation/subject/ecec8b4598f8422fbdbe3ff5c675cb3c&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;#C++面试#&lt;/a&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nowcoder.com/creation/subject/8d2082df305c46bfbec65e2eb45f6c8c&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;#面试经验  #&lt;/a&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nowcoder.com/creation/subject/6a66429eec244c149ba7080ae15f24be&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;#QT#&lt;/a&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nowcoder.com/creation/subject/0382f3b286444b5385c498b6ba171605&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;#C++面试题#&lt;/a&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nowcoder.com/creation/subject/928d551be73f40db82c0ed83286c8783&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;#面经#&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title></title>
+        <link>https://serennan.github.io/note/readme/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://serennan.github.io/note/readme/</guid>
+        <description>&lt;p&gt;单纯放一些不展示的笔记&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
